@@ -2,7 +2,6 @@
 $series_list = null;
 require_once 'classes/functions.php';
 require_once 'config/db.php';
-require_once 'classes/Login.php';
 
 $comics = new comicSearch ();
 $comics->seriesList ();
