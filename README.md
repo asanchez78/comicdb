@@ -10,7 +10,7 @@ MySQL
 
 Installation
 -------------
-Clone repository to web root
+Clone repository to web directory
 <br/>
 import .sql file to comicdb database
 <br/>
