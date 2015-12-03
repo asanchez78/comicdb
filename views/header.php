@@ -54,9 +54,9 @@ $login = new Login();
 		echo '<div class="mdl-layout__drawer">
 			<span class="mdl-layout-title">MyComics</span>
 			<nav class="mdl-navigation">
-				<a class="mdl-navigation__link" href="' . $multipage . '">Multi</a>
-				<a class="mdl-navigation__link" href="' . $multicpage . '">Commas</a>
-				<a class="mdl-navigation__link" href="' . $searchpage . '">Search</a>
+				<a class="mdl-navigation__link" href="' . $multipage . '">Add Range</a>
+				<a class="mdl-navigation__link" href="' . $multicpage . '">Add Comma Separated List</a>
+				<a class="mdl-navigation__link" href="' . $searchpage . '">Add Single Issue</a>
 			</nav>
 		</div>';
 		}
