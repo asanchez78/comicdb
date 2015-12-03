@@ -37,7 +37,7 @@ if (!$_POST) {
 	if (mysqli_query ( $connection, $sql )) {
 		echo $series_name . " series created in database.";
 	} else {
-		echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+		echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
 	}
 }
 include '../views/footer.php';
