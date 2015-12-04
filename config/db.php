@@ -21,7 +21,7 @@ define ( "DB_NAME", $DB_NAME );
 define ( "DB_USER", $DB_USER );
 define ( "DB_PASS", $DB_PASS );
 
-$connection = mysqli_connect ( "localhost", $DB_NAME, $DB_USER, $DB_PASS );
+$connection = mysqli_connect ( $DB_HOST, $DB_NAME, $DB_USER, $DB_PASS );
 if (! $connection) {
 	die ( "Connection failed: " . mysqli_connect_error () );
 }
