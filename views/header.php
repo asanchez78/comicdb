@@ -8,12 +8,14 @@ if ( preg_match('/^%2Fcomicdb%2Fadmin%2F.*/', $current_page)) {
 	$multipage = "multiadd.php";
 	$multicpage = "multiaddc.php";
 	$searchpage = "../search.php";
+	$logoutPage = "../logout.php?logout";
 } else {
 	require_once 'classes/Login.php';
 	$background = "images/background.jpg";
 	$multipage = "admin/multiadd.php";
 	$multicpage = "admin/multiaddc.php";
 	$searchpage = "search.php";
+	$logoutPage = "logout.php?logout";
 }
 $login = new Login();
 ?>
@@ -42,7 +44,7 @@ $login = new Login();
 				<!-- Navigation -->
 				<nav class="mdl-navigation">
 					<?php if ($login->isUserLoggedIn () == true) {
-						echo "<a class=\"mdl-navigation__link\" href=\"logout.php?logout&return=" . htmlspecialchars($current_page) . "\">Logout</a>";
+						echo "<a class=\"mdl-navigation__link\" href=\"" . $logoutPage . "&return=" . htmlspecialchars($current_page) . "\">Logout</a>";
 					} else {
 						echo "<a class=\"mdl-navigation__link\" href=\"login.php?return=" . htmlspecialchars($current_page) . "\">Login</a>";
 					}
