@@ -1,6 +1,6 @@
 <?php
-require_once '../classes/Login.php';
 require_once '../config/db.php';
+$submitted = filter_input ( INPUT_POST, 'submitted' );
 ?>
 <html>
 <head>
@@ -20,12 +20,17 @@ require_once '../config/db.php';
 <div class="mdl-layout">
 <div class="mdl-grid">
 <?php
-if (!$_POST) {
+if ($login->isUserLoggedIn() == false) {
+	include '../views/not_logged_in.php';
+	die();
+}
+if (!$submitted) {
 	$filename=$_SERVER["PHP_SELF"];
 	?>
 	<form method="post" action="<?php echo $filename; ?>">
 		<label>Series Name</label>
 		<input name="series_name" type="text" size="50" value=""/>
+		<input type="hidden" name="submitted" value="yes" />
 		<input type="submit" name="submit" value="Submit" />
 	</form>
 	<?php
