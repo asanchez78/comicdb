@@ -1,6 +1,6 @@
 #eclipse files
 .buildpath
-.settings
+.settings/
 .jsdtscope
 org.eclipse.php.core.prefs
 org.eclipse.wst.common.project.facet.core.xml
@@ -37,6 +37,10 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
 
 # Thumbnails
 ._*
@@ -55,3 +59,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# --------------------
+# Node Files
+# --------------------
+.nodemonignore
+npm-debug.log
+node_modules/
+
+# --------------------
+# SASS Files
+# --------------------
+.sass-cache/
+
