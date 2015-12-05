@@ -21,17 +21,17 @@ $login = new Login();
 ?>
 
 <!-- Uses a transparent header that draws on top of the layout's background -->
-	<style>
-.demo-layout-transparent {
+<style>
+	.demo-layout-transparent {
 	background: url('<?php echo $background; ?>') top/cover;
-}
+	}
 
-.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
+	.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
 	{
 	/* This background is dark, so we set text to white. Use 87% black instead if
      your background is light. */
 	color: black;
-}
+	}
 </style>
 
 	<div class="demo-layout-transparent mdl-layout mdl-js-layout">
