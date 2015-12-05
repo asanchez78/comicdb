@@ -48,5 +48,6 @@ if (!$submitted) {
 include '../views/footer.php';
 ?>
 </div>
+</div>
 </body>
 </html>
