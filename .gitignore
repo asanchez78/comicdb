@@ -1,3 +1,5 @@
+#phpstorm
+.idea/
 #eclipse files
 .buildpath
 .settings/
