@@ -61,6 +61,7 @@ if ($login->isUserLoggedIn () == true) {
 			echo $sqlInsert . "<br/>";
 			echo "<a href=\"../comic.php?comic_id=" . $comic_id . "\">check</a><br/><br/>";
 			set_time_limit(0);
+			$wikiDetails->synopsis = "";
 //			if (mysqli_query ( $connection, $sql )) {
 //				echo "Record updated successfully with the following information";
 //			} else {
