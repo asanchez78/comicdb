@@ -4,11 +4,17 @@ $series_list = null;
 $comics = new comicSearch ();
 $comics->seriesList ();
 
-while ( $row = $comics->series_list_result->fetch_assoc () ) {
-	$series_id = $row ['series_id'];
-	$series_name = $row ['series_name'];
-	$series_list .= "<tr>\n";
-	$series_list .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></td>\n";
+if ($comics->series_list_result->num_rows > 0) {
+	while ( $row = $comics->series_list_result->fetch_assoc () ) {
+		$series_id = $row ['series_id'];
+		$series_name = $row ['series_name'];
+		$series_list .= "<tr>\n";
+		$series_list .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></td>\n";
+		$series_list .= "</tr>\n";
+	}
+} else {
+	$series_list = "<tr>\n";
+	$series_list .= "<td class=\"mdl-data-table__cell--non-numeric\">No Comic Series in database. Perhaps you should <a href=\"admin/addseries.php\">Add some.</a></td>\n";
 	$series_list .= "</tr>\n";
 }
 ?>

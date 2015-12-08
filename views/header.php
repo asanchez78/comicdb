@@ -1,15 +1,37 @@
-<!-- Uses a transparent header that draws on top of the layout's background -->
-	<style>
-.demo-layout-transparent {
-	background: url('<?php echo $background; ?>') top/cover;
-}
+<?php
+// This will get the current URL the user is on
+$current_page = urlencode($_SERVER['REQUEST_URI']);
 
-.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
+if ( preg_match('/^%2Fcomicdb%2Fadmin%2F.*/', $current_page)) {
+	require_once '../classes/Login.php';
+	$background = "../images/background.jpg";
+	$multipage = "multiadd.php";
+	$multicpage = "multiaddc.php";
+	$searchpage = "../search.php";
+	$logoutPage = "../logout.php?logout";
+} else {
+	require_once 'classes/Login.php';
+	$background = "images/background.jpg";
+	$multipage = "admin/multiadd.php";
+	$multicpage = "admin/multiaddc.php";
+	$searchpage = "search.php";
+	$logoutPage = "logout.php?logout";
+}
+$login = new Login();
+?>
+
+<!-- Uses a transparent header that draws on top of the layout's background -->
+<style>
+	.demo-layout-transparent {
+	background: url('<?php echo $background; ?>') top/cover;
+	}
+
+	.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
 	{
 	/* This background is dark, so we set text to white. Use 87% black instead if
      your background is light. */
 	color: black;
-}
+	}
 </style>
 
 	<div class="demo-layout-transparent mdl-layout mdl-js-layout">
@@ -22,7 +44,7 @@
 				<!-- Navigation -->
 				<nav class="mdl-navigation">
 					<?php if ($login->isUserLoggedIn () == true) {
-						echo "<a class=\"mdl-navigation__link\" href=\"logout.php?logout&return=" . htmlspecialchars($current_page) . "\">Logout</a>";
+						echo "<a class=\"mdl-navigation__link\" href=\"" . $logoutPage . "&return=" . htmlspecialchars($current_page) . "\">Logout</a>";
 					} else {
 						echo "<a class=\"mdl-navigation__link\" href=\"login.php?return=" . htmlspecialchars($current_page) . "\">Login</a>";
 					}

@@ -10,7 +10,6 @@
  *</pre>
  */
 class wikiQuery {
-	private $wikiSearchResultID;
 	private $wikiSearchResultTitle;
 	private $query;
 	/**
@@ -23,6 +22,7 @@ class wikiQuery {
 	public $storyName;
 	public $wikiTitle;
 	public $synopsis;
+	public $wikiSearchResultID;
 
 	/**
 	 * uses an API call to marvel.wikia.com to return search results
