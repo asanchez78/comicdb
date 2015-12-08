@@ -49,19 +49,21 @@ if ($login->isUserLoggedIn () == true) {
 			WHERE comic_id='$comic_id'";
 			echo $sql . "<br/><br/>";
 			set_time_limit(0);
-//			if (mysqli_query ( $connection, $sql )) {
-//				echo "Record updated successfully with the following information";
-//			} else {
-//				echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
-//			}
+			if (mysqli_query ( $connection, $sql )) {
+				$wikiMsg = "wiki IDs entered";
+			} else {
+				echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+			}
 		}
+	} else {
+		$wikiMsg = "All entries have a wiki id.";
 	}
 
 	//Update records that have a wiki id, but have not been updated with information from the marvel wikia
 	$sql = "SELECT comics.comic_id, comics.wiki_id
 			FROM comics
 			WHERE comics.wiki_id IS NOT NULL
-			AND comics.wikiUpdated=0 LIMIT 10";
+			AND comics.wikiUpdated=0 LIMIT 2";
 	$result = $connection->query ( $sql );
 	if ($result->num_rows > 0) {
 		while ( $row = $result->fetch_assoc () ) {
@@ -71,14 +73,17 @@ if ($login->isUserLoggedIn () == true) {
 			$wikiDetails->comicDetails($wiki_id);
 			$url = $wikiDetails->coverURL;
 			$path = "../images/$wikiDetails->coverFile";
-//			$downloader->downloadFile($url, $path);
-			$sqlInsert = "UPDATE comics
-				SET story_name='$wikiDetails->storyName', plot='$wikiDetails->synopsis', cover_image='images/$wikiDetails->coverFile' wikiUpdated=1
+			$downloader->downloadFile($url, $path);
+            $synopsis = addslashes($wikiDetails->synopsis);
+			$sql = "UPDATE comics
+				SET story_name='$wikiDetails->storyName',  plot='$synopsis', cover_image='images/$wikiDetails->coverFile', wikiUpdated=1
 				WHERE comic_id='$comic_id'";
 			$linkList .= "<tr>\n";
 			$linkList .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $wikiDetails->wikiTitle ."</a></td>\n";
 			$linkList .= "</tr>\n";
 			set_time_limit(0);
+
+            echo "<br><br><br>";
 //			if (mysqli_query ( $connection, $sql )) {
 //				echo "Record updated successfully with the following information";
 //			} else {
@@ -102,7 +107,7 @@ include '../views/not_logged_in.php';
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp centered half-width table">
 		<thead>
 			<tr>
-				<th class="mdl-data-table__cell--non-numeric full-width">Results</th>
+				<th class="mdl-data-table__cell--non-numeric full-width">Results: <?php echo $wikiMsg; ?></th>
 			</tr>
 		</thead>
 		<tbody>
