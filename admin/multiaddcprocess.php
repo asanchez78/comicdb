@@ -28,16 +28,10 @@ foreach ( $issue_list as $number ) {
 	//}
 }
 
+include '../views/head.php';
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<head>
-<meta charset="UTF-8">
+	<script
+	src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
 <title></title>
 </head>
 <body>

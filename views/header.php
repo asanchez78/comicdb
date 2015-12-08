@@ -1,23 +1,3 @@
-<?php
-// This will get the current URL the user is on
-$current_page = urlencode($_SERVER['REQUEST_URI']);
-
-if ( preg_match('/^%2Fcomicdb%2Fadmin%2F.*/', $current_page)) {
-	require_once '../classes/Login.php';
-	$background = "../images/background.jpg";
-	$multipage = "multiadd.php";
-	$multicpage = "multiaddc.php";
-	$searchpage = "../search.php";
-} else {
-	require_once 'classes/Login.php';
-	$background = "images/background.jpg";
-	$multipage = "admin/multiadd.php";
-	$multicpage = "admin/multiaddc.php";
-	$searchpage = "search.php";
-}
-$login = new Login();
-?>
-
 <!-- Uses a transparent header that draws on top of the layout's background -->
 	<style>
 .demo-layout-transparent {

@@ -2,7 +2,7 @@
 require_once '../classes/Registration.php';
 require_once '../config/db.php';
 $registration = new Registration();
-$allowRegistration = "no";
+$allowRegistration = "yes";
 
 // show potential errors / feedback (from registration object)
 if (isset ( $registration )) {

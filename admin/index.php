@@ -1,25 +1,5 @@
-<?php
-require_once '../config/db.php';
-//require_once '../classes/Login.php';
-
-?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<head>
-<link rel="stylesheet"
-	href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.green-blue.min.css">
-<script
-	src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-<title>Admin</title>
+<?php include '../views/head.php'; ?>
+	<title>Admin</title>
 </head>
 <body>
 <?php include '../views/header.php';

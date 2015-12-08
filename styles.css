@@ -1,38 +1,6 @@
-/**
- * material-design-lite - Material Design Components in CSS, JS and HTML
- * @version v1.0.6
- * @license Apache-2.0
- * @copyright 2015 Google, Inc.
- * @link https://github.com/google/material-design-lite
- */
 @charset "UTF-8"; 
-/**
-*
-*My own additions
-*
-*/
-.table a
-{
-    display:block;
-    text-decoration:none;
-}
-.centered {
-	margin: 0 auto;
-	
-}
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
 
-.full-width {
-	width: 100%;
-}
-
-.half-width{
-	width: 50%;
-}
-/**
-*
-*Original Style below
-*
-*/
 html {
 	color: rgba(0, 0, 0, .87)
 }
@@ -68,6 +36,24 @@ fieldset {
 
 textarea {
 	resize: vertical
+}
+
+.table a
+{
+    display:block;
+    text-decoration:none;
+}
+.centered {
+	margin: 0 auto;
+	
+}
+
+.full-width {
+	width: 100%;
+}
+
+.half-width{
+	width: 50%;
 }
 
 .browserupgrade {
@@ -4678,7 +4664,7 @@ left
 }
 
 .mdl-layout__header--transparent.mdl-layout__header--transparent {
-	background-color: transparent;
+	background-color: white;
 	box-shadow: none
 }
 
@@ -6996,4 +6982,9 @@ iframe.heightSet {
 
 .demo-wrapper iframe {
 	border: 1px solid rgba(0, 0, 0, .5)
+}
+
+/* Sean's Additions */
+header {
+	opacity: 0.9;
 }

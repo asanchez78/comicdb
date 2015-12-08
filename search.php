@@ -33,20 +33,16 @@ if (mysqli_num_rows ( $last_series_id ) > 0) {
 mysqli_close ( $connection );
 
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Comic Search</title>
+<?php include 'views/head.php';?>
+  <title>Comic Search</title>
 </head>
 <body>
-<form method="post" action="results.php">
-<label>Series</label>
-<?php echo $dropdown?>
-<label>Issue Number</label>
-<input name="issue_number" type="text" size="3" maxlength="4" value=""/>
-<input type="submit" name="submit" value="Submit" />
-</form>
+  <form method="post" action="results.php">
+    <label>Series</label>
+    <?php echo $dropdown?>
+    <label>Issue Number</label>
+    <input name="issue_number" type="text" size="3" maxlength="4" value=""/>
+    <input type="submit" name="submit" value="Submit" />
+  </form>
 </body>
 </html>
