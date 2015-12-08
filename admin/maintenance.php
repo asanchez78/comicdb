@@ -49,11 +49,11 @@ if ($login->isUserLoggedIn () == true) {
 			WHERE comic_id='$comic_id'";
 			echo $sql . "<br/><br/>";
 			set_time_limit(0);
-			if (mysqli_query ( $connection, $sql )) {
-				$wikiMsg = "wiki IDs entered";
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
-			}
+//			if (mysqli_query ( $connection, $sql )) {
+//				$wikiMsg = "wiki IDs entered";
+//			} else {
+//				echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+//			}
 		}
 	} else {
 		$wikiMsg = "All entries have a wiki id.";
@@ -73,7 +73,7 @@ if ($login->isUserLoggedIn () == true) {
 			$wikiDetails->comicDetails($wiki_id);
 			$url = $wikiDetails->coverURL;
 			$path = "../images/$wikiDetails->coverFile";
-			$downloader->downloadFile($url, $path);
+//			$downloader->downloadFile($url, $path);
             $synopsis = addslashes($wikiDetails->synopsis);
 			$sql = "UPDATE comics
 				SET story_name='$wikiDetails->storyName',  plot='$synopsis', cover_image='images/$wikiDetails->coverFile', wikiUpdated=1
