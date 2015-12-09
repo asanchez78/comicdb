@@ -7,6 +7,9 @@ require_once '../classes/wikiFunctions.php';
 require_once '../classes/Login.php';
 require_once '../classes/functions.php';
 require_once '../config/db.php';
+
+
+
 ?>
 
 <html>
@@ -24,40 +27,15 @@ require_once '../config/db.php';
 
 <?php include '../views/header.php';
 if ($login->isUserLoggedIn () == true) {
+	//fill in missing wiki IDs
+	$wikiID = new wikiQuery();
+	$wikiID->addWikiID();
 	$wikiDetails = new wikiQuery();
 	$downloader = new grab_cover();
 	$linkList = "";
 //	turning off NOTICE reporting. bulleted lists in synopsis are burried one level deeper in the json data
 //	this currently causes an index error
-	error_reporting(E_ALL & ~E_NOTICE);
-
-	//Get wiki ids for records that do not have them by searching the marvel wikia api
-	$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
-			FROM comics
-			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NULL";
-	$result = $connection->query ($sql);
-	if ($result->num_rows > 0) {
-		while ($row = $result->fetch_assoc()) {
-			$comic_id = $row ['comic_id'];
-			$series_name = $row ['series_name'];
-			$issue_number = $row['issue_number'];
-			$query = $series_name . " " . $issue_number;
-			$wikiDetails->wikiSearch($query, $series_name, $issue_number, 1);
-			$sql = "UPDATE comics
-			SET wiki_id=$wikiDetails->wikiSearchResultID
-			WHERE comic_id='$comic_id'";
-			echo $sql . "<br/><br/>";
-			set_time_limit(0);
-			if (mysqli_query ( $connection, $sql )) {
-				$wikiMsg = "wiki IDs entered";
-			} else {
-				echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
-			}
-		}
-	} else {
-		$wikiMsg = "All entries have a wiki id.";
-	}
+//	error_reporting(E_ALL & ~E_NOTICE);
 
 	//Update records that have a wiki id, but have not been updated with information from the marvel wikia
 	$sql = "SELECT comics.comic_id, comics.wiki_id
@@ -107,7 +85,7 @@ include '../views/not_logged_in.php';
 	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp centered half-width table">
 		<thead>
 			<tr>
-				<th class="mdl-data-table__cell--non-numeric full-width">Results: <?php echo $wikiMsg; ?></th>
+				<th class="mdl-data-table__cell--non-numeric full-width">Results: <?php echo $wikiID->wikiMsg; ?></th>
 			</tr>
 		</thead>
 		<tbody>
