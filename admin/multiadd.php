@@ -1,5 +1,6 @@
 <?php
-require_once '../config/db.php';
+	define('__ROOT__', dirname(dirname(__FILE__)));
+	include(__ROOT__.'/views/head.php');
 
 	$last_series_id_query = "select series_id from series ORDER BY series_id DESC LIMIT 1";
 	$series_query = "SELECT series_id, series_name FROM series";
@@ -29,33 +30,37 @@ require_once '../config/db.php';
 		$dropdown = "<input id=\"element_6\" name=\"series_name\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"\"/>";
 	}
 	mysqli_close ( $connection );
-
-include '../views/head.php';
 ?>
-	<script
-	src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
 	<title>Admin</title>
 </head>
 <body>
-<?php include '../views/header.php';
+<?php 
+	include(__ROOT__.'/views/header.php');
 	if ($login->isUserLoggedIn () == false) {
-	include ("../views/not_logged_in.php");
-	die ();
-}
-
+		include(__ROOT__."/views/not_logged_in.php");
+		die ();
+	}
 ?>
-<form id="input_select" method="post" action="multiaddprocess.php">
-	<label>Series</label>
-        <?php echo $dropdown; ?>
-        <label>First Issue</label> <input name="first_issue" type="text"
-		maxlength="3" /> <label>Last Issue</label> <input name="last_issue"
-		type="text" maxlength="3" /> <label>Purchased when released?</label> <select
-		name="original_purchase">
-		<option value="" selected="selected"></option>
-		<option value="1">Yes</option>
-		<option value="0">No</option>
-	</select> <input type="submit" name="submit" value="Submit" />
-</form>
-<a href="multiadd.php?logout">Logout</a>
-<?php include '../views/footer.php';?>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<form id="input_select" method="post" action="multiaddprocess.php">
+					<label>Series</label>
+				  <?php echo $dropdown; ?>
+				  <label>First Issue</label> 
+				  <input name="first_issue" type="text" maxlength="3" /> 
+					<label>Last Issue</label> 
+					<input name="last_issue" type="text" maxlength="3" /> 
+					<label>Purchased when released?</label> 
+					<select name="original_purchase">
+						<option value="" selected="selected"></option>
+						<option value="1">Yes</option>
+						<option value="0">No</option>
+					</select> 
+					<input type="submit" name="submit" value="Submit" />
+				</form>
+			</div>
+		</div>
+	</div>
+<?php include(__ROOT__.'/views/footer.php'); ?>	
 </html>

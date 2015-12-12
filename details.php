@@ -1,29 +1,25 @@
 <?php
-require_once 'classes/wikiFunctions.php';
+  include 'views/head.php';
+  require_once 'classes/wikiFunctions.php';
 
-$wiki_id= filter_input(INPUT_GET, 'wiki_id');
-$comic = new wikiQuery();
-$comic->comicCover($wiki_id);
-$comic->comicDetails($wiki_id);
+  $wiki_id= filter_input(INPUT_GET, 'wiki_id');
+  $comic = new wikiQuery();
+  $comic->comicCover($wiki_id);
+  $comic->comicDetails($wiki_id);
 ?>
-
-<?php include 'views/head.php';?>
-  <title>Add Issue</title>
+  <title>Add Issue :: comicDB</title>
 </head>
 <body>
-<?php
-echo "<img alt=\"cover\" src=" . $comic->coverURL . ">";
-echo "<br>\n";
-echo "<br>\n";
-
-echo $comic->wikiTitle;
-echo "<br>\n";
-echo "<br>\n";
-echo $comic->storyName;
-echo "<br>\n";
-echo "<br>\n";
-echo $comic->synopsis;
-?>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <img src="<?php echo $comic->coverURL; ?>" alt="Cover" />
+        <h3><?php echo $comic->wikiTitle; ?></h3>
+        <p><?php echo $comic->storyName; ?></p>
+        <p><?php echo $comic->synopsis; ?></p>
+      </div>
+    </div>
+  </div>
+<?php include 'views/footer.php';?>
 </body>
 </html>
