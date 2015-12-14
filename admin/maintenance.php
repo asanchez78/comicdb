@@ -51,14 +51,11 @@ if ($login->isUserLoggedIn () == true) {
 			$wikiDetails->comicDetails($wiki_id);
 			$url = $wikiDetails->coverURL;
 			$path = "../images/$wikiDetails->coverFile";
-			$downloader->downloadFile($url, $path);
+//			$downloader->downloadFile($url, $path);
             $synopsis = addslashes($wikiDetails->synopsis);
 			$sql = "UPDATE comics
 				SET story_name='$wikiDetails->storyName',  plot='$synopsis', cover_image='images/$wikiDetails->coverFile', wikiUpdated=1
 				WHERE comic_id='$comic_id'";
-			$linkList .= "<tr>\n";
-			$linkList .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $wikiDetails->wikiTitle ."</a></td>\n";
-			$linkList .= "</tr>\n";
 			set_time_limit(0);
 
             echo "<br><br><br>";
@@ -89,7 +86,7 @@ include '../views/not_logged_in.php';
 			</tr>
 		</thead>
 		<tbody>
-<?php echo $linkList; ?>
+<?php echo $wikiID->newWikiIDs; ?>
 </tbody>
 </table>
 </div>
