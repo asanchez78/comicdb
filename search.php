@@ -1,5 +1,5 @@
 <?php
-  include 'views/head.php';
+  require_once('views/head.php');
   $comics = new comicSearch ();
   $comics->seriesList ();
   $dropdown = "<select name=\"series_name\">\n";

@@ -1,5 +1,5 @@
 <?php
-  include 'views/head.php';
+  require_once('views/head.php');
   require_once 'classes/wikiFunctions.php';
 
   $wiki_id= filter_input(INPUT_GET, 'wiki_id');

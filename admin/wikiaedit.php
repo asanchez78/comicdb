@@ -1,9 +1,7 @@
 <?php
   define('__ROOT__', dirname(dirname(__FILE__)));
-  include(__ROOT__.'/views/head.php');
+  require_once(__ROOT__.'/views/head.php');
 
-  require_once(__ROOT__.'/classes/Login.php');
-  $login = new Login ();
   if ($login->isUserLoggedIn () == false) {
   	include (__ROOT__."/views/not_logged_in.php");
   	die ();
@@ -18,7 +16,6 @@
   $dbValues = new comicSearch();
   $dbValues->issueLookup($comic_id);
 
-include(__ROOT__.'/views/head.php');
 ?>
   <title>Edit Issue :: comicDB</title>
 </head>

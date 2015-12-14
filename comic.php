@@ -1,5 +1,5 @@
 <?php
-	include 'views/head.php';
+	require_once('views/head.php');
 	// Create connection
 	require_once 'classes/wikiFunctions.php';
 

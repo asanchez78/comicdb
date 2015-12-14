@@ -1,5 +1,5 @@
 <?php
-  include 'views/head.php';
+  require_once('views/head.php');
   require_once 'classes/wikiFunctions.php';
 
   $series_name = filter_input(INPUT_POST, 'series_name');
@@ -16,7 +16,7 @@
 
 
   //while ($row = $returnedResults->wikiSearchResultTitle) {
-  //	echo "<a href=\"details.php?wiki_id=" . $returnedResults->wikiSearchResultID . "\">" . $returnedResults->wikiSearchResultTitle . "</a> - ";
+  //	echo "<a href=\"\details.php?wiki_id=" . $returnedResults->wikiSearchResultID . "\">" . $returnedResults->wikiSearchResultTitle . "</a> - ";
   //	echo "<br>\n";
   //}
 ?>

@@ -1,6 +1,6 @@
 <?php 
 	define('__ROOT__', dirname(dirname(__FILE__)));
-	include(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/views/head.php');
 ?>
 	<title>Admin :: comicDB</title>
 </head>

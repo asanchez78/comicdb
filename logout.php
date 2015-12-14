@@ -1,8 +1,6 @@
 <?php
-  require_once 'classes/Login.php';
-  require_once 'config/db.php';
+  require_once('views/head.php');
 ?>
-<?php include 'views/head.php';?>
   <title>Comicdb</title>
 </head>
 <body>

@@ -1,6 +1,6 @@
 <?php
 	define('__ROOT__', dirname(dirname(__FILE__)));
-	include(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/views/head.php');
 
 	$last_series_id_query = "select series_id from series ORDER BY series_id DESC LIMIT 1";
 	$series_query = "SELECT series_id, series_name FROM series";

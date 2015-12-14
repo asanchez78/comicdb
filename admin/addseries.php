@@ -1,11 +1,7 @@
 <?php
 	define('__ROOT__', dirname(dirname(__FILE__)));
-	include(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/views/head.php');
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
-	 
-	// Login functions
-  require_once(__ROOT__.'/classes/Login.php');
-  $login = new Login();
 ?>
 	<title>Add Series :: ComicDB</title>
 </head>

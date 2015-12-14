@@ -1,6 +1,6 @@
 <?php
 	define('__ROOT__', dirname(dirname(__FILE__)));
-	include(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/views/head.php');
 
 	$last_series_id_query = "select series_id from series ORDER BY series_id DESC LIMIT 1";
 	$series_query = "SELECT series_id, series_name FROM series";
@@ -47,17 +47,17 @@
 				<form id="input_select" method="post" action="multiaddcprocess.php">
 					<div>
 						<label>Series</label>
-			        <?php echo $dropdown; ?>
-			        </div>
+			      <?php echo $dropdown; ?>
+			    </div>
 
 					<div>
-						<label>Comma separated list of issues</label> <br />
+						<label for="issue_list">Comma separated list of issues</label> <br />
 						<textarea name="issue_list" rows="4" cols="30" form="input_select"></textarea>
 					</div>
 
 					<div>
-						<label>Purchased when released?</label> <select
-							name="original_purchase">
+						<label>Purchased when released?</label> 
+						<select name="original_purchase">
 							<option value="" selected="selected"></option>
 							<option value="1">Yes</option>
 							<option value="0">No</option>

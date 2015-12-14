@@ -1,10 +1,10 @@
 <?php
-include 'views/head.php';
-$issue_list = null;
+	require_once('views/head.php');
+	$issue_list = null;
 
-$series_id = filter_input ( INPUT_GET, 'series_id' );
-$issues = new comicSearch ();
-$issues->issuesList ( $series_id );
+	$series_id = filter_input ( INPUT_GET, 'series_id' );
+	$issues = new comicSearch ();
+	$issues->issuesList ( $series_id );
 
 ?>
   <title>Comicdb</title>

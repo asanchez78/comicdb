@@ -1,5 +1,7 @@
 <?php
-require_once '../config/db.php';
+define('__ROOT__', dirname(dirname(__FILE__)));
+require_once(__ROOT__.'/views/head.php');
+
 $first_issue = filter_input ( INPUT_POST, 'first_issue' );
 $last_issue = filter_input ( INPUT_POST, 'last_issue' );
 $series_id = filter_input ( INPUT_POST, 'series_name' );
@@ -30,11 +32,8 @@ foreach ( range ( $first_issue, $last_issue ) as $number ) {
 		echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
 	}
 }
-include '../views/head.php';
 ?>
-	<script
-	src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-<title></title>
+	<title></title>
 </head>
 <body>
 

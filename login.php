@@ -1,4 +1,4 @@
-<?php include 'views/head.php'; ?>
+<?php require_once('views/head.php'); ?>
   <title>Login to your Account :: comicDB</title>
 </head>
 <body>

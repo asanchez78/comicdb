@@ -1,6 +1,6 @@
 <?php
 	define('__ROOT__', dirname(dirname(__FILE__)));
-	include(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/views/head.php');
 
 $first_issue = filter_input ( INPUT_POST, 'first_issue' );
 $last_issue = filter_input ( INPUT_POST, 'last_issue' );

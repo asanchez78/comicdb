@@ -1,10 +1,3 @@
-<?php
-// This will get the current URL the user is on
-$current_page = htmlspecialchars(urlencode($_SERVER['REQUEST_URI']));
-require_once(__ROOT__.'/classes/Login.php');
-$login = new Login();
-?>
-
 <!-- Site wrapper begins -->
 <div id="wrapper">
 	<header>
@@ -18,18 +11,21 @@ $login = new Login();
 				</div>
 				<!-- Navigation -->
 				<nav class="col-md-4 col-sm-12 sitenav">
+					<ul class="nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
-						<a href="#" id="button-add-comics">Add Comics</a>
-						<div id="comics-submenu">
-							<a href="/admin/addseries.php">Add Series</a>
-							<a href="/search.php">Add Single Issue</a>
-							<a href="/admin/multiadd.php">Add Range</a>
-							<a href="/admin/multiaddc.php">Add Comma Separated List</a>
-						</div>
-						<a href="/logout.php?logout&return=<?php echo $current_page; ?>">Logout</a>
+						<li><a href="#" id="button-add-comics">Add Comics</a>
+							<ul id="comics-submenu" class="nolist">
+								<li><a href="/admin/addseries.php">Add Series</a></li>
+								<li><a href="/search.php">Add Single Issue</a></li>
+								<li><a href="/admin/multiadd.php">Add Range</a></li>
+								<li><a href="/admin/multiaddc.php">Add Comma Separated List</a></li>
+							</ul>
+						</li>
+						<li><a href="/logout.php?logout&return=<?php echo $current_page; ?>">Logout</a></li>
 					<?php } else { ?>
-						<a href="/login.php?return=<?php echo $current_page; ?>">Login</a>
+						<li><a href="/login.php?return=<?php echo $current_page; ?>">Login</a></li>
 					<?php } ?>
+					</ul>
 				</nav>
 			</div>
 		</div>
