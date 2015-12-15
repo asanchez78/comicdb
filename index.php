@@ -9,7 +9,7 @@
 			while ( $row = $comics->series_list_result->fetch_assoc () ) {
 				$series_id = $row ['series_id'];
 				$series_name = $row ['series_name'];
-				$series_list = "<li><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></li>\n";
+				$series_list .= "<li><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></li>\n";
 			}
 		} else {
 			$series_list = "<li>No Comic Series in database. Perhaps you should <a href=\"/admin/addseries.php\">Add some.</a></li>";
