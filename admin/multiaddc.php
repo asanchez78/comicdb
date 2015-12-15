@@ -1,5 +1,6 @@
 <?php
-require_once '../config/db.php';
+	define('__ROOT__', dirname(dirname(__FILE__)));
+	require_once(__ROOT__.'/views/head.php');
 
 	$last_series_id_query = "select series_id from series ORDER BY series_id DESC LIMIT 1";
 	$series_query = "SELECT series_id, series_name FROM series";
@@ -29,61 +30,47 @@ require_once '../config/db.php';
 		$dropdown = "<input id=\"element_6\" name=\"series_name\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"\"/>";
 	}
 	mysqli_close ( $connection );
-
 ?>
-
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<head>
-<link rel="stylesheet"
-	href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.green-blue.min.css">
-<script
-	src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-<title>Admin</title>
+	<title>Add Comma Separated List :: comicDB</title>
 </head>
 <body>
-<?php include '../views/header.php';
+<?php 
+	include(__ROOT__.'/views/header.php');
 	if ($login->isUserLoggedIn () == false) {
-	include ("../views/not_logged_in.php");
-	die ();
-}
-
+		include(__ROOT__."/views/not_logged_in.php");
+		die ();
+	}
 ?>
-<div>
-	<form id="input_select" method="post" action="multiaddcprocess.php">
-		<div>
-			<label>Series</label>
-        <?php echo $dropdown; ?>
-        </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<form id="input_select" method="post" action="multiaddcprocess.php">
+					<div>
+						<label>Series</label>
+			      <?php echo $dropdown; ?>
+			    </div>
 
-		<div>
-			<label>Comma separated list of issues</label> <br />
-			<textarea name="issue_list" rows="4" cols="30" form="input_select"></textarea>
+					<div>
+						<label for="issue_list">Comma separated list of issues</label> <br />
+						<textarea name="issue_list" rows="4" cols="30" form="input_select"></textarea>
+					</div>
+
+					<div>
+						<label>Purchased when released?</label> 
+						<select name="original_purchase">
+							<option value="" selected="selected"></option>
+							<option value="1">Yes</option>
+							<option value="0">No</option>
+						</select>
+					</div>
+
+					<div>
+						<input type="submit" name="submit" value="Submit" />
+					</div>
+
+				</form>
+			</div>
 		</div>
-
-		<div>
-			<label>Purchased when released?</label> <select
-				name="original_purchase">
-				<option value="" selected="selected"></option>
-				<option value="1">Yes</option>
-				<option value="0">No</option>
-			</select>
-		</div>
-
-		<div>
-			<input type="submit" name="submit" value="Submit" />
-		</div>
-
-	</form>
-</div>
-<a href="multiadd.php?logout">Logout</a>
+	</div>
+	<?php include(__ROOT__.'/views/footer.php'); ?>	
 </html>

@@ -1,67 +1,34 @@
-<?php
-// This will get the current URL the user is on
-$current_page = urlencode($_SERVER['REQUEST_URI']);
-
-if ( preg_match('/^%2Fcomicdb%2Fadmin%2F.*/', $current_page)) {
-	require_once '../classes/Login.php';
-	$background = "../images/background.jpg";
-	$multipage = "multiadd.php";
-	$multicpage = "multiaddc.php";
-	$searchpage = "../search.php";
-	$logoutPage = "../logout.php?logout";
-} else {
-	require_once 'classes/Login.php';
-	$background = "images/background.jpg";
-	$multipage = "admin/multiadd.php";
-	$multicpage = "admin/multiaddc.php";
-	$searchpage = "search.php";
-	$logoutPage = "logout.php?logout";
-}
-$login = new Login();
-?>
-
-<!-- Uses a transparent header that draws on top of the layout's background -->
-<style>
-	.demo-layout-transparent {
-	background: url('<?php echo $background; ?>') top/cover;
-	}
-
-	.demo-layout-transparent .mdl-layout__header, .demo-layout-transparent .mdl-layout__drawer-button
-	{
-	/* This background is dark, so we set text to white. Use 87% black instead if
-     your background is light. */
-	color: black;
-	}
-</style>
-
-	<div class="demo-layout-transparent mdl-layout mdl-js-layout">
-		<header class="mdl-layout__header mdl-layout__header--transparent">
-			<div class="mdl-layout__header-row">
+<!-- Site wrapper begins -->
+<div id="wrapper">
+	<header>
+		<div class="container">
+			<div class="row">
+				<!-- Spacer -->
+				<div class="col-md-4 hidden-sm"></div>
 				<!-- Title -->
-				<a class="mdl-navigation__link mdl-layout-title" href="https://<?php echo $_SERVER['HTTP_HOST']; ?>/comicdb/index.php">MyComics</a>
-				<!-- Add spacer, to align navigation to the right -->
-				<div class="mdl-layout-spacer"></div>
+				<div class="col-md-4 col-sm-12 logo">
+					<h1><a href="/index.php">comicDB</a></h1>
+				</div>
 				<!-- Navigation -->
-				<nav class="mdl-navigation">
-					<?php if ($login->isUserLoggedIn () == true) {
-						echo "<a class=\"mdl-navigation__link\" href=\"" . $logoutPage . "&return=" . htmlspecialchars($current_page) . "\">Logout</a>";
-					} else {
-						echo "<a class=\"mdl-navigation__link\" href=\"login.php?return=" . htmlspecialchars($current_page) . "\">Login</a>";
-					}
-					?>
+				<nav class="col-md-4 col-sm-12 sitenav">
+					<ul class="nolist">
+					<?php if ($login->isUserLoggedIn () == true) { ?>
+						<li><a href="#" id="button-add-comics">Add Comics</a>
+							<ul id="comics-submenu" class="nolist">
+								<li><a href="/admin/addseries.php">Add Series</a></li>
+								<li><a href="/search.php">Add Single Issue</a></li>
+								<li><a href="/admin/multiadd.php">Add Range</a></li>
+								<li><a href="/admin/multiaddc.php">Add Comma Separated List</a></li>
+							</ul>
+						</li>
+						<li><a href="/logout.php?logout&return=<?php echo $current_page; ?>">Logout</a></li>
+					<?php } else { ?>
+						<li><a href="/login.php?return=<?php echo $current_page; ?>">Login</a></li>
+					<?php } ?>
+					</ul>
 				</nav>
 			</div>
-		</header>
-		<?php if ($login->isUserLoggedIn () == true) {
-		echo '<div class="mdl-layout__drawer">
-			<span class="mdl-layout-title">MyComics</span>
-			<nav class="mdl-navigation">
-				<a class="mdl-navigation__link" href="' . $multipage . '">Add Range</a>
-				<a class="mdl-navigation__link" href="' . $multicpage . '">Add Comma Separated List</a>
-				<a class="mdl-navigation__link" href="' . $searchpage . '">Add Single Issue</a>
-			</nav>
-		</div>';
-		}
-		?>
-
-		<main class="mdl-layout__content">
+		</div>
+	</header>
+	<!-- Site content begins -->
+	<main>

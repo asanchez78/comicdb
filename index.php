@@ -1,52 +1,43 @@
 <?php
-$series_list = null;
-require_once 'classes/functions.php';
-require_once 'config/db.php';
+	require_once('views/head.php');
+	if ($login->isUserLoggedIn () == true) {
+		$series_list = null;
+		$comics = new comicSearch ();
+		$comics->seriesList ();
 
-$comics = new comicSearch ();
-$comics->seriesList ();
-
-if ($comics->series_list_result->num_rows > 0) {
-	while ( $row = $comics->series_list_result->fetch_assoc () ) {
-		$series_id = $row ['series_id'];
-		$series_name = $row ['series_name'];
-		$series_list .= "<tr>\n";
-		$series_list .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></td>\n";
-		$series_list .= "</tr>\n";
+		if ($comics->series_list_result->num_rows > 0) {
+			while ( $row = $comics->series_list_result->fetch_assoc () ) {
+				$series_id = $row ['series_id'];
+				$series_name = $row ['series_name'];
+				$series_list = "<li><a href=\"issues.php?series_id=$series_id\">" . $series_name . "</a></li>\n";
+			}
+		} else {
+			$series_list = "<li>No Comic Series in database. Perhaps you should <a href=\"/admin/addseries.php\">Add some.</a></li>";
+		}
 	}
-} else {
-	$series_list = "<tr>\n";
-	$series_list .= "<td class=\"mdl-data-table__cell--non-numeric\">No Comic Series in database. Perhaps you should <a href=\"admin/addseries.php\">Add some.</a></td>\n";
-	$series_list .= "</tr>\n";
-}
 ?>
-<html>
-<head>
-<link rel="stylesheet" href="material.min.css">
-<script src="material.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comicdb</title>
-
+  <title>comicDB</title>
 </head>
-
 <body>
-
-<?php include 'views/header.php';?>
-<div class="mdl-grid">
-	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp centered half-width table">
-		<thead>
-			<tr>
-				<th class="mdl-data-table__cell--non-numeric full-width">Series</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php echo $series_list; ?>
-		</tbody>
-	</table>
-</div>
+	<?php include 'views/header.php';?>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<?php if ($login->isUserLoggedIn () == true) { ?>
+					<h2>Your Comics</h2>
+					<?php if ($series_list != null) { ?>
+					<ul class="nolist inventory-table">
+						<?php echo $series_list; ?>
+					</ul>
+					<?php } else { ?>
+						<p>No comics have been entered into the database. Why not add one?</p>
+					<?php } ?>
+				<?php } else { ?>
+					<p>You are not signed in. Please sign in using the Login button above.</p>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
 <?php include 'views/footer.php';?>
-
 </body>
 </html>

@@ -1,26 +1,26 @@
 <?php
-require_once '../classes/Registration.php';
-require_once '../config/db.php';
-$registration = new Registration();
-$allowRegistration = "no";
+	define('__ROOT__', dirname(dirname(__FILE__)));
+	require_once(__ROOT__'/classes/Registration.php');
+	$registration = new Registration();
+	$allowRegistration = "yes";
 
-// show potential errors / feedback (from registration object)
-if (isset ( $registration )) {
-	if ($registration->errors) {
-		foreach ( $registration->errors as $error ) {
-			echo $error;
+	// show potential errors / feedback (from registration object)
+	if (isset ( $registration )) {
+		if ($registration->errors) {
+			foreach ( $registration->errors as $error ) {
+				echo $error;
+			}
+		}
+		if ($registration->messages) {
+			foreach ( $registration->messages as $message ) {
+				echo $message;
+			}
 		}
 	}
-	if ($registration->messages) {
-		foreach ( $registration->messages as $message ) {
-			echo $message;
-		}
+	if ($allowRegistration == "no") {
+		echo "Registration is currently closed";
+		die();
 	}
-}
-if ($allowRegistration == "no") {
-	echo "Registration is currently closed";
-	die();
-}
 ?>
 
 <!-- register form -->

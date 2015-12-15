@@ -1,5 +1,7 @@
 <?php
-require_once '../config/db.php';
+	define('__ROOT__', dirname(dirname(__FILE__)));
+	require_once(__ROOT__.'/views/head.php');
+
 $first_issue = filter_input ( INPUT_POST, 'first_issue' );
 $last_issue = filter_input ( INPUT_POST, 'last_issue' );
 $series_id = filter_input ( INPUT_POST, 'series_name' );
@@ -27,20 +29,16 @@ foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	//}
 }
 ?>
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
+	<title>Multi Issue Addition :: comicDB</title>
 </head>
 <body>
-
-        <?php echo $message; ?>
-
-    </body>
+<?php include(__ROOT__.'/views/header.php'); ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<?php echo $message; ?>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

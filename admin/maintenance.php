@@ -1,28 +1,10 @@
-<?php
-/**
- * fills in information for all records using information from marvel.wikia.com
- * records must have a wiki id
- */
-require_once '../classes/wikiFunctions.php';
-require_once '../classes/Login.php';
-require_once '../classes/functions.php';
-require_once '../config/db.php';
-
-
-
+<?php 
+	define('__ROOT__', dirname(dirname(__FILE__)));
+	require_once(__ROOT__.'/views/head.php');
+	require_once(__ROOT__.'/classes/wikiFunctions.php');
 ?>
-
-<html>
-<head>
-<link rel="stylesheet" href="../material.min.css">
-<script src="../material.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maintenance</title>
-
+	<title>Maintenance :: comicDB</title>
 </head>
-
 <body>
 
 <?php include '../views/header.php';
@@ -70,29 +52,26 @@ if ($login->isUserLoggedIn () == true) {
 	} else {
 		echo "0 results";
 	}
-
 } else {
-include '../views/not_logged_in.php';
+	include '../views/not_logged_in.php';
 }
 ?>
-
-
-
-<div class="mdl-grid">
-	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp centered half-width table">
-		<thead>
-			<tr>
-				<th class="mdl-data-table__cell--non-numeric full-width">Results: <?php echo $wikiID->wikiMsg; ?></th>
-			</tr>
-		</thead>
-		<tbody>
-<?php echo $wikiID->newWikiIDs; ?>
-</tbody>
-</table>
-</div>
-
-
-<?php include '../views/footer.php';?>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<table>
+					<thead>
+						<tr>
+							<th>Results: <?php echo $wikiID->wikiMsg; ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php echo $wikiID->newWikiIDs; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<?php include(__ROOT__.'/views/footer.php'); ?>
 </body>
 </html>
