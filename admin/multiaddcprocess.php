@@ -1,6 +1,5 @@
 <?php
-	define('__ROOT__', dirname(dirname(__FILE__)));
-	require_once(__ROOT__.'/views/head.php');
+	require_once('../views/head.php');
 	$filtered_issue_list = filter_input ( INPUT_POST, 'issue_list' );
 	$issue_list = explode ( ",", $filtered_issue_list );
 	$series_id = filter_input ( INPUT_POST, 'series_name' );
@@ -27,7 +26,7 @@
 	//} else {
 		// echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error($connection);
 	//}
-	} 
+	}
 ?>
 	<title></title>
 </head>

@@ -1,11 +1,10 @@
-<?php 
-	define('__ROOT__', dirname(dirname(__FILE__)));
-	require_once(__ROOT__.'/views/head.php');
+<?php
+	require_once('../views/head.php');
 ?>
 	<title>Admin :: comicDB</title>
 </head>
 <body>
-<?php 
+<?php
 	include(__ROOT__.'/views/header.php');
 	if ($login->isUserLoggedIn () == false) {
 		include (__ROOT__."/views/not_logged_in.php");
@@ -22,6 +21,6 @@
 			</div>
 		</div>
 	</div>
-<?php include(__ROOT__.'/views/footer.php'); ?>	
+<?php include(__ROOT__.'/views/footer.php'); ?>
 </body>
 </html>

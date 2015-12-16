@@ -1,6 +1,5 @@
-<?php 
-	define('__ROOT__', dirname(dirname(__FILE__)));
-	require_once(__ROOT__.'/views/head.php');
+<?php
+	require_once('../views/head.php');
 	require_once(__ROOT__.'/classes/wikiFunctions.php');
 ?>
 	<title>Maintenance :: comicDB</title>

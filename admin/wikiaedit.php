@@ -1,6 +1,5 @@
 <?php
-  define('__ROOT__', dirname(dirname(__FILE__)));
-  require_once(__ROOT__.'/views/head.php');
+  require_once('../views/head.php');
 
   if ($login->isUserLoggedIn () == false) {
   	include (__ROOT__."/views/not_logged_in.php");
@@ -51,7 +50,7 @@
             <input name="cover_image" type="text" maxlength="255" value="<?php echo $comic->coverURL; ?>" />
           </div>
           <div>
-            <label for="cover_image_file">Destination Filename</label> 
+            <label for="cover_image_file">Destination Filename</label>
             <input name="cover_image_file" type="text" maxlength="255" value="<?php echo $comic->coverFile; ?>" />
           </div>
           <input type="hidden" name="original_purchase" value="<?php echo $dbValues->original_purchase; ?>" />

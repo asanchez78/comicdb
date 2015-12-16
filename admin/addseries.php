@@ -1,6 +1,5 @@
 <?php
-	define('__ROOT__', dirname(dirname(__FILE__)));
-	require_once(__ROOT__.'/views/head.php');
+	require_once('../views/head.php');
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
 ?>
 	<title>Add Series :: ComicDB</title>
@@ -43,6 +42,6 @@
 			</div>
 		</div>
 	</div>
-<?php include(__ROOT__.'/views/footer.php'); ?>	
+<?php include(__ROOT__.'/views/footer.php'); ?>
 </body>
 </html>
