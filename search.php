@@ -29,7 +29,6 @@
 
   mysqli_close ( $connection );
 ?>
-<?php include 'views/head.php';?>
   <title>Comic Search :: comicDB</title>
 </head>
 <body>
