@@ -108,7 +108,7 @@ class wikiQuery {
 		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NULL LIMIT 2";
+			WHERE comics.wiki_id IS NULL";
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		$result = $this->db_connection->query ($sql);
 		if ($result->num_rows > 0) {
@@ -126,11 +126,11 @@ class wikiQuery {
 				$this->newWikiIDs .= "<tr>\n";
 				$this->newWikiIDs .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $series_name . " #" . $issue_number ."</a></td>\n";
 				$this->newWikiIDs .= "</tr>\n";
-//				if (mysqli_query ( $connection, $sql )) {
-//					$this->wikiMsg = "wiki IDs entered";
-//				} else {
-//					echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
-//				}
+				if (mysqli_query ( $this->db_connection, $sql )) {
+					$this->wikiMsg = "wiki IDs entered";
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+				}
 			}
 		} else {
 			$this->wikiMsg = "All entries have a wiki id.";
