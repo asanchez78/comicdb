@@ -23,8 +23,34 @@ class wikiQuery {
 	public $wikiTitle;
 	public $synopsis;
 	public $wikiSearchResultID;
-	public $wikiMsg;
+	public $AddWikiIDMsg;
+	public $addDetailsMsg;
 	public $newWikiIDs;
+	public $updatedList;
+
+	public function downloadFile($url, $path) {
+		$newfname = $path;
+		$file = fopen ( $url, "rb" );
+		if ($file) {
+			$newf = fopen ( $newfname, "wb" );
+
+			if ($newf) {
+				while ( ! feof ( $file ) ) {
+					fwrite ( $newf, fread ( $file, 1024 * 8 ), 1024 * 8 );
+				}
+			} else {
+				die ( 'Could not write cover image file.' );
+			}
+		}
+
+		if ($file) {
+			fclose ( $file );
+		}
+
+		if ($newf) {
+			fclose ( $newf );
+		}
+	}
 
 	/**
 	 * uses an API call to marvel.wikia.com to return search results
@@ -122,18 +148,57 @@ class wikiQuery {
 				SET wiki_id=$wikiDetails
 				WHERE comic_id='$comic_id'";
 				set_time_limit(0);
-				$this->wikiMsg = "wiki IDs entered";
 				$this->newWikiIDs .= "<tr>\n";
 				$this->newWikiIDs .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $series_name . " #" . $issue_number ."</a></td>\n";
 				$this->newWikiIDs .= "</tr>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
-					$this->wikiMsg = "wiki IDs entered";
+					$this->AddWikiIDMsg = "wiki IDs entered";
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
 				}
 			}
 		} else {
-			$this->wikiMsg = "All entries have a wiki id.";
+			$this->AddWikiIDMsg = "All entries have a wiki id.";
+		}
+	}
+
+	public function addDetails() {
+		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number, wiki_id
+			FROM comics
+			LEFT JOIN series ON comics.series_id=series.series_id
+			WHERE comics.wiki_id IS NOT NULL
+			AND comics.wikiUpdated=0";
+		$result = $this->db_connection->query ( $sql );
+		if ($result->num_rows > 0) {
+			while ( $row = $result->fetch_assoc () ) {
+				$comic_id = $row ['comic_id'];
+				$wiki_id = $row ['wiki_id'];
+				$series_name = $row ['series_name'];
+				$issue_number = $row['issue_number'];
+				$this->comicCover($wiki_id);
+				$this->comicDetails($wiki_id);
+				$url = $this->coverURL;
+				$path = "../images/$this->coverFile";
+				$this->downloadFile($url, $path);
+				$synopsis = addslashes($this->synopsis);
+				$storyName = addslashes($this->storyName);
+				$sql = "UPDATE comics
+				SET story_name='$storyName',  plot='$synopsis', cover_image='images/$this->coverFile', wikiUpdated=1
+				WHERE comic_id='$comic_id'";
+				set_time_limit(0);
+				if (mysqli_query ( $this->db_connection, $sql )) {
+					$this->addDetailsMsg = "Entries below Updated with new information.";
+					$this->updatedList .= "<tr>\n";
+					$this->updatedList .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $series_name . " #" . $issue_number ."</a></td>\n";
+					$this->updatedList .= "</tr>\n";
+				} else {
+					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
+				}
+				//resetting synopsis so that it doesn't concatinate with the next result
+				$this->synopsis = "";
+			}
+		} else {
+			$this->addDetailsMsg = "All records have wiki information filled in";
 		}
 	}
 }
