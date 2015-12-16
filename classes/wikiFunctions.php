@@ -40,7 +40,7 @@ class wikiQuery {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/new.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
 				$this->resultsList .= "<br>\n";
 				return $this->wikiSearchResultID;
 
@@ -80,7 +80,21 @@ class wikiQuery {
 		$this->wikiTitle = $issue_results['sections'][0]['title'];
 		if (array_key_exists('text', $issue_results['sections'][2]['content'][0])) {
 			foreach ($paragraphs as $paragraph) {
-				$this->synopsis .= $issue_results['sections'][2]['content'][$paragraphNum]['text'] . "\r\n\r\n";
+				$this->synopsis .= "<p>\r\n";
+				if (array_key_exists('text', $issue_results['sections'][2]['content'][$paragraphNum])) {
+				$this->synopsis .= $issue_results['sections'][2]['content'][$paragraphNum]['text'];
+				}
+				if (array_key_exists('elements', $issue_results['sections'][2]['content'][$paragraphNum])) {
+					$bullets = $issue_results['sections'][2]['content'][$paragraphNum]['elements'];
+					$bulletNum = 0;
+					$this->synopsis .= "<ul>\r\n";
+					foreach ($bullets as $bullet) {
+						$this->synopsis .= "<li>" . $issue_results['sections'][2]['content'][$paragraphNum]['elements'][$bulletNum]['text'] . "</li>\r\n";
+						++$bulletNum;
+					}
+					$this->synopsis .= "</ul>";
+				}
+				$this->synopsis .= "\r\n</p>\r\n";
 				++$paragraphNum;
 			}
 		} else {
