@@ -28,7 +28,7 @@ if ($login->isUserLoggedIn () == true) {
 						</tr>
 					</thead>
 					<tbody>
-						<?php echo $fillIn->newWikiIDs; echo $fillIn->updatedList; ?>
+						<?php echo $fillIn->newWikiIDs; echo $fillIn->updatedList; echo $fillIn->coverSearchErr?>
 					</tbody>
 				</table>
 			</div>

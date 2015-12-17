@@ -1,15 +1,11 @@
 <?php
 	require_once('views/head.php');
-	// Create connection
-	require_once 'classes/wikiFunctions.php';
 
 	$comic_id = filter_input ( INPUT_GET, 'comic_id' );
 	$details = new comicSearch ();
 	$details->issueLookup ( $comic_id );
 	$details->artistLookup ( $comic_id );
 	$details->writerLookup ( $comic_id );
-	$wikiLookup = new wikiQuery ();
-	$wikiLookup->comicCover ( $details->wiki_id );
 ?>
 	<title><?php echo $details->series_name . " #" . $details->issue_number; ?> :: comicDB</title>
 </head>
