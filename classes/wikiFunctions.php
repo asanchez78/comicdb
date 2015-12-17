@@ -27,6 +27,7 @@ class wikiQuery {
 	public $addDetailsMsg;
 	public $newWikiIDs;
 	public $updatedList;
+	public $coverSearchErr;
 
 	public function downloadFile($url, $path) {
 		$newfname = $path;
@@ -84,13 +85,29 @@ class wikiQuery {
 		$cover_api = "http://marvel.wikia.com/api/v1/Articles/Details?ids=$wiki_id";
 		$cover_jsondata = file_get_contents($cover_api);
 		$details_results = json_decode($cover_jsondata, true);
-		$subject = $details_results['items'][$wiki_id]['thumbnail'];
-		$pattern = "/(?<=jpg|png|jpeg).*/";
-		$replacement = "";
 		$wiki_id = $details_results['items'][$wiki_id]['id'];
-		$this->coverURL = preg_replace($pattern, $replacement, $subject);
-		$fileparts = explode("/", $this->coverURL);
-		$this->coverFile = $fileparts[7];
+		//make sure entry has a cover URL
+		if ($details_results['items'][$wiki_id]['thumbnail']) {
+			$subject = $details_results['items'][$wiki_id]['thumbnail'];
+			$pattern = "/(?<=jpg|png|jpeg).*/";
+			$replacement = "";
+			$this->coverURL = preg_replace($pattern, $replacement, $subject);
+			$fileparts = explode("/", $this->coverURL);
+			$this->coverFile = $fileparts[7];
+		} else {
+			$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
+			FROM comics
+			LEFT JOIN series ON comics.series_id=series.series_id
+			WHERE wiki_id=$wiki_id";
+			$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+			$result = $this->db_connection->query($sql);
+			while ($row = $result->fetch_assoc()) {
+				$comic_id = $row['comic_id'];
+				$series_name = $row['series_name'];
+				$issue_number = $row['issue_number'];
+				$this->coverSearchErr .= "$series_name $issue_number has no cover image result.";
+			}
+		}
 	}
 	/**
 	 * grabs comic details from marvel.wikia.com using the comic's wiki_id
@@ -128,6 +145,10 @@ class wikiQuery {
 		}
 	}
 
+	/**
+	 * searches wikia api using series name and issue number to attempt
+	 * to get a wiki ID
+	 */
 	public function addWikiID() {
 
 		//Get wiki ids for records that do not have them by searching the marvel wikia api
@@ -149,7 +170,7 @@ class wikiQuery {
 				WHERE comic_id='$comic_id'";
 				set_time_limit(0);
 				$this->newWikiIDs .= "<tr>\n";
-				$this->newWikiIDs .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $series_name . " #" . $issue_number ."</a></td>\n";
+				$this->newWikiIDs .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">Wiki ID entered for ". $series_name . " #" . $issue_number ."</a></td>\n";
 				$this->newWikiIDs .= "</tr>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
@@ -162,6 +183,9 @@ class wikiQuery {
 		}
 	}
 
+	/**
+	 * fills in details for entries with a wiki id where wikiUpdated flag is 0
+	 */
 	public function addDetails() {
 		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number, wiki_id
 			FROM comics
@@ -177,9 +201,11 @@ class wikiQuery {
 				$issue_number = $row['issue_number'];
 				$this->comicCover($wiki_id);
 				$this->comicDetails($wiki_id);
-				$url = $this->coverURL;
-				$path = "../images/$this->coverFile";
-				$this->downloadFile($url, $path);
+				if ($this->coverFile) {
+					$url = $this->coverURL;
+					$path = "../images/$this->coverFile";
+					$this->downloadFile($url, $path);
+				}
 				$synopsis = addslashes($this->synopsis);
 				$storyName = addslashes($this->storyName);
 				$sql = "UPDATE comics
@@ -189,7 +215,7 @@ class wikiQuery {
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->addDetailsMsg = "Entries below Updated with new information.";
 					$this->updatedList .= "<tr>\n";
-					$this->updatedList .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">". $series_name . " #" . $issue_number ."</a></td>\n";
+					$this->updatedList .= "<td class=\"mdl-data-table__cell--non-numeric\"><a href=\"../comic.php?comic_id=" . $comic_id . "\">Details entered for ". $series_name . " #" . $issue_number ."</a></td>\n";
 					$this->updatedList .= "</tr>\n";
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
