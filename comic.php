@@ -14,8 +14,11 @@
 	<?php include 'views/header.php';?>
 	<div class="container">
 		<div class="row">
+			<div class="col-sm-12 headline">
+        <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
+        <a href="#">&lt; Back</a>
+      </div>
 			<div class="col-md-8">
-				<h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
 				<div class="issue-description"><?php echo $details->plot; ?></div>
 				<div class="issue-details">
 					<h3>Issue details</h3>
