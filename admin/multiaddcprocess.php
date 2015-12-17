@@ -1,5 +1,7 @@
 <?php
 	require_once('../views/head.php');
+	require_once(__ROOT__.'/classes/wikiFunctions.php');
+	
 	$filtered_issue_list = filter_input ( INPUT_POST, 'issue_list' );
 	$issue_list = explode ( ",", $filtered_issue_list );
 	$series_id = filter_input ( INPUT_POST, 'series_name' );
@@ -27,6 +29,11 @@
 		// echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error($connection);
 	//}
 	}
+	//fill in missing wiki IDs
+	$fillIn = new wikiQuery();
+	$fillIn->addWikiID();
+	//Update records that have a wiki id, but have not been updated with information from the marvel wikia
+	$fillIn->addDetails();
 ?>
 	<title></title>
 </head>
@@ -34,7 +41,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<?php echo $message; ?>
+				<?php echo $message; echo $fillIn->newWikiIDs; ?>
 			</div>
 		</div>
 	</div>

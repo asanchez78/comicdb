@@ -1,5 +1,6 @@
 <?php
 	require_once('../views/head.php');
+	require_once(__ROOT__.'/classes/wikiFunctions.php');
 
 $first_issue = filter_input ( INPUT_POST, 'first_issue' );
 $last_issue = filter_input ( INPUT_POST, 'last_issue' );
@@ -27,6 +28,11 @@ foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	//	echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
 	//}
 }
+//fill in missing wiki IDs
+$fillIn = new wikiQuery();
+$fillIn->addWikiID();
+//Update records that have a wiki id, but have not been updated with information from the marvel wikia
+$fillIn->addDetails();
 ?>
 	<title>Multi Issue Addition :: comicDB</title>
 </head>
@@ -35,7 +41,7 @@ foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<?php echo $message; ?>
+				<?php echo $message; echo $fillIn->newWikiIDs; ?>
 			</div>
 		</div>
 	</div>
