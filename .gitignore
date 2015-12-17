@@ -5,6 +5,7 @@ images/
 .buildpath
 .settings/
 .project
+admin/imagecheck.php
 
 # Windows image file caches
 Thumbs.db
