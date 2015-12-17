@@ -44,6 +44,7 @@ main .container {
 	opacity: 0.9;
 	padding-top: 15px;
 	padding-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 /* Header */
@@ -144,4 +145,32 @@ th.comics-heading-issue {
 
 .issue-details {
 	margin-bottom: 20px;
+}
+
+.headline {
+	position: relative;
+}
+
+.headline a {
+	position: absolute;
+	top: 5px;
+	right: 15px;
+}
+
+.edit-form label {
+	width: 20%;
+}
+
+.edit-form input[type="text"] {
+	width: 70%;
+}
+
+.textarea label {
+	display: block;
+}
+
+.textarea textarea {
+	width: 90%;
+	height: 200px;
+	border: 1px solid silver;
 }

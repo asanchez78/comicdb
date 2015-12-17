@@ -1,6 +1,5 @@
 <?php
-require_once '../config/db.php';
-require_once '../classes/functions.php';
+require_once '../views/head.php';
 
 /* Filter POST Data Variables */
 
@@ -21,94 +20,98 @@ $wiki_id = filter_input ( INPUT_POST, 'wiki_id' );
 
 
 if ($released_date == 0000 - 00 - 00) {
-	$release_date = "";
+  $release_date = "";
 } else {
-	$release_date = $released_date;
+  $release_date = $released_date;
 }
 
 if ($cover_image) {
-	$path = "../images/$cover_image_file";
-	$downloader = new grab_cover ();
-	$downloader->downloadFile ( $cover_image, $path );
+  $path = "../images/$cover_image_file";
+  $downloader = new grab_cover ();
+  $downloader->downloadFile ( $cover_image, $path );
 }
 
 
 // insert data in to comics table
 if ($update == "yes") {
-	$insert_comic_query = "UPDATE comics
-	SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', original_purchase='$original_purchase', wikiUpdated=1
-	WHERE comic_id='$comic_id'";
-	if (mysqli_query ( $connection, $insert_comic_query )) {
-		echo "Record updated successfully with the following information";
-	} else {
-		echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
-	}
+  $insert_comic_query = "UPDATE comics
+  SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', original_purchase='$original_purchase', wikiUpdated=1
+  WHERE comic_id='$comic_id'";
+  if (mysqli_query ( $connection, $insert_comic_query )) {
+      $message = "Record updated successfully with the following information";
+  } else {
+      $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+  }
 } else {
-	$insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id)
-	VALUES ('$series_name', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id')";
+  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id)
+  VALUES ('$series_name', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id')";
 
-	if (mysqli_query ( $connection, $insert_comic_query )) {
-		echo "New Record created successfully with the following information";
-	} else {
-		echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
-	}
+  if (mysqli_query ( $connection, $insert_comic_query )) {
+      $message = "New Record created successfully with the following information";
+  } else {
+      $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+  }
 }
 // insert data in to series_comic_link table
 //$insert_series_link_query = "INSERT INTO series_link (comic_id, series_id)
 //VALUES ($new_comic_id, $series_name)";
 //if (mysqli_query ( $connection, $insert_series_link_query )) {
-//	echo "New series/comic link created";
+//  echo "New series/comic link created";
 //} else {
-//	echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
+//  echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
 //}
-
-/* Results rendered as HTML */
-$theResults = <<<EOD
-<html>
-        <head>
-                <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.green-blue.min.css">
-<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-                <title>Comicdb</title>
-        </head>
-
-        <body>
-<div>
-        <img src="../images/$cover_image_file" />
-</div>
-
-<div>
-        <em>$plot</em>
-</div>
-                <div>
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                        <thead>
-                        <tr>
-                                <th>Issue Number</th>
-                                <td>$issue_number</td>
-                        </tr>
-                        <tr>
-                                <th>Series Name</th>
-                                <td>$series_name</td>
-                        </tr>
-                        <tr>
-                                <th>Story Name</th>
-                                <td>$story_name</td>
-                        </tr>
-                        <tr>
-                                <th>Cover Date</th>
-                                <td>$release_date</td>
-                        </tr>
-                        </thead>
-                </table>
-                </div>
-                <a href="../comic.php?comic_id=$comic_id">Go to record</a>
-        </body>
-</html>
-
-EOD;
-
-echo "$theResults";
-
 ?>
+  <title>Insert Record Confirmation :: comicDB</title>
+</head>
+<body>
+  <?php include '../views/header.php';?>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <strong><em><?php echo $message; ?></em></strong>:
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 headline">
+        <h2><?php echo $series_name . " #" . $issue_number; ?></h2>
+        <a href="#">&lt; Back</a>
+      </div>
+      <div class="col-md-8">
+        <div class="issue-details">
+          <h3>Issue details</h3>
+          <?php
+            if ($details->writer) {
+              echo "<div class=\"issue-writer\">";
+              echo "Writer: " . $details->writer;
+              echo "</div>";
+            }
+
+            if ($details->artist) {
+              echo "<div class=\"issue-artist\">";
+              echo "Artist: " . $details->artist;
+              echo "</div>";
+            }
+          ?>
+          <div>
+            <strong>Issue: </strong><?php echo $issue_number; ?>
+          </div>
+          <div>
+            <strong>Story Name: </strong><?php echo $story_name; ?>
+          </div>
+          <div>
+            <strong>Published: </strong><?php echo $released_date; ?>
+          </div>
+          <a href="../comic.php?comic_id=<?php echo $comic_id; ?>">Go to record</a>
+        </div>
+        <div class="issue-description"><?php echo $plot; ?></div>
+      </div>
+      <div class="col-md-4 issue-image">
+        <img src="../images/<?php echo $cover_image_file; ?>" />
+      </div>
+    </div>
+  </div>
+<?php include '../views/footer.php';?>
+</body>
+</html>
