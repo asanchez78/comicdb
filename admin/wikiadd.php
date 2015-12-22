@@ -54,7 +54,7 @@
           </div>
           <div class="plot">
             <label for="plot">Plot:</label>
-            <small>[edit]</small>
+            <small><a href="#">[edit]</a></small>
             <?php echo $comic->synopsis; ?>
           </div>
           <div>
@@ -72,7 +72,7 @@
           <input type="submit" name="submit" value="Submit" />
         </form>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 issue-image">
         <img src="<?php echo $comic->coverURL; ?>" alt="Cover" />
       </div>
     </div>
