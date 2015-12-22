@@ -44,7 +44,7 @@ if ($update == "yes") {
   }
 } else {
   $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id)
-  VALUES ('$series_name', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id')";
+  VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id')";
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
       $message = "New Record created successfully with the following information";
