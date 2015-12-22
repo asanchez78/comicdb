@@ -59,19 +59,17 @@ class wikiQuery {
 	 */
 	public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		$comic = str_replace(' ', '+', $query);
-		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=10&batch=1&namespaces=0%2C14";
+		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=80&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
 		$results = json_decode($jsondata, true);
-
 		if ($results['items']){
+			$resultList = null;
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
-				$this->resultsList .= "<br>\n";
-				return $this->wikiSearchResultID;
-
+				$resultList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a><br>";
 			}
+			return $resultList;
 		} else {
 			echo "No results. Perhaps you mispelled something?<br>";
 			echo "You searched for " . "\"" . $query . "\"";
