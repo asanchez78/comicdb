@@ -67,13 +67,17 @@ nav.sitenav {
 	text-align: right;
 }
 
-nav.sitenav ul > li {
+nav.sitenav ul {
+	padding: 0;
+}
+
+nav.sitenav > ul > li {
 	display: inline-block;
 	vertical-align: top;
 	margin: 0 10px;
 }
 
-nav.sitenav ul > li > a {
+nav.sitenav > ul > li > a {
 	display: block;
 	padding: 0 10px;
 	line-height: 50px;
@@ -96,6 +100,15 @@ nav.sitenav ul > li:last-of-type > a {
 
 #button-add-comics {
 	position: relative;
+}
+
+#button-add-comics.expanded {
+	background-color: gray;
+	color: yellow;
+}
+
+#button-add-comics.expanded + #comics-submenu {
+	display: block;
 }
 
 #comics-submenu {
@@ -165,11 +178,11 @@ th.comics-heading-issue {
 	width: 70%;
 }
 
-.textarea label {
+.plot label {
 	display: block;
 }
 
-.textarea textarea {
+.plot textarea {
 	width: 90%;
 	height: 200px;
 	border: 1px solid silver;
