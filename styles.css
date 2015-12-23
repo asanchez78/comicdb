@@ -197,3 +197,22 @@ th.comics-heading-issue {
 	right: 20px;
 	top: 5px;
 }
+
+.form-submit {
+	border: 1px solid transparent;
+	outline: none;
+	background-color: red;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 10px 0;
+	transition: all 0.1s ease-in-out;
+	text-transform: uppercase;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+	background-color: gray;
+	border: 1px solid silver;
+}

@@ -69,7 +69,7 @@
           <input type="hidden" name="original_purchase" value="" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
 
-          <input type="submit" name="submit" value="Submit" />
+          <input type="submit" name="submit" value="Submit" class="form-submit" />
         </form>
       </div>
       <div class="col-md-4 issue-image">
