@@ -218,7 +218,7 @@ class comicSearch {
 			die ( "Connection failed:" );
 		}
 
-		$sql = "SELECT * FROM series";
+		$sql = "SELECT * FROM series ORDER BY series_name ASC";
 		$this->series_list_result = $this->db_connection->query ( $sql );
 	}
 
