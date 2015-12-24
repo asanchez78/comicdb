@@ -218,7 +218,7 @@ class comicSearch {
 			die ( "Connection failed:" );
 		}
 
-		$sql = "SELECT * FROM series";
+		$sql = "SELECT * FROM series ORDER BY series_name ASC";
 		$this->series_list_result = $this->db_connection->query ( $sql );
 	}
 
@@ -230,5 +230,15 @@ class comicSearch {
 
 		$sql = "SELECT * FROM series where series_name = '$series_name'";
 		$this->series = $this->db_connection->query ( $sql );
+	}
+
+	public function seriesLatestCover($series_id) {
+		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+		if ($this->db_connection->connect_errno) {
+			die ( "Connection failed:" );
+		}
+		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
+		$result = $this->db_connection->query ( $sql );
+		$this->series_latest_cover = implode(mysqli_fetch_row($result));
 	}
 }

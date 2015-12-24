@@ -21,19 +21,22 @@
 						?>
 						<p>Use the form below to add a new series to your database.</p>
 						<form method="post" action="<?php echo $filename; ?>">
-							<label>Series Name</label>
+							<label for="series_name">Series Name</label>
 							<input name="series_name" type="text" size="50" value=""/>
+							<label for="volume_number">Volume Number</label>
+          		<input name="volume_number" type="text" size="3" maxlength="4" value="" />
 							<input type="hidden" name="submitted" value="yes" />
 							<input type="submit" name="submit" value="Submit" />
 						</form>
 						<?php
 					} else {
 						$series_name = filter_input ( INPUT_POST, 'series_name' );
-						$sql = "INSERT INTO series (series_name)
-						VALUES ('$series_name')";
+						$volume_number = filter_input ( INPUT_POST, 'volume_number' );
+						$sql = "INSERT INTO series (series_name, series_vol)
+						VALUES ('$series_name', '$volume_number')";
 
 						if (mysqli_query ( $connection, $sql )) {
-							echo $series_name . " series created in database.";
+							echo $series_name . ' Volume '. $volume_number . ' series created in database.';
 						} else {
 							echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
 						}

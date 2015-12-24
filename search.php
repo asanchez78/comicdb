@@ -40,9 +40,9 @@
         <form method="post" action="results.php">
           <label>Series</label>
           <?php echo $dropdown?>
-          <label>Issue Number</label>
-          <input name="issue_number" type="text" size="3" maxlength="4" value=""/>
-          <input type="submit" name="submit" value="Submit" />
+          <label for="issue_number">Issue Number</label>
+          <input name="issue_number" type="text" size="3" maxlength="4" value="" required aria-required="true" />
+          <input class="form-submit" type="submit" name="submit" value="Search" />
         </form>
       </div>
     </div>
