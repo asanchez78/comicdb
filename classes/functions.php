@@ -221,4 +221,14 @@ class comicSearch {
 		$sql = "SELECT * FROM series";
 		$this->series_list_result = $this->db_connection->query ( $sql );
 	}
+
+	public function seriesFind($series_name) {
+		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+		if ($this->db_connection->connect_errno) {
+			die ( "Connection failed:" );
+		}
+
+		$sql = "SELECT * FROM series where series_name = '$series_name'";
+		$this->series = $this->db_connection->query ( $sql );
+	}
 }

@@ -5,7 +5,14 @@ jQuery(document).ready(function($) {
   $comicSubmenu = $('#comics-submenu');
 
   // Shows the add comics submenu on hover
-  $($menuButton).hover(function() {
-    $($comicSubmenu).slideToggle( "slow", function(){});
+  $($menuButton).click(function() {
+    if ($(this).hasClass('expanded') != true) {
+      $(this).addClass('expanded');
+    }
   });
+
+  $($comicSubmenu).mouseleave(function() {
+    $($menuButton).removeClass('expanded');
+  });
+
 });

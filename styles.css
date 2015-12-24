@@ -67,13 +67,17 @@ nav.sitenav {
 	text-align: right;
 }
 
-nav.sitenav ul > li {
+nav.sitenav ul {
+	padding: 0;
+}
+
+nav.sitenav > ul > li {
 	display: inline-block;
 	vertical-align: top;
 	margin: 0 10px;
 }
 
-nav.sitenav ul > li > a {
+nav.sitenav > ul > li > a {
 	display: block;
 	padding: 0 10px;
 	line-height: 50px;
@@ -96,6 +100,15 @@ nav.sitenav ul > li:last-of-type > a {
 
 #button-add-comics {
 	position: relative;
+}
+
+#button-add-comics.expanded {
+	background-color: gray;
+	color: yellow;
+}
+
+#button-add-comics.expanded + #comics-submenu {
+	display: block;
 }
 
 #comics-submenu {
@@ -133,7 +146,7 @@ nav.sitenav ul > li:last-of-type > a {
 	display: block;
 }
 
-/* Component Styles */
+/* Add Comics */
 th.comics-heading-issue {
 	width: 100px;
 }
@@ -165,12 +178,41 @@ th.comics-heading-issue {
 	width: 70%;
 }
 
-.textarea label {
+.plot {
+	position: relative;
+}
+
+.plot label {
 	display: block;
 }
 
-.textarea textarea {
+.plot textarea {
 	width: 90%;
 	height: 200px;
+	border: 1px solid silver;
+}
+
+.plot small {
+	position: absolute;
+	right: 20px;
+	top: 5px;
+}
+
+.form-submit {
+	border: 1px solid transparent;
+	outline: none;
+	background-color: red;
+	color: white;
+	padding: 5px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 10px 0;
+	transition: all 0.1s ease-in-out;
+	text-transform: uppercase;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+	background-color: gray;
 	border: 1px solid silver;
 }
