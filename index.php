@@ -10,12 +10,18 @@
 				$series_id = $row ['series_id'];
 				$series_name = $row ['series_name'];
 				$series_vol = $row ['series_vol'];
-				$comics->seriesLatestCover($series_id);
+				$comics->seriesInfo($series_id);
+				$series_issue_count = $comics->series_issue_count;
+				if ($series_issue_count == 1) {
+					$series_issue_count = $series_issue_count . ' Issue';
+				} else {
+					$series_issue_count = $series_issue_count . ' Issues';
+				}
 				$series_cover = $comics->series_latest_cover;
 				if ($series_cover == NULL) {
 					$series_cover = 'assets/nocover.jpg';
 				}
-				$series_list .= '<li class="col-xs-6 col-sm-3 col-md-2"><a href="issues.php?series_id=' . $series_id . '" class="series-info"><img src="/' . $series_cover  . '" /><div class="series-title"><h3>' . $series_name . '</h3></div></a><small>Volume ' . $series_vol . '</small><a href="#" class="button add-button">[Add New]</a><a href="#" class="button edit-button">[Edit]</a></li>';
+				$series_list .= '<li class="col-xs-6 col-sm-3 col-md-2"><a href="issues.php?series_id=' . $series_id . '" class="series-info"><img src="/' . $series_cover  . '" /><div class="series-title"><h3>' . $series_name . '</h3></div></a><small>' . $series_issue_count . '</small><div class="volume-number"><span class="count">Vol ' . $series_vol . '</span></div><a href="#" class="button add-button">[Add New]</a><a href="#" class="button edit-button">[Edit]</a></li>';
 			}
 		} else {
 			$series_list = "<li>No Comic Series in database. Perhaps you should <a href=\"/admin/addseries.php\">Add some.</a></li>";
