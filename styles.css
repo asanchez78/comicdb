@@ -7,6 +7,8 @@ body {
 	margin: 0;
 	font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	font-weight: 400;
+	background: url('/assets/backgrounds/rotate.php') no-repeat center center fixed;
+	background-size: cover;
 }
 
 h1 {
@@ -34,10 +36,6 @@ ul.nolist {
 
 #wrapper {
 	display: block;
-	width: 100%;
-	height: 100vh;
-	background: url('/assets/backgrounds/rotate.php') no-repeat center center fixed;
-	background-size: cover;
 }
 
 main .container {
@@ -176,11 +174,36 @@ nav.sitenav ul > li:last-of-type > a {
 	text-align: center;
 	min-height: 230px;
 	margin-bottom: 20px;
+	position: relative;
 }
 
 .inventory-table .series-info {
 	display: block;
 	position: relative;
+}
+
+.volume-number {
+  width: 45px;
+  height: 48px;
+  overflow: hidden;
+  position: absolute;
+  top: -3px;
+  right: 13px;
+}
+
+.volume-number .count {
+	display: block;
+  color: #333;
+  text-align: center;
+  transform: rotate(45deg);
+  position: relative;
+  left: -30px;
+  top: 6px;
+  width: 120px;
+  background-color: #BFDC7A;
+  color: #6a6340;
+  padding: 2px 0;
+  font-size: 10px;
 }
 
 .inventory-table li > a:hover,
