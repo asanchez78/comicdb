@@ -249,6 +249,8 @@ class comicSearch {
 		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
 		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
 			$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+		} else {
+			$this->series_latest_cover = "assets/nocover.jpg";
 		}
 	}
 }
