@@ -159,7 +159,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 	public function addWikiID() {
 
 		//Get wiki ids for records that do not have them by searching the marvel wikia api
-		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
+		$sql = "SELECT comics.comic_id, series.series_name, series.series_vol, comics.issue_number
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
 			WHERE comics.wiki_id IS NULL";
@@ -169,8 +169,9 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			while ($row = $result->fetch_assoc()) {
 				$comic_id = $row ['comic_id'];
 				$series_name = $row ['series_name'];
+				$series_vol = $row['series_vol'];
 				$issue_number = $row['issue_number'];
-				$query = $series_name . " " . $issue_number;
+				$query = $series_name . " " . $series_vol . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
 				$sql = "UPDATE comics
 				SET wiki_id=$wikiDetails
