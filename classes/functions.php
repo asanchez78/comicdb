@@ -77,25 +77,6 @@ class comicSearch {
 	public $volume_number;
 
 	/**
-	 * Looks up a comic from the ComicRack
-	 *
-	 * @param string $series_name
-	 * @param int $issue_no
-	 */
-	public function comicrackLookup($series_name, $issue_no) {
-		$this->db_connection = new mysqli ( 'chronos', 'comicrack', 'comicrack', 'comicrack' );
-		if ($this->db_connection->connect_errno) {
-			die ( "Connection failed: " );
-		}
-
-		$sql = "SELECT id, data FROM comics WHERE data LIKE '%<Series>%$series_name%<Number>$issue_no</Number>%'";
-		$result = $this->db_connection->query ( $sql );
-		if ($result->num_rows >= 1) {
-			$xml_result = $result->simplexml_load_string ();
-			print_r ( $xml_result );
-		}
-	}
-	/**
 	 * Looks up a single comic issue using comic_id
 	 *
 	 * @param int $comic_id
