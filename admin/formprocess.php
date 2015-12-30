@@ -48,6 +48,7 @@ if ($update == "yes") {
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
       $message = "New Record created successfully with the following information";
+      $comic_id = mysqli_insert_id($connection);
   } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
