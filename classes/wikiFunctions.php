@@ -57,19 +57,28 @@ class wikiQuery {
 	 * uses an API call to marvel.wikia.com to return search results
 	 * @param string $query
 	 */
-	public function wikiSearch($query, $series_name, $issue_number, $limit) {
+public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		$comic = str_replace(' ', '+', $query);
 		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=80&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
 		$results = json_decode($jsondata, true);
-		if ($results['items']){
-			$resultList = null;
+		if (count($results['items']) == 1) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$resultList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a><br>";
+				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<br>\n";
+				return $this->wikiSearchResultID;
 			}
-			return $resultList;
+		}
+		if (count($results['items']) > 1){
+			foreach($results['items'] as $result) {
+				$this->wikiSearchResultID = $result['id'];
+				$this->wikiSearchResultTitle = $result['title'];
+				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<br>\n";
+				$this->wikiID = $this->wikiSearchResultID;
+			}
 		} else {
 			echo "No results. Perhaps you mispelled something?<br>";
 			echo "You searched for " . "\"" . $query . "\"";
@@ -173,7 +182,7 @@ class wikiQuery {
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
 				} else {
-					echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
 				}
 			}
 		} else {
@@ -189,7 +198,7 @@ class wikiQuery {
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
 			WHERE comics.wiki_id IS NOT NULL
-			AND comics.wikiUpdated=0";
+			AND comics.wikiUpdated=0 OR comics.wikiUpdated IS NULL";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
