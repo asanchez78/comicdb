@@ -162,7 +162,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		$sql = "SELECT comics.comic_id, series.series_name, series.series_vol, comics.issue_number
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NULL";
+			WHERE comics.wiki_id=0";
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		$result = $this->db_connection->query ($sql);
 		if ($result->num_rows > 0) {
@@ -171,7 +171,8 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				$series_name = $row ['series_name'];
 				$series_vol = $row['series_vol'];
 				$issue_number = $row['issue_number'];
-				$query = $series_name . " vol " . $series_vol . " " . $issue_number;
+				//$query = $series_name . " vol " . $series_vol . " " . $issue_number;
+				$query = $series_name . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
 				$sql = "UPDATE comics
 				SET wiki_id=$wikiDetails
@@ -198,8 +199,8 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number, wiki_id
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NOT NULL
-			AND comics.wikiUpdated=0 OR comics.wikiUpdated IS NULL";
+			WHERE comics.wiki_id !=0
+			AND comics.wikiUpdated=0";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
