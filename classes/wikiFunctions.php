@@ -171,8 +171,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				$series_name = $row ['series_name'];
 				$series_vol = $row['series_vol'];
 				$issue_number = $row['issue_number'];
-				//$query = $series_name . " vol " . $series_vol . " " . $issue_number;
-				$query = $series_name . " " . $issue_number;
+				$query = $series_name . " vol " . $series_vol . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
 				$sql = "UPDATE comics
 				SET wiki_id=$wikiDetails
