@@ -74,6 +74,7 @@ class comicSearch {
 	 * @var ArrayObject
 	 */
 	public $series_list_result;
+	public $volume_number;
 
 	/**
 	 * Looks up a comic from the ComicRack
@@ -105,7 +106,7 @@ class comicSearch {
 			die ( "Connection failed: " );
 		}
 
-		$sql = "SELECT comics.wiki_id, comics.series_id, comics.comic_id, series.series_name, comics.issue_number, comics.release_date, comics.story_name, comics.cover_image, comics.plot, comics.original_purchase FROM comics LEFT JOIN series ON comics.series_id=series.series_id WHERE comics.comic_id = $comic_id";
+		$sql = "SELECT comics.wiki_id, comics.series_id, comics.comic_id, series.series_name, series.series_vol, comics.issue_number, comics.release_date, comics.story_name, comics.cover_image, comics.plot, comics.original_purchase FROM comics LEFT JOIN series ON comics.series_id=series.series_id WHERE comics.comic_id = $comic_id";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
@@ -119,6 +120,7 @@ class comicSearch {
 				$series_name = $row ['series_name'];
 				$series_id = $row['series_id'];
 				$original_purchase = $row['original_purchase'];
+				$volume_number = $row['series_vol'];
 			}
 		}
 		$this->cover_image = $cover_image;
@@ -131,6 +133,7 @@ class comicSearch {
 		$this->series_name = $series_name;
 		$this->original_purchase = $original_purchase;
 		$this->series_id = $series_id;
+		$this->volume_number = $volume_number;
 	}
 	/**
 	 * Looks up the artist of a given comic using comic_id
@@ -244,6 +247,8 @@ class comicSearch {
 
 		// Gets the latest comic book cover image for the series
 		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
-		$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+			$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+		}
 	}
 }
