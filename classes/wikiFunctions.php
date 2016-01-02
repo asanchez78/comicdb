@@ -66,7 +66,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
 				$this->resultsList .= "<br>\n";
 				return $this->wikiSearchResultID;
 			}
@@ -75,7 +75,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiaedit.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
 				$this->resultsList .= "<br>\n";
 				$this->wikiID = $this->wikiSearchResultID;
 			}
