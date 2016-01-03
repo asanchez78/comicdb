@@ -52,6 +52,11 @@
             <label for="released_date">Release Date:</label>
             <input name="released_date" size="10" maxlength="10" value="" type="text" placeholder="YYYY-MM-DD" />
           </div>
+          <div>
+            <label for="original_purchase">Purchased When Released:</label>
+            <input name="original_purchase" value="1" type="radio" />Yes
+            <input name="original_purchase" value="0" type="radio" />No
+          </div>
           <div class="plot">
             <label for="plot">Plot:</label>
             <small><a href="#">[edit]</a></small>
@@ -66,8 +71,8 @@
             <input name="cover_image_file" type="text" maxlength="255" value="<?php echo $comic->coverFile; ?>" />
           </div>
           <input type="hidden" name="plot" value="<?php echo htmlspecialchars($comic->synopsis); ?>" />
-          <input type="hidden" name="original_purchase" value="" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
+          <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
 
           <input type="submit" name="submit" value="Submit" class="form-submit" />
         </form>

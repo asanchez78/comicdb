@@ -7,7 +7,7 @@
   $query = $series_name . " " . $issue_number;
 
   $returnedResults = new wikiQuery();
-  $results = $returnedResults->wikiSearch($query, $series_name, $issue_number, 50);
+  $returnedResults->wikiSearch($query, $series_name, $issue_number, 50);
 ?>
 <?php include 'views/header.php';?>
   <div class="container">
@@ -15,7 +15,7 @@
       <div class="col-sm-12">
         <h2>Your Search Results</h2>
         <p>We found the following issues on the Marvel Wikia related to your search:</p>
-        <?php echo $results; ?>
+        <?php echo $returnedResults->resultsList; ?>
       </div>
     </div>
   </div>

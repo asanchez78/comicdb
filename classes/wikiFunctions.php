@@ -57,19 +57,28 @@ class wikiQuery {
 	 * uses an API call to marvel.wikia.com to return search results
 	 * @param string $query
 	 */
-	public function wikiSearch($query, $series_name, $issue_number, $limit) {
+public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		$comic = str_replace(' ', '+', $query);
-		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=80&batch=1&namespaces=0%2C14";
+		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
 		$results = json_decode($jsondata, true);
-		if ($results['items']){
-			$resultList = null;
+		if (count($results['items']) == 1) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$resultList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a><br>";
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<br>\n";
+				return $this->wikiSearchResultID;
 			}
-			return $resultList;
+		}
+		if (count($results['items']) > 1){
+			foreach($results['items'] as $result) {
+				$this->wikiSearchResultID = $result['id'];
+				$this->wikiSearchResultTitle = $result['title'];
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<br>\n";
+				$this->wikiID = $this->wikiSearchResultID;
+			}
 		} else {
 			echo "No results. Perhaps you mispelled something?<br>";
 			echo "You searched for " . "\"" . $query . "\"";
@@ -92,6 +101,8 @@ class wikiQuery {
 			$this->coverURL = preg_replace($pattern, $replacement, $subject);
 			$fileparts = explode("/", $this->coverURL);
 			$this->coverFile = $fileparts[7];
+			$this->coverFile = str_replace("%28", "", $this->coverFile);
+			$this->coverFile = str_replace("%29", "", $this->coverFile);
 		} else {
 			$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
 			FROM comics
@@ -151,18 +162,19 @@ class wikiQuery {
 	public function addWikiID() {
 
 		//Get wiki ids for records that do not have them by searching the marvel wikia api
-		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
+		$sql = "SELECT comics.comic_id, series.series_name, series.series_vol, comics.issue_number
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NULL";
+			WHERE comics.wiki_id=0";
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		$result = $this->db_connection->query ($sql);
 		if ($result->num_rows > 0) {
 			while ($row = $result->fetch_assoc()) {
 				$comic_id = $row ['comic_id'];
 				$series_name = $row ['series_name'];
+				$series_vol = $row['series_vol'];
 				$issue_number = $row['issue_number'];
-				$query = $series_name . " " . $issue_number;
+				$query = $series_name . " vol " . $series_vol . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
 				$sql = "UPDATE comics
 				SET wiki_id=$wikiDetails
@@ -174,7 +186,7 @@ class wikiQuery {
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
 				} else {
-					echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
 				}
 			}
 		} else {
@@ -189,7 +201,7 @@ class wikiQuery {
 		$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number, wiki_id
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id
-			WHERE comics.wiki_id IS NOT NULL
+			WHERE comics.wiki_id !=0
 			AND comics.wikiUpdated=0";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {

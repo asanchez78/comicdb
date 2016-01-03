@@ -74,26 +74,8 @@ class comicSearch {
 	 * @var ArrayObject
 	 */
 	public $series_list_result;
+	public $volume_number;
 
-	/**
-	 * Looks up a comic from the ComicRack
-	 *
-	 * @param string $series_name
-	 * @param int $issue_no
-	 */
-	public function comicrackLookup($series_name, $issue_no) {
-		$this->db_connection = new mysqli ( 'chronos', 'comicrack', 'comicrack', 'comicrack' );
-		if ($this->db_connection->connect_errno) {
-			die ( "Connection failed: " );
-		}
-
-		$sql = "SELECT id, data FROM comics WHERE data LIKE '%<Series>%$series_name%<Number>$issue_no</Number>%'";
-		$result = $this->db_connection->query ( $sql );
-		if ($result->num_rows >= 1) {
-			$xml_result = $result->simplexml_load_string ();
-			print_r ( $xml_result );
-		}
-	}
 	/**
 	 * Looks up a single comic issue using comic_id
 	 *
@@ -119,6 +101,7 @@ class comicSearch {
 				$series_name = $row ['series_name'];
 				$series_id = $row['series_id'];
 				$original_purchase = $row['original_purchase'];
+				$volume_number = $row['series_vol'];
 			}
 		}
 		$this->cover_image = $cover_image;
@@ -131,6 +114,7 @@ class comicSearch {
 		$this->series_name = $series_name;
 		$this->original_purchase = $original_purchase;
 		$this->series_id = $series_id;
+		$this->volume_number = $volume_number;
 	}
 	/**
 	 * Looks up the artist of a given comic using comic_id
@@ -262,6 +246,10 @@ class comicSearch {
 
 		// Gets the latest comic book cover image for the series
 		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
-		$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+			$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+		} else {
+			$this->series_latest_cover = "assets/nocover.jpg";
+		}
 	}
 }

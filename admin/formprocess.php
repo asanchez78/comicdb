@@ -43,11 +43,12 @@ if ($update == "yes") {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
 } else {
-  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id)
-  VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id')";
+  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
+  VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
-      $message = "New Record created successfully with the following information";
+      $message = "New Record created successfully with the following information:";
+      $comic_id = mysqli_insert_id($connection);
   } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
