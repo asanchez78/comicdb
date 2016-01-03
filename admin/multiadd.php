@@ -43,19 +43,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
+				<p>
+				If the series had a regular monthly release, you may enter the published date of the first issue.
+				<br/>
+				Each entry will automatically have the month incremented.
+				</p>
 				<form id="input_select" method="post" action="multiaddprocess.php">
-					<label>Series</label>
+					<label for="series_name">Series</label>
 				  <?php echo $dropdown; ?>
-				  <label>First Issue</label>
+				  <br/>
+				  <label for="first_issue">First Issue</label>
 				  <input name="first_issue" type="text" maxlength="3" />
-					<label>Last Issue</label>
+				  <br/>
+					<label for="last_issue">Last Issue</label>
 					<input name="last_issue" type="text" maxlength="3" />
-					<label>Purchased when released?</label>
-					<select name="original_purchase">
-						<option value="" selected="selected"></option>
-						<option value="1">Yes</option>
-						<option value="0">No</option>
-					</select>
+					<br/>
+					<label for="original_purchase">Purchased When Released:</label>
+            		<input name="original_purchase" value="1" type="radio" />Yes
+            		<input name="original_purchase" value="0" type="radio" />No
+            		<br/>
+            		<label for="release_date">First Comic's Published Date</label>
+				  	<input name="release_date" type="text" maxlength="10" placeholder="YYYY-MM-DD"/>
+				  	<br/>
 					<input type="submit" name="submit" value="Submit" />
 				</form>
 			</div>
