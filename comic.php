@@ -19,6 +19,7 @@
         <a href="#">&lt; Back</a>
       </div>
 			<div class="col-md-8">
+				<div class="issue-story"><h4><?php echo $details->story_name; ?></h4></div>
 				<div class="issue-description"><?php echo $details->plot; ?></div>
 				<div class="issue-details">
 					<h3>Issue details</h3>
@@ -35,15 +36,6 @@
 							echo "</div>";
 						}
 					?>
-					<div>
-						<strong>Volume: </strong><?php echo $details->volume_number; ?>
-					</div>
-					<div>
-						<strong>Issue: </strong><?php echo $details->issue_number; ?>
-					</div>
-					<div>
-						<strong>Story Name: </strong><?php echo $details->story_name; ?>
-					</div>
 					<div>
 						<strong>Published: </strong><?php echo $details->release_date; ?>
 					</div>

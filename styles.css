@@ -29,7 +29,7 @@ a {
 ul.nolist {
 	list-style-type: none;
 	margin: 0;
-	padding: 5px 15px;
+	padding: 0;
 }
 
 /* Layout */
@@ -245,6 +245,63 @@ nav.sitenav ul > li:last-of-type > a {
 	font-size: 10px;
 	display: block;
 	margin-top: 5px;
+}
+
+/* Issues List */
+.issues-list .issue-meta {
+	position: absolute;
+	right: 15px;
+	top: 20px;
+	font-size: 12px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.issue-meta ul > li {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 30px;
+}
+
+.issue-meta ul > li:last-of-type {
+	margin-right: 0;
+}
+
+.list-row, .list-heading {
+	display: block;
+	margin: 5px 0;
+}
+
+.list-row a > *,
+.list-heading > * {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+.list-heading {
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.issue-cover {
+	width: 5%;
+	min-width: 47px;
+}
+
+.issue-cover img {
+	width: 100%;
+	height: auto;
+}
+
+.list-heading .issue-number,
+.list-row a .issue-number {
+	min-width: 25px;
+	text-align: center;
+}
+
+.list-row a .issue-number {
+	margin-right: 15px;
 }
 
 /* Add Comics */

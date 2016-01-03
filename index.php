@@ -12,11 +12,6 @@
 				$series_vol = $row ['series_vol'];
 				$comics->seriesInfo($series_id);
 				$series_issue_count = $comics->series_issue_count;
-				if ($series_issue_count == 1) {
-					$series_issue_count = $series_issue_count . ' Issue';
-				} else {
-					$series_issue_count = $series_issue_count . ' Issues';
-				}
 				$series_cover = $comics->series_latest_cover;
 				if ($series_cover == NULL) {
 					$series_cover = 'assets/nocover.jpg';
