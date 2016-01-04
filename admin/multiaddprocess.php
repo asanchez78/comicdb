@@ -13,7 +13,6 @@ $series_name_query = "SELECT series_name from series where series_id=$series_id"
 $series_name_result = mysqli_query ( $connection, $series_name_query );
 
 foreach ( range ( $first_issue, $last_issue ) as $number ) {
-	echo "<br/>";
 	$release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
 	$insert_comics_query = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase) VALUES ('$series_id', '$number', '$release_date', '$original_purchase')";
 	if (mysqli_query ( $connection, $insert_comics_query )) {
