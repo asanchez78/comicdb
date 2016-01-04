@@ -7,44 +7,15 @@
  */
 
 /**
- * downloads an image from $url and saves it to $path
- *
- * @author Anthony
- */
-class grab_cover {
-	public function downloadFile($url, $path) {
-		$newfname = $path;
-		$file = fopen ( $url, "rb" );
-		if ($file) {
-			$newf = fopen ( $newfname, "wb" );
-
-			if ($newf) {
-				while ( ! feof ( $file ) ) {
-					fwrite ( $newf, fread ( $file, 1024 * 8 ), 1024 * 8 );
-				}
-			} else {
-				die ( 'Could not write cover image file.' );
-			}
-		}
-
-		if ($file) {
-			fclose ( $file );
-		}
-
-		if ($newf) {
-			fclose ( $newf );
-		}
-	}
-}
-/**
  * functions relating to searching comic information
  * <pre>
- * comicrackLookup
  * issueLookup
  * artistLookup
  * writerLookup
  * issuesList
  * seriesList
+ * seriesFind
+ * seriesInfo
  * </pre>
  * @author asanchez
  *
@@ -221,7 +192,7 @@ class comicSearch {
 		if ($this->db_connection->connect_errno) {
 			die ( "Connection failed:" );
 		}
-		
+
 		// Gets the number of issues in each series
 		$sql = "SELECT * FROM comics WHERE series_id = $series_id";
 		$this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
