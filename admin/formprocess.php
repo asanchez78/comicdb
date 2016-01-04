@@ -1,5 +1,6 @@
 <?php
 require_once '../views/head.php';
+require_once(__ROOT__.'/classes/wikiFunctions.php');
 
 /* Filter POST Data Variables */
 
@@ -27,7 +28,7 @@ if ($released_date == 0000 - 00 - 00) {
 
 if ($cover_image) {
   $path = "../images/$cover_image_file";
-  $downloader = new grab_cover ();
+  $downloader = new wikiQuery();
   $downloader->downloadFile ( $cover_image, $path );
 }
 
