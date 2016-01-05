@@ -179,7 +179,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				SET wiki_id=$wikiDetails
 				WHERE comic_id='$comic_id'";
 				set_time_limit(0);
-				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\">Wiki ID entered for ". $series_name . " #" . $issue_number ."</a>\n";
+				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">Wiki ID entered for ". $series_name . " #" . $issue_number ."</a>\n";
 				$this->newWikiIDs .= "<br/>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
@@ -223,7 +223,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				set_time_limit(0);
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->addDetailsMsg = "Entries below Updated with new information.";
-					$this->updatedList .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\">Details entered for ". $series_name . " #" . $issue_number ."</a>\n";
+					$this->updatedList .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">Details entered for ". $series_name . " #" . $issue_number ."</a>\n";
 					$this->updatedList .= "<br/>\n";
 				} else {
 					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
