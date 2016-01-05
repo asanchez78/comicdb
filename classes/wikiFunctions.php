@@ -103,6 +103,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			$this->coverFile = $fileparts[7];
 			$this->coverFile = str_replace("%28", "", $this->coverFile);
 			$this->coverFile = str_replace("%29", "", $this->coverFile);
+			$this->coverFile = str_replace("%3F", "", $this->coverFile);
 		} else {
 			$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
 			FROM comics
