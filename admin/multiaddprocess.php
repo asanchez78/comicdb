@@ -22,6 +22,10 @@ foreach ( range ( $first_issue, $last_issue ) as $number ) {
 		echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
 	}
 	++$releaseDateArray[1];
+	if ($releaseDateArray[1] > 12) {
+		++$releaseDateArray[0];
+		$releaseDateArray[1] = 01;
+	}
 	// insert data in to series_comic_link table
 	//$insert_series_link_query = "INSERT INTO series_link (comic_id, series_id)
     //VALUES ($new_comic_id, $series_id)";
