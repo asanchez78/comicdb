@@ -13,7 +13,7 @@ if ($login->isUserLoggedIn () == true) {
 	$fillIn->addWikiID();
 	//Update records that have a wiki id, but have not been updated with information from the marvel wikia
 	$fillIn->addDetails();
-
+	$time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
 } else {
 	include '../views/not_logged_in.php';
 }
@@ -31,6 +31,7 @@ if ($login->isUserLoggedIn () == true) {
 						<?php echo $fillIn->newWikiIDs; echo $fillIn->updatedList; echo $fillIn->coverSearchErr?>
 					</tbody>
 				</table>
+					<?php echo "Process Time: {$time} </br>"; ?>
 			</div>
 		</div>
 	</div>
