@@ -58,7 +58,7 @@ class comicSearch {
 			die ( "Connection failed: " );
 		}
 
-		$sql = "SELECT comics.wiki_id, comics.series_id, comics.comic_id, series.series_name, series.series_vol, comics.issue_number, comics.release_date, comics.story_name, comics.cover_image, comics.plot, comics.original_purchase FROM comics LEFT JOIN series ON comics.series_id=series.series_id WHERE comics.comic_id = $comic_id";
+		$sql = "SELECT * FROM comics LEFT JOIN series ON comics.series_id=series.series_id WHERE comics.comic_id = $comic_id";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
@@ -143,7 +143,7 @@ class comicSearch {
 		if ($this->db_connection->connect_errno) {
 			die ( "Connect failed:" );
 		}
-		$sql = "SELECT comics.comic_id, comics.issue_number, comics.plot, comics.release_date, comics.story_name, comics.wiki_id
+		$sql = "SELECT *
 			FROM comics
 			LEFT JOIN series ON comics.series_id = series.series_id
 			WHERE comics.series_id = '$series_id'
@@ -155,10 +155,12 @@ class comicSearch {
 				$this->wiki_id = $row ['wiki_id'];
 				$this->issue_number = $row ['issue_number'];
 				$this->story_name = $row ['story_name'];
-				$this->issue_list .= "<tr>\n";
-				$this->issue_list .= "<td class=\"mdl-data-table__cell--non-numeric\">" . "<a href=\"comic.php?comic_id=$this->comic_id\">" . $this->issue_number . "</a>" . "</td>";
-				$this->issue_list .= "<td class=\"mdl-data-table__cell--non-numeric\">" . "<a href=\"comic.php?comic_id=$this->comic_id\">" . $this->story_name . "</a>" . "</td>";
-				$this->issue_list .= "</tr>";
+				$this->cover_image = $row ['cover_image'];
+				$this->issue_list .= '<li class="list-row issue-' . $this->issue_number . ' col-md-6"><a href="comic.php?comic_id=' . $this->comic_id . '">';
+				$this->issue_list .= '<div class="issue-cover"><img src="' . $this->cover_image . '" alt="" /></div>';
+				$this->issue_list .= '<div class="issue-number">' . $this->issue_number . '</div>';
+				$this->issue_list .= '<div class="issue-story">' . $this->story_name . '</div>';
+				$this->issue_list .= '</a></li>';
 			}
 		} else {
 			echo "0 results";
@@ -193,9 +195,25 @@ class comicSearch {
 			die ( "Connection failed:" );
 		}
 
-		// Gets the number of issues in each series
+		$sql = "SELECT series_name, series_vol FROM series WHERE series_id = $series_id";
+		$result = $this->db_connection->query ( $sql );
+		if ($result->num_rows > 0) {
+			while ( $row = $result->fetch_assoc () ) {
+				$this->series_name = $row ['series_name'];
+				$this->series_vol = $row ['series_vol'];
+			}
+		} else {
+			echo "0 results";
+		}
+
+		// Gets the number of issues in each series and outputs a text string
 		$sql = "SELECT * FROM comics WHERE series_id = $series_id";
 		$this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+		if ($this->series_issue_count == 1) {
+			$this->series_issue_count = $this->series_issue_count . ' Issue';
+		} else {
+			$this->series_issue_count = $this->series_issue_count . ' Issues';
+		}
 
 		// Gets the latest comic book cover image for the series
 		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
