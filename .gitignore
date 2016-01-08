@@ -1,4 +1,5 @@
 images/
+sftp-config.json
 #phpstorm
 .idea/
 #eclipse files
