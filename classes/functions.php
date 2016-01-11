@@ -154,13 +154,13 @@ class comicSearch {
 				$this->comic_id = $row ['comic_id'];
 				$this->wiki_id = $row ['wiki_id'];
 				$this->issue_number = $row ['issue_number'];
-				$this->story_name = $row ['story_name'];
+				$this->release_date = DateTime::createFromFormat('Y-m-d', $row ['release_date'])->format('M Y');
 				$this->cover_image = $row ['cover_image'];
-				$this->issue_list .= '<li class="list-row issue-' . $this->issue_number . ' col-md-6"><a href="comic.php?comic_id=' . $this->comic_id . '">';
-				$this->issue_list .= '<div class="issue-cover"><img src="' . $this->cover_image . '" alt="" /></div>';
-				$this->issue_list .= '<div class="issue-number">' . $this->issue_number . '</div>';
-				$this->issue_list .= '<div class="issue-story">' . $this->story_name . '</div>';
-				$this->issue_list .= '</a></li>';
+				$this->issue_list .= '<li class="col-xs-6 col-sm-3 col-md-2" id="issue-' . $this->issue_number . '">';
+				$this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" /></div></a>';
+				$this->issue_list .= '<div class="issue-meta issue-number">Issue #' . $this->issue_number . '</div>';
+				$this->issue_list .= '<div class="issue-meta release-date">' . $this->release_date . '</div>';
+				$this->issue_list .= '</li>';
 			}
 		} else {
 			echo "0 results";

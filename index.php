@@ -16,7 +16,13 @@
 				if ($series_cover == NULL) {
 					$series_cover = 'assets/nocover.jpg';
 				}
-				$series_list .= '<li class="col-xs-6 col-sm-3 col-md-2"><a href="issues.php?series_id=' . $series_id . '" class="series-info"><img src="/' . $series_cover  . '" /><div class="series-title"><h3>' . $series_name . '</h3></div></a><small>' . $series_issue_count . '</small><div class="volume-number"><span class="count">Vol ' . $series_vol . '</span></div><a href="#" class="button add-button">[Add New]</a><a href="#" class="button edit-button">[Edit]</a></li>';
+				$series_list .= '<li class="col-xs-6 col-sm-3 col-md-2">';
+				$series_list .= '<a href="issues.php?series_id=' . $series_id . '" class="series-info"><div class="comic-image">';
+				$series_list .= '<img src="/' . $series_cover  . '" alt="' . $series_name .'" />';
+				$series_list .= '<div class="series-title"><h3>' . $series_name . '</h3></div>';
+				$series_list .= '</div></a>';
+				$series_list .= '<small>' . $series_issue_count . '</small>';
+				$series_list .= '<div class="volume-number"><span class="count">Vol ' . $series_vol . '</span></div><a href="#" class="button add-button">[Add New]</a><a href="#" class="button edit-button">[Edit]</a></li>';
 			}
 		} else {
 			$series_list = "<li>No Comic Series in database. Perhaps you should <a href=\"/admin/addseries.php\">Add some.</a></li>";
@@ -34,6 +40,7 @@
 					<h2>Your Comics</h2>
 					<?php if ($series_list != null) { ?>
 					<ul class="inventory-table row">
+						
 						<?php echo $series_list; ?>
 					</ul>
 					<?php } else { ?>

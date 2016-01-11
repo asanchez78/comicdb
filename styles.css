@@ -259,7 +259,7 @@ nav.sitenav ul > li:last-of-type > a {
 	display: block;
 }
 
-/* Home page */
+/* Grid display styles */
 .inventory-table {
 	list-style-type: none;
 	margin: 0;
@@ -268,9 +268,46 @@ nav.sitenav ul > li:last-of-type > a {
 
 .inventory-table li {
 	text-align: center;
-	min-height: 230px;
 	margin-bottom: 20px;
 	position: relative;
+}
+
+.inventory-table li:nth-child(6n+1) {
+	clear: both;
+}
+
+.inventory-table li a:hover,
+.inventory-table li a:focus {
+	text-decoration: none;
+}
+
+.inventory-table .comic-image {
+	width: 100%;
+	height: 195px;
+	display: block;
+	overflow: hidden;
+	position: relative;
+}
+
+.inventory-table li > a {
+	transition: box-shadow 0.2s ease-in-out;
+	box-shadow: 0px 0px 15px 1px transparent;
+}
+
+.inventory-table li > a:hover,
+.inventory-table li > a:focus {
+	box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+	outline: none;
+}
+
+.inventory-table .comic-image img {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: block;
+	width: auto;
+	min-height: 200px;
+	height: 100%;
 }
 
 .inventory-table .series-info {
@@ -302,25 +339,6 @@ nav.sitenav ul > li:last-of-type > a {
   font-size: 10px;
 }
 
-.inventory-table li > a:hover,
-.inventory-table li > a:focus {
-	text-decoration: none;
-}
-
-.inventory-table li img {
-	display: block;
-	width: 100%;
-	height: 230px;
-	transition: box-shadow 0.2s ease-in-out;
-	box-shadow: 0px 0px 15px 1px transparent;
-}
-
-.inventory-table li > a:hover img,
-.inventory-table li > a:focus img {
-	box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
-	outline: none;
-}
-
 .inventory-table .series-title {
 	position: absolute;
 	bottom: 0;
@@ -328,6 +346,9 @@ nav.sitenav ul > li:last-of-type > a {
 	opacity: 0.9;
 	padding: 5px 10px;
 	width: 100%;
+}
+
+.series-title a {
 	color: white;
 }
 
@@ -341,6 +362,21 @@ nav.sitenav ul > li:last-of-type > a {
 	font-size: 10px;
 	display: block;
 	margin-top: 5px;
+}
+
+.issue-meta {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: left;
+	padding-top: 5px;
+}
+
+.release-date {
+	text-align: right;
 }
 
 /* Issues List */
