@@ -154,7 +154,11 @@ class comicSearch {
 				$this->comic_id = $row ['comic_id'];
 				$this->wiki_id = $row ['wiki_id'];
 				$this->issue_number = $row ['issue_number'];
-				$this->release_date = DateTime::createFromFormat('Y-m-d', $row ['release_date'])->format('M Y');
+				if ($row['release_date']) {
+					$this->release_date = DateTime::createFromFormat('Y-m-d', $row ['release_date'])->format('M Y');
+				} else {
+					$this->release_date = "";
+				}
 				$this->cover_image = $row ['cover_image'];
 				$this->issue_list .= '<li class="col-xs-6 col-sm-3 col-md-2" id="issue-' . $this->issue_number . '">';
 				$this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" /></div></a>';
