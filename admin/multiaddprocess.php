@@ -41,7 +41,7 @@ $fillIn->addWikiID();
 //Update records that have a wiki id, but have not been updated with information from the marvel wikia
 $fillIn->addDetails();
 ?>
-	<title>Multi Issue Addition :: comicDB</title>
+	<title>Multi Issue Addition :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php include(__ROOT__.'/views/header.php'); ?>

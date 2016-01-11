@@ -4,13 +4,13 @@
 		<div class="container">
 			<div class="row">
 				<!-- Spacer -->
-				<div class="col-md-4 hidden-sm"></div>
+				<div class="col-md-3 hidden-sm"></div>
 				<!-- Title -->
-				<div class="col-md-4 col-sm-12 logo">
-					<h1><a href="/index.php">comicDB</a></h1>
+				<div class="col-md-6 col-sm-12 logo">
+					<h1><a href="/index.php"><img src="../assets/logo.png" alt="POW! Comic Book Manager" />Comic Book Manager</a></h1>
 				</div>
 				<!-- Navigation -->
-				<nav class="col-md-4 col-sm-12 sitenav">
+				<nav class="col-md-3 col-sm-12 sitenav">
 					<ul class="nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
 						<li><a href="#" id="button-add-comics">Add Comics</a>

@@ -1,7 +1,7 @@
 <?php
 	require_once('../views/head.php');
 ?>
-	<title>Admin :: comicDB</title>
+	<title>Admin :: POW! Comic Book Manager</title>
 </head>
 <body>
 	<?php include(__ROOT__.'/views/header.php'); ?>

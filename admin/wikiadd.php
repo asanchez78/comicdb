@@ -24,7 +24,7 @@
     }
   }
 ?>
-  <title>Add Issue :: comicDB</title>
+  <title>Add Issue :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php include(__ROOT__.'/views/header.php'); ?>

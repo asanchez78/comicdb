@@ -1,0 +1,25 @@
+//
+// Mixins
+// --------------------------------------------------
+
+=centerVert ($position: absolute) 
+  position: $position
+  top: 50%
+  transform: translateY(-50%)
+
+=imageUrl($fileName, $color: transparent, $vertical: center, $horizontal: center ) 
+  background: $color url('#{$imageUrl}/#{$fileName}') no-repeat $vertical $horizontal
+
+=columns ($count: 3, $gap: 20px) 
+  column-count: $count
+  column-gap: $gap
+  column-fill: balance
+  column-break-inside: avoid
+
+=hide()
+  display: none
+  visibility: hidden
+
+=show($display: block) 
+  display: $display
+  visibility: visible

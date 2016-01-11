@@ -63,7 +63,7 @@ if ($update == "yes") {
 //  echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
 //}
 ?>
-  <title>Insert Record Confirmation :: comicDB</title>
+  <title>Insert Record Confirmation :: POW! Comic Book Manager</title>
 </head>
 <body>
   <?php include '../views/header.php';?>
