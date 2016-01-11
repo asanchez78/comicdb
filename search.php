@@ -2,12 +2,12 @@
   require_once('views/head.php');
   $comics = new comicSearch ();
   $comics->seriesList ();
-  $dropdown = "<select name=\"series_name\">\n";
-  $dropdown .= "<option value=\"\" selected=\"selected\"></option>\n";
+  $dropdown = '<select class="form-control" name="series_name">';
+  $dropdown .= '<option value="default" selected>Choose a series</option>';
   while ( $row = $comics->series_list_result->fetch_assoc () ) {
   	$series_id = $row ['series_id'];
   	$series_name = $row ['series_name'];
-  	$dropdown .= "<option value=\"$series_name\" >" . $series_name . "</option>\n";
+  	$dropdown .= '<option value="' . $series_name . '">' . $series_name . '</option>';
   }
 
   $dropdown .= "</select>";
@@ -37,12 +37,16 @@
     <div class="row">
       <div class="col-sm-12">
         <h2>Add an Issue</h2>
-        <form method="post" action="results.php">
-          <label>Series</label>
-          <?php echo $dropdown?>
-          <label for="issue_number">Issue Number</label>
-          <input name="issue_number" type="text" size="3" maxlength="4" value="" required aria-required="true" />
-          <input class="form-submit" type="submit" name="submit" value="Search" />
+        <form method="post" action="results.php" class="form-inline">
+          <div class="form-group">
+            <label>Series</label>
+            <?php echo $dropdown; ?>
+          </div>
+          <div class="form-group">
+            <label for="issue_number">Issue #</label>
+            <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
+          </div>
+          <input class="btn btn-default form-submit" type="submit" name="submit" value="Search" />
         </form>
       </div>
     </div>

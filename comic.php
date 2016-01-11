@@ -4,8 +4,7 @@
 	$comic_id = filter_input ( INPUT_GET, 'comic_id' );
 	$details = new comicSearch ();
 	$details->issueLookup ( $comic_id );
-	$details->artistLookup ( $comic_id );
-	$details->writerLookup ( $comic_id );
+	$details->seriesInfo ( $details->series_id );
 ?>
 	<title><?php echo $details->series_name . " #" . $details->issue_number; ?> :: comicDB</title>
 </head>
@@ -16,37 +15,22 @@
 		<div class="row">
 			<div class="col-sm-12 headline">
         <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
-        <a href="#">&lt; Back</a>
+        <div class="series-meta">
+					<ul class="nolist">
+						<li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
+						<li>Volume <?php echo $details->series_vol; ?></li>
+					</ul>
+				</div>
       </div>
 			<div class="col-md-8">
-				<div class="issue-description"><?php echo $details->plot; ?></div>
-				<div class="issue-details">
-					<h3>Issue details</h3>
-					<?php
-						if ($details->writer) {
-							echo "<div class=\"issue-writer\">";
-							echo "Writer: " . $details->writer;
-							echo "</div>";
-						}
-
-					 	if ($details->artist) {
-							echo "<div class=\"issue-artist\">";
-							echo "Artist: " . $details->artist;
-							echo "</div>";
-						}
+				<div class="issue-story"><h4><?php echo $details->story_name; ?></h4></div>
+				<div class="issue-description">
+					<?php if ($details->plot != '') {
+						echo $details->plot; 
+					} else {
+						echo 'Plot details have not been entered.';
+					}
 					?>
-					<div>
-						<strong>Volume: </strong><?php echo $details->volume_number; ?>
-					</div>
-					<div>
-						<strong>Issue: </strong><?php echo $details->issue_number; ?>
-					</div>
-					<div>
-						<strong>Story Name: </strong><?php echo $details->story_name; ?>
-					</div>
-					<div>
-						<strong>Published: </strong><?php echo $details->release_date; ?>
-					</div>
 				</div>
 				<p>
 					<?php
