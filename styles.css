@@ -29,7 +29,120 @@ a {
 ul.nolist {
 	list-style-type: none;
 	margin: 0;
-	padding: 5px 15px;
+	padding: 0;
+}
+
+.button {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 10px;
+}
+
+.button:after {
+	content: "";
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.button:last-of-type:after {
+	margin: 0;
+	display: none;
+}
+
+/* Form Elements */
+
+.form-control {
+	border: 4px solid silver;
+	font-size: 20px;
+	outline: none;
+	padding: 20px 10px;
+}
+
+.form-control:focus {
+	border-color: gray;
+}
+
+select.form-control {
+	height: 48px;
+}
+
+.form-inline .form-group {
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+label {
+	display: block;
+}
+
+.error-message {
+	color: red;
+	font-size:;
+}
+
+.form-radio label:first-of-type {
+	margin-bottom: 15px;
+}
+
+.form-radio input[type="radio"] {
+	padding: 0;
+	display: none;
+}
+
+.form-radio fieldset label {
+	display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+  margin-right: 15px;
+  font-size: 13px;
+}
+
+.form-radio fieldset label:before {
+	content: "";
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  background-color: silver;
+  border: 4px solid silver;
+  border-radius: 25px;
+}
+
+input[type="radio"]:checked + label:before {
+  content: "";
+  background-color: gray;
+  border-color: gray;
+  color: #f3f3f3;
+  text-align: center;
+}
+
+.form-submit {
+	clear: both;
+	display: block;
+	border: 1px solid transparent;
+	outline: none;
+	background-color: red;
+	color: white;
+	padding: 12px 25px;
+	font-size: 16px;
+	transition: all 0.1s ease-in-out;
+	text-transform: uppercase;
+	margin-top: 20px;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+	background-color: gray;
+	border: 1px solid silver;
+}
+
+.form-inline .form-submit {
+	display: inline-block;
+	margin: 25px 0 15px;
 }
 
 /* Layout */
@@ -38,12 +151,13 @@ ul.nolist {
 	display: block;
 }
 
-main .container {
+main > .container {
 	background-color: white;
-	opacity: 0.9;
+	opacity: 0.95;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
+	min-height: 80vh;
 }
 
 /* Header */
@@ -145,25 +259,7 @@ nav.sitenav ul > li:last-of-type > a {
 	display: block;
 }
 
-/* Common */
-.button {
-	display: inline-block;
-	text-transform: uppercase;
-	font-size: 10px;
-}
-
-.button:after {
-	content: "";
-	display: inline-block;
-	margin: 0 5px;
-}
-
-.button:last-of-type:after {
-	margin: 0;
-	display: none;
-}
-
-/* Home page */
+/* Grid display styles */
 .inventory-table {
 	list-style-type: none;
 	margin: 0;
@@ -172,9 +268,46 @@ nav.sitenav ul > li:last-of-type > a {
 
 .inventory-table li {
 	text-align: center;
-	min-height: 230px;
 	margin-bottom: 20px;
 	position: relative;
+}
+
+.inventory-table li:nth-child(6n+1) {
+	clear: both;
+}
+
+.inventory-table li a:hover,
+.inventory-table li a:focus {
+	text-decoration: none;
+}
+
+.inventory-table .comic-image {
+	width: 100%;
+	height: 195px;
+	display: block;
+	overflow: hidden;
+	position: relative;
+}
+
+.inventory-table li > a {
+	transition: box-shadow 0.2s ease-in-out;
+	box-shadow: 0px 0px 15px 1px transparent;
+}
+
+.inventory-table li > a:hover,
+.inventory-table li > a:focus {
+	box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
+	outline: none;
+}
+
+.inventory-table .comic-image img {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: block;
+	width: auto;
+	min-height: 200px;
+	height: 100%;
 }
 
 .inventory-table .series-info {
@@ -206,25 +339,6 @@ nav.sitenav ul > li:last-of-type > a {
   font-size: 10px;
 }
 
-.inventory-table li > a:hover,
-.inventory-table li > a:focus {
-	text-decoration: none;
-}
-
-.inventory-table li img {
-	display: block;
-	width: 100%;
-	height: 230px;
-	transition: box-shadow 0.2s ease-in-out;
-	box-shadow: 0px 0px 15px 1px transparent;
-}
-
-.inventory-table li > a:hover img,
-.inventory-table li > a:focus img {
-	box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.75);
-	outline: none;
-}
-
 .inventory-table .series-title {
 	position: absolute;
 	bottom: 0;
@@ -232,6 +346,9 @@ nav.sitenav ul > li:last-of-type > a {
 	opacity: 0.9;
 	padding: 5px 10px;
 	width: 100%;
+}
+
+.series-title a {
 	color: white;
 }
 
@@ -245,6 +362,79 @@ nav.sitenav ul > li:last-of-type > a {
 	font-size: 10px;
 	display: block;
 	margin-top: 5px;
+}
+
+.issue-meta {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: left;
+	padding-top: 5px;
+}
+
+.release-date {
+	text-align: right;
+}
+
+/* Issues List */
+.series-meta {
+	position: absolute;
+	right: 15px;
+	top: 20px;
+	font-size: 12px;
+	text-align: right;
+	font-weight: bold;
+	width: 200px;
+}
+
+.series-meta ul > li {
+	display: inline-block;
+	vertical-align: top;
+	margin: 0 30px;
+}
+
+.series-meta ul > li:last-of-type {
+	margin-right: 0;
+}
+
+.list-row, .list-heading {
+	display: block;
+	margin: 5px 0;
+}
+
+.list-row a > *,
+.list-heading > * {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+.list-heading {
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.issue-cover {
+	width: 5%;
+	min-width: 47px;
+}
+
+.issue-cover img {
+	width: 100%;
+	height: auto;
+}
+
+.list-heading .issue-number,
+.list-row a .issue-number {
+	min-width: 25px;
+	text-align: center;
+}
+
+.list-row a .issue-number {
+	margin-right: 15px;
 }
 
 /* Add Comics */
@@ -271,10 +461,6 @@ th.comics-heading-issue {
 	right: 15px;
 }
 
-.edit-form label {
-	width: 20%;
-}
-
 .edit-form input[type="text"] {
 	width: 70%;
 }
@@ -297,23 +483,4 @@ th.comics-heading-issue {
 	position: absolute;
 	right: 20px;
 	top: 5px;
-}
-
-.form-submit {
-	border: 1px solid transparent;
-	outline: none;
-	background-color: red;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 5px;
-	font-size: 16px;
-	margin: 10px 0;
-	transition: all 0.1s ease-in-out;
-	text-transform: uppercase;
-}
-
-.form-submit:hover,
-.form-submit:focus {
-	background-color: gray;
-	border: 1px solid silver;
 }

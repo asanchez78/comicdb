@@ -17,16 +17,16 @@
 	}
 
 	if (mysqli_num_rows ( $series_list ) > 0) {
-		$dropdown = "<select class=\"element select medium\" id=\"element_6\" name=\"series_name\">\n";
-		$dropdown .= "<option value=\"\" selected=\"selected\"></option>\n";
+		$dropdown = '<select class="form-control" name="series_name">';
+		$dropdown .= '<option value="" selected>Choose a series</option>';
 		while ( $row = mysqli_fetch_assoc ( $series_list ) ) {
 			$series_id = $row ['series_id'];
 			$series_name = $row ['series_name'];
-			$dropdown .= "<option value=\"$series_id\" >" . $series_name . "</option>\n";
+			$dropdown .= '<option value="' . $series_name . '">' . $series_name . '</option>';
 		}
 		$dropdown .= "</select>";
 	} else {
-		$dropdown = "<input id=\"element_6\" name=\"series_name\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"\"/>";
+		$dropdown = "<input name=\"series_name\" class=\"element text medium\" type=\"text\" maxlength=\"255\" value=\"\"/>";
 	}
 	mysqli_close ( $connection );
 ?>
@@ -44,29 +44,24 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<form id="input_select" method="post" action="multiaddcprocess.php">
-					<div>
+					<div class="form-group">
 						<label>Series</label>
 			      <?php echo $dropdown; ?>
 			    </div>
 
-					<div>
-						<label for="issue_list">Comma separated list of issues</label> <br />
-						<textarea name="issue_list" rows="4" cols="30" form="input_select"></textarea>
+					<div class="form-group">
+						<label for="issue_list">Comma separated list of issues</label>
+						<textarea  class="form-control" name="issue_list" rows="4" cols="30" form="input_select"></textarea>
 					</div>
 
-					<div>
-						<label>Purchased when released?</label>
-						<select name="original_purchase">
-							<option value="" selected="selected"></option>
-							<option value="1">Yes</option>
-							<option value="0">No</option>
-						</select>
-					</div>
-
-					<div>
-						<input type="submit" name="submit" value="Submit" />
-					</div>
-
+					<div class="form-group form-radio">
+						<label for="original_purchase">Purchased When Released</label>
+						<fieldset>
+							<input name="original_purchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
+							<input name="original_purchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+          	</fieldset>
+          </div>
+					<input type="submit" name="submit" value="Submit" class="btn btn-default form-submit" />
 				</form>
 			</div>
 		</div>

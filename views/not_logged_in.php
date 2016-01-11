@@ -15,13 +15,14 @@ if (isset ( $login )) {
 ?>
 
 <!-- login form box -->
-<form method="post" action="<?php $refering_page; ?>" name="loginform">
-
-	<label for="login_input_username">Username</label> <input
-		id="login_input_username" class="login_input" type="text"
-		name="user_name" required /> <label for="login_input_password">Password</label>
-	<input id="login_input_password" class="login_input" type="password"
-		name="user_password" autocomplete="off" required /> <input
-		type="submit" name="login" value="Log in" />
-
+<form method="post" action="<?php echo $refering_page; ?>" name="loginform" class="form-inline login-form">
+	<div class="form-group">
+		<label for="login_input_username">Username</label>
+		<input id="login_input_username" class="form-control" type="text" name="user_name" required />
+	</div>
+	<div class="form-group">
+		<label for="login_input_password">Password</label>
+		<input id="login_input_password" class="form-control" type="password" name="user_password" autocomplete="off" required /> 
+	</div>
+	<input type="submit" name="login" value="Log in" class="btn btn-default form-submit" />
 </form>

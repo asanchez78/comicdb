@@ -36,45 +36,40 @@
       </div>
       <div class="col-md-8 col-sm-12">
         <form method="post" action="formprocess.php">
-          <div>
+          <div class="form-group">
             <label for="series_name">Series: </label>
-            <input name="series_name" type="text" maxlength="255" value="<?php echo $series; ?>" required />
+            <input class="form-control" name="series_name" type="text" maxlength="255" value="<?php echo $series; ?>" required />
           </div>
-          <div>
+          <div class="form-group">
             <label for="issue_number">Issue Number: </label>
-            <input name="issue_number" type="text" maxlength="255" value="<?php echo $issue; ?>" required />
+            <input class="form-control" name="issue_number" type="text" maxlength="255" value="<?php echo $issue; ?>" required />
           </div>
-          <div>
+          <div class="form-group">
             <label for="story_name">Story Name: </label>
-              <input name="story_name" type="text" maxlength="255" value="<?php echo $comic->storyName; ?>" />
+            <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $comic->storyName; ?>" />
           </div>
-          <div>
+          <div class="form-group">
             <label for="released_date">Release Date:</label>
-            <input name="released_date" size="10" maxlength="10" value="" type="text" placeholder="YYYY-MM-DD" />
+            <input class="form-control" name="released_date" size="10" maxlength="10" value="" type="date" placeholder="YYYY-MM-DD" />
           </div>
-          <div>
+          <div class="form-group form-radio">
             <label for="original_purchase">Purchased When Released:</label>
-            <input name="original_purchase" value="1" type="radio" />Yes
-            <input name="original_purchase" value="0" type="radio" />No
+            <fieldset>
+              <input name="original_purchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
+              <input name="original_purchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+            </fieldset>
           </div>
-          <div class="plot">
+          <div class="plot form-group">
             <label for="plot">Plot:</label>
             <small><a href="#">[edit]</a></small>
             <?php echo $comic->synopsis; ?>
           </div>
-          <div>
-            <label for="cover_image">Cover Image URL:</label>
-            <input name="cover_image" type="text" maxlength="255" value="<?php echo $comic->coverURL; ?>" />
-          </div>
-          <div>
-            <label for="cover_image_file">Destination Filename:</label>
-            <input name="cover_image_file" type="text" maxlength="255" value="<?php echo $comic->coverFile; ?>" />
-          </div>
+          <input type="hidden" name="cover_image" value="<?php echo $comic->coverURL; ?>" />
+          <input type="hidden" name="cover_image_file" value="<?php echo $comic->coverFile; ?>" />
           <input type="hidden" name="plot" value="<?php echo htmlspecialchars($comic->synopsis); ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
           <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
-
-          <input type="submit" name="submit" value="Submit" class="form-submit" />
+          <input type="submit" name="submit" value="Submit" class="btn btn-default form-submit" />
         </form>
       </div>
       <div class="col-md-4 issue-image">
