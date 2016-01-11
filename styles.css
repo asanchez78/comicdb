@@ -32,18 +32,132 @@ ul.nolist {
 	padding: 0;
 }
 
+.button {
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 10px;
+}
+
+.button:after {
+	content: "";
+	display: inline-block;
+	margin: 0 5px;
+}
+
+.button:last-of-type:after {
+	margin: 0;
+	display: none;
+}
+
+/* Form Elements */
+
+.form-control {
+	border: 4px solid silver;
+	font-size: 20px;
+	outline: none;
+	padding: 20px 10px;
+}
+
+.form-control:focus {
+	border-color: gray;
+}
+
+select.form-control {
+	height: 48px;
+}
+
+.form-inline .form-group {
+	vertical-align: top;
+	margin-right: 10px;
+}
+
+label {
+	display: block;
+}
+
+.error-message {
+	color: red;
+	font-size:;
+}
+
+.form-radio label:first-of-type {
+	margin-bottom: 15px;
+}
+
+.form-radio input[type="radio"] {
+	padding: 0;
+	display: none;
+}
+
+.form-radio fieldset label {
+	display: inline-block;
+  cursor: pointer;
+  position: relative;
+  padding-left: 35px;
+  margin-right: 15px;
+  font-size: 13px;
+}
+
+.form-radio fieldset label:before {
+	content: "";
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  background-color: silver;
+  border: 4px solid silver;
+  border-radius: 25px;
+}
+
+input[type="radio"]:checked + label:before {
+  content: "";
+  background-color: gray;
+  border-color: gray;
+  color: #f3f3f3;
+  text-align: center;
+}
+
+.form-submit {
+	clear: both;
+	display: block;
+	border: 1px solid transparent;
+	outline: none;
+	background-color: red;
+	color: white;
+	padding: 12px 25px;
+	font-size: 16px;
+	transition: all 0.1s ease-in-out;
+	text-transform: uppercase;
+	margin-top: 20px;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+	background-color: gray;
+	border: 1px solid silver;
+}
+
+.form-inline .form-submit {
+	display: inline-block;
+	margin: 25px 0 15px;
+}
+
 /* Layout */
 
 #wrapper {
 	display: block;
 }
 
-main .container {
+main > .container {
 	background-color: white;
-	opacity: 0.9;
+	opacity: 0.95;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
+	min-height: 80vh;
 }
 
 /* Header */
@@ -143,24 +257,6 @@ nav.sitenav ul > li:last-of-type > a {
 
 #comics-submenu.expanded a {
 	display: block;
-}
-
-/* Common */
-.button {
-	display: inline-block;
-	text-transform: uppercase;
-	font-size: 10px;
-}
-
-.button:after {
-	content: "";
-	display: inline-block;
-	margin: 0 5px;
-}
-
-.button:last-of-type:after {
-	margin: 0;
-	display: none;
 }
 
 /* Home page */
@@ -328,10 +424,6 @@ th.comics-heading-issue {
 	right: 15px;
 }
 
-.edit-form label {
-	width: 20%;
-}
-
 .edit-form input[type="text"] {
 	width: 70%;
 }
@@ -354,23 +446,4 @@ th.comics-heading-issue {
 	position: absolute;
 	right: 20px;
 	top: 5px;
-}
-
-.form-submit {
-	border: 1px solid transparent;
-	outline: none;
-	background-color: red;
-	color: white;
-	padding: 5px 15px;
-	border-radius: 5px;
-	font-size: 16px;
-	margin: 10px 0;
-	transition: all 0.1s ease-in-out;
-	text-transform: uppercase;
-}
-
-.form-submit:hover,
-.form-submit:focus {
-	background-color: gray;
-	border: 1px solid silver;
 }

@@ -72,10 +72,6 @@ if ($update == "yes") {
       <div class="col-sm-12">
         <strong><em><?php echo $message; ?></em></strong>:
       </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
       <div class="col-sm-12 headline">
         <h2><?php echo $series_name . " #" . $issue_number; ?></h2>
         <a href="#">&lt; Back</a>
