@@ -124,10 +124,9 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 	 * @param int $wiki_id
 	 */
 	public function comicDetails($wiki_id) {
-		$details_api = "http://marvel.wikia.com/api/v1/Articles/Details/AsSimpleJson?id=$wiki_id";
+		$details_api = "http://marvel.wikia.com/api/v1/Articles/AsSimpleJson?id=$wiki_id";
 		$issue_jsondata = file_get_contents($details_api);
 		$issue_results = json_decode($issue_jsondata, true);
-		print_r ($issue_results);
 		$paragraphs = $issue_results['sections'][2]['content'];
 		$paragraphNum = 0;
 		$this->storyName = trim(str_replace('Appearing in ', "", $issue_results['sections'][1]['title']), '"');
