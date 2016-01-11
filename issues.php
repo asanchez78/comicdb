@@ -12,10 +12,16 @@
 
 <body>
 <?php include 'views/header.php';?>
-	<div class="container">
+	<div class="container issues-list">
 		<div class="row">
 			<div class="col-sm-12">
 				<h2><?php echo $issues->series_name; ?></h2>
+				<div class="series-meta">
+					<ul class="nolist">
+						<li><?php echo $issues->series_issue_count; ?></li>
+						<li>Volume <?php echo $issues->series_vol; ?></li>
+					</ul>
+				</div>
 			</div>
 			<div class="col-sm-12 inventory-table">
 				<ul class="nolist">

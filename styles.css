@@ -380,22 +380,23 @@ nav.sitenav ul > li:last-of-type > a {
 }
 
 /* Issues List */
-.issues-list .issue-meta {
+.series-meta {
 	position: absolute;
 	right: 15px;
 	top: 20px;
 	font-size: 12px;
 	text-align: right;
 	font-weight: bold;
+	width: 200px;
 }
 
-.issue-meta ul > li {
+.series-meta ul > li {
 	display: inline-block;
 	vertical-align: top;
 	margin: 0 30px;
 }
 
-.issue-meta ul > li:last-of-type {
+.series-meta ul > li:last-of-type {
 	margin-right: 0;
 }
 
