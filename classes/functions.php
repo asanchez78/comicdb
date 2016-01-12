@@ -178,8 +178,6 @@ class comicSearch {
 		if ($this->db_connection->connect_errno) {
 			die ( "Connection failed:" );
 		}
-		$sql = "SELECT user_id from users where user_name=$user";
-		$result = $this->db_connection->query ( $sql );
 		$sql = "SELECT DISTINCT series_id FROM comics where ownerID=$user ORDER BY series_id";
 		$result = $this->db_connection->query ( $sql );
 		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
