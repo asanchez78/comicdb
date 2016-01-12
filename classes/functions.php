@@ -178,31 +178,20 @@ class comicSearch {
 		if ($this->db_connection->connect_errno) {
 			die ( "Connection failed:" );
 		}
-		if ($user) {
-			$sql = "SELECT user_id from users where user_name='$user'";
-			$result = $this->db_connection->query ( $sql );
-			if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
-				while ($row = $result->fetch_assoc ()) {
-					$user_id = $row['user_id'];
-				}
-				$sql = "SELECT DISTINCT series_id FROM comics where ownerID=$user_id ORDER BY series_id";
-				$result = $this->db_connection->query ( $sql );
-				if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
-					$list = NULL;
-					while ($row = $result->fetch_assoc ()) {
-						$list .= "series_id=" . $row ['series_id'] . " or ";
-					}
-					$idList = preg_replace('/(or(?!.*or))/', '', $list);
-					$sql = "SELECT * FROM series where $idList ORDER BY series_name ASC";
-					$this->series_list_result = $this->db_connection->query ( $sql );
-				}
-			} else {
-				echo "No user named $user found";
+		$sql = "SELECT user_id from users where user_name=$user";
+		$result = $this->db_connection->query ( $sql );
+		$sql = "SELECT DISTINCT series_id FROM comics where ownerID=$user ORDER BY series_id";
+		$result = $this->db_connection->query ( $sql );
+		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+			$list = NULL;
+			while ($row = $result->fetch_assoc ()) {
+				$list .= "series_id=" . $row ['series_id'] . " or ";
 			}
-		} else {
-			$sql = "SELECT * FROM series ORDER BY series_name ASC";
+			$idList = preg_replace('/(or(?!.*or))/', '', $list);
+			$sql = "SELECT * FROM series where $idList ORDER BY series_name ASC";
 			$this->series_list_result = $this->db_connection->query ( $sql );
-		}
+			
+		} 
 	}
 
 	public function seriesFind($series_name) {
