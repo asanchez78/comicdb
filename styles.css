@@ -339,7 +339,7 @@ a {
   text-decoration: none;
 }
 a:hover, a:focus {
-  color: #b30200;
+  color: #ffaa00;
   text-decoration: underline;
 }
 a:focus {
@@ -2796,7 +2796,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   border-color: transparent;
 }
 .btn-link:hover, .btn-link:focus {
-  color: #b30200;
+  color: #ffaa00;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -3203,6 +3203,7 @@ main > .container.content {
   padding-bottom: 15px;
   margin-bottom: 15px;
   min-height: 80vh;
+  border: 2px solid gray;
 }
 
 /* Header */
@@ -3222,6 +3223,9 @@ header a:hover, header a:focus {
   width: auto;
   height: 52px;
   margin-right: 10px;
+}
+.logo a:hover, .logo a:focus {
+  color: #ff0300;
 }
 
 nav.sitenav {
@@ -3262,7 +3266,6 @@ nav.sitenav > ul > li > a {
   line-height: 62px;
 }
 nav.sitenav > ul > li > a:hover, nav.sitenav > ul > li > a:focus {
-  color: white;
   text-decoration: none;
 }
 nav.sitenav > ul > li:first-of-type > a {
