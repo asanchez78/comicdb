@@ -12,7 +12,7 @@
 
 <body>
 <?php include 'views/header.php';?>
-	<div class="container issues-list">
+	<div class="container issues-list content">
 		<div class="row">
 			<div class="col-sm-12">
 				<h2><?php echo $issues->series_name; ?></h2>

@@ -1,5 +1,7 @@
 //Custom Variables
-$brand-red: red;
+$brand-red: #ff0300;
+$brand-orange: #ffaa00;
+$brand-yellow: #ffff00;
 
 $font-bold-weight: 700;
 $body-font-weight: 400;
@@ -14,12 +16,12 @@ $font-family-sans-serif: 'Roboto', Arial, Helvetica, sans-serif;
 $font-family-serif: Times, 'Times New Roman', serif;
 $font-size-base: 15px;
 
-$font-size-h1: 25px;
-$font-size-h2: 25px;
+$font-size-h1: 36px;
+$font-size-h2: 28px;
 $font-size-h3: 13px;
 
 $line-height-base: 1.5;
-$headings-font-family: $font-family-sans-serif;
+$headings-font-family: 'Bangers', Arial, Helvetica, sans-serif;
 $headings-font-weight: normal;
 
 $border-color: #353535;
@@ -34,4 +36,4 @@ $screen-lg: 850px;
 
 $container-sm: 100%;
 $container-md: 100%;
-$container-lg: 975px;
+$container-lg: 1000px;

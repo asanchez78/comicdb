@@ -28,7 +28,7 @@
 </head>
 <body>
 <?php include(__ROOT__.'/views/header.php'); ?>
-  <div class="container edit-form">
+  <div class="container edit-form content">
     <div class="row">
       <div class="col-sm-12 headline">
         <h2>Add Issue</h2>

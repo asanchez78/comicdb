@@ -11,7 +11,7 @@
 
 <body>
 	<?php include 'views/header.php';?>
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="col-sm-12 headline">
         <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>

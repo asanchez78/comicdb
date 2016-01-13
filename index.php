@@ -18,7 +18,7 @@
 				}
 				$series_list .= '<li class="col-xs-6 col-sm-3 col-md-2">';
 				$series_list .= '<a href="issues.php?series_id=' . $series_id . '" class="series-info"><div class="comic-image">';
-				$series_list .= '<img src="/' . $series_cover  . '" alt="' . $series_name .'" />';
+				$series_list .= '<img src="/' . $series_cover  . '" alt="' . $series_name .'" class="img-responsive" />';
 				$series_list .= '<div class="series-title"><h3>' . $series_name . '</h3></div>';
 				$series_list .= '</div></a>';
 				$series_list .= '<small>' . $series_issue_count . '</small>';
@@ -33,7 +33,7 @@
 </head>
 <body>
 	<?php include 'views/header.php';?>
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="col-sm-12">
 				<?php if ($login->isUserLoggedIn () == true) { ?>
