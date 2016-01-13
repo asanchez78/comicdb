@@ -1,7 +1,8 @@
 <?php
   require_once('views/head.php');
+  $listAllSeries=1;
   $comics = new comicSearch ();
-  $comics->seriesList ();
+  $comics->seriesList ($listAllSeries);
   $dropdown = '<select class="form-control" name="series_name">';
   $dropdown .= '<option value="default" selected>Choose a series</option>';
   while ( $row = $comics->series_list_result->fetch_assoc () ) {
