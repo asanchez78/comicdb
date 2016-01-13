@@ -30,7 +30,7 @@
 	}
 	mysqli_close ( $connection );
 ?>
-	<title>Add Range :: comicDB</title>
+	<title>Add Range :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php

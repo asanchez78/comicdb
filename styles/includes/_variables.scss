@@ -1,0 +1,37 @@
+//Custom Variables
+$brand-red: red;
+
+$font-bold-weight: 700;
+$body-font-weight: 400;
+
+// Bootstrap Overrides
+$body-color: white;
+$text-color: #363636;
+
+$link-color: $brand-red;
+
+$font-family-sans-serif: 'Roboto', Arial, Helvetica, sans-serif;
+$font-family-serif: Times, 'Times New Roman', serif;
+$font-size-base: 15px;
+
+$font-size-h1: 25px;
+$font-size-h2: 25px;
+$font-size-h3: 13px;
+
+$line-height-base: 1.5;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: normal;
+
+$border-color: #353535;
+$divider-color: gray;
+
+$imageUrl: 'images';
+
+$screen-xs: 320px;
+$screen-sm: 480px;
+$screen-md: 640px;
+$screen-lg: 850px;
+
+$container-sm: 100%;
+$container-md: 100%;
+$container-lg: 975px;

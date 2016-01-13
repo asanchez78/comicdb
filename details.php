@@ -7,7 +7,7 @@
   $comic->comicCover($wiki_id);
   $comic->comicDetails($wiki_id);
 ?>
-  <title>Add Issue :: comicDB</title>
+  <title>Add Issue :: POW! Comic Book Manager</title>
 </head>
 <body>
   <div class="container">

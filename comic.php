@@ -6,7 +6,7 @@
 	$details->issueLookup ( $comic_id );
 	$details->seriesInfo ( $details->series_id );
 ?>
-	<title><?php echo $details->series_name . " #" . $details->issue_number; ?> :: comicDB</title>
+	<title><?php echo $details->series_name . " #" . $details->issue_number; ?> :: POW! Comic Book Manager</title>
 </head>
 
 <body>

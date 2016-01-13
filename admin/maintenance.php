@@ -2,7 +2,7 @@
 	require_once('../views/head.php');
 	require_once(__ROOT__.'/classes/wikiFunctions.php');
 ?>
-	<title>Maintenance :: comicDB</title>
+	<title>Maintenance :: POW! Comic Book Manager</title>
 </head>
 <body>
 
