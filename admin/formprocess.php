@@ -48,8 +48,8 @@ if ($update == "yes") {
   VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
-      $message = "New Record created successfully with the following information:";
       $comic_id = mysqli_insert_id($connection);
+      echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&message=1">';
   } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
@@ -71,42 +71,6 @@ if ($update == "yes") {
     <div class="row">
       <div class="col-sm-12">
         <strong><em><?php echo $message; ?></em></strong>:
-      </div>
-      <div class="col-sm-12 headline">
-        <h2><?php echo $series_name . " #" . $issue_number; ?></h2>
-        <a href="#">&lt; Back</a>
-      </div>
-      <div class="col-md-8">
-        <div class="issue-details">
-          <h3>Issue details</h3>
-          <?php
-            if ($details->writer) {
-              echo "<div class=\"issue-writer\">";
-              echo "Writer: " . $details->writer;
-              echo "</div>";
-            }
-
-            if ($details->artist) {
-              echo "<div class=\"issue-artist\">";
-              echo "Artist: " . $details->artist;
-              echo "</div>";
-            }
-          ?>
-          <div>
-            <strong>Issue: </strong><?php echo $issue_number; ?>
-          </div>
-          <div>
-            <strong>Story Name: </strong><?php echo $story_name; ?>
-          </div>
-          <div>
-            <strong>Published: </strong><?php echo $released_date; ?>
-          </div>
-          <a href="../comic.php?comic_id=<?php echo $comic_id; ?>">Go to record</a>
-        </div>
-        <div class="issue-description"><?php echo $plot; ?></div>
-      </div>
-      <div class="col-md-4 issue-image">
-        <img src="../images/<?php echo $cover_image_file; ?>" />
       </div>
     </div>
   </div>
