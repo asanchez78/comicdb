@@ -18,6 +18,10 @@ header {
     height: 52px;
     margin-right: 10px
   }
+
+  a:hover, a:focus {
+    color: $brand-red;
+  }
 }
 
 nav.sitenav {
@@ -65,7 +69,6 @@ nav.sitenav > ul > li {
 
     &:hover,
     &:focus {
-      color: white;
       text-decoration: none;
     }
   }

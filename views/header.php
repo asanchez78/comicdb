@@ -19,7 +19,7 @@
 								<li><a href="/admin/multiaddc.php">Add Comma Separated List</a></li>
 							</ul>
 						</li>
-						<li><a href="/logout.php?logout&return=<?php echo $current_page; ?>">Logout</a></li>
+						<li><a href="/index.php?logout&message=49">Logout</a></li>
 					<?php } else { ?>
 						<li><a href="/login.php?return=<?php echo $current_page; ?>">Login</a></li>
 					<?php } ?>
@@ -32,16 +32,27 @@
 	<main>
 		<?php 
 			$message = $_GET['message'];
-			if ($message == 1 || $message == 2 || $message == 3) {
-				$notifyClass = "bg-success";
-				if ($message == 1) {
-					$messageText = "Issue added successfully.";	
+			// 50 is the start of error messaging
+			if (isset($message)) {
+				if ($message < 50) {
+					$notifyClass = "bg-success";	
+				} else {
+					$notifyClass = "bg-danger";
 				}
-				if ($message == 2) {
-					$messageText = "Issues added successfully.";	
-				}
-				if ($message == 3) {
-					$messageText = "Series added successfully.";	
+				
+				switch ($message) {
+					case 1:
+						$messageText = "Issue added successfully.";	
+						break;
+					case 2:
+						$messageText = "Issues added successfully.";	
+						break;
+					case 3:
+						$messageText = "Series added successfully.";
+						break;
+					case 49:
+						$messageText = "You have been successfully logged out.";
+						break;
 				}
 			} else {
 				$notifyClass = "notifications-hide";
