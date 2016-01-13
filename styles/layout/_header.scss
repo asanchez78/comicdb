@@ -1,0 +1,106 @@
+/* Header */
+header {
+  background-color: white;
+  opacity: 0.9;
+  border-bottom: 2px solid $divider-color;
+  margin-bottom: 25px;
+  display: block;
+  position: relative;
+  z-index: 999;
+}
+
+.logo {
+  text-align: center;
+
+  img {
+    width: auto;
+    height: 52px;
+    margin-right: 10px
+  }
+}
+
+nav.sitenav {
+  position: relative;
+  text-align: right;
+
+  ul {
+    padding: 0;
+  }
+
+  > ul > li {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 10px;
+  }
+}
+
+nav.sitenav > ul > li {
+  > a {
+    display: block;
+    padding: 0 10px;
+    line-height: 50px;
+
+    &:hover,
+    &:focus {
+      color: white;
+      background-color: gray;
+      text-decoration: none;
+    }
+  }
+
+  &:first-of-type > a {
+    margin-left: 0;
+  }
+
+  &:last-of-type > a {
+    margin-right: 0;
+  }
+}
+
+#button-add-comics {
+  position: relative;
+
+  &.expanded {
+    background-color: gray;
+    color: yellow;
+
+    + #comics-submenu {
+      display: block;
+    }
+  }
+}
+
+#comics-submenu {
+  display: none;
+  position: absolute;
+  padding: 10px;
+  background-color: gray;
+  transition: opacity 0.2s ease-in-out;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: left;
+
+  > li {
+    display: block;
+  }
+
+  a {
+    color: white;
+    margin: 2px 0;
+
+    &:hover, 
+    &:focus {
+      text-decoration: none;
+      color: yellow;
+    }
+  }
+
+  .expanded {
+    opacity: 1;
+    visibility: visible;
+
+    a {
+      display: block;
+    }
+  }
+}

@@ -24,7 +24,7 @@
 		die();
 	}
 ?>
-	<title>Register :: ComicDB</title>
+	<title>Register :: POW! Comic Book Manager</title>
 </head>
 
 <body>

@@ -16,7 +16,7 @@
   $dbValues->issueLookup($comic_id);
 
 ?>
-  <title>Edit Issue :: comicDB</title>
+  <title>Edit Issue :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php include(__ROOT__.'/views/header.php'); ?>

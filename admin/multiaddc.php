@@ -30,7 +30,7 @@
 	}
 	mysqli_close ( $connection );
 ?>
-	<title>Add Comma Separated List :: comicDB</title>
+	<title>Add Comma Separated List :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php

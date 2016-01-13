@@ -1,0 +1,47 @@
+/* Add Comics */
+th.comics-heading-issue {
+  width: 100px;
+}
+
+.issue-image img {
+  width: 100%;
+  height: auto;
+}
+
+.issue-details {
+  margin-bottom: 20px;
+}
+
+.headline {
+  position: relative;
+
+  a {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+  }
+}
+
+.edit-form input[type="text"] {
+  width: 70%;
+}
+
+.plot {
+  position: relative;
+
+  label {
+    display: block;
+  }
+
+  textarea {
+    width: 90%;
+    height: 200px;
+    border: 1px solid silver;
+  }
+
+  small {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+  }
+}

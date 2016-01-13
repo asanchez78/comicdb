@@ -1,5 +1,5 @@
 <?php require_once('views/head.php'); ?>
-  <title>Login to your Account :: comicDB</title>
+  <title>Login to your Account :: POW! Comic Book Manager</title>
 </head>
 <body>
   <?php include 'views/header.php';?>

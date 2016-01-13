@@ -2,7 +2,7 @@
 	require_once('../views/head.php');
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
 ?>
-	<title>Add Series :: ComicDB</title>
+	<title>Add Series :: POW! Comic Book Manager</title>
 </head>
 
 <body>

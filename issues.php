@@ -7,7 +7,7 @@
 	$issues->issuesList ( $series_id );
 	$issues->seriesInfo ( $series_id );
 ?>
-  <title>Comicdb</title>
+  <title><?php echo $issues->series_name; ?> (Vol <?php echo $issues->series_vol; ?>) :: POW! Comic Book Manager</title>
 </head>
 
 <body>

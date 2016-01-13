@@ -29,7 +29,7 @@
 
   mysqli_close ( $connection );
 ?>
-  <title>Comic Search :: comicDB</title>
+  <title>Comic Search :: POW! Comic Book Manager</title>
 </head>
 <body>
 <?php include 'views/header.php';?>

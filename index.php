@@ -23,7 +23,7 @@
 		}
 	}
 ?>
-  <title>comicDB</title>
+  <title>POW! Comic Book Manager</title>
 </head>
 <body>
 	<?php include 'views/header.php';?>
