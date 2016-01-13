@@ -1,7 +1,7 @@
 <?php
 	require_once('../views/head.php');
 	require_once(__ROOT__.'/classes/wikiFunctions.php');
-
+$ownerID = $_SESSION['user_id'];
 $first_issue = filter_input ( INPUT_POST, 'first_issue' );
 $last_issue = filter_input ( INPUT_POST, 'last_issue' );
 $series_id = filter_input ( INPUT_POST, 'series_name' );
@@ -14,7 +14,7 @@ $series_name_result = mysqli_query ( $connection, $series_name_query );
 
 foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	$release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
-	$insert_comics_query = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase) VALUES ('$series_id', '$number', '$release_date', '$original_purchase')";
+	$insert_comics_query = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase, ownerID) VALUES ('$series_id', '$number', '$release_date', '$original_purchase', '$ownerID')";
 	if (mysqli_query ( $connection, $insert_comics_query )) {
 		$message = "New Record created successfully. <br />";
 		$new_comic_id = mysqli_insert_id ( $connection );
