@@ -46,12 +46,40 @@ ul.nolist {
   }
 }
 
+/* Notifications */
+.notifications {
+  margin-bottom: 25px;
+  transition: height 0.2s ease-in-out;
+  height: 40px;
+
+  &.notifications-hide {
+    display: none;
+  }
+
+  &.notifications-close {
+    height: 0;
+
+    > * {
+      display: none;
+    }
+  }
+}
+
+.notifications-hide + .content {
+  margin-top: 25px;
+}
+
+.notification-text, .notifications .close span {
+  line-height: 40px;
+  margin: 0;
+}
+
 /* Layout */
 #wrapper {
   display: block;
 }
 
-main > .container {
+main > .container.content {
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
