@@ -17,7 +17,11 @@
         <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
         <div class="series-meta">
 					<ul class="nolist">
+						<?php
+							if ($details->release_date) {
+						?>
 						<li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
+						<?php } ?>
 						<li>Volume <?php echo $details->series_vol; ?></li>
 					</ul>
 				</div>
