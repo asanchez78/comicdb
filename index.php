@@ -2,10 +2,8 @@
 	require_once('views/head.php');
 	require_once('config/db.php');
 	if (isset($_SESSION ['user_name'])) {
-		//$user = $_SESSION ['user_name'];
-		$user = $_SESSION ['user_id'];
-		echo $user;
-		$invalidUser=0;
+		$user = $_SESSION ['user_name'];
+		$validUser=1;
 	} else {
 		$user = filter_input(INPUT_GET, 'user');
 		if ($connection->connect_errno) {
@@ -15,11 +13,11 @@
 		$result = $connection->query ( $sql );
 		if (mysqli_fetch_row($connection->query ( $sql )) > 0) {
 			while ($row = $result->fetch_assoc ()) {
-				$user = $row['user_id'];
+				$_SESSION ['user_id'] = $row['user_id'];
 			}
-			$invalidUser=0;
+			$validUser=1;
 		} else {
-			$invalidUser=1;
+			$validUser=0;
 		}
 	}
 ?>
@@ -31,15 +29,14 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<?php
-					if ($invalidUser == 1) {
-						$series_list = "$user not found.";
-						echo "$user not found. Here is a random comic instead.";
-						echo $invalidUser;
+					if (isset($user) AND $validUser !=1 ) {
+						$series_list = "$user not found. Here is a random comic instead.";
+						echo $series_list;
 					}
-					if ($login->isUserLoggedIn () == true or isset($user) AND $invalidUser == 0) { 
+					if ($login->isUserLoggedIn () == true or isset($user) AND $validUser == 1) { 
 						$series_list = null;
 						$comics = new comicSearch ();
-						$comics->seriesList ($user);
+						$comics->seriesList ($_SESSION ['user_id']);
 						if ($comics->series_list_result->num_rows > 0) {
 							while ( $row = $comics->series_list_result->fetch_assoc () ) {
 								$series_id = $row ['series_id'];
@@ -82,6 +79,7 @@
 						$details = new comicSearch ();
 						$details->issueLookup ( $comic_id );
 						$details->seriesInfo ( $details->series_id );
+
 					 ?>
 <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
         <div class="series-meta">
