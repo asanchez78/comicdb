@@ -22,7 +22,7 @@
 		while ( $row = mysqli_fetch_assoc ( $series_list ) ) {
 			$series_id = $row ['series_id'];
 			$series_name = $row ['series_name'];
-			$dropdown .= '<option value="' . $series_name . '">' . $series_name . '</option>';
+			$dropdown .= '<option value="' . $series_id . '">' . $series_name . '</option>';
 		}
 		$dropdown .= "</select>";
 	} else {

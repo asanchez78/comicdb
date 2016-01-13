@@ -139,6 +139,7 @@ class comicSearch {
 	 * @param int $series_id
 	 */
 	public function issuesList($series_id) {
+		$ownerID = $_SESSION ['user_id'];
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		if ($this->db_connection->connect_errno) {
 			die ( "Connect failed:" );
@@ -146,7 +147,7 @@ class comicSearch {
 		$sql = "SELECT *
 			FROM comics
 			LEFT JOIN series ON comics.series_id = series.series_id
-			WHERE comics.series_id = '$series_id'
+			WHERE comics.series_id = '$series_id' AND comics.ownerID = $ownerID
 			ORDER BY comics.issue_number";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
@@ -173,14 +174,28 @@ class comicSearch {
 	/**
 	 * Returns a list of comic series
 	 */
-	public function seriesList() {
+	public function seriesList($listAllSeries) {
+		$ownerID = $_SESSION ['user_id'];
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		if ($this->db_connection->connect_errno) {
 			die ( "Connection failed:" );
 		}
-
-		$sql = "SELECT * FROM series ORDER BY series_name ASC";
-		$this->series_list_result = $this->db_connection->query ( $sql );
+		if ($listAllSeries == 1) {
+			$sql = "SELECT * FROM series ORDER BY series_name ASC";
+			$this->series_list_result = $this->db_connection->query ( $sql );
+		} else {
+			$sql = "SELECT DISTINCT series_id FROM comics where ownerID=$ownerID ORDER BY series_id";
+			$result = $this->db_connection->query ( $sql );
+			if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+			$list = NULL;
+			while ($row = $result->fetch_assoc ()) {
+				$list .= "series_id=" . $row ['series_id'] . " or ";
+			}
+			$idList = preg_replace('/(or(?!.*or))/', '', $list);
+			$sql = "SELECT * FROM series where $idList ORDER BY series_name ASC";
+			$this->series_list_result = $this->db_connection->query ( $sql );	
+		}
+	}
 	}
 
 	public function seriesFind($series_name) {
@@ -194,6 +209,10 @@ class comicSearch {
 	}
 
 	public function seriesInfo($series_id) {
+		if (isset($_SESSION['user_id'])) {
+			$ownerID = $_SESSION ['user_id'];
+		}
+		
 		$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
 		if ($this->db_connection->connect_errno) {
 			die ( "Connection failed:" );
@@ -211,20 +230,25 @@ class comicSearch {
 		}
 
 		// Gets the number of issues in each series and outputs a text string
-		$sql = "SELECT * FROM comics WHERE series_id = $series_id";
-		$this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
-		if ($this->series_issue_count == 1) {
-			$this->series_issue_count = $this->series_issue_count . ' Issue';
-		} else {
-			$this->series_issue_count = $this->series_issue_count . ' Issues';
+		if (isset($ownerID)) {
+			$sql = "SELECT * FROM comics WHERE series_id = $series_id AND ownerID = $ownerID";
+			$this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+			if ($this->series_issue_count == 1) {
+				$this->series_issue_count = $this->series_issue_count . ' Issue';
+			} else {
+				$this->series_issue_count = $this->series_issue_count . ' Issues';
+			}
 		}
 
+
 		// Gets the latest comic book cover image for the series
-		$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id ORDER BY issue_number DESC LIMIT 1";
-		if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
-			$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
-		} else {
-			$this->series_latest_cover = "assets/nocover.jpg";
+		if (isset($ownerID)) {
+			$sql = "SELECT cover_image FROM comics WHERE series_id = $series_id AND ownerID = $ownerID ORDER BY issue_number DESC LIMIT 1";
+			if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+				$this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+			} else {
+				$this->series_latest_cover = "assets/nocover.jpg";
+			}
 		}
 	}
 }

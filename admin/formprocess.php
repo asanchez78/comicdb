@@ -1,7 +1,7 @@
 <?php
 require_once '../views/head.php';
 require_once(__ROOT__.'/classes/wikiFunctions.php');
-
+$ownerID = $_SESSION['user_id'];
 /* Filter POST Data Variables */
 
 $series_name = filter_input ( INPUT_POST, 'series_name' );
@@ -44,8 +44,8 @@ if ($update == "yes") {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
 } else {
-  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
-  VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, ownerID, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
+  VALUES ('$series_id', '$issue_number', '$ownerID', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
       $comic_id = mysqli_insert_id($connection);
