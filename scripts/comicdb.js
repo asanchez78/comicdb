@@ -23,4 +23,9 @@ jQuery(document).ready(function($) {
     $($notifications).addClass('notifications-close');
   });
 
+  if (!$notifications.hasClass('notifications-close')) {
+    setTimeout(function() {
+      $($notifications).addClass('notifications-close');
+    }, 6000);
+  }
 });
