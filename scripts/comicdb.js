@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
   $notifications = $('.notifications');
   $notifyClose = $($notifications).find('.close');
   $($notifyClose).click(function() {
-    $($notifications).addClass('notifications-cloasdasdse');
+    $($notifications).addClass('notifications-close');
   });
 
   if (!$notifications.hasClass('notifications-close')) {
