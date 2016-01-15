@@ -10,7 +10,7 @@
   $returnedResults->wikiSearch($query, $series_name, $issue_number, 50);
 ?>
 <?php include 'views/header.php';?>
-  <div class="container">
+  <div class="container content">
     <div class="row">
       <div class="col-sm-12">
         <h2>Your Search Results</h2>

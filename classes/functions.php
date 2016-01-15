@@ -161,8 +161,8 @@ class comicSearch {
 					$this->release_date = "";
 				}
 				$this->cover_image = $row ['cover_image'];
-				$this->issue_list .= '<li class="col-xs-6 col-sm-3 col-md-2" id="issue-' . $this->issue_number . '">';
-				$this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" /></div></a>';
+				$this->issue_list .= '<li class="col-xs-6 col-sm-4 col-md-3 col-lg-2" id="issue-' . $this->issue_number . '">';
+				$this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" class="img-responsive" /></div></a>';
 				$this->issue_list .= '<div class="issue-meta issue-number">Issue #' . $this->issue_number . '</div>';
 				$this->issue_list .= '<div class="issue-meta release-date">' . $this->release_date . '</div>';
 				$this->issue_list .= '</li>';

@@ -3,7 +3,7 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <div class="container">
+  <div class="container content">
     <div class="row">
       <div class="col-sm-12">
         <!-- login form box -->

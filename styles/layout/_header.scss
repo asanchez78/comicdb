@@ -3,19 +3,36 @@ header {
   background-color: white;
   opacity: 0.9;
   border-bottom: 2px solid $divider-color;
-  margin-bottom: 25px;
   display: block;
   position: relative;
   z-index: 999;
+
+  a:hover, a:focus {
+    text-decoration: none
+  }
 }
 
 .logo {
   text-align: center;
 
+  @media (min-width: $screen-sm) {
+    text-align: left;
+  }
+
   img {
     width: auto;
     height: 52px;
-    margin-right: 10px
+    margin: 0 auto;
+    display: block;
+
+    @media (min-width: $screen-sm) {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  a:hover, a:focus {
+    color: $brand-red;
   }
 }
 
@@ -34,16 +51,40 @@ nav.sitenav {
   }
 }
 
+#button-add-comics {
+  position: relative;
+  background: url('../assets/add-button.svg') no-repeat center center;
+  background-size: 40px 40px;
+  width: 40px;
+  font-size: 0;
+  padding: 0;
+
+  &:hover, &:focus {
+    background-image: url('../assets/add-button-hover.svg');
+  }
+
+  &.expanded {
+    color: yellow;
+    background-image: url('../assets/add-button-hover.svg');
+
+    + #comics-submenu {
+      display: block;
+    }
+  }
+}
+
 nav.sitenav > ul > li {
   > a {
     display: block;
     padding: 0 10px;
-    line-height: 50px;
+    line-height: 42px;
+    
+    @media (min-width: $screen-md) {
+      line-height: 62px;
+    }
 
     &:hover,
     &:focus {
-      color: white;
-      background-color: gray;
       text-decoration: none;
     }
   }
@@ -54,19 +95,6 @@ nav.sitenav > ul > li {
 
   &:last-of-type > a {
     margin-right: 0;
-  }
-}
-
-#button-add-comics {
-  position: relative;
-
-  &.expanded {
-    background-color: gray;
-    color: yellow;
-
-    + #comics-submenu {
-      display: block;
-    }
   }
 }
 

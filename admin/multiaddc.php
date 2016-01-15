@@ -40,7 +40,7 @@
 		die ();
 	}
 ?>
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="col-sm-12">
 				<form id="input_select" method="post" action="multiaddcprocess.php">

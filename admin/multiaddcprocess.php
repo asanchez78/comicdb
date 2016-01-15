@@ -38,7 +38,7 @@ echo $series_id;
 	<title></title>
 </head>
 <body>
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="col-sm-12">
 				<?php echo $message; echo $fillIn->newWikiIDs; ?>

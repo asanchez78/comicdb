@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  var $menuButton, $comicSubmenu;
+  var $menuButton, $comicSubmenu, $notifyClose, $notifications;
 
   $menuButton = $('#button-add-comics');
   $comicSubmenu = $('#comics-submenu');
@@ -8,6 +8,8 @@ jQuery(document).ready(function($) {
   $($menuButton).click(function() {
     if ($(this).hasClass('expanded') != true) {
       $(this).addClass('expanded');
+    } else {
+      $(this).removeClass('expanded');
     }
   });
 
@@ -15,4 +17,15 @@ jQuery(document).ready(function($) {
     $($menuButton).removeClass('expanded');
   });
 
+  $notifications = $('.notifications');
+  $notifyClose = $($notifications).find('.close');
+  $($notifyClose).click(function() {
+    $($notifications).addClass('notifications-close');
+  });
+
+  if (!$notifications.hasClass('notifications-close')) {
+    setTimeout(function() {
+      $($notifications).addClass('notifications-close');
+    }, 6000);
+  }
 });

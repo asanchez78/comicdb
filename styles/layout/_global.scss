@@ -6,8 +6,21 @@ body {
   background-size: cover;
 }
 
+h1, h2, h3, h4 {
+   letter-spacing: 1px
+}
+
 h1 {
   margin: 5px 0;
+  font-size: 20px;
+  
+  @media (min-width: $screen-md) {
+    font-size: 24px;
+  }
+
+  @media (min-width: $screen-md) {
+    font-size: $font-size-h1;
+  }
 }
 
 h2 {
@@ -42,16 +55,55 @@ ul.nolist {
   }
 }
 
+/* Notifications */
+.notifications {
+  transition: height 0.2s ease-in-out;
+  height: 30px;
+  position: absolute;
+  top: 85px;
+  width: 100%;
+
+  @media (min-width: $screen-md) {
+    top: 64px;
+  }
+
+  &.notifications-hide {
+    display: none;
+  }
+
+  &.notifications-close {
+    height: 0;
+
+    > * {
+      display: none;
+    }
+  }
+}
+
+.content {
+  margin-top: 35px;
+}
+
+.notification-text, .notifications .close span {
+  line-height: 30px;
+  margin: 0;
+}
+
+.notification-text {
+  font-size: 14px
+}
+
 /* Layout */
 #wrapper {
   display: block;
 }
 
-main > .container {
+main > .container.content {
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
   min-height: 80vh;
+  border: 2px solid $border-color;
 }
