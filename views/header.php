@@ -30,39 +30,3 @@
 	</header>
 	<!-- Site content begins -->
 	<main>
-		<?php 
-			$message = $_GET['message'];
-			// 50 is the start of error messaging
-			if (isset($message)) {
-				if ($message < 50) {
-					$notifyClass = "bg-success";	
-				} else {
-					$notifyClass = "bg-danger";
-				}
-				
-				switch ($message) {
-					case 1:
-						$messageText = "Issue added successfully.";	
-						break;
-					case 2:
-						$messageText = "Issues added successfully.";	
-						break;
-					case 3:
-						$messageText = "Series added successfully.";
-						break;
-					case 49:
-						$messageText = "You have been successfully logged out.";
-						break;
-				}
-			} else {
-				$notifyClass = "notifications-hide";
-			}
-		?>
-		<div class="notifications <?php echo $notifyClass; ?>">
-			<div class="container">
-				<div class="row">
-					<p class="col-xs-11 notification-text"><?php echo $messageText; ?></p>
-					<button type="button" class="close col-xs-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-			</div>
-		</div>

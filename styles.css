@@ -3167,10 +3167,12 @@ ul.nolist {
 
 /* Notifications */
 .notifications {
-  margin-bottom: 25px;
   -webkit-transition: height 0.2s ease-in-out;
           transition: height 0.2s ease-in-out;
-  height: 40px;
+  height: 30px;
+  position: absolute;
+  top: 64px;
+  width: 100%;
 }
 .notifications.notifications-hide {
   display: none;
@@ -3182,13 +3184,17 @@ ul.nolist {
   display: none;
 }
 
-.notifications-hide + .content {
-  margin-top: 25px;
+.content {
+  margin-top: 35px;
 }
 
 .notification-text, .notifications .close span {
-  line-height: 40px;
+  line-height: 30px;
   margin: 0;
+}
+
+.notification-text {
+  font-size: 14px;
 }
 
 /* Layout */
