@@ -14,26 +14,19 @@ $series_name_result = mysqli_query ( $connection, $series_name_query );
 
 foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	$release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
-	$insert_comics_query = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase, ownerID) VALUES ('$series_id', '$number', '$release_date', '$original_purchase', '$ownerID')";
-	if (mysqli_query ( $connection, $insert_comics_query )) {
-		$message = "New Record created successfully. <br />";
+	$sql = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase, ownerID) VALUES ('$series_id', '$number', '$release_date', '$original_purchase', '$ownerID')";
+	if (mysqli_query ( $connection, $sql )) {
 		$new_comic_id = mysqli_insert_id ( $connection );
+		$messageNum = 4;
 	} else {
-		echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+		echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+		$messageNum = 51;
 	}
 	++$releaseDateArray[1];
 	if ($releaseDateArray[1] > 12) {
 		++$releaseDateArray[0];
 		$releaseDateArray[1] = 01;
 	}
-	// insert data in to series_comic_link table
-	//$insert_series_link_query = "INSERT INTO series_link (comic_id, series_id)
-    //VALUES ($new_comic_id, $series_id)";
-	//if (mysqli_query ( $connection, $insert_series_link_query )) {
-	//	$message .= "Series link created successfully.";
-	//} else {
-	//	echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
-	//}
 }
 //fill in missing wiki IDs
 $fillIn = new wikiQuery();

@@ -12,6 +12,15 @@ h1, h2, h3, h4 {
 
 h1 {
   margin: 5px 0;
+  font-size: 20px;
+  
+  @media (min-width: $screen-md) {
+    font-size: 24px;
+  }
+
+  @media (min-width: $screen-md) {
+    font-size: $font-size-h1;
+  }
 }
 
 h2 {
@@ -51,8 +60,12 @@ ul.nolist {
   transition: height 0.2s ease-in-out;
   height: 30px;
   position: absolute;
-  top: 64px;
+  top: 85px;
   width: 100%;
+
+  @media (min-width: $screen-md) {
+    top: 64px;
+  }
 
   &.notifications-hide {
     display: none;

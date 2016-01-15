@@ -4,11 +4,11 @@
 		<div class="container">
 			<div class="row">
 				<!-- Title -->
-				<div class="col-md-9 col-xs-12 logo">
+				<div class="col-md-9 col-xs-8 logo">
 					<h1><a href="/index.php"><img src="../assets/logo.svg" alt="POW! Comic Book Manager" />Comic Book Manager</a></h1>
 				</div>
 				<!-- Navigation -->
-				<nav class="col-md-3 col-xs-12 sitenav">
+				<nav class="col-md-3 col-xs-4 sitenav">
 					<ul class="nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
 						<li><a href="#" id="button-add-comics">Add Comics</a>
@@ -19,7 +19,7 @@
 								<li><a href="/admin/multiaddc.php">Add Comma Separated List</a></li>
 							</ul>
 						</li>
-						<li><a href="/index.php?logout&message=49">Logout</a></li>
+						<li><a href="/index.php?logout&m=49">Logout</a></li>
 					<?php } else { ?>
 						<li><a href="/login.php?return=<?php echo $current_page; ?>">Login</a></li>
 					<?php } ?>

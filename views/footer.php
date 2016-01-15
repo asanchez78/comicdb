@@ -1,17 +1,17 @@
 	</main>
   <!-- Site content ends -->
   <?php 
-    if (isset($message) || isset($_GET['message'])) {
-      if (isset($_GET['message'])) {
-        $message = $_GET['message'];
+    if (isset($messageNum) || isset($_GET['m'])) {
+      if (!isset($messageNum) && isset($_GET['m'])) {
+        $messageNum = $_GET['m'];
       }
-      if ($message < 50) {
+      if ($messageNum < 50) {
         $notifyClass = "bg-success";
       } else {
         $notifyClass = "bg-danger";
       }
 
-      switch ($message) {
+      switch ($messageNum) {
       // SUCCESS MESSAGES
         case 1:
           $messageText = "Issue added successfully."; 
@@ -22,12 +22,24 @@
         case 3:
           $messageText = '<em>' . $series_name . '</em> added to your collection successfully.';
           break;
+        case 4:
+          $messageText = '<em>' . $series_name . ' #' . $first_issue . ' - ' . $last_issue . '</em> added to your collection successfully.';
+          break;
+        case 5:
+          $messageText = "Issue updated successfully.";
+          break;
         case 49:
           $messageText = "You have been successfully logged out.";
           break;
         // ERROR MESSAGES
-        case 50;
+        case 50:
           $messageText = '<strong>ERROR</strong>: Cannot add <em>' . $error . '</em> to your collection. Series already exists.';
+          break;
+        case 51:
+          $messageText = '<strong>ERROR</strong>: Cannot add the issues you entered.';
+          break;
+        case 52:
+          $messageText = '<strong>ERROR</strong>: User "' . $user . '" not found. Here is a random comic instead.';
           break;
       }
     } else {

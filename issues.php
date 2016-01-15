@@ -23,8 +23,10 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-sm-12 inventory-table">
-				<ul class="nolist">
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nolist row inventory-table">
 					<?php echo $issues->issue_list; ?>
 				</ul>
 			</div>

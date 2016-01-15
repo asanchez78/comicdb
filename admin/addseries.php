@@ -8,10 +8,10 @@
 		$sql = "INSERT INTO series (series_name, series_vol) VALUES ('$series_name', '$volume_number')";
 
 		if (mysqli_query ( $connection, $sql )) {
-			$message = 3;
+			$messageNum = 3;
 		} else {
 			if ($connection->errno == 1062) {
-				$message = 50;
+				$messageNum = 50;
 				$error = $series_name . ' (Vol ' . $volume_number . ')';
 			}
 			// Uncomment below if you want more verbose error reporting.

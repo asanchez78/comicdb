@@ -39,7 +39,7 @@ if ($update == "yes") {
   SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', original_purchase='$original_purchase', wikiUpdated=1
   WHERE comic_id='$comic_id'";
   if (mysqli_query ( $connection, $insert_comic_query )) {
-      $message = "Record updated successfully with the following information";
+      echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&m=5">';
   } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
@@ -49,19 +49,11 @@ if ($update == "yes") {
 
   if (mysqli_query ( $connection, $insert_comic_query )) {
       $comic_id = mysqli_insert_id($connection);
-      echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&message=1">';
+      echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&m=1">';
   } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
 }
-// insert data in to series_comic_link table
-//$insert_series_link_query = "INSERT INTO series_link (comic_id, series_id)
-//VALUES ($new_comic_id, $series_name)";
-//if (mysqli_query ( $connection, $insert_series_link_query )) {
-//  echo "New series/comic link created";
-//} else {
-//  echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error ( $connection );
-//}
 ?>
   <title>Insert Record Confirmation :: POW! Comic Book Manager</title>
 </head>
