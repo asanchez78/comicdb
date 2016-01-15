@@ -44,7 +44,7 @@
 						} else {
 							echo "<p>Error: " . $sql . "<br>" . mysqli_error ( $connection ) . '</p>';
 						} ?>
-						<p>Use the form below to add another new series to your database, or use the Add Comics menu above to add comics to a series.</p>
+						<p>Use the form below to add another new series to your database.</p>
 						<form method="post" action="<?php echo $filename; ?>" class="form-inline">
 							<div class="form-group">
 								<label for="series_name">Series Name</label>
