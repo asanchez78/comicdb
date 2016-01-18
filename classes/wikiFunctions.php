@@ -180,7 +180,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				SET wiki_id=$wikiDetails
 				WHERE comic_id='$comic_id'";
 				set_time_limit(0);
-				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">Wiki ID entered for ". $series_name . " #" . $issue_number ."</a>\n";
+				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">New entry created for ". $series_name . " #" . $issue_number ."</a>\n";
 				$this->newWikiIDs .= "<br/>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";

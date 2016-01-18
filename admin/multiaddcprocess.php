@@ -11,23 +11,32 @@
 	$series_name_result = mysqli_query ( $connection, $series_name_query );
 
 	foreach ( $issue_list as $number ) {
-		$insert_comics_query = "INSERT INTO comics (series_id, issue_number, original_purchase, ownerID) VALUES ('$series_id', '$number', '$original_purchase', '$ownerID')";
-echo $series_id;
-		if (mysqli_query ( $connection, $insert_comics_query )) {
-			$message = "New Record created successfully. <br />";
-			$new_comic_id = mysqli_insert_id ( $connection );
-		} else {
-			echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+		$issueExists = new comicSearch();
+  		$issueExists->issueCheck($series_id, $number);
+  		if ($issueExists->issueExists == 1) {
+    		$sql = "INSERT INTO users_comics (user_id, comic_id)
+          			VALUES ('$ownerID', '$issueExists->comic_id')";
+      		if (mysqli_query ( $connection, $sql )) {
+        	
+      		} else {
+        		$message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+    		}
+  		} else {
+			$insert_comics_query = "INSERT INTO comics (series_id, issue_number, original_purchase) VALUES ('$series_id', '$number', '$original_purchase')";
+			if (mysqli_query ( $connection, $insert_comics_query )) {
+				$message = "New Record created successfully. <br />";
+				$comic_id = mysqli_insert_id ( $connection );
+				$sql = "INSERT INTO users_comics (user_id, comic_id)
+        	  			VALUES ('$ownerID', '$comic_id')";
+      			if (mysqli_query ( $connection, $sql )) {
+        	
+      			} else {
+        			$message = "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+      			}
+			} else {
+				echo "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+			}
 		}
-
-	// insert data in to series_comic_link table
-	//$insert_series_link_query = "INSERT INTO series_link (comic_id, series_id)
-    //VALUES ($new_comic_id, $series_id)";
-	//if (mysqli_query ( $connection, $insert_series_link_query )) {
-//		$message .= "New series/comic link created";
-	//} else {
-		// echo "Error: " . $insert_series_link_query . "<br>" . mysqli_error($connection);
-	//}
 	}
 	//fill in missing wiki IDs
 	$fillIn = new wikiQuery();
