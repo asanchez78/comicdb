@@ -44,14 +44,31 @@ if ($update == "yes") {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
   }
 } else {
-  $insert_comic_query = "INSERT INTO comics (series_id, issue_number, ownerID, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
-  VALUES ('$series_id', '$issue_number', '$ownerID', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
-
-  if (mysqli_query ( $connection, $insert_comic_query )) {
-      $comic_id = mysqli_insert_id($connection);
-      echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&m=1">';
+  $issueExists = new comicSearch();
+  $issueExists->issueCheck($series_id, $issue_number);
+  if ($issueExists->issueExists == 1) {
+    $sql = "INSERT INTO users_comics (user_id, comic_id)
+          VALUES ('$ownerID', '$issueExists->comic_id')";
+      if (mysqli_query ( $connection, $sql )) {
+        echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $issueExists->comic_id . '&m=1">';
+      } else {
+        $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+      }
   } else {
+    $insert_comic_query = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
+    VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+    if (mysqli_query ( $connection, $insert_comic_query )) {
+      $comic_id = mysqli_insert_id($connection);
+      $sql = "INSERT INTO users_comics (user_id, comic_id)
+          VALUES ('$ownerID', '$comic_id')";
+      if (mysqli_query ( $connection, $sql )) {
+        echo '<META http-equiv="refresh" content="0;URL=/comic.php?comic_id=' . $comic_id . '&m=1">';
+      } else {
+        $message = "Error: " . $sql . "<br>" . mysqli_error ( $connection );
+      }
+    } else {
       $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+    }
   }
 }
 ?>
