@@ -4,7 +4,7 @@
   $details->seriesInfo ( $details->series_id );
 
   $series_name = $details->series_name;
-  $series_vol = $details->series_vol
+  $series_vol = $details->series_vol;
   $issue_num = $details->issue_number;
 ?>
 <div class="row">
