@@ -46,12 +46,12 @@
 					<div class="form-group">
 						<label for="publisher">Publisher</label>
 						<select class="form-control" name="publisher">
-							<option value="default" selected>Choose a Publisher</option>
-							<option value="marvel">Marvel Comics</option>
+							<option value="">Choose a Publisher</option>
+							<option value="marvel" selected>Marvel Comics</option>
 							<option value="dc">DC Comics</option>
 							<option value="image">Image Comics</option>
 							<option value="darkhorse">Dark Horse Comics</option>
-							<option value="darkhorse">Valiant Comics</option>
+							<option value="valiant">Valiant Comics</option>
 						</select>
 					</div>
 					<div class="form-group">

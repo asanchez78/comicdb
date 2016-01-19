@@ -3,21 +3,26 @@
   $details->issueLookup ( $comic_id );
   $details->seriesInfo ( $details->series_id );
 
+  $publisher = $details->publisher;
+  // REMOVE THIS ONCE PUBLISHER IS INTEGRATED
+  $publisher = 'Marvel Comics';
+  //
   $series_name = $details->series_name;
-  $series_vol = $details->series_vol
+  $series_vol = $details->series_vol;
   $issue_num = $details->issue_number;
+
+  $publisherShort = strtolower(str_replace(' ', '', $publisher));
 ?>
 <div class="row">
   <div class="col-sm-12 headline">
     <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
     <div class="series-meta">
       <ul class="nolist">
-        <?php
-          if ($details->release_date) {
-        ?>
-        <li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
-        <?php } ?>
+        <?php if ($publisher) { echo '<li class="logo-' . $publisherShort .'">' . $publisher . '</li>'; } ?>
         <li>Volume <?php echo $series_vol; ?></li>
+        <?php if ($details->release_date) { ?>
+          <li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
+        <?php } ?>
       </ul>
     </div>
   </div>
