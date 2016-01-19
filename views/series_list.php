@@ -1,6 +1,7 @@
 <?php 
   $comics = new comicSearch ();
-  $comics->seriesList ($_SESSION ['user_id']);
+  $listAllSeries = 0;
+  $comics->seriesList ($listAllSeries);
   if ($comics->series_list_result->num_rows > 0) { ?>
     <ul class="nolist row inventory-table">
     <?php while ( $row = $comics->series_list_result->fetch_assoc () ) {
