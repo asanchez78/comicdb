@@ -2,7 +2,7 @@
 	require_once('../views/head.php');
 
 	$last_series_id_query = "select series_id from series ORDER BY series_id DESC LIMIT 1";
-	$series_query = "SELECT series_id, series_name FROM series";
+	$series_query = "SELECT * FROM series";
 	// $writer_query = "SELECT writer_name FROM writer_link LEFT JOIN writers ON (writers.writer_id = writer_link.writer_id) WHERE writer_link.comic_id = $_GET[comic_id]";
 	$series_list = mysqli_query ( $connection, $series_query );
 	$last_series_id = mysqli_query ( $connection, $last_series_id_query );
@@ -22,7 +22,8 @@
 		while ( $row = mysqli_fetch_assoc ( $series_list ) ) {
 			$series_id = $row ['series_id'];
 			$series_name = $row ['series_name'];
-			$dropdown .= '<option value="' . $series_id . '">' . $series_name . '</option>';
+			$series_vol = $row ['series_vol'];
+			$dropdown .= '<option value="' . $series_id .'">' . $series_name . ' Vol ' . $series_vol . '</option>';
 		}
 		$dropdown .= "</select>";
 	} else {

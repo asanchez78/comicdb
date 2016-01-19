@@ -8,7 +8,8 @@
   while ( $row = $comics->series_list_result->fetch_assoc () ) {
   	$series_id = $row ['series_id'];
   	$series_name = $row ['series_name'];
-  	$dropdown .= '<option value="' . $series_name . '">' . $series_name . '</option>';
+    $series_vol = $row ['series_vol'];
+    $dropdown .= '<option value="' . $series_id . '">' . $series_name . ' Vol ' . $series_vol . '</option>';
   }
 
   $dropdown .= "</select>";
