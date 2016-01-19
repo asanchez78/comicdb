@@ -3,6 +3,7 @@
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
 	$filename = $_SERVER["PHP_SELF"];
 	if ($submitted) {
+		$publisher = filter_input ( INPUT_POST, 'publisher' );
 		$series_name = filter_input ( INPUT_POST, 'series_name' );
 		$volume_number = filter_input ( INPUT_POST, 'volume_number' );
 		$sql = "INSERT INTO series (series_name, series_vol) VALUES ('$series_name', '$volume_number')";
@@ -42,6 +43,17 @@
 						<p>Add another new series to your database.</p>
 				<?php } ?>
 				<form method="post" action="<?php echo $filename; ?>" class="form-inline">
+					<div class="form-group">
+						<label for="publisher">Publisher</label>
+						<select class="form-control" name="publisher">
+							<option value="default" selected>Choose a Publisher</option>
+							<option value="marvel">Marvel Comics</option>
+							<option value="dc">DC Comics</option>
+							<option value="image">Image Comics</option>
+							<option value="darkhorse">Dark Horse Comics</option>
+							<option value="darkhorse">Valiant Comics</option>
+						</select>
+					</div>
 					<div class="form-group">
 						<label for="series_name">Series Name</label>
 						<input name="series_name" class="form-control" type="text" size="50" value="" required />
