@@ -44,10 +44,10 @@ CREATE TABLE IF NOT EXISTS `series` (
   `series_id` int(3) NOT NULL AUTO_INCREMENT,
   `series_name` varchar(100) NOT NULL,
   `series_vol` int(3) DEFAULT NULL,
-  PRIMARY KEY (`series_id`),
-  UNIQUE KEY `series_name` (`series_name`),
-  UNIQUE KEY `series_id` (`series_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+  UNIQUE KEY `series_id` (`series_id`),
+  UNIQUE KEY `series_name_2` (`series_name`,`series_vol`),
+  KEY `series_name` (`series_name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
 
 DROP TABLE IF EXISTS `storylines`;
 CREATE TABLE IF NOT EXISTS `storylines` (
