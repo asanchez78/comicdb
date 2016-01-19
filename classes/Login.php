@@ -34,7 +34,7 @@ class Login {
 		if (isset ( $_GET ["logout"] )) {
 			$this->doLogout ();
 		} // login via post data (if user just submitted a login form)
-elseif (isset ( $_POST ["login"] )) {
+		elseif (isset ( $_POST ["login"] )) {
 			$this->dologinWithPostData ();
 		}
 	}
@@ -46,8 +46,10 @@ elseif (isset ( $_POST ["login"] )) {
 		// check login form contents
 		if (empty ( $_POST ['user_name'] )) {
 			$this->errors [] = "Username field was empty.";
+			$messageNum = 58;
 		} elseif (empty ( $_POST ['user_password'] )) {
 			$this->errors [] = "Password field was empty.";
+			$messageNum = 59;
 		} elseif (! empty ( $_POST ['user_name'] ) && ! empty ( $_POST ['user_password'] )) {
 			
 			// create a database connection, using the constants from config/db.php (which we loaded in index.php)
@@ -88,12 +90,15 @@ elseif (isset ( $_POST ["login"] )) {
 						$_SESSION ['user_id'] = $result_row->user_id;
 					} else {
 						$this->errors [] = "Wrong password. Try again.";
+						$messageNum = 57;
 					}
 				} else {
 					$this->errors [] = "This user does not exist.";
+					$messageNum = 56;
 				}
 			} else {
 				$this->errors [] = "Database connection problem.";
+				$messageNum = 90;
 			}
 		}
 	}
@@ -107,6 +112,7 @@ elseif (isset ( $_POST ["login"] )) {
 		session_destroy ();
 		// return a little feeedback message
 		$this->messages [] = "You have been logged out.";
+		$messageNum = 49;
 	}
 	
 	/**

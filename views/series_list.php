@@ -31,6 +31,6 @@
     <?php } ?>
     </ul>
   <?php } else { ?>
-    <li>No Comic Series in database. Perhaps you should <a href=\"/admin/addseries.php\">Add some.</a></li>
+    <p>No Comic Series in database. Perhaps you should <a href="/admin/addseries.php">Add some.</a></p>
   <?php }
 ?>

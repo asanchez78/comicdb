@@ -3362,10 +3362,6 @@ nav.sitenav > ul > li:last-of-type > a {
   color: initial;
 }
 
-select.form-control {
-  height: 48px;
-}
-
 .form-inline .form-group {
   vertical-align: top;
   margin-right: 10px;

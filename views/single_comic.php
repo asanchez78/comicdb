@@ -2,10 +2,14 @@
   $details = new comicSearch ();
   $details->issueLookup ( $comic_id );
   $details->seriesInfo ( $details->series_id );
+
+  $series_name = $details->series_name;
+  $series_vol = $details->series_vol
+  $issue_num = $details->issue_number;
 ?>
 <div class="row">
   <div class="col-sm-12 headline">
-    <h2><?php echo $details->series_name . " #" . $details->issue_number; ?></h2>
+    <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
     <div class="series-meta">
       <ul class="nolist">
         <?php
@@ -13,7 +17,7 @@
         ?>
         <li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
         <?php } ?>
-        <li>Volume <?php echo $details->series_vol; ?></li>
+        <li>Volume <?php echo $series_vol; ?></li>
       </ul>
     </div>
   </div>

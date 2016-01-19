@@ -84,6 +84,7 @@ class Registration {
 				
 				if ($query_check_user_name->num_rows == 1) {
 					$this->errors [] = "Sorry, that username / email address is already taken.";
+					$messageNum = 54;
 				} else {
 					// write new user's data into database
 					$sql = "INSERT INTO users (user_name, user_password_hash, user_email)
@@ -93,15 +94,19 @@ class Registration {
 					// if user has been added successfully
 					if ($query_new_user_insert) {
 						$this->messages [] = "Your account has been created successfully. You can now log in.";
+						$messageNum = 9;
 					} else {
 						$this->errors [] = "Sorry, your registration failed. Please go back and try again.";
+						$messageNum = 55;
 					}
 				}
 			} else {
 				$this->errors [] = "Sorry, no database connection.";
+				$messageNum = 90;
 			}
 		} else {
 			$this->errors [] = "An unknown error occurred.";
+			$messageNum = 99;
 		}
 	}
 }
