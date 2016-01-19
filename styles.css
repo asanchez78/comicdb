@@ -3579,18 +3579,31 @@ ul.inventory-table {
 
 /* Issues List */
 .series-meta {
-  position: absolute;
-  right: 15px;
-  top: 13px;
   font-size: 12px;
-  text-align: right;
   font-weight: bold;
-  width: 200px;
+  margin-bottom: 15px;
+}
+@media (min-width: 640px) {
+  .series-meta {
+    width: 350px;
+    position: absolute;
+    right: 15px;
+    top: 13px;
+    text-align: right;
+  }
 }
 .series-meta ul > li {
   display: inline-block;
   vertical-align: top;
-  margin: 0 30px;
+  margin: 0 10px;
+}
+@media (min-width: 640px) {
+  .series-meta ul > li {
+    margin: 0 20px;
+  }
+}
+.series-meta ul > li:first-of-type {
+  margin-left: 0;
 }
 .series-meta ul > li:last-of-type {
   margin-right: 0;
@@ -3631,6 +3644,61 @@ ul.inventory-table {
 
 .list-row a .issue-number {
   margin-right: 15px;
+}
+
+.issue-story h4 {
+  margin-top: 0;
+}
+
+/* Logos */
+li[class*="logo-"] {
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+li[class*="logo-"]:before {
+  background-repeat: no-repeat;
+  background-position: center left;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+  width: 13px;
+  height: 18px;
+}
+
+li.logo-marvelcomics {
+  font-size: 0;
+  width: 40px;
+  height: 18px;
+  background-image: url("../assets/logos/marvel_comics.svg");
+}
+
+li.logo-dccomics:before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background-image: url("../assets/logos/dc_comics.svg");
+  background-size: 18px 18px;
+}
+
+li.logo-imagecomics:before {
+  content: "";
+  background-image: url("../assets/logos/image_comics.svg");
+  background-size: 13px 18px;
+}
+
+li.logo-darkhorsecomics:before {
+  content: "";
+  background-image: url("../assets/logos/dark_horse_comics.svg");
+  background-size: 13px 18px;
+}
+
+li.logo-valiantcomics {
+  font-size: inherit;
+}
+li.logo-valiantcomics:before {
+  content: "";
+  background-image: url("../assets/logos/valiant_comics.png");
+  background-size: 13px 18px;
 }
 
 /* Add Comics */
