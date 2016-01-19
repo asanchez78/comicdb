@@ -8,10 +8,14 @@
   } else {
     $publisher = 'Marvel Comics';
   }
-  $series_name = $details->series_name;
-  $series_vol = $details->series_vol;
-  $issue_num = $details->issue_number;
+  // Standardizes values for common variables for use in notifications
+  if (isset($details->series_name) || isset($details->series_vol) || isset($details->issue_number)) {
+    $series_name = $details->series_name;
+    $series_vol = $details->series_vol;
+    $issue_num = $details->issue_number;
+  }
 
+  // Creates a "shortname" for the publisher that can be used in a CSS class
   $publisherShort = strtolower(str_replace(' ', '', $publisher));
 ?>
 <div class="row">
@@ -35,7 +39,7 @@
       <?php if ($details->plot != '') {
         echo $details->plot; 
       } else {
-        echo 'Plot details have not been entered.';
+        echo '<p>Plot details have not been entered.</p>';
       }
       ?>
     </div>
