@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `comics` (
   `wikiUpdated` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`comic_id`),
   UNIQUE KEY `comic_id` (`comic_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=613 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=618 ;
 
 DROP TABLE IF EXISTS `series`;
 CREATE TABLE IF NOT EXISTS `series` (
@@ -83,8 +83,9 @@ CREATE TABLE IF NOT EXISTS `users_comics` (
   `custPlot` varchar(10000) COLLATE utf8_unicode_ci NOT NULL,
   `custCover` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `custStoryName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=569 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`comic_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=576 ;
 
 DROP TABLE IF EXISTS `writers`;
 CREATE TABLE IF NOT EXISTS `writers` (
