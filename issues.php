@@ -7,10 +7,11 @@
 	$issues->issuesList ( $series_id );
 	$issues->seriesInfo ( $series_id );
 
-	$publisher = $issues->publisher;
-	// REMOVE THIS ONCE PUBLISHER IS INTEGRATED
-  $publisher = 'Marvel Comics';
-  //
+	if (isset($issues->publisher)) {
+		$publisher = $issues->publisher;
+	} else {
+		$publisher = 'Marvel Comics';
+	}
   $series_name = $issues->series_name;
   $series_vol = $issues->series_vol;
   $issue_num = $issues->issue_number;

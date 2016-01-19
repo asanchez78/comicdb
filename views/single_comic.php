@@ -3,10 +3,11 @@
   $details->issueLookup ( $comic_id );
   $details->seriesInfo ( $details->series_id );
 
-  $publisher = $details->publisher;
-  // REMOVE THIS ONCE PUBLISHER IS INTEGRATED
-  $publisher = 'Marvel Comics';
-  //
+  if (isset($details->publisher)) {
+    $publisher = $details->publisher;
+  } else {
+    $publisher = 'Marvel Comics';
+  }
   $series_name = $details->series_name;
   $series_vol = $details->series_vol;
   $issue_num = $details->issue_number;
