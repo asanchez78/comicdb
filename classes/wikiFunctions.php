@@ -57,7 +57,7 @@ class wikiQuery {
 	 * uses an API call to marvel.wikia.com to return search results
 	 * @param string $query
 	 */
-public function wikiSearch($query, $series_name, $issue_number, $limit) {
+public function wikiSearch($query, $series_id, $issue_number, $limit) {
 		$comic = str_replace(' ', '+', $query);
 		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
@@ -66,7 +66,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_id=$series_id&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
 				$this->resultsList .= "<br>\n";
 				return $this->wikiSearchResultID;
 			}
@@ -75,7 +75,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
+				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_id=$series_id&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
 				$this->resultsList .= "<br>\n";
 				$this->wikiID = $this->wikiSearchResultID;
 			}

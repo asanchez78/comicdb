@@ -13,6 +13,8 @@
     $series_name = $details->series_name;
     $series_vol = $details->series_vol;
     $issue_num = $details->issue_number;
+  } else {
+    $messageNum = 99;
   }
 
   // Creates a "shortname" for the publisher that can be used in a CSS class
