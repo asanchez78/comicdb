@@ -89,6 +89,15 @@
     $notifyClass = "notifications-hide";
   }
 ?>
+<?php if(isset($sqlMessage)) { ?>
+<div class="dev-messages container">
+  <div class="row">
+    <div class="col-xs-12">
+      <?php echo $sqlMessage; ?>
+    </div>
+  </div>
+</div>
+<?php } ?>
 <?php if(isset($messageText)) { ?>
 <div class="notifications <?php echo $notifyClass; ?>">
   <div class="container">
