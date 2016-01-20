@@ -2,9 +2,10 @@
   $type = $_GET['type'];
   if ($type) {
     $series_name = filter_input ( INPUT_POST, 'series_name' );
-    if ($type == 'issue' || $type == 'issue-search' || $type == 'issue-add') {
+    if ($type == 'issue-search' || $type == 'issue-add') {
       require_once(__ROOT__.'/classes/wikiFunctions.php');
       $series_id = filter_input ( INPUT_POST, 'series_id' );
+      $series_vol = filter_input(INPUT_POST, 'series_vol');
       $issue_number = filter_input ( INPUT_POST, 'issue_number' );
     }
     switch ($type) {
@@ -25,22 +26,15 @@
           }
         }
         break;
-      // Part one of the single issue process. User chooses series and enters issue number.
-      case 'issue':
-        $series_vol = filter_input(INPUT_POST, 'series_vol');
-        $query = $series_name . " " . $issue_number;
-        $wiki = new wikiQuery();
-        $wiki->wikiSearch($query, $series_name, $issue_number, 50);
-        break;
-      // Part two of the single issue process. Displays Wikia results.
+      // Part one of the single issue process. Displays Wikia results.
       case 'issue-search':
         $issueSearch = true;
-        $query = $series_name . " " . $issue_number;
+        $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
         $wiki = new wikiQuery();
-        $wiki->wikiSearch($query, $series_name, $issue_number, 50);
+        $wiki->wikiSearch($query, 50);
         break;
-      // Part three of the single issue process. Displays final fields and allows user to change details before adding to collection.
+      // Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
         $issueSearch = false;
         $issueAdd = true;

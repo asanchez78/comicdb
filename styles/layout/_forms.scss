@@ -52,7 +52,8 @@ label {
     position: relative;
     padding-left: 35px;
     margin-right: 15px;
-    font-size: 13px;
+    font-size: 12px;
+    min-height: 30px;
 
     &:before {
       content: "";
@@ -62,7 +63,7 @@ label {
       margin-right: 10px;
       position: absolute;
       left: 0;
-      bottom: -2px;
+      top: -2px;
       background-color: silver;
       border: 4px solid silver;
       border-radius: 25px;
@@ -93,4 +94,28 @@ label {
 .form-inline .form-submit {
   display: inline-block;
   margin: 25px 0 15px;
+}
+
+.issue-search-result {
+  margin-bottom: 10px;
+
+  label {
+    margin-bottom: 0 !important;
+  }
+
+  @media (min-width: $screen-sm) {
+    &:nth-child(2n+1) {
+      clear: both;
+    }
+  }
+
+  @media (min-width: $screen-md) {
+    &:nth-child(2n+1) {
+      clear: none;
+    }
+
+    &:nth-child(3n+1) {
+      clear: both;
+    }
+  }
 }

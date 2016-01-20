@@ -57,7 +57,7 @@ class wikiQuery {
 	 * uses an API call to marvel.wikia.com to return search results
 	 * @param string $query
 	 */
-public function wikiSearch($query, $series_name, $issue_number, $limit) {
+public function wikiSearch($query, $limit) {
 		$comic = str_replace(' ', '+', $query);
 		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
@@ -66,7 +66,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= '<input name="issue-search-result" id="result-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="result-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label>';
+				$this->resultsList .= '<div class="issue-search-result col-xs-12 col-sm-6 col-md-4"><input name="wiki_id" id="wiki_id-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="wiki_id-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label></div>';
 				return $this->wikiSearchResultID;
 			}
 		}

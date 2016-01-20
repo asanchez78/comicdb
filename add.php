@@ -1,6 +1,9 @@
 <?php
 	require_once('views/head.php');
 	$filename = $_SERVER["PHP_SELF"];
+	$seriesSubmitted = false;
+	$issueSearch = false;
+	$issueAdd = false;
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
 	if ($submitted) { include('admin/formprocess.php'); }
 ?>
@@ -68,10 +71,11 @@
 						<div class="form-group form-radio">
 							<label for="wiki_id">Choose the result that matches your issue:</label>
 							<fieldset class="row">
-								<?php echo $returnedResults->resultsList; ?>
+								<?php echo $wiki->resultsList; ?>
 							</fieldset>
 						</div>
 						<input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
+						<input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
 						<input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
 						<input type="hidden" name="submitted" value="yes" />
 						<input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
@@ -108,6 +112,7 @@
 	            <?php echo $comic->synopsis; ?>
 	          </div>
 	          <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
+	          <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
 	          <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
 	          <input type="hidden" name="cover_image" value="<?php echo $comic->coverURL; ?>" />
 	          <input type="hidden" name="cover_image_file" value="<?php echo $comic->coverFile; ?>" />
@@ -147,6 +152,7 @@
 		          <label for="issue_number">Issue #</label>
 		          <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
 		        </div>
+						<input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
 		        <input type="hidden" name="submitted" value="yes" />
 		        <input class="btn btn-default form-submit" type="submit" name="submit" value="Search" />
 		      </form>
