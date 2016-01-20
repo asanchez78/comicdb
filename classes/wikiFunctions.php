@@ -66,8 +66,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
-				$this->resultsList .= "<br>\n";
+				$this->resultsList .= '<input name="issue-search-result" id="result-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="result-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label>';
 				return $this->wikiSearchResultID;
 			}
 		}
@@ -75,8 +74,7 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
-				$this->resultsList .= "<br>\n";
+				$this->resultsList .= '<div class="issue-search-result col-xs-12 col-sm-6 col-md-4"><input name="wiki_id" id="wiki_id-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="wiki_id-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label></div>';
 				$this->wikiID = $this->wikiSearchResultID;
 			}
 		} else {
