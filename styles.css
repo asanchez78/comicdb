@@ -3692,9 +3692,6 @@ li.logo-darkhorse:before {
   background-size: 13px 18px;
 }
 
-li.logo-valiant {
-  font-size: inherit;
-}
 li.logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
