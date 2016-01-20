@@ -3218,13 +3218,17 @@ ul.nolist {
   display: block;
 }
 
-main > .container.content {
+.content {
+  min-height: 80vh;
+}
+
+.content,
+.dev-messages {
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  min-height: 80vh;
   border: 2px solid gray;
 }
 
@@ -3702,8 +3706,37 @@ li.logo-valiantcomics:before {
 }
 
 /* Add Comics */
-th.comics-heading-issue {
-  width: 100px;
+.add-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.add-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 98;
+  height: 245px;
+  -webkit-transition: left 0.4s ease-out;
+          transition: left 0.4s ease-out;
+}
+.add-success.success-hide {
+  left: -100%;
+}
+.add-success .success-message {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  padding: 0 90px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.add-success h3 {
+  font-size: 42px;
+  margin: 0 0 10px;
+  line-height: 0.75;
 }
 
 .issue-image img {

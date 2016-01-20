@@ -1,6 +1,41 @@
 /* Add Comics */
-th.comics-heading-issue {
-  width: 100px;
+
+.add-block {
+  position: relative;
+  overflow: hidden;
+}
+
+.add-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 98;
+  height: 245px;
+  transition: left 0.4s ease-out;
+
+  &.success-hide {
+    left: -100%;
+  }
+
+  .success-message {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 0 90px;
+    transform: translateY(-50%);
+  }
+
+  h3 {
+    font-size: 42px;
+    margin: 0 0 10px;
+    line-height: 0.75;
+  }
+}
+
+.add-success + .form-series-add {
+
 }
 
 .issue-image img {
