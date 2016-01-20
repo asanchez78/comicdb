@@ -3,13 +3,13 @@
 .add-block {
   position: relative;
   overflow: hidden;
+  min-height: 245px;
 }
 
 .add-success {
   position: absolute;
   top: 0;
   left: 0;
-  text-align: center;
   z-index: 98;
   height: 245px;
   transition: left 0.4s ease-out;
@@ -19,11 +19,10 @@
   }
 
   .success-message {
+    width: 100%;
+    padding: 20px 120px;
     position: absolute;
     top: 50%;
-    left: 0;
-    width: 100%;
-    padding: 0 90px;
     transform: translateY(-50%);
   }
 
@@ -31,6 +30,11 @@
     font-size: 42px;
     margin: 0 0 10px;
     line-height: 0.75;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 

@@ -4,6 +4,7 @@
 	$seriesSubmitted = false;
 	$issueSearch = false;
 	$issueAdd = false;
+	$issueSubmit = false;
 	$submitted = filter_input ( INPUT_POST, 'submitted' );
 	if ($submitted) { include('admin/formprocess.php'); }
 ?>
@@ -16,14 +17,6 @@
 	  	include (__ROOT__."/views/not_logged_in.php");
 	  	die ();
 	  } ?>
-		<div class="row add-main">
-			<ul class="nolist">
-				<li class="col-xs-12 col-md-6">Add Series</li>
-				<li class="col-xs-12 col-md-6">Add Issue</li>
-				<li class="col-xs-12 col-md-6">Add Range of Issues</li>
-				<li class="col-xs-12 col-md-6">Add List of Issues</li>
-			</ul>
-		</div>
 		<div class="row add-block add-series">
 			<?php if ($seriesSubmitted == true) { ?>
 				<div class="add-success bg-success col-xs-12">
@@ -78,7 +71,10 @@
 						<input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
 						<input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
 						<input type="hidden" name="submitted" value="yes" />
-						<input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
+						<div class="text-center center-block">
+							<a href="#" class="btn btn-default form-back">&lt; Back</a>
+							<input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
+						</div>
 					</form>
 				</div>
 			<?php } elseif ($issueAdd == true) { ?>
@@ -119,6 +115,8 @@
 	          <input type="hidden" name="plot" value="<?php echo htmlspecialchars($comic->synopsis); ?>" />
 	          <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
 	          <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
+	          <input type="hidden" name="submitted" value="yes" />
+	          <a href="#" class="btn btn-default form-back">&lt; Back</a>
 	          <input type="submit" name="submit" value="Submit" class="btn btn-default form-submit" />
 	        </form>
 	      </div>
@@ -126,7 +124,23 @@
 	        <img src="<?php echo $comic->coverURL; ?>" alt="Cover" />
 	      </div>
 			<?php } elseif ($issueSubmit == true) { ?>
-
+				<div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+					<div class="success-message">
+						<div class="row">
+							<div class="col-md-2 col-xs-hidden">
+								<img src="/images/<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
+							</div>
+							<div class="col-xs-12 col-md-10">
+								<h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h2>
+								<p><?php if ($messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+							</div>
+						</div>
+						<div class="text-center center-block">
+							<a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-default">View Issue</a>
+							<a href="/add.php" class="btn btn-default">Add another?</a>
+						</div>
+					</div>
+				</div>
 			<?php } else {
 				$listAllSeries=1;
 			  $comics = new comicSearch ();

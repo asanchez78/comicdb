@@ -71,18 +71,37 @@ label {
   }
 }
 
+.form-back,
 .form-submit {
-  clear: both;
-  display: block;
   border: 1px solid transparent;
   outline: none;
-  background-color: red;
-  color: white;
   padding: 12px 25px;
   font-size: 16px;
   transition: all 0.1s ease-in-out;
   text-transform: uppercase;
-  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 25px 0 15px;
+  color: white;
+
+  &:hover,
+  &:focus {
+    color: white;
+  }
+}
+
+.form-submit {
+  background-color: red;
+
+  &:hover,
+  &:focus {
+    background-color: gray;
+    border: 1px solid silver;
+  }
+}
+
+.form-back {
+  background-color: $brand-orange;
 
   &:hover,
   &:focus {
@@ -101,21 +120,5 @@ label {
 
   label {
     margin-bottom: 0 !important;
-  }
-
-  @media (min-width: $screen-sm) {
-    &:nth-child(2n+1) {
-      clear: both;
-    }
-  }
-
-  @media (min-width: $screen-md) {
-    &:nth-child(2n+1) {
-      clear: none;
-    }
-
-    &:nth-child(3n+1) {
-      clear: both;
-    }
   }
 }

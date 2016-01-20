@@ -47,14 +47,15 @@
         $messageText = "You have been successfully logged out.";
         break;
       // ERROR MESSAGES
+      // Error messages are concatenated to append to ERROR: text above
       case 50:
         $messageText .= 'Cannot add <em>' . $series_name . '</em> to your collection. Series already exists.';
         break;
       case 51:
-        $messageText .= '<strong>ERROR</strong>: Cannot add the issues you entered.';
+        $messageText .= 'This issue is already in your collection.';
         break;
       case 52:
-        $messageText .= '<strong>ERROR</strong>: User "' . $user . '" not found. Here is a random comic instead.';
+        $messageText .= 'User "' . $user . '" not found. Here is a random comic instead.';
         break;
       // Registration
       case 53:

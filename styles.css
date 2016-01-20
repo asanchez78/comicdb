@@ -2841,6 +2841,56 @@ input[type="button"].btn-block {
   width: 100%;
 }
 
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.affix {
+  position: fixed;
+}
+
 @-ms-viewport {
   width: device-width;
 }
@@ -3416,21 +3466,38 @@ label {
   border-radius: 25px;
 }
 
+.form-back,
 .form-submit {
-  clear: both;
-  display: block;
   border: 1px solid transparent;
   outline: none;
-  background-color: red;
-  color: white;
   padding: 12px 25px;
   font-size: 16px;
   -webkit-transition: all 0.1s ease-in-out;
           transition: all 0.1s ease-in-out;
   text-transform: uppercase;
-  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 25px 0 15px;
+  color: white;
+}
+.form-back:hover, .form-back:focus,
+.form-submit:hover,
+.form-submit:focus {
+  color: white;
+}
+
+.form-submit {
+  background-color: red;
 }
 .form-submit:hover, .form-submit:focus {
+  background-color: gray;
+  border: 1px solid silver;
+}
+
+.form-back {
+  background-color: #ffaa00;
+}
+.form-back:hover, .form-back:focus {
   background-color: gray;
   border: 1px solid silver;
 }
@@ -3445,19 +3512,6 @@ label {
 }
 .issue-search-result label {
   margin-bottom: 0 !important;
-}
-@media (min-width: 480px) {
-  .issue-search-result:nth-child(2n+1) {
-    clear: both;
-  }
-}
-@media (min-width: 640px) {
-  .issue-search-result:nth-child(2n+1) {
-    clear: none;
-  }
-  .issue-search-result:nth-child(3n+1) {
-    clear: both;
-  }
 }
 
 /* Grid display styles */
@@ -3690,14 +3744,14 @@ li[class*="logo-"]:before {
   height: 18px;
 }
 
-li.logo-marvelcomics {
+li.logo-marvel {
   font-size: 0;
   width: 40px;
   height: 18px;
   background-image: url("../assets/logos/marvel_comics.svg");
 }
 
-li.logo-dccomics:before {
+li.logo-dc:before {
   content: "";
   width: 18px;
   height: 18px;
@@ -3711,16 +3765,16 @@ li.logo-imagecomics:before {
   background-size: 13px 18px;
 }
 
-li.logo-darkhorsecomics:before {
+li.logo-darkhorse:before {
   content: "";
   background-image: url("../assets/logos/dark_horse_comics.svg");
   background-size: 13px 18px;
 }
 
-li.logo-valiantcomics {
+li.logo-valiant {
   font-size: inherit;
 }
-li.logo-valiantcomics:before {
+li.logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
   background-size: 13px 18px;
@@ -3730,13 +3784,13 @@ li.logo-valiantcomics:before {
 .add-block {
   position: relative;
   overflow: hidden;
+  min-height: 245px;
 }
 
 .add-success {
   position: absolute;
   top: 0;
   left: 0;
-  text-align: center;
   z-index: 98;
   height: 245px;
   -webkit-transition: left 0.4s ease-out;
@@ -3746,11 +3800,10 @@ li.logo-valiantcomics:before {
   left: -100%;
 }
 .add-success .success-message {
+  width: 100%;
+  padding: 20px 120px;
   position: absolute;
   top: 50%;
-  left: 0;
-  width: 100%;
-  padding: 0 90px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
 }
@@ -3758,6 +3811,10 @@ li.logo-valiantcomics:before {
   font-size: 42px;
   margin: 0 0 10px;
   line-height: 0.75;
+}
+.add-success img {
+  width: 100%;
+  height: auto;
 }
 
 .issue-image img {
