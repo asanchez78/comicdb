@@ -3665,14 +3665,14 @@ li[class*="logo-"]:before {
   height: 18px;
 }
 
-li.logo-marvelcomics {
+li.logo-marvel {
   font-size: 0;
   width: 40px;
   height: 18px;
   background-image: url("../assets/logos/marvel_comics.svg");
 }
 
-li.logo-dccomics:before {
+li.logo-dc:before {
   content: "";
   width: 18px;
   height: 18px;
@@ -3686,16 +3686,16 @@ li.logo-imagecomics:before {
   background-size: 13px 18px;
 }
 
-li.logo-darkhorsecomics:before {
+li.logo-darkhorse:before {
   content: "";
   background-image: url("../assets/logos/dark_horse_comics.svg");
   background-size: 13px 18px;
 }
 
-li.logo-valiantcomics {
+li.logo-valiant {
   font-size: inherit;
 }
-li.logo-valiantcomics:before {
+li.logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
   background-size: 13px 18px;
