@@ -9,7 +9,7 @@
   require_once(__ROOT__.'/classes/wikiFunctions.php');
   $wiki_id = filter_input ( INPUT_GET, 'wiki_id' );
   $comic_id = filter_input(INPUT_GET, 'comic_id');
-  $series = filter_input(INPUT_GET, 'series_name');
+  $series_id = filter_input(INPUT_GET, 'series_id');
   $issue = filter_input(INPUT_GET, 'issue_number');
   
   $comic = new wikiQuery ();
@@ -38,7 +38,7 @@
         <form method="post" action="formprocess.php">
           <div class="form-group">
             <label for="series_name">Series: </label>
-            <input class="form-control" name="series_name" type="text" maxlength="255" value="<?php echo $series; ?>" required />
+            <h4><?php echo $series; ?></h4>
           </div>
           <div class="form-group">
             <label for="issue_number">Issue Number: </label>
