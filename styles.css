@@ -3343,13 +3343,6 @@ nav.sitenav > ul > li {
 #button-add-comics:hover, #button-add-comics:focus {
   background-image: url("../assets/add-button-hover.svg");
 }
-#button-add-comics.expanded {
-  color: yellow;
-  background-image: url("../assets/add-button-hover.svg");
-}
-#button-add-comics.expanded + #comics-submenu {
-  display: block;
-}
 
 nav.sitenav > ul > li > a {
   display: block;

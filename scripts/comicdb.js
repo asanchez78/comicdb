@@ -1,21 +1,5 @@
 jQuery(document).ready(function($) {
-  var $menuButton, $comicSubmenu, $notifyClose, $notifications, $addAnotherSeries;
-
-  $menuButton = $('#button-add-comics');
-  $comicSubmenu = $('#comics-submenu');
-
-  // Shows the add comics submenu on hover
-  $($menuButton).click(function() {
-    if ($(this).hasClass('expanded') != true) {
-      $(this).addClass('expanded');
-    } else {
-      $(this).removeClass('expanded');
-    }
-  });
-
-  $($comicSubmenu).mouseleave(function() {
-    $($menuButton).removeClass('expanded');
-  });
+  var $notifyClose, $notifications, $addAnotherSeries;
 
   $notifications = $('.notifications');
   $notifyClose = $($notifications).find('.close');
@@ -30,7 +14,7 @@ jQuery(document).ready(function($) {
   }
 
   // Hiding the "SERIES has been added successfully. Add another?" section after button click.
-  $addAnotherSeries = $('.add-success').find('.btn');
+  $addAnotherSeries = $('.add-success').find('.add-another');
   $($addAnotherSeries).click(function(e) {
     e.preventDefault;
     // Let CSS do the work for us, just add a new class to the container.
