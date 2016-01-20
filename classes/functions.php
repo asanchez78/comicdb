@@ -150,13 +150,18 @@ class comicSearch {
 				ON comics.comic_id=users_comics.comic_id
 				LEFT JOIN series
 				ON comics.series_id=series.series_id
-				WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID ORDER BY comics.issue_number";
+				LEFT join publishers
+				on series.publisherID=publishers.publisherID
+				WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID ORDER BY comics.issue_number
+";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
 				$this->comic_id = $row ['comic_id'];
 				$this->wiki_id = $row ['wiki_id'];
 				$this->issue_number = $row ['issue_number'];
+				$this->publisherShort = $row ['publisherShort'];
+				$this->publisherName = $row ['publisherName'];
 				if ($row['release_date']) {
 					$this->release_date = DateTime::createFromFormat('Y-m-d', $row ['release_date'])->format('M Y');
 				} else {
@@ -224,12 +229,18 @@ class comicSearch {
 			die ( "Connection failed:" );
 		}
 
-		$sql = "SELECT series_name, series_vol FROM series WHERE series_id = $series_id";
+		$sql = "SELECT *
+				FROM series
+				LEFT JOIN publishers
+				ON publishers.publisherID=series.publisherID
+				WHERE series_id = $series_id";
 		$result = $this->db_connection->query ( $sql );
 		if ($result->num_rows > 0) {
 			while ( $row = $result->fetch_assoc () ) {
 				$this->series_name = $row ['series_name'];
 				$this->series_vol = $row ['series_vol'];
+				$this->publisherName = $row ['publisherName'];
+				$this->publisherShort = $row ['publisherShort'];
 			}
 		} else {
 			echo "0 results";

@@ -7,16 +7,12 @@
 	$issues->issuesList ( $series_id );
 	$issues->seriesInfo ( $series_id );
 
-	if (isset($issues->publisher)) {
-		$publisher = $issues->publisher;
-	} else {
-		$publisher = 'Marvel Comics';
-	}
+  $publisherName = $issues->publisherName;
+  $publisherShort = $issues->publisherShort;
   $series_name = $issues->series_name;
   $series_vol = $issues->series_vol;
   $issue_num = $issues->issue_number;
 
-  $publisherShort = strtolower(str_replace(' ', '', $publisher));
 ?>
   <title><?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) :: POW! Comic Book Manager</title>
 </head>
@@ -29,7 +25,7 @@
 				<h2><?php echo $series_name; ?></h2>
 				<div class="series-meta">
 					<ul class="nolist">
-						<?php if ($publisher) { echo '<li class="logo-' . $publisherShort .'">' . $publisher . '</li>'; } ?>
+						<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
 						<li><?php echo $issues->series_issue_count; ?></li>
 						<li>Volume <?php echo $series_vol; ?></li>
 					</ul>

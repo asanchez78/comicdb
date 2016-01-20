@@ -3,10 +3,11 @@
   $details->issueLookup ( $comic_id );
   $details->seriesInfo ( $details->series_id );
 
-  if (isset($details->publisher)) {
-    $publisher = $details->publisher;
+  if (isset($details->publisherName)) {
+    $publisherName = $details->publisherName;
+    $publisherShort = $details->publisherShort;
   } else {
-    $publisher = 'Marvel Comics';
+    $messageNum = 99;
   }
   // Standardizes values for common variables for use in notifications
   if (isset($details->series_name) || isset($details->series_vol) || isset($details->issue_number)) {
@@ -17,15 +18,13 @@
     $messageNum = 99;
   }
 
-  // Creates a "shortname" for the publisher that can be used in a CSS class
-  $publisherShort = strtolower(str_replace(' ', '', $publisher));
 ?>
 <div class="row">
   <div class="col-sm-12 headline">
     <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
     <div class="series-meta">
       <ul class="nolist">
-        <?php if ($publisher) { echo '<li class="logo-' . $publisherShort .'">' . $publisher . '</li>'; } ?>
+        <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
         <li>Volume <?php echo $series_vol; ?></li>
         <?php if ($details->release_date) { ?>
           <li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
