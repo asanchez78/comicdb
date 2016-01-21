@@ -28,6 +28,10 @@ h2 {
   border-bottom: 2px solid $divider-color;
 }
 
+h4 {
+  margin-top: 0;
+}
+
 a {
   transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -98,12 +102,16 @@ ul.nolist {
   display: block;
 }
 
-main > .container.content {
+.content {
+  min-height: 80vh;
+}
+
+.content,
+.dev-messages {
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  min-height: 80vh;
   border: 2px solid $border-color;
 }

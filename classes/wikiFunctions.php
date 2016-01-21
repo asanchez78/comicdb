@@ -57,7 +57,7 @@ class wikiQuery {
 	 * uses an API call to marvel.wikia.com to return search results
 	 * @param string $query
 	 */
-public function wikiSearch($query, $series_name, $issue_number, $limit) {
+public function wikiSearch($query, $limit) {
 		$comic = str_replace(' ', '+', $query);
 		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
@@ -65,18 +65,13 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 		if (count($results['items']) == 1) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
-				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
-				$this->resultsList .= "<br>\n";
-				return $this->wikiSearchResultID;
+				$this->wiki_id = $this->wikiSearchResultID;
 			}
-		}
-		if (count($results['items']) > 1){
+		} else if (count($results['items']) > 1){
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= "<a href=\"admin/wikiadd.php?wiki_id=" . $this->wikiSearchResultID . "&series_name=$series_name&issue_number=$issue_number\">" . $this->wikiSearchResultTitle . "</a>";
-				$this->resultsList .= "<br>\n";
+				$this->resultsList .= '<div class="issue-search-result col-xs-12 col-sm-6 col-md-4"><input name="wiki_id" id="wiki_id-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="wiki_id-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label></div>';
 				$this->wikiID = $this->wikiSearchResultID;
 			}
 		} else {
@@ -176,16 +171,14 @@ public function wikiSearch($query, $series_name, $issue_number, $limit) {
 				$issue_number = $row['issue_number'];
 				$query = $series_name . " vol " . $series_vol . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
-				$sql = "UPDATE comics
-				SET wiki_id=$wikiDetails
-				WHERE comic_id='$comic_id'";
+				$sql = "UPDATE comics SET wiki_id=$wikiDetails WHERE comic_id='$comic_id'";
 				set_time_limit(0);
 				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">New entry created for ". $series_name . " #" . $issue_number ."</a>\n";
 				$this->newWikiIDs .= "<br/>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
 				} else {
-					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
+					echo '<p><strong class="text-danger">Error</strong>: ' . $sql . '</p><code>' . mysqli_error ( $this->db_connection ) . '</code>';
 				}
 			}
 		} else {

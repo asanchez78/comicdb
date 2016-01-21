@@ -62,15 +62,6 @@ nav.sitenav {
   &:hover, &:focus {
     background-image: url('../assets/add-button-hover.svg');
   }
-
-  &.expanded {
-    color: yellow;
-    background-image: url('../assets/add-button-hover.svg');
-
-    + #comics-submenu {
-      display: block;
-    }
-  }
 }
 
 nav.sitenav > ul > li {

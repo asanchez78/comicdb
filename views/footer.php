@@ -1,6 +1,6 @@
-	</main>
+	 <?php include('notifications.php'); ?>
+  </main>
   <!-- Site content ends -->
-  <?php include('notifications.php'); ?>
 </div>
 <!-- Site wrapper ends -->
 

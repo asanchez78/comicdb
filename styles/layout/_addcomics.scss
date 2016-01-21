@@ -1,6 +1,90 @@
 /* Add Comics */
-th.comics-heading-issue {
-  width: 100px;
+
+.add-container {
+  padding-bottom: 0;
+}
+
+.add-menu {
+  margin-top: -15px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: 1px solid $border-color;
+  background-color: $brand-red;
+  margin-bottom: 0;
+  > li {
+    text-align: center;
+    width: 25%;
+    font-size: 0;
+    margin: 0;
+    margin-right: -4px;
+    padding: 0;
+
+    a {
+      display: block;
+      width: 100%;
+      color: white;
+      font-size: 15px;
+      padding: 8px 0;
+
+      &:hover,
+      &:focus,
+      &.active {
+        background-color: $brand-orange;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.add-block {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: none;
+
+  > div:not(.add-success) {
+    margin-top: 15px;
+  }
+}
+
+.add-block.active {
+  display: block;
+}
+
+.add-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 98;
+  height: 500px;
+  transition: left 0.4s ease-out;
+
+  &.success-hide {
+    left: -100%;
+  }
+
+  .success-message {
+    width: 100%;
+    padding: 20px 120px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  h3 {
+    font-size: 42px;
+    margin: 0 0 10px;
+    line-height: 0.75;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.add-success + .form-series-add {
+
 }
 
 .issue-image img {

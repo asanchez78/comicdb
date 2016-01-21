@@ -7,19 +7,21 @@
       $notifyClass = "bg-success";
     } else {
       $notifyClass = "bg-danger";
+      $messageText = '';
       $messageText .= '<strong>ERROR</strong>: ';
+      $sqlMessage .= '<strong class="text-danger">ERROR</strong>: ';
     }
 
     switch ($messageNum) {
     // SUCCESS MESSAGES
       case 1:
-        $messageText = "Issue added successfully."; 
+        $messageText = "Issue added successfully.";
         break;
       case 2:
-        $messageText = "Issues added successfully.";  
+        $messageText = "Issues added successfully.";
         break;
       case 3:
-        $messageText = '<em>' . $series_name . '</em> added to your collection successfully.';
+        $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
         break;
       case 4:
         $messageText = '<em>' . $series_name . ' #' . $first_issue . ' - ' . $last_issue . '</em> added to your collection successfully.';
@@ -47,14 +49,15 @@
         $messageText = "You have been successfully logged out.";
         break;
       // ERROR MESSAGES
+      // Error messages are concatenated to append to ERROR: text above
       case 50:
-        $messageText .= 'Cannot add <em>' . $series_name . '</em> to your collection. Series already exists.';
+        $messageText .= 'Cannot add <em>' . $series_name . ' (Vol ' . $series_vol . ')</em> to your collection. Series already exists.';
         break;
       case 51:
-        $messageText .= '<strong>ERROR</strong>: Cannot add the issues you entered.';
+        $messageText .= 'This issue is already in your collection.';
         break;
       case 52:
-        $messageText .= '<strong>ERROR</strong>: User "' . $user . '" not found. Here is a random comic instead.';
+        $messageText .= 'User "' . $user . '" not found. Here is a random comic instead.';
         break;
       // Registration
       case 53:
@@ -78,6 +81,15 @@
       case 59:
         $messageText .= 'Password field was empty.';
         break;
+      case 60:
+        $messageText .= 'Publisher data missing.';
+        break;
+      case 61:
+        $messageText .= 'The issues are already in your collection.';
+        break;
+      case 62:
+        $messageText .= 'Could not update issue. An error occurred.';
+        break;
       case 90:
         $messageText .= 'Sorry, no database connection.';
         break;
@@ -89,6 +101,15 @@
     $notifyClass = "notifications-hide";
   }
 ?>
+<?php if(isset($sqlMessage)) { ?>
+<div class="dev-messages container">
+  <div class="row">
+    <div class="col-xs-12">
+      <?php echo $sqlMessage; ?>
+    </div>
+  </div>
+</div>
+<?php } ?>
 <?php if(isset($messageText)) { ?>
 <div class="notifications <?php echo $notifyClass; ?>">
   <div class="container">

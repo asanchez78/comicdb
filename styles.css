@@ -2841,6 +2841,56 @@ input[type="button"].btn-block {
   width: 100%;
 }
 
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.affix {
+  position: fixed;
+}
+
 @-ms-viewport {
   width: device-width;
 }
@@ -3150,6 +3200,10 @@ h2 {
   border-bottom: 2px solid gray;
 }
 
+h4 {
+  margin-top: 0;
+}
+
 a {
   -webkit-transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
           transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -3218,13 +3272,17 @@ ul.nolist {
   display: block;
 }
 
-main > .container.content {
+.content {
+  min-height: 80vh;
+}
+
+.content,
+.dev-messages {
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  min-height: 80vh;
   border: 2px solid gray;
 }
 
@@ -3288,13 +3346,6 @@ nav.sitenav > ul > li {
 }
 #button-add-comics:hover, #button-add-comics:focus {
   background-image: url("../assets/add-button-hover.svg");
-}
-#button-add-comics.expanded {
-  color: yellow;
-  background-image: url("../assets/add-button-hover.svg");
-}
-#button-add-comics.expanded + #comics-submenu {
-  display: block;
 }
 
 nav.sitenav > ul > li > a {
@@ -3395,7 +3446,8 @@ label {
   position: relative;
   padding-left: 35px;
   margin-right: 15px;
-  font-size: 13px;
+  font-size: 12px;
+  min-height: 30px;
 }
 .form-radio fieldset label:before {
   content: "";
@@ -3405,27 +3457,44 @@ label {
   margin-right: 10px;
   position: absolute;
   left: 0;
-  bottom: -2px;
+  top: -2px;
   background-color: silver;
   border: 4px solid silver;
   border-radius: 25px;
 }
 
+.form-back,
 .form-submit {
-  clear: both;
-  display: block;
   border: 1px solid transparent;
   outline: none;
-  background-color: red;
-  color: white;
   padding: 12px 25px;
   font-size: 16px;
   -webkit-transition: all 0.1s ease-in-out;
           transition: all 0.1s ease-in-out;
   text-transform: uppercase;
-  margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 25px 0 15px;
+  color: white;
+}
+.form-back:hover, .form-back:focus,
+.form-submit:hover,
+.form-submit:focus {
+  color: white;
+}
+
+.form-submit {
+  background-color: red;
 }
 .form-submit:hover, .form-submit:focus {
+  background-color: gray;
+  border: 1px solid silver;
+}
+
+.form-back {
+  background-color: #ffaa00;
+}
+.form-back:hover, .form-back:focus {
   background-color: gray;
   border: 1px solid silver;
 }
@@ -3433,6 +3502,13 @@ label {
 .form-inline .form-submit {
   display: inline-block;
   margin: 25px 0 15px;
+}
+
+.issue-search-result {
+  margin-bottom: 10px;
+}
+.issue-search-result label {
+  margin-bottom: 0 !important;
 }
 
 /* Grid display styles */
@@ -3699,8 +3775,80 @@ li.logo-valiant:before {
 }
 
 /* Add Comics */
-th.comics-heading-issue {
-  width: 100px;
+.add-container {
+  padding-bottom: 0;
+}
+
+.add-menu {
+  margin-top: -15px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: 1px solid gray;
+  background-color: #ff0300;
+  margin-bottom: 0;
+}
+.add-menu > li {
+  text-align: center;
+  width: 25%;
+  font-size: 0;
+  margin: 0;
+  margin-right: -4px;
+  padding: 0;
+}
+.add-menu > li a {
+  display: block;
+  width: 100%;
+  color: white;
+  font-size: 15px;
+  padding: 8px 0;
+}
+.add-menu > li a:hover, .add-menu > li a:focus, .add-menu > li a.active {
+  background-color: #ffaa00;
+  text-decoration: none;
+}
+
+.add-block {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: none;
+}
+.add-block > div:not(.add-success) {
+  margin-top: 15px;
+}
+
+.add-block.active {
+  display: block;
+}
+
+.add-success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 98;
+  height: 500px;
+  -webkit-transition: left 0.4s ease-out;
+          transition: left 0.4s ease-out;
+}
+.add-success.success-hide {
+  left: -100%;
+}
+.add-success .success-message {
+  width: 100%;
+  padding: 20px 120px;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.add-success h3 {
+  font-size: 42px;
+  margin: 0 0 10px;
+  line-height: 0.75;
+}
+.add-success img {
+  width: 100%;
+  height: auto;
 }
 
 .issue-image img {
