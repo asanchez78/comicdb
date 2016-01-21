@@ -3774,10 +3774,50 @@ li.logo-valiant:before {
 }
 
 /* Add Comics */
+.add-container {
+  padding-bottom: 0;
+}
+
+.add-menu {
+  margin-top: -15px;
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: 1px solid gray;
+  background-color: #ff0300;
+  margin-bottom: 0;
+}
+.add-menu > li {
+  text-align: center;
+  width: 25%;
+  font-size: 0;
+  margin: 0;
+  margin-right: -4px;
+  padding: 0;
+}
+.add-menu > li a {
+  display: block;
+  width: 100%;
+  color: white;
+  font-size: 15px;
+  padding: 8px 0;
+}
+.add-menu > li a:hover, .add-menu > li a:focus, .add-menu > li a.active {
+  background-color: #ffaa00;
+  text-decoration: none;
+}
+
 .add-block {
   position: relative;
   overflow: hidden;
-  min-height: 245px;
+  min-height: 500px;
+  display: none;
+}
+.add-block > div:not(.add-success) {
+  margin-top: 15px;
+}
+
+.add-block.active {
+  display: block;
 }
 
 .add-success {
@@ -3785,7 +3825,7 @@ li.logo-valiant:before {
   top: 0;
   left: 0;
   z-index: 98;
-  height: 245px;
+  height: 500px;
   -webkit-transition: left 0.4s ease-out;
           transition: left 0.4s ease-out;
 }

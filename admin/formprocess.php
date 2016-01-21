@@ -22,7 +22,7 @@
           $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br /><code>' . mysqli_error ( $connection ) . $connection->errno . '</code>';
           $seriesSubmitted = false;
           if ($connection->errno == 1062) {
-            return $messageNum = 50;
+            $messageNum = 50;
           }
         }
         break;
