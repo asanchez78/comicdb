@@ -141,8 +141,8 @@
             $wiki->comicDetails ( $wiki_id );
 
             $release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
-            $plot = htmlspecialchars($wiki->synopsis);
-            $story_name = $wiki->storyName;
+            $plot = addslashes( $wiki->synopsis );
+            $story_name = addslashes( $wiki->storyName );
             $cover_image = $wiki->coverURL;
 
             if ($cover_image == 'assets/nocover.jpg') {
