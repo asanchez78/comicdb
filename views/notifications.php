@@ -84,6 +84,9 @@
       case 60:
         $messageText .= 'Publisher data missing.';
         break;
+      case 61:
+        $messageText .= 'The issues are already in your collection.';
+        break;
       case 90:
         $messageText .= 'Sorry, no database connection.';
         break;

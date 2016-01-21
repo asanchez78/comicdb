@@ -14,28 +14,25 @@ $series_name_result = mysqli_query ( $connection, $series_name_query );
 
 foreach ( range ( $first_issue, $last_issue ) as $number ) {
 	$issueExists = new comicSearch();
-  	$issueExists->issueCheck($series_id, $number);
-  	if ($issueExists->issueExists == 1) {
-    	$sql = "INSERT INTO users_comics (user_id, comic_id)
-          VALUES ('$ownerID', '$issueExists->comic_id')";
-      	if (mysqli_query ( $connection, $sql )) {
-        	
-      	} else {
-        	$message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
-    	}
-  	} else {
+	$issueExists->issueCheck($series_id, $number);
+	if ($issueExists->issueExists == 1) {
+  	$sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$issueExists->comic_id')";
+    if (mysqli_query ( $connection, $sql )) {
+      	
+    } else {
+      $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+  	}
+	} else {
 		$release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
 		$sql = "INSERT INTO comics (series_id, issue_number, release_date, original_purchase) VALUES ('$series_id', '$number', '$release_date', '$original_purchase')";
 		if (mysqli_query ( $connection, $sql )) {
 			$comic_id = mysqli_insert_id ( $connection );
 			$messageNum = 4;
-			$sql = "INSERT INTO users_comics (user_id, comic_id)
-        		  VALUES ('$ownerID', '$comic_id')";
-      		if (mysqli_query ( $connection, $sql )) {
-
-	    	} else {
-        		$message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
-    	  	}
+			$sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic_id')";
+      if (mysqli_query ( $connection, $sql )) {
+	    } else {
+        $message = "Error: " . $insert_comic_query . "<br>" . mysqli_error ( $connection );
+    	}
 		} else {
 			echo "Error: " . $sql . "<br>" . mysqli_error ( $connection );
 			$messageNum = 51;

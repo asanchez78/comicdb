@@ -7,6 +7,7 @@
   $issueSearch = false;
   $issueAdd = false;
   $issueSubmit = false;
+  $rangeSearch = false;
   $submitted = filter_input ( INPUT_POST, 'submitted' );
   if ($submitted) { include('admin/formprocess.php'); }
 ?>
@@ -33,11 +34,7 @@
         <a href="#addlist" id="form-add-list">Add List of Issues</a>
       </li>
     </ul>
-    <?php 
-      // ADD SERIES 
-      $sql = new comicSearch ();
-      $sql->publisherList ();
-    ?>
+    <?php // ADD SERIES ?>
     <div class="row add-block form-add-series active">
       <div class="col-xs-12" id="form-series-add">
         <h2>Add Series</h2>
@@ -47,8 +44,10 @@
             <label for="publisherID">Publisher</label>
             <select class="form-control" name="publisherID" required>
               <option value="">Choose a Publisher</option>
-              <?php 
-                while ( $row = $sql->publisher_list_result->fetch_assoc () ) {
+              <?php
+                $comic = new comicSearch ();
+                $comic->publisherList ();
+                while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
                   $list_publisher_name = $row ['publisherName'];
                   $list_publisherID = $row ['publisherID'];
                   echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
@@ -164,11 +163,7 @@
             </div>
           </div>
         </div>
-      <?php } else {
-        $listAllSeries=1;
-        $sql = new comicSearch ();
-        $sql->seriesList ($listAllSeries);
-      ?>
+      <?php } else { ?>
         <div class="col-xs-12">
           <h2>Add Issue</h2>
           <form method="post" action="<?php echo $filename; ?>?type=issue-search#addissue" class="form-inline" id="add-issue">
@@ -176,8 +171,12 @@
               <label>Series</label>
               <select class="form-control" name="series_id">
                 <option value="" disabled selected>Choose a series</option>
-                <?php 
-                  while ( $row = $sql->series_list_result->fetch_assoc () ) {
+                <?php
+                  $listAllSeries=1;
+                  $comic = new comicSearch ();
+                  $comic->seriesList ($listAllSeries);
+                  $comic->publisherList ();
+                  while ( $row = $comic->series_list_result->fetch_assoc () ) {
                     $list_series_name = $row ['series_name'];
                     $list_series_vol = $row ['series_vol'];
                     $list_series_id = $row ['series_id'];
@@ -197,6 +196,75 @@
       <?php } ?>
     </div>
     <?php // ADD RANGE ?>
+    <div class="row add-block form-add-range">
+      <?php if ($rangeSearch != true) { ?>
+      <div class="col-xs-12">
+        <h2>Add a range of issues</h2>
+        <p>If the series had a regular monthly release, you may enter the published date of the first issue.</p>
+        <p>Each entry will automatically have the month incremented.</p>
+        <form id="input_select" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+          <div class="row">
+            <div class="col-xs-12 col-md-6">
+              <div class="form-group">
+                <label for="series_name">Series</label>
+                <select class="form-control" name="series_id">
+                  <option value="" disabled selected>Choose a series</option>
+                  <?php 
+                    $listAllSeries=1;
+                    $comic = new comicSearch ();
+                    $comic->seriesList ($listAllSeries);
+                    while ( $row = $comic->series_list_result->fetch_assoc () ) {
+                      $list_series_name = $row ['series_name'];
+                      $list_series_vol = $row ['series_vol'];
+                      $list_series_id = $row ['series_id'];
+                      echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                    }  
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+              <div class="form-inline">
+                <div class="form-group">
+                  <label for="first_issue">First Issue</label>
+                  <input name="first_issue" type="text" class="form-control" maxlength="3" size="3" />
+                </div>
+                <div class="form-group">
+                  <label for="last_issue">Last Issue</label>
+                  <input name="last_issue" type="text" class="form-control" maxlength="3" size="3" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-xs-12">
+              <div class="form-inline">
+                <div class="form-group form-radio">
+                  <label for="original_purchase">Purchased When Released</label>
+                  <fieldset>
+                    <input name="original_purchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
+                    <input name="original_purchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+                  </fieldset>
+                </div>
+                <div class="form-group">
+                  <label for="release_date">First Comic's Published Date</label>
+                  <input name="release_date" type="date" class="form-control" maxlength="10" placeholder="YYYY-MM-DD"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="submitted" value="yes" />
+          <input type="submit" name="submit" value="Submit" class="form-submit" />
+        </form>
+      </div>
+      <?php } else {
+        $wiki = new wikiQuery();
+        $wiki->addWikiID();
+        $wiki->addDetails();
+        echo $wiki->newWikiIDs; ?>
+      <?php } ?>
+    </div>
+    </div>
   </div>
 <?php include 'views/footer.php';?>
 </body>

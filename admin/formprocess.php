@@ -106,6 +106,61 @@
         }
         break;
       case 'range':
+        $rangeSearch = true;
+        $ownerID = $_SESSION['user_id'];
+        $series_id = filter_input ( INPUT_POST, 'series_id' );
+        $first_issue = filter_input ( INPUT_POST, 'first_issue' );
+        $last_issue = filter_input ( INPUT_POST, 'last_issue' );
+        $original_purchase = filter_input ( INPUT_POST, 'original_purchase' );
+        $release_date = filter_input(INPUT_POST, 'release_date');
+        $releaseDateArray = explode("-", $release_date);
+
+        $comic = new comicSearch ();
+        $comic->seriesInfo ($series_id);
+        $series_name = $comic->series_name;
+        $series_vol = $comic->series_vol;
+
+        foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
+          $comic->issueCheck($series_id, $issue_number);
+          if ($comic->issueExists == 1) {
+            $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic->comic_id')";
+            if (mysqli_query ( $connection, $sql )) {
+              $messageNum = 4;
+            } else {
+              $messageNum = 61;
+              $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+            }
+          } else {
+            $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
+            $wiki = new wikiQuery();
+            $wiki->wikiSearch($query, 1);
+            $wiki_id = $wiki->wiki_id;
+            
+            $wiki->comicDetails ( $wiki_id );
+            $release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
+            $plot = htmlspecialchars($wiki->synopsis);
+            $story_name = $wiki->storyName;
+            $cover_image_file = $wiki->comicCover( $wiki_id );
+            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+            if (mysqli_query ( $connection, $sql )) {
+              $comic_id = mysqli_insert_id ( $connection );
+              $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic_id')";
+              if (mysqli_query ( $connection, $sql )) {
+              } else {
+                $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+              }
+              $messageNum = 4;
+            } else {
+              $messageNum = 51;
+              $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+            }
+          }
+          ++$releaseDateArray[1];
+          if ($releaseDateArray[1] > 12) {
+            ++$releaseDateArray[0];
+            $releaseDateArray[1] = 01;
+          }
+        }
         break;
       case 'csv':
         break;

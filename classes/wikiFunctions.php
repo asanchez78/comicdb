@@ -65,12 +65,9 @@ public function wikiSearch($query, $limit) {
 		if (count($results['items']) == 1) {
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
-				$this->wikiSearchResultTitle = $result['title'];
-				$this->resultsList .= '<div class="issue-search-result col-xs-12 col-sm-6 col-md-4"><input name="wiki_id" id="wiki_id-' . $this->wikiSearchResultID . '" value="' . $this->wikiSearchResultID . '" type="radio" /> <label for="wiki_id-' . $this->wikiSearchResultID . '">' . $this->wikiSearchResultTitle . '</label></div>';
-				return $this->wikiSearchResultID;
+				$this->wiki_id = $this->wikiSearchResultID;
 			}
-		}
-		if (count($results['items']) > 1){
+		} else if (count($results['items']) > 1){
 			foreach($results['items'] as $result) {
 				$this->wikiSearchResultID = $result['id'];
 				$this->wikiSearchResultTitle = $result['title'];
@@ -174,16 +171,14 @@ public function wikiSearch($query, $limit) {
 				$issue_number = $row['issue_number'];
 				$query = $series_name . " vol " . $series_vol . " " . $issue_number;
 				$wikiDetails = $this->wikiSearch($query, $series_name, $issue_number, 1);
-				$sql = "UPDATE comics
-				SET wiki_id=$wikiDetails
-				WHERE comic_id='$comic_id'";
+				$sql = "UPDATE comics SET wiki_id=$wikiDetails WHERE comic_id='$comic_id'";
 				set_time_limit(0);
 				$this->newWikiIDs .= "<a href=\"../comic.php?comic_id=" . $comic_id . "\" target=\"_blank\">New entry created for ". $series_name . " #" . $issue_number ."</a>\n";
 				$this->newWikiIDs .= "<br/>\n";
 				if (mysqli_query ( $this->db_connection, $sql )) {
 					$this->AddWikiIDMsg = "wiki IDs entered";
 				} else {
-					echo "Error: " . $sql . "<br>" . mysqli_error ( $this->db_connection );
+					echo '<p><strong class="text-danger">Error</strong>: ' . $sql . '</p><code>' . mysqli_error ( $this->db_connection ) . '</code>';
 				}
 			}
 		} else {
