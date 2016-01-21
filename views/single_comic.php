@@ -7,7 +7,7 @@
     $publisherName = $details->publisherName;
     $publisherShort = $details->publisherShort;
   } else {
-    $messageNum = 99;
+    $messageNum = 60;
   }
   // Standardizes values for common variables for use in notifications
   if (isset($details->series_name) || isset($details->series_vol) || isset($details->issue_number)) {

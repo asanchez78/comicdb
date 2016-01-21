@@ -7,16 +7,18 @@
       $notifyClass = "bg-success";
     } else {
       $notifyClass = "bg-danger";
+      $messageText = '';
       $messageText .= '<strong>ERROR</strong>: ';
+      $sqlMessage .= '<strong class="text-danger">ERROR</strong>: ';
     }
 
     switch ($messageNum) {
     // SUCCESS MESSAGES
       case 1:
-        $messageText = "Issue added successfully."; 
+        $messageText = "Issue added successfully.";
         break;
       case 2:
-        $messageText = "Issues added successfully.";  
+        $messageText = "Issues added successfully.";
         break;
       case 3:
         $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
@@ -78,6 +80,9 @@
         break;
       case 59:
         $messageText .= 'Password field was empty.';
+        break;
+      case 60:
+        $messageText .= 'Publisher data missing.';
         break;
       case 90:
         $messageText .= 'Sorry, no database connection.';

@@ -48,7 +48,6 @@ jQuery(document).ready(function($) {
 
   // Detects a hashtag in url for add comics
   var hash = window.location.hash;
-  console.log(hash);
   var $addBlocks = $('.add-block');
   if(hash) {
     $($addBlocks).removeClass('active');

@@ -93,6 +93,7 @@
             </div>
             <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
             <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+            <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
             <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block">
@@ -103,16 +104,13 @@
         </div>
       <?php } elseif ($issueAdd == true) { ?>
         <div class="col-sm-12 headline">
-          <h2>Add Issue</h2>
+          <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
         </div>
         <div class="col-md-8 col-sm-12">
           <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
             <div class="form-group">
-              <h4><?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h4>
-            </div>
-            <div class="form-group">
               <label for="story_name">Story Name: </label>
-              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $comic->storyName; ?>" />
+              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $wiki->storyName; ?>" />
             </div>
             <div class="form-group">
               <label for="released_date">Release Date:</label>
@@ -128,14 +126,14 @@
             <div class="plot form-group">
               <label for="plot">Plot:</label>
               <small><a href="#">[edit]</a></small>
-              <?php echo $comic->synopsis; ?>
+              <?php echo $wiki->synopsis; ?>
             </div>
             <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
             <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-            <input type="hidden" name="cover_image" value="<?php echo $comic->coverURL; ?>" />
-            <input type="hidden" name="cover_image_file" value="<?php echo $comic->coverFile; ?>" />
-            <input type="hidden" name="plot" value="<?php echo htmlspecialchars($comic->synopsis); ?>" />
+            <input type="hidden" name="cover_image" value="<?php echo $wiki->coverURL; ?>" />
+            <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
+            <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
             <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
             <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
             <input type="hidden" name="submitted" value="yes" />
@@ -146,7 +144,7 @@
           </form>
         </div>
         <div class="col-md-4 issue-image">
-          <img src="<?php echo $comic->coverURL; ?>" alt="Cover" />
+          <img src="<?php echo $wiki->coverURL; ?>" alt="Cover" />
         </div>
       <?php } elseif ($issueSubmit == true) { ?>
         <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
@@ -176,13 +174,14 @@
           <form method="post" action="<?php echo $filename; ?>?type=issue-search#addissue" class="form-inline" id="add-issue">
             <div class="form-group">
               <label>Series</label>
-              <select class="form-control" name="series_name">
+              <select class="form-control" name="series_id">
                 <option value="" disabled selected>Choose a series</option>
                 <?php 
                   while ( $row = $sql->series_list_result->fetch_assoc () ) {
                     $list_series_name = $row ['series_name'];
                     $list_series_vol = $row ['series_vol'];
-                    echo '<option value="' . $list_series_name . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                    $list_series_id = $row ['series_id'];
+                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
                   } 
                 ?>
               </select>
@@ -191,7 +190,6 @@
               <label for="issue_number">Issue #</label>
               <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
             </div>
-            <input type="hidden" name="series_vol" value="<?php echo $list_series_vol; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <input class="btn btn-default form-submit" type="submit" name="submit" value="Search" />
           </form>

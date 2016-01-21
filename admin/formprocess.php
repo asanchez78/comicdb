@@ -1,18 +1,13 @@
 <?php
   $type = $_GET['type'];
   if ($type) {
-    $series_name = filter_input ( INPUT_POST, 'series_name' );
-    if ($type == 'issue-search' || $type == 'issue-add' || $type == 'issue-submit') {
-      require_once(__ROOT__.'/classes/wikiFunctions.php');
-      $series_id = filter_input ( INPUT_POST, 'series_id' );
-      $series_vol = filter_input(INPUT_POST, 'series_vol');
-      $issue_number = filter_input ( INPUT_POST, 'issue_number' );
-    }
+    require_once(__ROOT__.'/classes/wikiFunctions.php');
     switch ($type) {
       // Runs when the Add Series form has been submitted
       case 'series':
+        $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $series_vol = filter_input(INPUT_POST, 'series_vol');
         $publisherID = filter_input ( INPUT_POST, 'publisherID' );
-        $series_vol = filter_input ( INPUT_POST, 'series_vol' );
         $sql = "INSERT INTO series (series_name, series_vol, publisherID) VALUES ('$series_name', '$series_vol', '$publisherID')";
         if (mysqli_query ( $connection, $sql )) {
           $messageNum = 3;
@@ -29,6 +24,12 @@
       // Part one of the single issue process. Displays Wikia results.
       case 'issue-search':
         $issueSearch = true;
+        $series_id = filter_input ( INPUT_POST, 'series_id' );
+        $comic = new comicSearch ();
+        $comic->seriesInfo ($series_id);
+        $series_name = $comic->series_name;
+        $series_vol = $comic->series_vol;
+        $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
         $wiki = new wikiQuery();
@@ -37,24 +38,23 @@
       // Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
         $issueAdd = true;
+        $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $series_vol = filter_input(INPUT_POST, 'series_vol');
+        $series_id = filter_input ( INPUT_POST, 'series_id' );
+        $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $wiki_id = filter_input (INPUT_POST, 'wiki_id');
-        $comic_id = filter_input(INPUT_POST, 'comic_id');
-        $comic = new wikiQuery ();
-        $comic->comicCover ( $wiki_id );
-        $comic->comicDetails ( $wiki_id );
-        
-        $sql = new comicSearch ();
-        $sql->seriesFind ($series_name);
-        if ($sql->series->num_rows > 0) {
-          while ( $row = $sql->series->fetch_assoc () ) {
-            $series_id = $row ['series_id'];
-            $series_vol = $row ['series_vol'];
-          }
-        }
+
+        $wiki = new wikiQuery ();
+        $wiki->comicCover ( $wiki_id );
+        $wiki->comicDetails ( $wiki_id );
         break;
       case 'issue-submit':
         $issueSubmit = true;
         $ownerID = $_SESSION['user_id'];
+        $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $series_vol = filter_input(INPUT_POST, 'series_vol');
+        $series_id = filter_input ( INPUT_POST, 'series_id' );
+        $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $comic_id = filter_input ( INPUT_POST, 'comic_id' );
         $wiki_id = filter_input ( INPUT_POST, 'wiki_id' );
         $released_date = filter_input ( INPUT_POST, 'released_date' );
@@ -76,14 +76,13 @@
           $wiki->downloadFile ( $cover_image, $path );
         }
 
-        $query = new comicSearch();
-        $query->issueCheck($series_id, $issue_number);
-        if ($query->issueExists == 1) {
-          $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$query->comic_id')";
-          $comic_id = $query->comic_id;
+        $comic = new comicSearch();
+        $comic->issueCheck($series_id, $issue_number);
+        if ($comic->issueExists == 1) {
+          $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic->comic_id')";
+          $comic_id = $comic->comic_id;
           if (mysqli_query ( $connection, $sql )) {
             $messageNum = 1;
-            $sqlMessage = '<strong class="text-success">Success</strong>: Issue was matched to an existing issue in the database and added to the users collection.';
           } else {
             $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
             $messageNum = 51;
