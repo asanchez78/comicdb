@@ -87,6 +87,9 @@
       case 61:
         $messageText .= 'The issues are already in your collection.';
         break;
+      case 62:
+        $messageText .= 'Could not update issue. An error occurred.';
+        break;
       case 90:
         $messageText .= 'Sorry, no database connection.';
         break;

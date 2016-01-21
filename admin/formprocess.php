@@ -164,7 +164,32 @@
         break;
       case 'csv':
         break;
-      case 'update':
+      case 'edit':
+        $comic_id = filter_input(INPUT_GET, 'comic_id');
+        $wiki_id = filter_input ( INPUT_GET, 'wiki_id' );
+        $wiki = new wikiQuery ();
+        $wiki->comicCover ( $wiki_id );
+        $wiki->comicDetails ( $wiki_id );
+        $comic = new comicSearch();
+        $comic->issueLookup($comic_id);
+
+        $series_id = $comic->series_id;
+        $series_name = $comic->series_name;
+        $series_vol = $comic->series_vol;
+        $issue_number = $comic->issue_number;
+        $original_purchase = $comic->original_purchase;
+        $release_date = $comic->release_date;
+        $story_name = $comic->story_name;
+        break;
+      case 'edit-save':
+        $sql = "UPDATE comics SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', original_purchase='$original_purchase', wikiUpdated=1 WHERE comic_id='$comic_id'";
+        if (mysqli_query ( $connection, $sql )) {
+            $messageNum = 5;
+            $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql;
+        } else {
+            $messageNum = 62;
+            $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+        }
         break;
     }
   } else {

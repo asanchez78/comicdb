@@ -46,9 +46,9 @@
     </div>
     <p>
       <?php
-        if ($login->isUserLoggedIn () == true) {
-          echo "<a href=\"/admin/wikiaedit.php?comic_id=" . $comic->comic_id . "&wiki_id=" . $comic->wiki_id . "\">Update Info</a>";
-        }
+        if ($login->isUserLoggedIn () == true) { ?>
+          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&wiki_id=<?php echo $comic->wiki_id; ?>&type=edit" class="btn btn-default">Update Info</a>
+        <?php } 
       ?>
     </p>
   </div>

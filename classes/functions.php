@@ -72,7 +72,7 @@ class comicSearch {
         $series_name = $row ['series_name'];
         $series_id = $row['series_id'];
         $original_purchase = $row['original_purchase'];
-        $volume_number = $row['series_vol'];
+        $series_vol = $row['series_vol'];
       }
     }
     $this->cover_image = $cover_image;
@@ -85,7 +85,7 @@ class comicSearch {
     $this->series_name = $series_name;
     $this->original_purchase = $original_purchase;
     $this->series_id = $series_id;
-    $this->volume_number = $volume_number;
+    $this->series_vol = $series_vol;
   }
   /**
    * Looks up the artist of a given comic using comic_id
