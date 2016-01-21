@@ -11,9 +11,9 @@
     switch ($type) {
       // Runs when the Add Series form has been submitted
       case 'series':
-        $publisher = filter_input ( INPUT_POST, 'publisher' );
+        $publisherID = filter_input ( INPUT_POST, 'publisherID' );
         $series_vol = filter_input ( INPUT_POST, 'series_vol' );
-        $sql = "INSERT INTO series (series_name, series_vol) VALUES ('$series_name', '$series_vol')";
+        $sql = "INSERT INTO series (series_name, series_vol, publisherID) VALUES ('$series_name', '$series_vol', '$publisherID')";
         if (mysqli_query ( $connection, $sql )) {
           $messageNum = 3;
           $seriesSubmitted = true;

@@ -3,7 +3,8 @@ jQuery(document).ready(function($) {
 
   $notifications = $('.notifications');
   $notifyClose = $($notifications).find('.close');
-  $($notifyClose).click(function() {
+  $($notifyClose).click(function(e) {
+    e.preventDefault;
     $($notifications).addClass('notifications-close');
   });
 

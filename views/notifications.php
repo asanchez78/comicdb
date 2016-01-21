@@ -19,7 +19,7 @@
         $messageText = "Issues added successfully.";  
         break;
       case 3:
-        $messageText = '<em>' . $series_name . '</em> added to your collection successfully.';
+        $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
         break;
       case 4:
         $messageText = '<em>' . $series_name . ' #' . $first_issue . ' - ' . $last_issue . '</em> added to your collection successfully.';
@@ -49,7 +49,7 @@
       // ERROR MESSAGES
       // Error messages are concatenated to append to ERROR: text above
       case 50:
-        $messageText .= 'Cannot add <em>' . $series_name . '</em> to your collection. Series already exists.';
+        $messageText .= 'Cannot add <em>' . $series_name . ' (Vol ' . $series_vol . ')</em> to your collection. Series already exists.';
         break;
       case 51:
         $messageText .= 'This issue is already in your collection.';

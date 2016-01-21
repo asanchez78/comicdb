@@ -33,21 +33,27 @@
         <a href="#addlist" id="form-add-list">Add List of Issues</a>
       </li>
     </ul>
-    <?php // ADD SERIES ?>
+    <?php 
+      // ADD SERIES 
+      $sql = new comicSearch ();
+      $sql->publisherList ();
+    ?>
     <div class="row add-block form-add-series active">
       <div class="col-xs-12" id="form-series-add">
         <h2>Add Series</h2>
         <p>Use the form below to add a new series to your collection.</p>
         <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
           <div class="form-group">
-            <label for="publisher">Publisher</label>
-            <select class="form-control" name="publisher">
+            <label for="publisherID">Publisher</label>
+            <select class="form-control" name="publisherID" required>
               <option value="">Choose a Publisher</option>
-              <option value="marvel" selected>Marvel Comics</option>
-              <option value="dc">DC Comics</option>
-              <option value="image">Image Comics</option>
-              <option value="darkhorse">Dark Horse Comics</option>
-              <option value="valiant">Valiant Comics</option>
+              <?php 
+                while ( $row = $sql->publisher_list_result->fetch_assoc () ) {
+                  $list_publisher_name = $row ['publisherName'];
+                  $list_publisherID = $row ['publisherID'];
+                  echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
+                } 
+              ?>
             </select>
           </div>
           <div class="form-group">
@@ -67,7 +73,7 @@
           <div class="success-message text-center">
             <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
             <p>has been added to your collection.</p>
-            <a href="#" class="btn btn-default">Add another?</a>
+            <a href="#" class="btn btn-default add-another">Add another?</a>
           </div>
         </div>
       <?php } ?>
@@ -162,8 +168,8 @@
         </div>
       <?php } else {
         $listAllSeries=1;
-        $comics = new comicSearch ();
-        $comics->seriesList ($listAllSeries);
+        $sql = new comicSearch ();
+        $sql->seriesList ($listAllSeries);
       ?>
         <div class="col-xs-12">
           <h2>Add Issue</h2>
@@ -173,10 +179,10 @@
               <select class="form-control" name="series_name">
                 <option value="" disabled selected>Choose a series</option>
                 <?php 
-                  while ( $row = $comics->series_list_result->fetch_assoc () ) {
-                    $series_name = $row ['series_name'];
-                    $series_vol = $row ['series_vol'];
-                    echo '<option value="' . $series_name . '">' . $series_name . ' (Vol ' . $series_vol . ')</option>';
+                  while ( $row = $sql->series_list_result->fetch_assoc () ) {
+                    $list_series_name = $row ['series_name'];
+                    $list_series_vol = $row ['series_vol'];
+                    echo '<option value="' . $list_series_name . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
                   } 
                 ?>
               </select>
@@ -185,7 +191,7 @@
               <label for="issue_number">Issue #</label>
               <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
             </div>
-            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+            <input type="hidden" name="series_vol" value="<?php echo $list_series_vol; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <input class="btn btn-default form-submit" type="submit" name="submit" value="Search" />
           </form>
