@@ -1,19 +1,19 @@
 <?php 
-  $details = new comicSearch ();
-  $details->issueLookup ( $comic_id );
-  $details->seriesInfo ( $details->series_id );
+  $comic = new comicSearch ();
+  $comic->issueLookup ( $comic_id );
+  $comic->seriesInfo ( $comic->series_id );
 
-  if (isset($details->publisherName)) {
-    $publisherName = $details->publisherName;
-    $publisherShort = $details->publisherShort;
+  if (isset($comic->publisherName)) {
+    $publisherName = $comic->publisherName;
+    $publisherShort = $comic->publisherShort;
   } else {
     $messageNum = 60;
   }
   // Standardizes values for common variables for use in notifications
-  if (isset($details->series_name) || isset($details->series_vol) || isset($details->issue_number)) {
-    $series_name = $details->series_name;
-    $series_vol = $details->series_vol;
-    $issue_num = $details->issue_number;
+  if (isset($comic->series_name) || isset($comic->series_vol) || isset($comic->issue_number)) {
+    $series_name = $comic->series_name;
+    $series_vol = $comic->series_vol;
+    $issue_num = $comic->issue_number;
   } else {
     $messageNum = 99;
   }
@@ -26,8 +26,8 @@
       <ul class="nolist">
         <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
         <li>Volume <?php echo $series_vol; ?></li>
-        <?php if ($details->release_date) { ?>
-          <li><?php echo DateTime::createFromFormat('Y-m-d', $details->release_date)->format('M Y'); ?></li>
+        <?php if ($comic->release_date) { ?>
+          <li><?php echo DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y'); ?></li>
         <?php } ?>
       </ul>
     </div>
@@ -35,10 +35,10 @@
 </div>
 <div class="row">
   <div class="col-md-8">
-    <div class="issue-story"><h4><?php echo $details->story_name; ?></h4></div>
+    <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
     <div class="issue-description">
-      <?php if ($details->plot != '') {
-        echo $details->plot; 
+      <?php if ($comic->plot != '') {
+        echo $comic->plot; 
       } else {
         echo '<p>Plot details have not been entered.</p>';
       }
@@ -47,12 +47,12 @@
     <p>
       <?php
         if ($login->isUserLoggedIn () == true) {
-          echo "<a href=\"/admin/wikiaedit.php?comic_id=" . $details->comic_id . "&wiki_id=" . $details->wiki_id . "\">Update Info</a>";
+          echo "<a href=\"/admin/wikiaedit.php?comic_id=" . $comic->comic_id . "&wiki_id=" . $comic->wiki_id . "\">Update Info</a>";
         }
       ?>
     </p>
   </div>
   <div class="col-md-4 issue-image">
-    <img src="<?php echo $details->cover_image; ?>" alt="cover" />
+    <img src="<?php echo $comic->cover_image; ?>" alt="cover" />
   </div>
 </div>

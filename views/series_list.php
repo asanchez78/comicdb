@@ -1,16 +1,16 @@
 <?php 
-  $comics = new comicSearch ();
+  $comic = new comicSearch ();
   $listAllSeries = 0;
-  $comics->seriesList ($listAllSeries);
-  if ($comics->series_list_result->num_rows > 0) { ?>
+  $comic->seriesList ($listAllSeries);
+  if ($comic->series_list_result->num_rows > 0) { ?>
     <ul class="nolist row inventory-table">
-    <?php while ( $row = $comics->series_list_result->fetch_assoc () ) {
+    <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {
       $series_id = $row ['series_id'];
       $series_name = $row ['series_name'];
       $series_vol = $row ['series_vol'];
-      $comics->seriesInfo($series_id);
-      $series_issue_count = $comics->series_issue_count;
-      $series_cover = $comics->series_latest_cover;
+      $comic->seriesInfo($series_id);
+      $series_issue_count = $comic->series_issue_count;
+      $series_cover = $comic->series_latest_cover;
       if ($series_cover == NULL) {
         $series_cover = 'assets/nocover.jpg';
       } ?>
