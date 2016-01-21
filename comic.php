@@ -22,7 +22,7 @@
         <form method="post" action="<?php echo $filename; ?>?comic_id=<?php echo $comic->comic_id; ?>&type=edit-save">
           <div class="form-group">
             <label for="story_name">Story Name: </label>
-            <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $storyName; ?>" />
+            <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $comic->story_name; ?>" />
           </div>
           <div class="form-group">
             <label for="released_date">Release Date:</label>

@@ -150,7 +150,7 @@
           <div class="success-message">
             <div class="row">
               <div class="col-md-3 col-xs-hidden">
-                <img src="/images/<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
+                <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
               </div>
               <div class="col-xs-12 col-md-9">
                 <h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h2>

@@ -95,11 +95,14 @@ public function wikiSearch($query, $limit) {
 			$replacement = "";
 			$this->coverURL = preg_replace($pattern, $replacement, $subject);
 			$fileparts = explode("/", $this->coverURL);
-			$this->coverFile = $fileparts[7];
+			$this->coverFile = 'images/' . $fileparts[7];
 			$this->coverFile = str_replace("%28", "", $this->coverFile);
 			$this->coverFile = str_replace("%29", "", $this->coverFile);
 			$this->coverFile = str_replace("%3F", "", $this->coverFile);
 		} else {
+			$this->coverFile = 'assets/nocover.jpg';
+			$this->coverURL = 'assets/nocover.jpg';
+			$this->noCover = true;
 			$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
 			FROM comics
 			LEFT JOIN series ON comics.series_id=series.series_id

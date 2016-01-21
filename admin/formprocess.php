@@ -70,8 +70,10 @@
           $release_date = $released_date;
         }
 
-        if ($cover_image) {
-          $path = __ROOT__ . '/images/' . $cover_image_file;
+        if ($cover_image == 'assets/nocover.jpg') {
+          $cover_image_file = 'assets/nocover.jpg';
+        } else {
+          $path = __ROOT__ . '/' . $cover_image_file;
           $wiki = new wikiQuery();
           $wiki->downloadFile ( $cover_image, $path );
         }
@@ -89,7 +91,7 @@
           }
         } else {
           $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
-          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$original_purchase', '$wiki_id', 1)";
           if (mysqli_query ( $connection, $sql )) {
             $comic_id = mysqli_insert_id($connection);
             // Add to user_comics table
@@ -135,13 +137,23 @@
             $wiki = new wikiQuery();
             $wiki->wikiSearch($query, 1);
             $wiki_id = $wiki->wiki_id;
-            
+            $wiki->comicCover( $wiki_id );
             $wiki->comicDetails ( $wiki_id );
+
             $release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
-            $plot = htmlspecialchars($wiki->synopsis);
-            $story_name = $wiki->storyName;
-            $cover_image_file = $wiki->comicCover( $wiki_id );
-            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', 'images/$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+            $plot = addslashes( $wiki->synopsis );
+            $story_name = addslashes( $wiki->storyName );
+            $cover_image = $wiki->coverURL;
+
+            if ($cover_image == 'assets/nocover.jpg') {
+              $cover_image_file = 'assets/nocover.jpg';
+            } else {
+              $cover_image_file = $wiki->coverFile;
+              $path = __ROOT__ . '/' . $cover_image_file;
+              $wiki->downloadFile ( $cover_image, $path );
+            }
+
+            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$original_purchase', '$wiki_id', 1)";
             if (mysqli_query ( $connection, $sql )) {
               $comic_id = mysqli_insert_id ( $connection );
               $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic_id')";
