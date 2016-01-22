@@ -54,12 +54,12 @@ class wikiQuery {
 	}
 
 	/**
-	 * uses an API call to marvel.wikia.com to return search results
+	 * uses an API call to wikia.com to return search results
 	 * @param string $query
 	 */
-public function wikiSearch($query, $limit) {
+public function wikiSearch($publisherAPI, $query, $limit) {
 		$comic = str_replace(' ', '+', $query);
-		$api_url = "http://marvel.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
+		$api_url = "http://$publisherAPI.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
 		$results = json_decode($jsondata, true);
 		if (count($results['items']) == 1) {
@@ -80,11 +80,11 @@ public function wikiSearch($query, $limit) {
 		}
 	}
 	/**
-	 * grabs the cover image from marvel.wikia.com using the comic's wiki_id
+	 * grabs the cover image from wikia.com using the comic's wiki_id
 	 * @param int $wiki_id
 	 */
-	public function comicCover($wiki_id) {
-		$cover_api = "http://marvel.wikia.com/api/v1/Articles/Details?ids=$wiki_id";
+	public function comicCover($publisherAPI, $wiki_id) {
+		$cover_api = "http://$publisherAPI.wikia.com/api/v1/Articles/Details?ids=$wiki_id";
 		$cover_jsondata = file_get_contents($cover_api);
 		$details_results = json_decode($cover_jsondata, true);
 		$wiki_id = $details_results['items'][$wiki_id]['id'];
@@ -118,11 +118,11 @@ public function wikiSearch($query, $limit) {
 		}
 	}
 	/**
-	 * grabs comic details from marvel.wikia.com using the comic's wiki_id
+	 * grabs comic details from wikia.com using the comic's wiki_id
 	 * @param int $wiki_id
 	 */
-	public function comicDetails($wiki_id) {
-		$details_api = "http://marvel.wikia.com/api/v1/Articles/AsSimpleJson?id=$wiki_id";
+	public function comicDetails($publisherAPI, $wiki_id) {
+		$details_api = "http://$publisherAPI.wikia.com/api/v1/Articles/AsSimpleJson?id=$wiki_id";
 		$issue_jsondata = file_get_contents($details_api);
 		$issue_results = json_decode($issue_jsondata, true);
 		$paragraphs = $issue_results['sections'][2]['content'];
