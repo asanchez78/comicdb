@@ -94,6 +94,7 @@
             <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
             <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
+            <input type="hidden" name="publisherAPI" value="<?php echo $publisherAPI; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block">
               <a href="#" class="btn btn-default form-back">&lt; Back</a>

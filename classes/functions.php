@@ -46,6 +46,7 @@ class comicSearch {
    */
   public $series_list_result;
   public $volume_number;
+  public $publisherShort;
 
   /**
    * Looks up a single comic issue using comic_id

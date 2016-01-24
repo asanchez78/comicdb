@@ -29,11 +29,13 @@
         $comic->seriesInfo ($series_id);
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
+        $publisherAPI = $comic->publisherShort;
+
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
         $wiki = new wikiQuery();
-        $wiki->wikiSearch($query, 50);
+        $wiki->wikiSearch($publisherAPI, $query, 50);
         break;
       // Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
@@ -43,10 +45,11 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $wiki_id = filter_input (INPUT_POST, 'wiki_id');
+        $publisherAPI = filter_input( INPUT_POST, 'publisherAPI' );
 
         $wiki = new wikiQuery ();
-        $wiki->comicCover ( $wiki_id );
-        $wiki->comicDetails ( $wiki_id );
+        $wiki->comicCover ( $publisherAPI, $wiki_id );
+        $wiki->comicDetails ( $publisherAPI, $wiki_id );
         break;
       case 'issue-submit':
         $issueSubmit = true;
@@ -121,6 +124,7 @@
         $comic->seriesInfo ($series_id);
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
+        $publisherAPI = $comic->publisherShort;
 
         foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
           $comic->issueCheck($series_id, $issue_number);
@@ -135,10 +139,10 @@
           } else {
             $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
             $wiki = new wikiQuery();
-            $wiki->wikiSearch($query, 1);
+            $wiki->wikiSearch($publisherAPI, $query, 1);
             $wiki_id = $wiki->wiki_id;
-            $wiki->comicCover( $wiki_id );
-            $wiki->comicDetails ( $wiki_id );
+            $wiki->comicCover( $publisherAPI, $wiki_id );
+            $wiki->comicDetails ( $publisherAPI, $wiki_id );
 
             $release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
             $plot = addslashes( $wiki->synopsis );
@@ -180,10 +184,13 @@
         $comic_id = filter_input(INPUT_GET, 'comic_id');
         $wiki_id = filter_input ( INPUT_GET, 'wiki_id' );
         $wiki = new wikiQuery ();
-        $wiki->comicCover ( $wiki_id );
-        $wiki->comicDetails ( $wiki_id );
         $comic = new comicSearch();
         $comic->issueLookup($comic_id);
+        $series_id = $comic->series_id;
+        $comic->seriesInfo ($series_id);
+        $publisherAPI = $comic->publisherShort;
+        $wiki->comicCover ($publisherAPI, $wiki_id );
+        $wiki->comicDetails ($publisherAPI, $wiki_id );
 
         $series_id = $comic->series_id;
         $series_name = $comic->series_name;
