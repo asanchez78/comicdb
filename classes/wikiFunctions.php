@@ -59,7 +59,7 @@ class wikiQuery {
 	 */
 public function wikiSearch($publisherAPI, $query, $limit) {
 		$comic = str_replace(' ', '+', $query);
-		$api_url = "http://$publisherAPI.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=70&batch=1&namespaces=0%2C14";
+		$api_url = "http://$publisherAPI.wikia.com/api/v1/Search/List?query=$comic&limit=$limit&minArticleQuality=10&batch=1&namespaces=0%2C14";
 		$jsondata = file_get_contents($api_url);
 		$results = json_decode($jsondata, true);
 		if (count($results['items']) == 1) {
