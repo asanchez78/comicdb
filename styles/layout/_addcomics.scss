@@ -45,6 +45,10 @@
   > div:not(.add-success) {
     margin-top: 15px;
   }
+
+  form {
+    margin-bottom: 25px;
+  }
 }
 
 .add-block.active {
@@ -87,9 +91,15 @@
 
 }
 
-.issue-image img {
-  width: 100%;
-  height: auto;
+.issue-image {
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  img + .form-group {
+    margin-top: 15px;
+  }
 }
 
 .issue-details {
@@ -128,4 +138,8 @@
     right: 20px;
     top: 5px;
   }
+}
+
+.form-add-series button[type="submit"] {
+  margin: 25px 0;
 }

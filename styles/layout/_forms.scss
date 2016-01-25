@@ -71,48 +71,13 @@ label {
   }
 }
 
-.form-back,
-.form-submit {
-  border: 1px solid transparent;
-  outline: none;
-  padding: 12px 25px;
-  font-size: 16px;
-  transition: all 0.1s ease-in-out;
+.btn {
   text-transform: uppercase;
-  display: inline-block;
-  vertical-align: top;
-  margin: 25px 0 15px;
-  color: white;
-
-  &:hover,
-  &:focus {
-    color: white;
-  }
 }
 
 .form-submit {
-  background-color: red;
-
-  &:hover,
-  &:focus {
-    background-color: gray;
-    border: 1px solid silver;
-  }
-}
-
-.form-back {
-  background-color: $brand-orange;
-
-  &:hover,
-  &:focus {
-    background-color: gray;
-    border: 1px solid silver;
-  }
-}
-
-.form-inline .form-submit {
-  display: inline-block;
-  margin: 25px 0 15px;
+  transition: background-color 0.1s ease-in-out;
+  vertical-align: top;
 }
 
 .issue-search-result {

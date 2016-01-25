@@ -3463,45 +3463,14 @@ label {
   border-radius: 25px;
 }
 
-.form-back,
-.form-submit {
-  border: 1px solid transparent;
-  outline: none;
-  padding: 12px 25px;
-  font-size: 16px;
-  -webkit-transition: all 0.1s ease-in-out;
-          transition: all 0.1s ease-in-out;
+.btn {
   text-transform: uppercase;
-  display: inline-block;
-  vertical-align: top;
-  margin: 25px 0 15px;
-  color: white;
-}
-.form-back:hover, .form-back:focus,
-.form-submit:hover,
-.form-submit:focus {
-  color: white;
 }
 
 .form-submit {
-  background-color: red;
-}
-.form-submit:hover, .form-submit:focus {
-  background-color: gray;
-  border: 1px solid silver;
-}
-
-.form-back {
-  background-color: #ffaa00;
-}
-.form-back:hover, .form-back:focus {
-  background-color: gray;
-  border: 1px solid silver;
-}
-
-.form-inline .form-submit {
-  display: inline-block;
-  margin: 25px 0 15px;
+  -webkit-transition: background-color 0.1s ease-in-out;
+          transition: background-color 0.1s ease-in-out;
+  vertical-align: top;
 }
 
 .issue-search-result {
@@ -3816,6 +3785,9 @@ li.logo-valiant:before {
 .add-block > div:not(.add-success) {
   margin-top: 15px;
 }
+.add-block form {
+  margin-bottom: 25px;
+}
 
 .add-block.active {
   display: block;
@@ -3855,6 +3827,9 @@ li.logo-valiant:before {
   width: 100%;
   height: auto;
 }
+.issue-image img + .form-group {
+  margin-top: 15px;
+}
 
 .issue-details {
   margin-bottom: 20px;
@@ -3888,6 +3863,10 @@ li.logo-valiant:before {
   position: absolute;
   right: 20px;
   top: 5px;
+}
+
+.form-add-series button[type="submit"] {
+  margin: 25px 0;
 }
 
 /*# sourceMappingURL=styles.css.map */

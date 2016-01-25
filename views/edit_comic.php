@@ -23,25 +23,25 @@
       <small><a href="#">[edit]</a></small>
       <?php echo $wiki->synopsis; ?>
     </div>
-    <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
-    <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
-    <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-    <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
-    <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
-    <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-    <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
-    <input type="hidden" name="submitted" value="yes" />
-    <div class="text-center center-block">
-      <a href="#" class="btn btn-default form-back">&lt; Back</a>
-      <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
-    </div>
   </div>
   <div class="col-md-4 issue-image">
     <img src="<?php echo $wiki->coverURL; ?>" alt="Cover" />
     <div class="form-group">
       <label for="cover_image">Cover Image URL</label>
-      <input type="text" class="form-control" name="cover_image" value="<?php echo $wiki->coverURL; ?>" />
+      <input type="url" class="form-control" name="cover_image" placeholder="Enter the URL" value="<?php echo $wiki->coverURL; ?>" />
+      <small>Enter the URL of the image you wish to use. Default is the cover file from the Wikia entry on this issue.</small>
+      <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
     </div>
-    <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
+  </div>
+  <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
+  <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+  <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
+  <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
+  <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
+  <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
+  <input type="hidden" name="submitted" value="yes" />
+  <div class="col-xs-12 text-center center-block">
+    <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+    <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Next</button>
   </div>
 </form>
