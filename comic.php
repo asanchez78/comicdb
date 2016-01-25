@@ -29,10 +29,10 @@
             <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php if ($release_date) { echo $release_date; } ?>" type="date" placeholder="YYYY-MM-DD" />
           </div>
           <div class="form-group form-radio">
-            <label for="original_purchase">Purchased When Released:</label>
+            <label for="originalPurchase">Purchased When Released:</label>
             <fieldset>
-              <input name="original_purchase" id="original-yes" value="1" type="radio" <?php if ($original_purchase == 1) { echo 'selected'; } ?> /> <label for="original-yes">Yes</label>
-              <input name="original_purchase" id="original-no" value="0" type="radio" <?php if ($original_purchase == 0) { echo 'selected'; } ?> /> <label for="original-no">No</label>
+              <input name="originalPurchase" id="original-yes" value="1" type="radio" <?php if ($originalPurchase == 1) { echo 'selected'; } ?> /> <label for="original-yes">Yes</label>
+              <input name="originalPurchase" id="original-no" value="0" type="radio" <?php if ($originalPurchase == 0) { echo 'selected'; } ?> /> <label for="original-no">No</label>
             </fieldset>
           </div>
           <div class="plot form-group">
