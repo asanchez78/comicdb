@@ -35,7 +35,7 @@
         $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
         $wiki = new wikiQuery();
-        $wiki->wikiSearch($publisherAPI, $query, 50);
+        $wiki->wikiSearch($publisherAPI, $query, 12);
         break;
       // Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
