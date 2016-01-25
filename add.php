@@ -22,10 +22,7 @@
     } ?>
     <ul class="add-menu list-inline">
       <li>
-        <a href="#addseries" class="active" id="form-add-series">Add Series</a>
-      </li>
-      <li>
-        <a href="#addissue" id="form-add-issue">Add Issue</a>
+        <a href="#addissue" class="active" id="form-add-issue">Add Issue</a>
       </li>
       <li>
         <a href="#addrange" id="form-add-range">Add Range of Issues</a>
@@ -33,52 +30,12 @@
       <li>
         <a href="#addlist" id="form-add-list">Add List of Issues</a>
       </li>
+      <li>
+        <a href="#addseries" id="form-add-series">Add Series</a>
+      </li>
     </ul>
-    <?php // ADD SERIES ?>
-    <div class="row add-block form-add-series active">
-      <div class="col-xs-12" id="form-series-add">
-        <h2>Add Series</h2>
-        <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
-          <div class="form-group">
-            <label for="publisherID">Publisher</label>
-            <select class="form-control" name="publisherID" required>
-              <option value="">Choose a Publisher</option>
-              <?php
-                $comic = new comicSearch ();
-                $comic->publisherList ();
-                while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
-                  $list_publisher_name = $row ['publisherName'];
-                  $list_publisherID = $row ['publisherID'];
-                  echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
-                } 
-              ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="series_name">Series Name</label>
-            <input name="series_name" class="form-control" type="text" size="50" value="" required />
-          </div>
-          <div class="form-group">
-            <label for="series_vol">Volume #</label>
-            <input name="series_vol" class="form-control" type="text" size="3" maxlength="4" value="" required />
-          </div>
-          <input type="hidden" name="submitted" value="yes" />
-          <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
-        </form>
-      </div>
-      <?php if ($seriesSubmitted == true) { ?>
-        <div class="add-success bg-success col-xs-12">
-          <div class="success-message text-center">
-            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
-            <p>has been added to your collection.</p>
-            <a href="#" class="btn btn-default add-another">Add another?</a>
-          </div>
-        </div>
-      <?php } ?>
-    </div>
     <?php // ADD SINGLE ISSUE ?>
-    <div class="row add-block form-add-issue">
+    <div class="row add-block form-add-issue active">
       <?php if ($issueSearch == true) { ?>
         <div class="col-xs-12">
           <h2>Your Search Results</h2>
@@ -265,6 +222,59 @@
         echo $wiki->newWikiIDs; ?>
       <?php } ?>
     </div>
+    <?php // ADD SERIES ?>
+    <div class="row add-block form-add-series">
+      <div class="col-xs-12" id="form-series-add">
+        <h2>Add Series</h2>
+        <p>Use the form below to add a new series to your collection.</p>
+        <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
+          <div class="form-group">
+            <label for="publisherID">Publisher</label>
+            <select class="form-control" name="publisherID" required>
+              <option value="">Choose a Publisher</option>
+              <?php
+                $comic = new comicSearch ();
+                $comic->publisherList ();
+                while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
+                  $list_publisher_name = $row ['publisherName'];
+                  $list_publisherID = $row ['publisherID'];
+                  echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
+                } 
+              ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="series_name">Series Name</label>
+            <input name="series_name" class="form-control" type="text" size="50" value="" required />
+          </div>
+          <div class="form-group">
+            <label for="series_vol">Volume #</label>
+            <select class="form-control" name="series_vol">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <input type="hidden" name="submitted" value="yes" />
+          <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
+        </form>
+      </div>
+      <?php if ($seriesSubmitted == true) { ?>
+        <div class="add-success bg-success col-xs-12">
+          <div class="success-message text-center">
+            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
+            <p>has been added to your collection.</p>
+            <a href="#" class="btn btn-default add-another">Add another?</a>
+          </div>
+        </div>
+      <?php } ?>
     </div>
   </div>
 <?php include 'views/footer.php';?>
