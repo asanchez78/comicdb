@@ -87,10 +87,6 @@
   }
 }
 
-.add-success + .form-series-add {
-
-}
-
 .issue-image {
   img {
     width: 100%;
@@ -100,6 +96,10 @@
   img + .form-group {
     margin-top: 15px;
   }
+}
+
+#add-issue button[type="submit"] {
+  margin-top: 27px;
 }
 
 .issue-details {

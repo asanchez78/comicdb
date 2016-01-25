@@ -3831,6 +3831,10 @@ li.logo-valiant:before {
   margin-top: 15px;
 }
 
+#add-issue button[type="submit"] {
+  margin-top: 27px;
+}
+
 .issue-details {
   margin-bottom: 20px;
 }
