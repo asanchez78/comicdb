@@ -66,7 +66,7 @@
         $plot = addslashes ( filter_input ( INPUT_POST, 'plot' ) );
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
-        $original_purchase = filter_input ( INPUT_POST, 'original_purchase' );
+        $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {
@@ -88,7 +88,7 @@
         $comic->issueCheck($series_id, $issue_number);
         if ($comic->issueExists == 1) {
           // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
-          $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic->comic_id')";
+          $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
           $comic_id = $comic->comic_id;
           if (mysqli_query ( $connection, $sql )) {
             $messageNum = 1;
@@ -98,12 +98,12 @@
           }
         } else {
           // Comic does not exist in the master table. Add all details and then associate with the user table.
-          $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated)
-          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+          $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wiki_id, wikiUpdated)
+          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$wiki_id', 1)";
           if (mysqli_query ( $connection, $sql )) {
             $comic_id = mysqli_insert_id($connection);
             // Add to user_comics table
-            $sql_user = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic_id')";
+            $sql_user = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
             if (mysqli_query ( $connection, $sql_user )) {
               $messageNum = 1;
               $sqlMessage = '<strong class="text-success">Success</strong>: Issue did not exist in the current database. Issue added to database and users collection.';
@@ -122,7 +122,7 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $first_issue = filter_input ( INPUT_POST, 'first_issue' );
         $last_issue = filter_input ( INPUT_POST, 'last_issue' );
-        $original_purchase = filter_input ( INPUT_POST, 'original_purchase' );
+        $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
         $release_date = filter_input(INPUT_POST, 'release_date');
         $releaseDateArray = explode("-", $release_date);
 
@@ -135,7 +135,7 @@
         foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
           $comic->issueCheck($series_id, $issue_number);
           if ($comic->issueExists == 1) {
-            $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic->comic_id')";
+            $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
             if (mysqli_query ( $connection, $sql )) {
               $messageNum = 4;
             } else {
@@ -163,10 +163,10 @@
               $wiki->downloadFile ( $cover_image, $path );
             }
 
-            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, original_purchase, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$original_purchase', '$wiki_id', 1)";
+            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$wiki_id', 1)";
             if (mysqli_query ( $connection, $sql )) {
               $comic_id = mysqli_insert_id ( $connection );
-              $sql = "INSERT INTO users_comics (user_id, comic_id) VALUES ('$ownerID', '$comic_id')";
+              $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
               } else {
                 $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
@@ -204,12 +204,12 @@
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
         $issue_number = $comic->issue_number;
-        $original_purchase = $comic->original_purchase;
+        $originalPurchase = $comic->originalPurchase;
         $release_date = $comic->release_date;
         $story_name = $comic->story_name;
         break;
       case 'edit-save':
-        $sql = "UPDATE comics SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', original_purchase='$original_purchase', wikiUpdated=1 WHERE comic_id='$comic_id'";
+        $sql = "UPDATE comics SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', wikiUpdated=1 WHERE comic_id='$comic_id'";
         if (mysqli_query ( $connection, $sql )) {
             $messageNum = 5;
             $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql;

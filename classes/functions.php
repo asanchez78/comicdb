@@ -38,7 +38,7 @@ class comicSearch {
   public $comic_id;
   public $series_name;
   public $series_id;
-  public $original_purchase;
+  public $originalPurchase;
   /**
    * List of comic series in database
    *
@@ -59,7 +59,13 @@ class comicSearch {
       die ( "Connection failed: " );
     }
 
-    $sql = "SELECT * FROM comics LEFT JOIN series ON comics.series_id=series.series_id WHERE comics.comic_id = $comic_id";
+    $sql = "SELECT *
+            FROM comics
+            LEFT JOIN series
+            ON comics.series_id=series.series_id
+            LEFT JOIN users_comics
+            ON comics.comic_id=users_comics.comic_id
+            WHERE comics.comic_id = $comic_id";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
@@ -72,7 +78,7 @@ class comicSearch {
         $wiki_id = $row['wiki_id'];
         $series_name = $row ['series_name'];
         $series_id = $row['series_id'];
-        $original_purchase = $row['original_purchase'];
+        $originalPurchase = $row['originalPurchase'];
         $series_vol = $row['series_vol'];
       }
     }
@@ -84,7 +90,7 @@ class comicSearch {
     $this->wiki_id = $wiki_id;
     $this->comic_id = $comic_id;
     $this->series_name = $series_name;
-    $this->original_purchase = $original_purchase;
+    $this->originalPurchase = $originalPurchase;
     $this->series_id = $series_id;
     $this->series_vol = $series_vol;
   }
