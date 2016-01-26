@@ -195,7 +195,7 @@ class comicSearch {
       die ( "Connection failed:" );
     }
     if ($listAllSeries == 1) {
-      $sql = "SELECT * FROM series ORDER BY series_name ASC";
+      $sql = "SELECT * FROM series ORDER BY series_name ASC, series_vol ASC";
       $this->series_list_result = $this->db_connection->query ( $sql );
     } else {
       $sql = "SELECT DISTINCT comics.series_id

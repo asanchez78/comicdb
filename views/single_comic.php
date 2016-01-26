@@ -47,7 +47,7 @@
     <p>
       <?php
         if ($login->isUserLoggedIn () == true) { ?>
-          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&wiki_id=<?php echo $comic->wiki_id; ?>&type=edit" class="btn btn-default">Update Info</a>
+          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&wiki_id=<?php echo $comic->wiki_id; ?>&type=edit" class="btn btn-lg btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
         <?php } 
       ?>
     </p>

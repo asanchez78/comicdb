@@ -3,7 +3,7 @@
   if ($type) {
     require_once(__ROOT__.'/classes/wikiFunctions.php');
     switch ($type) {
-      // Runs when the Add Series form has been submitted
+      // ADD SERIES: Runs when the Add Series form has been submitted
       case 'series':
         $series_name = filter_input ( INPUT_POST, 'series_name' );
         $series_vol = filter_input(INPUT_POST, 'series_vol');
@@ -21,7 +21,7 @@
           }
         }
         break;
-      // Part one of the single issue process. Displays Wikia results.
+      // ADD SINGLE ISSUE: Part one of the single issue process. Displays Wikia results.
       case 'issue-search':
         $issueSearch = true;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
@@ -35,9 +35,9 @@
         $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
         $wiki = new wikiQuery();
-        $wiki->wikiSearch($publisherAPI, $query, 50);
+        $wiki->wikiSearch($publisherAPI, $query, 12);
         break;
-      // Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
+      // ADD SINGLE ISSUE: Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
         $issueAdd = true;
         $series_name = filter_input ( INPUT_POST, 'series_name' );
@@ -51,6 +51,7 @@
         $wiki->comicCover ( $publisherAPI, $wiki_id );
         $wiki->comicDetails ( $publisherAPI, $wiki_id );
         break;
+      // ADD SINGLE ISSUE: Part three of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
         $issueSubmit = true;
         $ownerID = $_SESSION['user_id'];
@@ -67,12 +68,14 @@
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
         $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
 
+        // Formats date
         if ($released_date == 0000 - 00 - 00) {
           $release_date = "";
         } else {
           $release_date = $released_date;
         }
 
+        // Downloads the cover from Wikia and stores is locally, otherwise show the nocover.jpg image.
         if ($cover_image == 'assets/nocover.jpg') {
           $cover_image_file = 'assets/nocover.jpg';
         } else {
@@ -84,6 +87,7 @@
         $comic = new comicSearch();
         $comic->issueCheck($series_id, $issue_number);
         if ($comic->issueExists == 1) {
+          // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
           $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
           $comic_id = $comic->comic_id;
           if (mysqli_query ( $connection, $sql )) {
@@ -93,6 +97,7 @@
             $messageNum = 51;
           }
         } else {
+          // Comic does not exist in the master table. Add all details and then associate with the user table.
           $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wiki_id, wikiUpdated)
           VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$wiki_id', 1)";
           if (mysqli_query ( $connection, $sql )) {
@@ -110,6 +115,7 @@
           }
         }
         break;
+      // ADD RANGE: Submit all issues in input range using the first Wikia API entry as the result.
       case 'range':
         $rangeSearch = true;
         $ownerID = $_SESSION['user_id'];
@@ -171,6 +177,8 @@
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           }
+
+          // Checks the month of the release date array since it auto-increments. If the month is greater than 12, then it resets the month number back to 0 and start the incrementing again.
           ++$releaseDateArray[1];
           if ($releaseDateArray[1] > 12) {
             ++$releaseDateArray[0];

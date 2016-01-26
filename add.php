@@ -22,63 +22,20 @@
     } ?>
     <ul class="add-menu list-inline">
       <li>
-        <a href="#addseries" class="active" id="form-add-series">Add Series</a>
+        <a href="#addissue" class="active" id="form-add-issue"><i class="fa fa-plus"></i> Add Issue</a>
       </li>
       <li>
-        <a href="#addissue" id="form-add-issue">Add Issue</a>
+        <a href="#addrange" id="form-add-range"><i class="fa fa-hashtag"></i> Add Range of Issues</a>
       </li>
       <li>
-        <a href="#addrange" id="form-add-range">Add Range of Issues</a>
+        <a href="#addlist" id="form-add-list"><i class="fa fa-archive"></i> Add List of Issues</a>
       </li>
       <li>
-        <a href="#addlist" id="form-add-list">Add List of Issues</a>
+        <a href="#addseries" id="form-add-series"><i class="fa fa-folder-open"></i> Add Series</a>
       </li>
     </ul>
-    <?php // ADD SERIES ?>
-    <div class="row add-block form-add-series active">
-      <div class="col-xs-12" id="form-series-add">
-        <h2>Add Series</h2>
-        <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
-          <div class="form-group">
-            <label for="publisherID">Publisher</label>
-            <select class="form-control" name="publisherID" required>
-              <option value="">Choose a Publisher</option>
-              <?php
-                $comic = new comicSearch ();
-                $comic->publisherList ();
-                while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
-                  $list_publisher_name = $row ['publisherName'];
-                  $list_publisherID = $row ['publisherID'];
-                  echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
-                } 
-              ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="series_name">Series Name</label>
-            <input name="series_name" class="form-control" type="text" size="50" value="" required />
-          </div>
-          <div class="form-group">
-            <label for="series_vol">Volume #</label>
-            <input name="series_vol" class="form-control" type="text" size="3" maxlength="4" value="" required />
-          </div>
-          <input type="hidden" name="submitted" value="yes" />
-          <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
-        </form>
-      </div>
-      <?php if ($seriesSubmitted == true) { ?>
-        <div class="add-success bg-success col-xs-12">
-          <div class="success-message text-center">
-            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
-            <p>has been added to your collection.</p>
-            <a href="#" class="btn btn-default add-another">Add another?</a>
-          </div>
-        </div>
-      <?php } ?>
-    </div>
     <?php // ADD SINGLE ISSUE ?>
-    <div class="row add-block form-add-issue">
+    <div class="row add-block form-add-issue active">
       <?php if ($issueSearch == true) { ?>
         <div class="col-xs-12">
           <h2>Your Search Results</h2>
@@ -97,17 +54,17 @@
             <input type="hidden" name="publisherAPI" value="<?php echo $publisherAPI; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block">
-              <a href="#" class="btn btn-default form-back">&lt; Back</a>
-              <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
+              <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Next</button>
             </div>
           </form>
         </div>
       <?php } elseif ($issueAdd == true) { ?>
-        <div class="col-sm-12 headline">
-          <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
-        </div>
-        <div class="col-md-8 col-sm-12">
-          <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
+        <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
+          <div class="col-sm-12 headline">
+            <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
+          </div>
+          <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <label for="story_name">Story Name: </label>
               <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $wiki->storyName; ?>" />
@@ -128,24 +85,28 @@
               <small><a href="#">[edit]</a></small>
               <?php echo $wiki->synopsis; ?>
             </div>
-            <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
-            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
-            <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-            <input type="hidden" name="cover_image" value="<?php echo $wiki->coverURL; ?>" />
-            <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
-            <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
-            <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-            <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
-            <input type="hidden" name="submitted" value="yes" />
-            <div class="text-center center-block">
-              <a href="#" class="btn btn-default form-back">&lt; Back</a>
-              <input type="submit" name="submit" value="Submit" class="btn btn-primary form-submit" />
+          </div>
+          <div class="col-md-4 issue-image">
+            <img src="<?php echo $wiki->coverURL; ?>" alt="Cover" />
+            <div class="form-group">
+              <label for="cover_image">Cover Image URL</label>
+              <input type="url" class="form-control" name="cover_image" value="<?php echo $wiki->coverURL; ?>" />
+              <small>Enter the URL of the image you wish to use. Default is the cover file from the Wikia entry on this issue.</small>
+              <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
             </div>
-          </form>
-        </div>
-        <div class="col-md-4 issue-image">
-          <img src="<?php echo $wiki->coverURL; ?>" alt="Cover" />
-        </div>
+          </div>
+          <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
+          <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+          <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
+          <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
+          <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
+          <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
+          <input type="hidden" name="submitted" value="yes" />
+          <div class="text-center center-block">
+            <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+          </div>
+        </form>  
       <?php } elseif ($issueSubmit == true) { ?>
         <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
           <div class="success-message">
@@ -154,13 +115,13 @@
                 <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
               </div>
               <div class="col-xs-12 col-md-9">
-                <h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h2>
+                <h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
                 <p><?php if ($messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
               </div>
             </div>
             <div class="text-center center-block">
-              <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-default">View Issue</a>
-              <a href="/add.php#addissue" class="btn btn-default">Add another?</a>
+              <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
+              <a href="/add.php#addissue" class="btn btn-lg btn-info">Add another?</a>
             </div>
           </div>
         </div>
@@ -176,7 +137,6 @@
                   $listAllSeries=1;
                   $comic = new comicSearch ();
                   $comic->seriesList ($listAllSeries);
-                  $comic->publisherList ();
                   while ( $row = $comic->series_list_result->fetch_assoc () ) {
                     $list_series_name = $row ['series_name'];
                     $list_series_vol = $row ['series_vol'];
@@ -191,14 +151,14 @@
               <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <input class="btn btn-default form-submit" type="submit" name="submit" value="Search" />
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
           </form>
         </div>
       <?php } ?>
     </div>
     <?php // ADD RANGE ?>
     <div class="row add-block form-add-range">
-      <?php if ($rangeSearch != true) { ?>
+      <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
       <div class="col-xs-12">
         <h2>Add a range of issues</h2>
         <p>If the series had a regular monthly release, you may enter the published date of the first issue.</p>
@@ -255,7 +215,7 @@
             </div>
           </div>
           <input type="hidden" name="submitted" value="yes" />
-          <input type="submit" name="submit" value="Submit" class="form-submit" />
+          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
         </form>
       </div>
       <?php } else {
@@ -265,6 +225,59 @@
         echo $wiki->newWikiIDs; ?>
       <?php } ?>
     </div>
+    <?php // ADD SERIES ?>
+    <div class="row add-block form-add-series">
+      <div class="col-xs-12" id="form-series-add">
+        <h2>Add Series</h2>
+        <p>Use the form below to add a new series to your collection.</p>
+        <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
+          <div class="form-group">
+            <label for="publisherID">Publisher</label>
+            <select class="form-control" name="publisherID" required>
+              <option value="">Choose a Publisher</option>
+              <?php
+                $comic = new comicSearch ();
+                $comic->publisherList ();
+                while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
+                  $list_publisher_name = $row ['publisherName'];
+                  $list_publisherID = $row ['publisherID'];
+                  echo '<option value="' . $list_publisherID . '">' . $list_publisher_name . '</option>';
+                } 
+              ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="series_name">Series Name</label>
+            <input name="series_name" class="form-control" type="text" size="50" value="" required />
+          </div>
+          <div class="form-group">
+            <label for="series_vol">Volume #</label>
+            <select class="form-control" name="series_vol">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <input type="hidden" name="submitted" value="yes" />
+          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+        </form>
+      </div>
+      <?php if ($seriesSubmitted == true) { ?>
+        <div class="add-success bg-success col-xs-12">
+          <div class="success-message text-center">
+            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
+            <p>has been added to your collection.</p>
+            <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
+          </div>
+        </div>
+      <?php } ?>
     </div>
   </div>
 <?php include 'views/footer.php';?>
