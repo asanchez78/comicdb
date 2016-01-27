@@ -3,23 +3,35 @@
   if ($type) {
     require_once(__ROOT__.'/classes/wikiFunctions.php');
     switch ($type) {
-      // ADD SERIES: Runs when the Add Series form has been submitted
-      case 'series':
+      // ADD SERIES: Part one of the series process. Displays API search results.
+      case 'series-search':
+        $seriesSearch = true;
         $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $publisherID = filter_input ( INPUT_POST, 'publisherID' );
+        $seriesSearch = new wikiQuery();
+        $seriesSearch->seriesSearch("$series_name");
+
+        break;
+      // ADD SERIES: Part two of the series process. Checks the database for existing series, and then adds series to the database.
+      case 'series-submit':
+        $seriesSearch->seriesLookup;
+        $seriesSubmit = true;
         $series_vol = filter_input(INPUT_POST, 'series_vol');
         $publisherID = filter_input ( INPUT_POST, 'publisherID' );
-        $sql = "INSERT INTO series (series_name, series_vol, publisherID) VALUES ('$series_name', '$series_vol', '$publisherID')";
-        if (mysqli_query ( $connection, $sql )) {
-          $messageNum = 3;
-          $seriesSubmitted = true;
-          $sqlMessage = '<strong class="text-success">Success</strong>: <code>' . $sql . '</code>';
-        } else {
-          $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br /><code>' . mysqli_error ( $connection ) . $connection->errno . '</code>';
-          $seriesSubmitted = false;
-          if ($connection->errno == 1062) {
-            $messageNum = 50;
-          }
-        }
+        $sql = "INSERT INTO series (series_name, series_vol, publisherID, cvVolumeID, apiDetailURL, siteDetailURL)
+                VALUES ('$seriesSearch->series_name', '$series_vol', '$publisherID', '$seriesSearch->cvVolumeID', '$seriesSearch->apiDetailURL', '$seriesSearch->siteDetailURL')";
+        //if (mysqli_query ( $connection, $sql )) {
+        //  $messageNum = 3;
+        //  $seriesSubmitted = true;
+        //  $sqlMessage = '<strong class="text-success">Success</strong>: <code>' . $sql . '</code>';
+        //} else {
+        //  $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br /><code>' . mysqli_error ( $connection ) . $connection->errno . '</code>';
+        //  $seriesSubmitted = false;
+        //  if ($connection->errno == 1062) {
+        //    $messageNum = 50;
+        //  }
+        //}
+        echo $sql;
         break;
       // ADD SINGLE ISSUE: Part one of the single issue process. Displays Wikia results.
       case 'issue-search':

@@ -29,6 +29,44 @@ class wikiQuery {
 	public $updatedList;
 	public $coverSearchErr;
 
+	/**
+	 * queries ComicVine API to get the volume ID of the series searched for
+	 * @param  int $seriesName name of the comic series being searched for
+	 * @return string             list of results
+	 */
+	public function seriesSearch ($seriesName) {
+		$apiURL = "http://www.comicvine.com/api/volumes/?api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691&format=json&filter=name:$seriesName";
+		$jsondata = file_get_contents($apiURL);
+		$results = json_decode($jsondata, true);
+		$this->resultNum = 1;
+			foreach($results['results'] as $result) {
+				$this->seriesName = $result['name'];
+				$this->cvVolumeID = $result['id'];
+				$this->seriesStartYear = $result['start_year'];
+				$this->seriesURL = $result['site_detail_url'];
+				$this->apiURL = $result['api_detail_url'];
+				$this->resultsList .= '<div class="series-search-result col-xs-12 col-sm-6 col-md-4">
+											<input name="cvVolumeID" id="cvVolumeID-' . $this->cvVolumeID . '" value="' . $this->apiURL . '" type="radio" />
+												<label for="cvVolumeID-' . $this->cvVolumeID . '">' . $this->resultNum . ': '  . $this->seriesName . ' ' . $this->seriesStartYear .'</label>
+											<a href="' . $this->seriesURL . '" target="_blank">' . $this->seriesURL . '</a>
+										</div>';
+				++$this->resultNum;
+			}
+	}
+
+	public function seriesLookup ($apiDetailURL) {
+		$apiURL = $apiDetailURL . "?api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691&format=json";
+		$jsondata = file_get_contents($apiURL);
+		$results = json_decode($jsondata, true);
+			foreach($results['results'] as $result) {
+				$this->seriesName = $result['name'];
+				$this->cvVolumeID = $result['id'];
+				$this->seriesStartYear = $result['start_year'];
+				$this->seriesURL = $result['site_detail_url'];
+				$this->apiURL = $result['api_detail_url'];
+			}
+	}
+
 	public function downloadFile($url, $path) {
 		$newfname = $path;
 		$file = fopen ( $url, "rb" );

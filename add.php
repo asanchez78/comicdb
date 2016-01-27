@@ -3,7 +3,9 @@
   $filename = $_SERVER["PHP_SELF"];
   
   // Reset all our form flags
-  $seriesSubmitted = false;
+  $seriesSearch = false;
+  $seriesAdd = false;
+  $seriesSubmit = false;
   $issueSearch = false;
   $issueAdd = false;
   $issueSubmit = false;
@@ -227,10 +229,43 @@
     </div>
     <?php // ADD SERIES ?>
     <div class="row add-block form-add-series">
+      <?php if ($seriesSearch == true) { ?>
+        <div class="col-xs-12" id="form-series-add">
+          <h2>Your Search Results</h2>
+          <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
+          <p>Check the ComicVine link below the result to make sure it is the series you are looking for. Links open in a new tab.</p>
+          <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline" id="add-series-search">
+            <div class="form-group form-radio">
+              <label for="wiki_id">Choose the result that matches your series:</label>
+              <fieldset class="row">
+                <?php echo $seriesSearch->resultsList; ?>
+              </fieldset>
+            </div>
+            <input type="hidden" name="series_name" value="<?php echo $seriesSearch->seriesName; ?>" />
+            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+            <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
+            <input type="hidden" name="apiDetailURL" value="<?php echo $seriesSearch->apiDetailURL; ?>" />
+            <input type="hidden" name="siteDetailURL" value="<?php echo $seriesSearch->siteDetailURL; ?>" />
+            <input type="hidden" name="submitted" value="yes" />
+            <div class="text-center center-block">
+              <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            </div>
+          </form>
+        </div>
+      <?php } elseif ($seriesSubmit == true) { ?>
+        <div class="add-success bg-success col-xs-12">
+          <div class="success-message text-center">
+            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
+            <p>has been added to your collection.</p>
+            <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
+          </div>
+        </div>
+      <?php } else {?>
       <div class="col-xs-12" id="form-series-add">
         <h2>Add Series</h2>
         <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series" class="form-inline" id="add-series">
+        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="add-series">
           <div class="form-group">
             <label for="publisherID">Publisher</label>
             <select class="form-control" name="publisherID" required>
@@ -269,14 +304,6 @@
           <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
         </form>
       </div>
-      <?php if ($seriesSubmitted == true) { ?>
-        <div class="add-success bg-success col-xs-12">
-          <div class="success-message text-center">
-            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
-            <p>has been added to your collection.</p>
-            <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
-          </div>
-        </div>
       <?php } ?>
     </div>
   </div>
