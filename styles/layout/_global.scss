@@ -108,10 +108,17 @@ ul.nolist {
 
 .content,
 .dev-messages {
+  position: relative;
   background-color: white;
   opacity: 0.95;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
   border: 2px solid $border-color;
+}
+
+.sort-controls {
+  position: absolute;
+  top: 20px;
+  right: 15px;
 }

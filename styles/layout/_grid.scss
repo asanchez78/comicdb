@@ -1,72 +1,72 @@
 /* Grid display styles */
-ul.inventory-table {
-  margin: 0 -15px;
-}
+#inventory-table {
+  @extend .nolist;
+  @extend .row;
 
-.inventory-table {
   h3 {
     margin: 0;
-    font-size: 14px;
   }
   
   small {
     text-transform: uppercase;
     font-size: 10px;
+  }
+
+  .comic-image {
+    overflow: hidden;
+  }
+
+  .series-count {
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .series-publisher {
+    display: none;
+  }
+
+  .issue-meta {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: left;
+    padding-top: 5px;
+  }
+}
+
+#inventory-table.layout-thumb-lg,
+#inventory-table.layout-thumb-sm {
+  .series-info {
     display: block;
-    margin-top: 5px;
+    position: relative;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   li {
-    text-align: center;
-    margin-bottom: 20px;
     position: relative;
+  }
 
-    &:nth-child(2n+1) {
-      clear: both;
-    }
-    
-    @media (min-width: $screen-sm) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
+  .comic-image {
+    width: 100%;
+    display: block;
+  }
 
-      &:nth-child(3n+1) {
-        clear: both;
-      }
-    }
+  .series-title {
+    text-align: center;
+    width: 100%;
+  }
+}
 
-    @media (min-width: $screen-md) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
+#inventory-table.layout-thumb-lg {
+  h3 {
+    font-size: 14px;
+  }
 
-      &:nth-child(3n+1) {
-        clear: none;
-      }
-
-      &:nth-child(4n+1) {
-        clear: both;
-      }
-    }
-    
-    @media (min-width: $screen-lg) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
-      
-      &:nth-child(3n+1) {
-        clear: none;
-      }
-
-      &:nth-child(4n+1) {
-        clear: none;
-      }
-
-      &:nth-child(6n+1) {
-        clear: both;
-      }
-    }
-    
+  li {
+    margin-bottom: 20px;
     > a:first-of-type {
       transition: box-shadow 0.2s ease-in-out;
       box-shadow: 0px 0px 15px 1px transparent;
@@ -77,13 +77,15 @@ ul.inventory-table {
         box-shadow: 0px 0px 15px 1px gray;
       }
     }
+
+    .issue-meta {
+      width: 50%;
+      vertical-align: top;
+    }
   }
 
   .comic-image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    height: 172px;
+    height: 216px;
 
     @media (min-width: $screen-sm) {
       height: 189px;
@@ -94,7 +96,7 @@ ul.inventory-table {
     }
 
     @media (min-width: $screen-lg) {
-      height: 205px;
+      height: 198px;
     }
   }
 
@@ -104,52 +106,311 @@ ul.inventory-table {
     background: black;
     opacity: 0.9;
     padding: 5px 10px;
-    width: 100%;
 
     a {
       color: white;
     }
   }
 
-  .series-info {
-    display: block;
-    position: relative;
+  .volume-number {
+    width: 45px;
+    height: 48px;
+    overflow: hidden;
+    position: absolute;
+    top: -3px;
+    right: 13px;
+
+    span {
+      display: block;
+      color: white;
+      text-align: center;
+      transform: rotate(45deg);
+      position: relative;
+      left: -30px;
+      top: 6px;
+      width: 120px;
+      background-color: $brand-red;
+      padding: 2px 0;
+      font-size: 10px;
+      font-weight: bold;
+    }
   }
-}
+  
+  .release-date {
+    text-align: right;
+  }
 
-.volume-number {
-  width: 45px;
-  height: 48px;
-  overflow: hidden;
-  position: absolute;
-  top: -3px;
-  right: 13px;
+  .series-extra {
+    .col-md-6:first-child {
+      font-size: 10px;
+      padding-top: 5px;
+    }
+  }
 
-  .count {
-    display: block;
-    color: white;
+  .series-count {
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
     text-align: center;
-    transform: rotate(45deg);
-    position: relative;
-    left: -30px;
-    top: 6px;
-    width: 120px;
-    background-color: $brand-red;
-    padding: 2px 0;
-    font-size: 10px;
-    font-weight: bold;
+
+    @media (min-width: $screen-md) {
+      width: 49%;
+      text-align: left;
+    }
+  }
+
+  .series-controls {
+    display: inline-block;
+    width: 48%;
+
+    button {
+      padding: 1px 2px;
+    }
   }
 }
 
-.issue-meta {
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 11px;
-  text-align: left;
-  padding-top: 5px;
+.issues-list #inventory-table.layout-thumb-lg {
+  .comic-image {
+    height: 150px;
+
+    @media (min-width: $screen-sm) {
+      height: 168px;
+    }
+
+    @media (min-width: $screen-md) {
+      height: 225px;
+    }
+
+    @media (min-width: $screen-lg) {
+      height: 196px;
+    }
+  }
+}
+
+.issues-list #inventory-table.layout-thumb-sm {
+  li {
+    min-height: 130px;
+  }
+}
+
+#inventory-table.layout-thumb-sm {
+  h3 {
+    font-size: 12px;
+  }
+
+  li {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 230px;
+
+    @media (min-width: $screen-lg) {
+      min-height: 190px;
+    }
+  }
+
+  .comic-image {
+    height: 155px;
+
+    @media (min-width: $screen-sm) {
+      height: 145px;
+    }
+
+    @media (min-width: $screen-md) {
+      height: 165px;
+    }
+
+    @media (min-width: $screen-lg) {
+      height: 106px;
+    }
+  }
+
+  .series-title {
+    margin-top: 5px;
+  }
+
+  .volume-number {
+    margin-top: 2px;
+    text-transform: uppercase;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+
+    &:before {
+      content: "( ";
+      display: inline;
+    }
+
+    &:after {
+      content: ")";
+      display: inline;
+    }
+  }
+
+  .series-count {
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .series-controls {
+    display: none;
+  }
+
+  .series-extra {
+    .col-md-6:first-child {
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+    }
+  }
+  
+  .issue-number {
+    width: 100%;
+    text-align: center;
+  }
+
+  .release-date {
+    display: none;
+  }
+}
+
+#inventory-table.layout-list {
+  > li {
+    padding: 0;
+  }
+
+  li:nth-child(even) {
+    background-color: #FFE4E1;
+  }
+
+  .comic-image {
+    height: 45px;
+    width: 8%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+    
+    @media (min-width: $screen-sm) {
+      width: 7%;
+    }
+    
+    @media (min-width: $screen-md) {
+      width: 4%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 3%;
+    }
+  }
+
+  .series-title {
+    display: inline-block;
+    width: 55%;
+
+    @media (min-width: $screen-md) {
+      width: 45%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 35%;
+    }
+  }
+
+  h3 {
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+
+    @media (min-width: $screen-md) {
+      font-size: 16px;
+      width: auto;
+      position: static;
+      top: auto;
+      transform: none;
+    }
+  }
+
+  .volume-number {
+    display: inline-block;
+    width: 8%;
+    text-align: center;
+    font-size: 11px;
+    
+    @media (min-width: $screen-sm) {
+      width: 7%;
+    }
+
+    @media (min-width: $screen-md) {
+      width: 15%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 7%;
+    }
+  }
+
+  .series-extra {
+    display: inline-block;
+    width: 17%;
+    text-align: right;
+
+    @media (min-width: $screen-sm) {
+      width: 20%;
+    } 
+    
+    @media (min-width: $screen-md) {
+      width: 31%;
+      text-align: left;
+    }    
+    
+    @media (min-width: $screen-lg) {
+      width: 50%;
+    }
+
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .series-publisher {
+    font-size: 12px;
+    text-align: center;
+    
+    @media (min-width: $screen-lg) {
+      width: 45%;
+    }
+  }
+  
+  .series-count {
+    text-align: center;
+
+    @media (min-width: $screen-md) {
+      width: 47%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 40%;
+    }
+  }
+
+  .series-controls {
+    width: 13%;
+    
+    @media (min-width: $screen-md) {
+      width: 40%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 13%;
+    }
+  }
+
+  .issue-meta {
+    width: 40%;
+  }
 }
 
 .release-date {

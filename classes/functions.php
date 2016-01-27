@@ -177,8 +177,8 @@ class comicSearch {
         $this->cover_image = $row ['cover_image'];
         $this->issue_list .= '<li class="col-xs-6 col-sm-4 col-md-3 col-lg-2" id="issue-' . $this->issue_number . '">';
         $this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" class="img-responsive" /></div></a>';
-        $this->issue_list .= '<div class="issue-meta issue-number">Issue #' . $this->issue_number . '</div>';
-        $this->issue_list .= '<div class="issue-meta release-date">' . $this->release_date . '</div>';
+        $this->issue_list .= '<div class="issue-meta issue-number text-uppercase">Issue #' . $this->issue_number . '</div>';
+        $this->issue_list .= '<div class="issue-meta release-date text-uppercase">' . $this->release_date . '</div>';
         $this->issue_list .= '</li>';
       }
     } else {
@@ -210,7 +210,7 @@ class comicSearch {
           $list .= "series_id=" . $row ['series_id'] . " or ";
         }
         $idList = preg_replace('/(or(?!.*or))/', '', $list);
-        $sql = "SELECT * FROM series where $idList ORDER BY series_name ASC";
+        $sql = "SELECT * FROM series where $idList ORDER BY series_name ASC, series_vol ASC";
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
     }
