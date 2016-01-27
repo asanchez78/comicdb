@@ -28,13 +28,18 @@
 						<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
 						<li><?php echo $issues->series_issue_count; ?></li>
 						<li>Volume <?php echo $series_vol; ?></li>
+						<li>
+							<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
+							<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
+							<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<ul class="nolist row inventory-table">
+				<ul id="inventory-table" class="layout-thumb-lg">
 					<?php echo $issues->issue_list; ?>
 				</ul>
 			</div>
