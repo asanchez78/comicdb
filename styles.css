@@ -3488,10 +3488,6 @@ label {
 }
 
 /* Grid display styles */
-ul.inventory-table {
-  margin: 0 -15px;
-}
-
 #inventory-table h3 {
   margin: 0;
 }
@@ -3508,6 +3504,13 @@ ul.inventory-table {
 }
 #inventory-table .series-publisher {
   display: none;
+}
+#inventory-table .issue-meta {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 11px;
+  text-align: left;
+  padding-top: 5px;
 }
 
 #inventory-table.layout-thumb-lg .series-info,
@@ -3550,6 +3553,10 @@ ul.inventory-table {
   text-decoration: none;
   box-shadow: 0px 0px 15px 1px gray;
 }
+#inventory-table.layout-thumb-lg li .issue-meta {
+  width: 50%;
+  vertical-align: top;
+}
 #inventory-table.layout-thumb-lg .comic-image {
   height: 216px;
 }
@@ -3565,7 +3572,7 @@ ul.inventory-table {
 }
 @media (min-width: 850px) {
   #inventory-table.layout-thumb-lg .comic-image {
-    height: 205px;
+    height: 198px;
   }
 }
 #inventory-table.layout-thumb-lg .series-title {
@@ -3601,6 +3608,9 @@ ul.inventory-table {
   font-size: 10px;
   font-weight: bold;
 }
+#inventory-table.layout-thumb-lg .release-date {
+  text-align: right;
+}
 #inventory-table.layout-thumb-lg .series-extra .col-md-6:first-child {
   font-size: 10px;
   padding-top: 5px;
@@ -3623,6 +3633,29 @@ ul.inventory-table {
 }
 #inventory-table.layout-thumb-lg .series-controls button {
   padding: 1px 2px;
+}
+
+.issues-list #inventory-table.layout-thumb-lg .comic-image {
+  height: 150px;
+}
+@media (min-width: 480px) {
+  .issues-list #inventory-table.layout-thumb-lg .comic-image {
+    height: 168px;
+  }
+}
+@media (min-width: 640px) {
+  .issues-list #inventory-table.layout-thumb-lg .comic-image {
+    height: 225px;
+  }
+}
+@media (min-width: 850px) {
+  .issues-list #inventory-table.layout-thumb-lg .comic-image {
+    height: 196px;
+  }
+}
+
+.issues-list #inventory-table.layout-thumb-sm li {
+  min-height: 130px;
 }
 
 #inventory-table.layout-thumb-sm h3 {
@@ -3686,6 +3719,13 @@ ul.inventory-table {
   width: 100%;
   text-align: center;
   font-size: 10px;
+}
+#inventory-table.layout-thumb-sm .issue-number {
+  width: 100%;
+  text-align: center;
+}
+#inventory-table.layout-thumb-sm .release-date {
+  display: none;
 }
 
 #inventory-table.layout-list > li {
@@ -3829,16 +3869,8 @@ ul.inventory-table {
     width: 13%;
   }
 }
-
-.issue-meta {
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 11px;
-  text-align: left;
-  padding-top: 5px;
+#inventory-table.layout-list .issue-meta {
+  width: 40%;
 }
 
 .release-date {
@@ -3853,16 +3885,15 @@ ul.inventory-table {
 }
 @media (min-width: 640px) {
   .series-meta {
-    width: 350px;
+    width: 50%;
     position: absolute;
     right: 15px;
-    top: 13px;
+    top: 8px;
     text-align: right;
   }
 }
 .series-meta ul > li {
   display: inline-block;
-  vertical-align: top;
   margin: 0 10px;
 }
 @media (min-width: 640px) {
@@ -3872,6 +3903,8 @@ ul.inventory-table {
 }
 .series-meta ul > li:first-of-type {
   margin-left: 0;
+  vertical-align: top;
+  margin-top: 4px;
 }
 .series-meta ul > li:last-of-type {
   margin-right: 0;

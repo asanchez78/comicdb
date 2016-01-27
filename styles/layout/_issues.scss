@@ -5,16 +5,15 @@
   margin-bottom: 15px;
 
   @media (min-width: $screen-md) {
-    width: 350px;
+    width: 50%;
     position: absolute;
     right: 15px;
-    top: 13px;
+    top: 8px;
     text-align: right;
   }
 
   ul > li {
     display: inline-block;
-    vertical-align: top;
     margin: 0 10px;
 
     @media (min-width: $screen-md) {
@@ -22,7 +21,9 @@
     }
 
     &:first-of-type {
-      margin-left: 0
+      margin-left: 0;
+      vertical-align: top;
+      margin-top: 4px;
     }
     
     &:last-of-type {
