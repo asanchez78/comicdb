@@ -29,7 +29,7 @@
           <span>Vol <?php echo $series_vol; ?></span>
         </div>
         <div class="series-extra">
-          <div class="series-publisher hidden-sm hidden-md">
+          <div class="series-publisher hidden-xs hidden-sm hidden-md">
             <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .'">' . $publisherName . '</div>'; } ?>
           </div>
           <div class="text-uppercase series-count">
@@ -44,6 +44,6 @@
     <?php } ?>
     </ul>
   <?php } else { ?>
-    <p>No Comic Series in database. Perhaps you should <a href="/admin/addseries.php">Add some.</a></p>
+    <p>No Comics in your collection. Perhaps you should <a href="/add.php">Add some!</a></p>
   <?php }
 ?>

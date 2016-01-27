@@ -22,6 +22,7 @@ ul.inventory-table {
 
   .series-count {
     font-size: 11px;
+    font-weight: bold;
   }
 
   .series-publisher {
@@ -135,8 +136,14 @@ ul.inventory-table {
 
   .series-count {
     display: inline-block;
-    width: 49%;
-    font-weight: bold;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+
+    @media (min-width: $screen-md) {
+      width: 49%;
+      text-align: left;
+    }
   }
 
   .series-controls {
@@ -158,7 +165,11 @@ ul.inventory-table {
     margin-bottom: 5px;
     padding-left: 5px;
     padding-right: 5px;
-    min-height: 190px;
+    min-height: 230px;
+
+    @media (min-width: $screen-lg) {
+      min-height: 190px;
+    }
   }
 
   .comic-image {
@@ -228,10 +239,18 @@ ul.inventory-table {
 
   .comic-image {
     height: 45px;
-    width: 7%;
+    width: 8%;
     display: inline-block;
     vertical-align: middle;
     margin-right: 20px;
+    
+    @media (min-width: $screen-sm) {
+      width: 7%;
+    }
+    
+    @media (min-width: $screen-md) {
+      width: 4%;
+    }
 
     @media (min-width: $screen-lg) {
       width: 3%;
@@ -252,15 +271,31 @@ ul.inventory-table {
   }
 
   h3 {
-    font-size: 16px;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+
+    @media (min-width: $screen-md) {
+      font-size: 16px;
+      width: auto;
+      position: static;
+      top: auto;
+      transform: none;
+    }
   }
 
   .volume-number {
     display: inline-block;
-    width: 7%;
+    width: 8%;
     text-align: center;
     font-size: 11px;
     
+    @media (min-width: $screen-sm) {
+      width: 7%;
+    }
+
     @media (min-width: $screen-md) {
       width: 15%;
     }
@@ -272,11 +307,15 @@ ul.inventory-table {
 
   .series-extra {
     display: inline-block;
-    width: 20%;
+    width: 17%;
     text-align: right;
+
+    @media (min-width: $screen-sm) {
+      width: 20%;
+    } 
     
     @media (min-width: $screen-md) {
-      width: 32%;
+      width: 31%;
       text-align: left;
     }    
     
