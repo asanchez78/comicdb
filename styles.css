@@ -3502,76 +3502,82 @@ ul.inventory-table {
 #inventory-table .comic-image {
   overflow: hidden;
 }
+#inventory-table .series-count {
+  font-size: 11px;
+}
+#inventory-table .series-publisher {
+  display: none;
+}
 
-.layout-thumb-lg .series-info,
-.layout-thumb-sm .series-info {
+#inventory-table.layout-thumb-lg .series-info,
+#inventory-table.layout-thumb-sm .series-info {
   display: block;
   position: relative;
 }
-.layout-thumb-lg .series-info:hover,
-.layout-thumb-sm .series-info:hover {
+#inventory-table.layout-thumb-lg .series-info:hover,
+#inventory-table.layout-thumb-sm .series-info:hover {
   text-decoration: none;
 }
-.layout-thumb-lg li,
-.layout-thumb-sm li {
+#inventory-table.layout-thumb-lg li,
+#inventory-table.layout-thumb-sm li {
   position: relative;
 }
-.layout-thumb-lg .comic-image,
-.layout-thumb-sm .comic-image {
+#inventory-table.layout-thumb-lg .comic-image,
+#inventory-table.layout-thumb-sm .comic-image {
   width: 100%;
   display: block;
 }
-.layout-thumb-lg .series-title,
-.layout-thumb-sm .series-title {
+#inventory-table.layout-thumb-lg .series-title,
+#inventory-table.layout-thumb-sm .series-title {
   text-align: center;
   width: 100%;
 }
 
-.layout-thumb-lg h3 {
+#inventory-table.layout-thumb-lg h3 {
   font-size: 14px;
 }
-.layout-thumb-lg li {
+#inventory-table.layout-thumb-lg li {
   margin-bottom: 20px;
 }
-.layout-thumb-lg li > a:first-of-type {
+#inventory-table.layout-thumb-lg li > a:first-of-type {
   -webkit-transition: box-shadow 0.2s ease-in-out;
           transition: box-shadow 0.2s ease-in-out;
   box-shadow: 0px 0px 15px 1px transparent;
   color: white;
 }
-.layout-thumb-lg li > a:first-of-type:hover, .layout-thumb-lg li > a:first-of-type:focus {
+#inventory-table.layout-thumb-lg li > a:first-of-type:hover, #inventory-table.layout-thumb-lg li > a:first-of-type:focus {
   text-decoration: none;
   box-shadow: 0px 0px 15px 1px gray;
 }
-.layout-thumb-lg .comic-image {
+#inventory-table.layout-thumb-lg .comic-image {
   height: 216px;
 }
 @media (min-width: 480px) {
-  .layout-thumb-lg .comic-image {
+  #inventory-table.layout-thumb-lg .comic-image {
     height: 189px;
   }
 }
 @media (min-width: 640px) {
-  .layout-thumb-lg .comic-image {
+  #inventory-table.layout-thumb-lg .comic-image {
     height: 242px;
   }
 }
 @media (min-width: 850px) {
-  .layout-thumb-lg .comic-image {
+  #inventory-table.layout-thumb-lg .comic-image {
     height: 205px;
   }
 }
-.layout-thumb-lg .series-title {
+#inventory-table.layout-thumb-lg .series-title {
   position: absolute;
   bottom: 0;
   background: black;
   opacity: 0.9;
   padding: 5px 10px;
 }
-.layout-thumb-lg .series-title a {
+#inventory-table.layout-thumb-lg .series-title a {
   color: white;
 }
-.layout-thumb-lg .volume-number {
+#inventory-table.layout-thumb-lg .volume-number {
   width: 45px;
   height: 48px;
   overflow: hidden;
@@ -3579,7 +3585,7 @@ ul.inventory-table {
   top: -3px;
   right: 13px;
 }
-.layout-thumb-lg .volume-number .count {
+#inventory-table.layout-thumb-lg .volume-number span {
   display: block;
   color: white;
   text-align: center;
@@ -3594,89 +3600,186 @@ ul.inventory-table {
   font-size: 10px;
   font-weight: bold;
 }
-.layout-thumb-lg .series-extra .col-md-6:first-child {
+#inventory-table.layout-thumb-lg .series-extra .col-md-6:first-child {
   font-size: 10px;
   padding-top: 5px;
 }
+#inventory-table.layout-thumb-lg .series-count {
+  display: inline-block;
+  width: 49%;
+  font-weight: bold;
+}
+#inventory-table.layout-thumb-lg .series-controls {
+  display: inline-block;
+  width: 48%;
+}
+#inventory-table.layout-thumb-lg .series-controls button {
+  padding: 1px 2px;
+}
 
-.layout-thumb-sm h3 {
+#inventory-table.layout-thumb-sm h3 {
   font-size: 12px;
 }
-.layout-thumb-sm li {
+#inventory-table.layout-thumb-sm li {
   margin-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   min-height: 190px;
 }
-.layout-thumb-sm .comic-image {
+#inventory-table.layout-thumb-sm .comic-image {
   height: 155px;
 }
 @media (min-width: 480px) {
-  .layout-thumb-sm .comic-image {
+  #inventory-table.layout-thumb-sm .comic-image {
     height: 145px;
   }
 }
 @media (min-width: 640px) {
-  .layout-thumb-sm .comic-image {
+  #inventory-table.layout-thumb-sm .comic-image {
     height: 165px;
   }
 }
 @media (min-width: 850px) {
-  .layout-thumb-sm .comic-image {
+  #inventory-table.layout-thumb-sm .comic-image {
     height: 106px;
   }
 }
-.layout-thumb-sm .series-title {
+#inventory-table.layout-thumb-sm .series-title {
   margin-top: 5px;
 }
-.layout-thumb-sm .volume-number {
+#inventory-table.layout-thumb-sm .volume-number {
   margin-top: 2px;
   text-transform: uppercase;
   font-size: 9px;
   font-weight: bold;
   text-align: center;
 }
-.layout-thumb-sm .volume-number:before {
+#inventory-table.layout-thumb-sm .volume-number:before {
   content: "( ";
   display: inline;
 }
-.layout-thumb-sm .volume-number:after {
+#inventory-table.layout-thumb-sm .volume-number:after {
   content: ")";
   display: inline;
 }
-.layout-thumb-sm .series-controls {
+#inventory-table.layout-thumb-sm .series-count {
+  text-align: center;
+  margin-top: 2px;
+}
+#inventory-table.layout-thumb-sm .series-controls {
   display: none;
 }
-.layout-thumb-sm .series-extra .col-md-6:first-child {
+#inventory-table.layout-thumb-sm .series-extra .col-md-6:first-child {
   width: 100%;
   text-align: center;
   font-size: 10px;
 }
 
-.layout-list li:nth-child(even) {
+#inventory-table.layout-list > li {
+  padding: 0;
+}
+#inventory-table.layout-list li:nth-child(even) {
   background-color: #FFE4E1;
 }
-.layout-list .comic-image {
+#inventory-table.layout-list .comic-image {
   height: 45px;
-  width: 3%;
+  width: 7%;
   display: inline-block;
   vertical-align: middle;
   margin-right: 20px;
 }
-.layout-list .series-title {
-  display: inline-block;
-  width: 40%;
+@media (min-width: 850px) {
+  #inventory-table.layout-list .comic-image {
+    width: 3%;
+  }
 }
-.layout-list h3 {
+#inventory-table.layout-list .series-title {
+  display: inline-block;
+  width: 55%;
+}
+@media (min-width: 640px) {
+  #inventory-table.layout-list .series-title {
+    width: 45%;
+  }
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .series-title {
+    width: 35%;
+  }
+}
+#inventory-table.layout-list h3 {
   font-size: 16px;
 }
-.layout-list .volume-number {
+#inventory-table.layout-list .volume-number {
   display: inline-block;
-  width: 20%;
+  width: 7%;
+  text-align: center;
+  font-size: 11px;
 }
-.layout-list .series-extra {
+@media (min-width: 640px) {
+  #inventory-table.layout-list .volume-number {
+    width: 15%;
+  }
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .volume-number {
+    width: 7%;
+  }
+}
+#inventory-table.layout-list .series-extra {
   display: inline-block;
   width: 20%;
+  text-align: right;
+}
+@media (min-width: 640px) {
+  #inventory-table.layout-list .series-extra {
+    width: 32%;
+    text-align: left;
+  }
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .series-extra {
+    width: 50%;
+  }
+}
+#inventory-table.layout-list .series-extra > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+#inventory-table.layout-list .series-publisher {
+  font-size: 12px;
+  text-align: center;
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .series-publisher {
+    width: 45%;
+  }
+}
+#inventory-table.layout-list .series-count {
+  text-align: center;
+}
+@media (min-width: 640px) {
+  #inventory-table.layout-list .series-count {
+    width: 47%;
+  }
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .series-count {
+    width: 40%;
+  }
+}
+#inventory-table.layout-list .series-controls {
+  width: 13%;
+}
+@media (min-width: 640px) {
+  #inventory-table.layout-list .series-controls {
+    width: 40%;
+  }
+}
+@media (min-width: 850px) {
+  #inventory-table.layout-list .series-controls {
+    width: 13%;
+  }
 }
 
 .issue-meta {
@@ -3768,11 +3871,11 @@ ul.inventory-table {
 }
 
 /* Logos */
-li[class*="logo-"] {
+*[class*="logo-"] {
   background-repeat: no-repeat;
   background-position: center left;
 }
-li[class*="logo-"]:before {
+*[class*="logo-"]:before {
   background-repeat: no-repeat;
   background-position: center left;
   display: inline-block;
@@ -3782,14 +3885,15 @@ li[class*="logo-"]:before {
   height: 18px;
 }
 
-li.logo-marvel {
+.logo-marvel {
   font-size: 0;
   width: 40px;
   height: 18px;
+  margin: 0 auto;
   background-image: url("../assets/logos/marvel_comics.svg");
 }
 
-li.logo-dc:before {
+.logo-dc:before {
   content: "";
   width: 18px;
   height: 18px;
@@ -3797,19 +3901,19 @@ li.logo-dc:before {
   background-size: 18px 18px;
 }
 
-li.logo-imagecomics:before {
+.logo-imagecomics:before {
   content: "";
   background-image: url("../assets/logos/image_comics.svg");
   background-size: 13px 18px;
 }
 
-li.logo-darkhorse:before {
+.logo-darkhorse:before {
   content: "";
   background-image: url("../assets/logos/dark_horse_comics.svg");
   background-size: 13px 18px;
 }
 
-li.logo-valiant:before {
+.logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
   background-size: 13px 18px;

@@ -13,7 +13,10 @@
       $series_cover = $comic->series_latest_cover;
       if ($series_cover == NULL) {
         $series_cover = 'assets/nocover.jpg';
-      } ?>
+      } 
+      $publisherName = $comic->publisherName;
+      $publisherShort = $comic->publisherShort;
+      ?>
 
       <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
         <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
@@ -23,13 +26,16 @@
           <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
         </a>
         <div class="volume-number">
-          <span class="count">Vol <?php echo $series_vol; ?></span>
+          <span>Vol <?php echo $series_vol; ?></span>
         </div>
-        <div class="row series-extra">
-          <div class="col-xs-12 col-md-6 text-uppercase">
+        <div class="series-extra">
+          <div class="series-publisher hidden-sm hidden-md">
+            <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .'">' . $publisherName . '</div>'; } ?>
+          </div>
+          <div class="text-uppercase series-count">
             <?php echo $series_issue_count; ?>
           </div>
-          <div class="hidden-xs hidden-sm col-md-6 text-right series-controls">
+          <div class="hidden-xs hidden-sm text-right series-controls">
             <button class="btn btn-link btn-xs" title="Add New Issue"><i class="fa fa-plus-square"></i></button>
             <button class="btn btn-link btn-xs" title="Edit this Series"><i class="fa fa-cog"></i></button>
           </div>

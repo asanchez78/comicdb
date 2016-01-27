@@ -19,10 +19,18 @@ ul.inventory-table {
   .comic-image {
     overflow: hidden;
   }
+
+  .series-count {
+    font-size: 11px;
+  }
+
+  .series-publisher {
+    display: none;
+  }
 }
 
-.layout-thumb-lg,
-.layout-thumb-sm {
+#inventory-table.layout-thumb-lg,
+#inventory-table.layout-thumb-sm {
   .series-info {
     display: block;
     position: relative;
@@ -47,7 +55,7 @@ ul.inventory-table {
   }
 }
 
-.layout-thumb-lg {
+#inventory-table.layout-thumb-lg {
   h3 {
     font-size: 14px;
   }
@@ -102,7 +110,7 @@ ul.inventory-table {
     top: -3px;
     right: 13px;
 
-    .count {
+    span {
       display: block;
       color: white;
       text-align: center;
@@ -124,9 +132,24 @@ ul.inventory-table {
       padding-top: 5px;
     }
   }
+
+  .series-count {
+    display: inline-block;
+    width: 49%;
+    font-weight: bold;
+  }
+
+  .series-controls {
+    display: inline-block;
+    width: 48%;
+
+    button {
+      padding: 1px 2px;
+    }
+  }
 }
 
-.layout-thumb-sm {
+#inventory-table.layout-thumb-sm {
   h3 {
     font-size: 12px;
   }
@@ -176,6 +199,11 @@ ul.inventory-table {
     }
   }
 
+  .series-count {
+    text-align: center;
+    margin-top: 2px;
+  }
+
   .series-controls {
     display: none;
   }
@@ -189,22 +217,38 @@ ul.inventory-table {
   }
 }
 
-.layout-list {
+#inventory-table.layout-list {
+  > li {
+    padding: 0;
+  }
+
   li:nth-child(even) {
     background-color: #FFE4E1;
   }
 
   .comic-image {
     height: 45px;
-    width: 3%;
+    width: 7%;
     display: inline-block;
     vertical-align: middle;
     margin-right: 20px;
+
+    @media (min-width: $screen-lg) {
+      width: 3%;
+    }
   }
 
   .series-title {
     display: inline-block;
-    width: 40%;
+    width: 55%;
+
+    @media (min-width: $screen-md) {
+      width: 45%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 35%;
+    }
   }
 
   h3 {
@@ -213,12 +257,70 @@ ul.inventory-table {
 
   .volume-number {
     display: inline-block;
-    width: 20%;
+    width: 7%;
+    text-align: center;
+    font-size: 11px;
+    
+    @media (min-width: $screen-md) {
+      width: 15%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 7%;
+    }
   }
 
   .series-extra {
     display: inline-block;
     width: 20%;
+    text-align: right;
+    
+    @media (min-width: $screen-md) {
+      width: 32%;
+      text-align: left;
+    }    
+    
+    @media (min-width: $screen-lg) {
+      width: 50%;
+    }
+
+    > * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .series-publisher {
+    font-size: 12px;
+    text-align: center;
+    
+    @media (min-width: $screen-lg) {
+      width: 45%;
+    }
+  }
+  
+  .series-count {
+    text-align: center;
+
+    @media (min-width: $screen-md) {
+      width: 47%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 40%;
+    }
+  }
+
+  .series-controls {
+    width: 13%;
+    
+    @media (min-width: $screen-md) {
+      width: 40%;
+    }
+
+    @media (min-width: $screen-lg) {
+      width: 13%;
+    }
   }
 }
 

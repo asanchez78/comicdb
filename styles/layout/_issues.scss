@@ -76,7 +76,7 @@
 
 /* Logos */
 
-li[class*="logo-"] {
+*[class*="logo-"] {
   
   background-repeat: no-repeat;
   background-position: center left;
@@ -92,14 +92,15 @@ li[class*="logo-"] {
    }
 }
 
-li.logo-marvel {
+.logo-marvel {
   font-size: 0;
   width: 40px;
   height: 18px;
+  margin: 0 auto;
   background-image: url('../assets/logos/marvel_comics.svg');
 }
 
-li.logo-dc {
+.logo-dc {
   &:before {
     content: "";
     width: 18px;
@@ -109,7 +110,7 @@ li.logo-dc {
   }
 }
 
-li.logo-imagecomics {
+.logo-imagecomics {
   &:before {
     content: "";
     background-image: url('../assets/logos/image_comics.svg');
@@ -117,7 +118,7 @@ li.logo-imagecomics {
   }
 }
 
-li.logo-darkhorse {
+.logo-darkhorse {
   &:before {
     content: "";
     background-image: url('../assets/logos/dark_horse_comics.svg');
@@ -125,7 +126,7 @@ li.logo-darkhorse {
   }
 }
 
-li.logo-valiant {
+.logo-valiant {
   &:before {
     content: "";
     background-image: url('../assets/logos/valiant_comics.png');
