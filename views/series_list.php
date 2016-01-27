@@ -3,7 +3,7 @@
   $listAllSeries = 0;
   $comic->seriesList ($listAllSeries);
   if ($comic->series_list_result->num_rows > 0) { ?>
-    <ul class="nolist row inventory-table">
+    <ul id="inventory-table" class="layout-thumb-lg">
     <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {
       $series_id = $row ['series_id'];
       $series_name = $row ['series_name'];
@@ -19,15 +19,21 @@
         <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
           <div class="comic-image">
             <img src="/<?php echo $series_cover; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
-            <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
           </div>
+          <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
         </a>
-        <small><?php echo $series_issue_count; ?></small>
         <div class="volume-number">
           <span class="count">Vol <?php echo $series_vol; ?></span>
         </div>
-        <a href="#" class="button add-button">[Add New]</a>
-        <a href="#" class="button edit-button">[Edit]</a>
+        <div class="row series-extra">
+          <div class="col-xs-12 col-md-6 text-uppercase">
+            <?php echo $series_issue_count; ?>
+          </div>
+          <div class="hidden-xs hidden-sm col-md-6 text-right series-controls">
+            <button class="btn btn-link btn-xs" title="Add New Issue"><i class="fa fa-plus-square"></i></button>
+            <button class="btn btn-link btn-xs" title="Edit this Series"><i class="fa fa-cog"></i></button>
+          </div>
+        </div>
       </li>
     <?php } ?>
     </ul>

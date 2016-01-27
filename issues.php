@@ -34,7 +34,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<ul class="nolist row inventory-table">
+				<ul id="inventory-table">
 					<?php echo $issues->issue_list; ?>
 				</ul>
 			</div>

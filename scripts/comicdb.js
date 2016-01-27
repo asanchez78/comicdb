@@ -66,4 +66,40 @@ jQuery(document).ready(function($) {
       $('.form-add-list').addClass('active');
     }
   }
+
+  // Sort display controls
+  var $sortControls, $comics, $comicsList;
+
+  $sortControls = $('.sort-control');
+  $comicsList = $('#inventory-table');
+  $comics = $($comicsList).find('li');
+
+  $($sortControls).click(function() {
+    var controlId, layoutThumbLg, layoutThumbSm, layoutList;
+    controlId = $(this).attr('id');
+    layoutThumbLg = 'col-xs-6 col-sm-4 col-md-3 col-lg-2';
+    layoutThumbSm = 'col-xs-4 col-sm-3 col-md-2 col-lg-1';
+    layoutList = 'col-xs-12';
+
+    $($sortControls).removeClass('active');
+    $(this).addClass('active');
+    if(controlId == 'sort-thumb-lg') {
+      $($comicsList).attr('class','layout-thumb-lg');
+      $.each($comics, function() {
+        $(this).attr('class', layoutThumbLg);
+      });
+    } else if(controlId == 'sort-thumb-sm') {
+      $($comicsList).attr('class','layout-thumb-sm');
+      $.each($comics, function() {
+        $(this).attr('class', layoutThumbSm);
+      });
+    } else {
+      $($comicsList).attr('class','layout-list');
+      $.each($comics, function() {
+        $(this).attr('class', layoutList);
+      });
+    }
+  });
+
+
 });

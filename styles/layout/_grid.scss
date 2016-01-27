@@ -3,70 +3,57 @@ ul.inventory-table {
   margin: 0 -15px;
 }
 
-.inventory-table {
+#inventory-table {
+  @extend .nolist;
+  @extend .row;
+
   h3 {
     margin: 0;
-    font-size: 14px;
   }
   
   small {
     text-transform: uppercase;
     font-size: 10px;
+  }
+
+  .comic-image {
+    overflow: hidden;
+  }
+}
+
+.layout-thumb-lg,
+.layout-thumb-sm {
+  .series-info {
     display: block;
-    margin-top: 5px;
+    position: relative;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   li {
-    text-align: center;
-    margin-bottom: 20px;
     position: relative;
+  }
 
-    &:nth-child(2n+1) {
-      clear: both;
-    }
-    
-    @media (min-width: $screen-sm) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
+  .comic-image {
+    width: 100%;
+    display: block;
+  }
 
-      &:nth-child(3n+1) {
-        clear: both;
-      }
-    }
+  .series-title {
+    text-align: center;
+    width: 100%;
+  }
+}
 
-    @media (min-width: $screen-md) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
+.layout-thumb-lg {
+  h3 {
+    font-size: 14px;
+  }
 
-      &:nth-child(3n+1) {
-        clear: none;
-      }
-
-      &:nth-child(4n+1) {
-        clear: both;
-      }
-    }
-    
-    @media (min-width: $screen-lg) {
-      &:nth-child(2n+1) {
-        clear: none;
-      }
-      
-      &:nth-child(3n+1) {
-        clear: none;
-      }
-
-      &:nth-child(4n+1) {
-        clear: none;
-      }
-
-      &:nth-child(6n+1) {
-        clear: both;
-      }
-    }
-    
+  li {
+    margin-bottom: 20px;
     > a:first-of-type {
       transition: box-shadow 0.2s ease-in-out;
       box-shadow: 0px 0px 15px 1px transparent;
@@ -80,10 +67,7 @@ ul.inventory-table {
   }
 
   .comic-image {
-    width: 100%;
-    display: block;
-    overflow: hidden;
-    height: 172px;
+    height: 216px;
 
     @media (min-width: $screen-sm) {
       height: 189px;
@@ -104,40 +88,137 @@ ul.inventory-table {
     background: black;
     opacity: 0.9;
     padding: 5px 10px;
-    width: 100%;
 
     a {
       color: white;
     }
   }
 
-  .series-info {
-    display: block;
-    position: relative;
+  .volume-number {
+    width: 45px;
+    height: 48px;
+    overflow: hidden;
+    position: absolute;
+    top: -3px;
+    right: 13px;
+
+    .count {
+      display: block;
+      color: white;
+      text-align: center;
+      transform: rotate(45deg);
+      position: relative;
+      left: -30px;
+      top: 6px;
+      width: 120px;
+      background-color: $brand-red;
+      padding: 2px 0;
+      font-size: 10px;
+      font-weight: bold;
+    }
+  }
+
+  .series-extra {
+    .col-md-6:first-child {
+      font-size: 10px;
+      padding-top: 5px;
+    }
   }
 }
 
-.volume-number {
-  width: 45px;
-  height: 48px;
-  overflow: hidden;
-  position: absolute;
-  top: -3px;
-  right: 13px;
+.layout-thumb-sm {
+  h3 {
+    font-size: 12px;
+  }
 
-  .count {
-    display: block;
-    color: white;
-    text-align: center;
-    transform: rotate(45deg);
-    position: relative;
-    left: -30px;
-    top: 6px;
-    width: 120px;
-    background-color: $brand-red;
-    padding: 2px 0;
-    font-size: 10px;
+  li {
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    min-height: 190px;
+  }
+
+  .comic-image {
+    height: 155px;
+
+    @media (min-width: $screen-sm) {
+      height: 145px;
+    }
+
+    @media (min-width: $screen-md) {
+      height: 165px;
+    }
+
+    @media (min-width: $screen-lg) {
+      height: 106px;
+    }
+  }
+
+  .series-title {
+    margin-top: 5px;
+  }
+
+  .volume-number {
+    margin-top: 2px;
+    text-transform: uppercase;
+    font-size: 9px;
     font-weight: bold;
+    text-align: center;
+
+    &:before {
+      content: "( ";
+      display: inline;
+    }
+
+    &:after {
+      content: ")";
+      display: inline;
+    }
+  }
+
+  .series-controls {
+    display: none;
+  }
+
+  .series-extra {
+    .col-md-6:first-child {
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+    }
+  }
+}
+
+.layout-list {
+  li:nth-child(even) {
+    background-color: #FFE4E1;
+  }
+
+  .comic-image {
+    height: 45px;
+    width: 3%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+
+  .series-title {
+    display: inline-block;
+    width: 40%;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .volume-number {
+    display: inline-block;
+    width: 20%;
+  }
+
+  .series-extra {
+    display: inline-block;
+    width: 20%;
   }
 }
 
