@@ -210,7 +210,7 @@ class comicSearch {
           $list .= "series_id=" . $row ['series_id'] . " or ";
         }
         $idList = preg_replace('/(or(?!.*or))/', '', $list);
-        $sql = "SELECT * FROM series where $idList ORDER BY series_name ASC";
+        $sql = "SELECT * FROM series where $idList ORDER BY series_name ASC, series_vol ASC";
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
     }
