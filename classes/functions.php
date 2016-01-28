@@ -257,6 +257,7 @@ class comicSearch {
         $this->series_vol = $row ['series_vol'];
         $this->publisherName = $row ['publisherName'];
         $this->publisherShort = $row ['publisherShort'];
+        $this->cvVolumeID = $row ['cvVolumeID'];
       }
     } else {
       echo "0 results";
