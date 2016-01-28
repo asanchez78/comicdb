@@ -38,7 +38,8 @@
     </ul>
     <?php // ADD SINGLE ISSUE ?>
     <div class="row add-block form-add-issue active">
-      <?php if ($issueSearch == true) { ?>
+      <?php // ADD SINGLE ISSUE: Part 2/4: Displays Wikia results.
+        if ($issueSearch == true) { ?>
         <div class="col-xs-12">
           <h2>Your Search Results</h2>
           <p>We found the following issues on the Marvel Wikia related to <em><?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?>:</em></p>
@@ -61,7 +62,8 @@
             </div>
           </form>
         </div>
-      <?php } elseif ($issueAdd == true) { ?>
+      <?php // ADD SINGLE ISSUE: Part 3/4: Displays final fields and allows user to change details before adding to collection.
+        } elseif ($issueAdd == true) { ?>
         <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
           <div class="col-sm-12 headline">
             <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
@@ -109,7 +111,8 @@
             <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
           </div>
         </form>  
-      <?php } elseif ($issueSubmit == true) { ?>
+      <?php // ADD SINGLE ISSUE: Part 4/4: Displays success message and allows user to view issue or add another issue.
+        } elseif ($issueSubmit == true) { ?>
         <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
           <div class="success-message">
             <div class="row">
@@ -127,7 +130,8 @@
             </div>
           </div>
         </div>
-      <?php } else { ?>
+      <?php // ADD SINGLE ISSUE: Part 1/4: Allows user to pick the series to add an issue and its issue #
+        } else { ?>
         <div class="col-xs-12">
           <h2>Add Issue</h2>
           <form method="post" action="<?php echo $filename; ?>?type=issue-search#addissue" class="form-inline" id="add-issue">
@@ -227,10 +231,16 @@
         echo $wiki->newWikiIDs; ?>
       <?php } ?>
     </div>
+    <?php // ADD LIST ?>
+    <div class="row add-block form-add-list">
+      <div class="col-xs-12">
+        <h2>Add Series</h2>
+      </div>
+    </div>
     <?php // ADD SERIES ?>
     <div class="row add-block form-add-series">
       <?php if ($seriesSearch == true) { ?>
-        <div class="col-xs-12" id="form-series-add">
+        <div class="col-xs-12">
           <h2>Your Search Results</h2>
           <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
           <p>Check the ComicVine link below the result to make sure it is the series you are looking for. Links open in a new tab.</p>
@@ -241,11 +251,8 @@
                 <?php echo $seriesSearch->resultsList; ?>
               </fieldset>
             </div>
-            <input type="hidden" name="series_name" value="<?php echo $seriesSearch->seriesName; ?>" />
             <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
-            <input type="hidden" name="apiDetailURL" value="<?php echo $seriesSearch->apiDetailURL; ?>" />
-            <input type="hidden" name="siteDetailURL" value="<?php echo $seriesSearch->siteDetailURL; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block">
               <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
@@ -301,7 +308,7 @@
             </select>
           </div>
           <input type="hidden" name="submitted" value="yes" />
-          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
         </form>
       </div>
       <?php } ?>
