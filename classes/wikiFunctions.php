@@ -54,6 +54,11 @@ class wikiQuery {
 			}
 	}
 
+	/**
+	 * Uses a comic series' API URL to get information about that series.
+	 * @param  string $apiDetailURL The API URL for a comic series
+	 * @return string               gets series name, volume ID, series start year, and details URLs
+	 */
 	public function seriesLookup ($apiDetailURL) {
 		$apiURL = $apiDetailURL . "?api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691&format=json";
 		$jsondata = file_get_contents($apiURL);
@@ -64,6 +69,42 @@ class wikiQuery {
 		$this->siteDetailURL = $results['results']['site_detail_url'];
 		$this->apiDetailURL = $results['results']['api_detail_url'];
 	}
+
+	public function issueSearch ($cvVolumeID, $issue_number) {
+		$apiURL = "http://www.comicvine.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691";
+		$jsondata = file_get_contents($apiURL);
+		$results = json_decode($jsondata, true);
+		$this->storyName = $results['results']['0']['name'];
+		$this->releaseDate = $results['results']['0']['cover_date'];
+		$this->synopsis = $results['results']['0']['description'];
+		$this->seriesName = $results['results']['0']['volume']['name'];
+		if ($results['results']['0']['image']['medium_url']) {
+			$subject = $results['results']['0']['image']['medium_url'];
+			$pattern = "/(?<=jpg|png|jpeg).*/";
+			$replacement = "";
+			$this->coverURL = preg_replace($pattern, $replacement, $subject);
+			$fileparts = explode("/", $this->coverURL);
+			$this->coverFile = 'images/' . $fileparts[7];
+			$this->coverFile = str_replace("%28", "", $this->coverFile);
+			$this->coverFile = str_replace("%29", "", $this->coverFile);
+			$this->coverFile = str_replace("%3F", "", $this->coverFile);
+		} else {
+			$this->coverFile = 'assets/nocover.jpg';
+			$this->coverURL = 'assets/nocover.jpg';
+			$this->noCover = true;
+			//$sql = "SELECT comics.comic_id, series.series_name, comics.issue_number
+			//FROM comics
+			//LEFT JOIN series ON comics.series_id=series.series_id
+			//WHERE wiki_id=$wiki_id";
+			//$this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+			//$result = $this->db_connection->query($sql);
+			//while ($row = $result->fetch_assoc()) {
+			//	$comic_id = $row['comic_id'];
+			//	$series_name = $row['series_name'];
+			//	$issue_number = $row['issue_number'];
+			//	$this->coverSearchErr .= "$series_name $issue_number has no cover image result.";
+			}
+		}
 
 	public function downloadFile($url, $path) {
 		$newfname = $path;
