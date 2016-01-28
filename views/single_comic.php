@@ -44,6 +44,30 @@
       }
       ?>
     </div>
+    <div class="issue-credits text-center">
+      <ul class="list-inline">
+        <li class="credit-writer">
+          <h3>Writer</h3>
+          Brian Michael Bendis
+        </li>
+        <li class="credit-artist">
+          <h3>Artist</h3>
+          Todd MacFarlane
+        </li>
+        <li class="credit-inker">
+          <h3>Colorist</h3>
+          Marte Gracia
+        </li>
+        <li class="credit-letters">
+          <h3>Letterer</h3>
+          Tyler Durden
+        </li>
+        <li class="credit-editor">
+          <h3>Editor</h3>
+          Mike Marts
+        </li>
+      </ul>
+    </div>
     <p>
       <?php
         if ($login->isUserLoggedIn () == true) { ?>
