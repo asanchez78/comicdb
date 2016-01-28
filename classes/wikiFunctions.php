@@ -30,7 +30,7 @@ class wikiQuery {
 	public $coverSearchErr;
 
 	/**
-	 * queries ComicVine API to get the volume ID of the series searched for
+	 * queries ComicVine API to get the API URL of the series searched for
 	 * @param  int $seriesName name of the comic series being searched for
 	 * @return string             list of results
 	 */
@@ -46,8 +46,8 @@ class wikiQuery {
 				$this->seriesURL = $result['site_detail_url'];
 				$this->apiURL = $result['api_detail_url'];
 				$this->resultsList .= '<div class="series-search-result col-xs-12 col-sm-6 col-md-4">
-											<input name="cvVolumeID" id="cvVolumeID-' . $this->cvVolumeID . '" value="' . $this->apiURL . '" type="radio" />
-												<label for="cvVolumeID-' . $this->cvVolumeID . '">' . $this->resultNum . ': '  . $this->seriesName . ' ' . $this->seriesStartYear .'</label>
+											<input name="apiURL" id="apiURL-' . $this->cvVolumeID . '" value="' . $this->apiURL . '" type="radio" />
+												<label for="apiURL-' . $this->cvVolumeID . '">' . $this->resultNum . ': '  . $this->seriesName . ' ' . $this->seriesStartYear .'</label>
 											<a href="' . $this->seriesURL . '" target="_blank">' . $this->seriesURL . '</a>
 										</div>';
 				++$this->resultNum;
@@ -58,13 +58,11 @@ class wikiQuery {
 		$apiURL = $apiDetailURL . "?api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691&format=json";
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
-			foreach($results['results'] as $result) {
-				$this->seriesName = $result['name'];
-				$this->cvVolumeID = $result['id'];
-				$this->seriesStartYear = $result['start_year'];
-				$this->seriesURL = $result['site_detail_url'];
-				$this->apiURL = $result['api_detail_url'];
-			}
+		$this->seriesName = $results['results']['name'];
+		$this->cvVolumeID = $results['results']['id'];
+		$this->seriesStartYear = $results['results']['start_year'];
+		$this->siteDetailURL = $results['results']['site_detail_url'];
+		$this->apiDetailURL = $results['results']['api_detail_url'];
 	}
 
 	public function downloadFile($url, $path) {
