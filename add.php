@@ -66,16 +66,16 @@
         } elseif ($issueAdd == true) { ?>
         <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
           <div class="col-sm-12 headline">
-            <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
+            <h2>Add Issue: <?php echo $issueDetails->seriesName; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
           </div>
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <label for="story_name">Story Name: </label>
-              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $wiki->storyName; ?>" />
+              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $issueDetails->storyName; ?>" />
             </div>
             <div class="form-group">
               <label for="released_date">Release Date:</label>
-              <input class="form-control" name="released_date" size="10" maxlength="10" value="" type="date" placeholder="YYYY-MM-DD" />
+              <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $issueDetails->releaseDate; ?>" type="date" placeholder="YYYY-MM-DD" />
             </div>
             <div class="form-group form-radio">
               <label for="originalPurchase">Purchased When Released:</label>
@@ -87,22 +87,22 @@
             <div class="plot form-group">
               <label for="plot">Plot:</label>
               <small><a href="#">[edit]</a></small>
-              <?php echo $wiki->synopsis; ?>
+              <?php echo $issueDetails->synopsis; ?>
             </div>
           </div>
           <div class="col-md-4 issue-image">
-            <img src="<?php echo $wiki->coverURL; ?>" alt="Cover" />
+            <img src="<?php echo $issueDetails->coverURL; ?>" alt="Cover" />
             <div class="form-group">
               <label for="cover_image">Cover Image URL</label>
-              <input type="url" class="form-control" name="cover_image" value="<?php echo $wiki->coverURL; ?>" />
+              <input type="url" class="form-control" name="cover_image" value="<?php echo $issueDetails->coverURL; ?>" />
               <small>Enter the URL of the image you wish to use. Default is the cover file from the Wikia entry on this issue.</small>
-              <input type="hidden" name="cover_image_file" value="<?php echo $wiki->coverFile; ?>" />
+              <input type="hidden" name="cover_image_file" value="<?php echo $issueDetails->coverFile; ?>" />
             </div>
           </div>
           <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
           <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
           <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-          <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
+          <input type="hidden" name="plot" value="<?php echo htmlspecialchars($issueDetails->synopsis); ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
           <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
           <input type="hidden" name="submitted" value="yes" />
@@ -134,7 +134,7 @@
         } else { ?>
         <div class="col-xs-12">
           <h2>Add Issue</h2>
-          <form method="post" action="<?php echo $filename; ?>?type=issue-search#addissue" class="form-inline" id="add-issue">
+          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue">
             <div class="form-group">
               <label>Series</label>
               <select class="form-control" name="series_id">

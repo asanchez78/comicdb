@@ -2,6 +2,7 @@
   $type = $_GET['type'];
   if ($type) {
     require_once(__ROOT__.'/classes/wikiFunctions.php');
+    require_once(__ROOT__.'/classes/functions.php');
     switch ($type) {
       // ADD SERIES: Part one of the series process. Displays API search results.
       case 'series-search':
@@ -45,7 +46,7 @@
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
         $publisherAPI = $comic->publisherShort;
-
+        $apiDetailURL = $comic->apiDetailURL;
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
 
@@ -55,16 +56,17 @@
       // ADD SINGLE ISSUE: Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
         $issueAdd = true;
-        $series_name = filter_input ( INPUT_POST, 'series_name' );
-        $series_vol = filter_input(INPUT_POST, 'series_vol');
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
+        $seriesDetails = new comicSearch();
+        $seriesDetails->seriesInfo($series_id);
+        $cvVolumeID = $seriesDetails->cvVolumeID;
+        $issueDetails = new wikiQuery;
+        $issueDetails->issueSearch($cvVolumeID, $issue_number);
+        $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $series_vol = $seriesDetails->series_vol;
         $wiki_id = filter_input (INPUT_POST, 'wiki_id');
         $publisherAPI = filter_input( INPUT_POST, 'publisherAPI' );
-
-        $wiki = new wikiQuery ();
-        $wiki->comicCover ( $publisherAPI, $wiki_id );
-        $wiki->comicDetails ( $publisherAPI, $wiki_id );
         break;
       // ADD SINGLE ISSUE: Part three of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
