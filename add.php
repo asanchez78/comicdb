@@ -38,35 +38,11 @@
     </ul>
     <?php // ADD SINGLE ISSUE ?>
     <div class="row add-block form-add-issue active">
-      <?php // ADD SINGLE ISSUE: Part 2/4: Displays Wikia results.
-        if ($issueSearch == true) { ?>
-        <div class="col-xs-12">
-          <h2>Your Search Results</h2>
-          <p>We found the following issues on the Marvel Wikia related to <em><?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?>:</em></p>
-          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue-search">
-            <div class="form-group form-radio">
-              <label for="wiki_id">Choose the result that matches your issue:</label>
-              <fieldset class="row">
-                <?php echo $wiki->resultsList; ?>
-              </fieldset>
-            </div>
-            <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
-            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
-            <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-            <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-            <input type="hidden" name="publisherAPI" value="<?php echo $publisherAPI; ?>" />
-            <input type="hidden" name="submitted" value="yes" />
-            <div class="text-center center-block">
-              <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Next</button>
-            </div>
-          </form>
-        </div>
-      <?php // ADD SINGLE ISSUE: Part 3/4: Displays final fields and allows user to change details before adding to collection.
-        } elseif ($issueAdd == true) { ?>
+      <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
+        if ($issueAdd == true) { ?>
         <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
           <div class="col-sm-12 headline">
-            <h2>Add Issue: <?php echo $issueDetails->seriesName; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
+            <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
           </div>
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
@@ -104,14 +80,13 @@
           <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
           <input type="hidden" name="plot" value="<?php echo htmlspecialchars($issueDetails->synopsis); ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-          <input type="hidden" name="wiki_id" value="<?php echo $wiki_id; ?>" />
           <input type="hidden" name="submitted" value="yes" />
           <div class="text-center center-block">
             <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
             <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
           </div>
         </form>  
-      <?php // ADD SINGLE ISSUE: Part 4/4: Displays success message and allows user to view issue or add another issue.
+      <?php // ADD SINGLE ISSUE: Part 3/3: Displays success message and allows user to view issue or add another issue.
         } elseif ($issueSubmit == true) { ?>
         <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
           <div class="success-message">
@@ -167,8 +142,6 @@
       <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
       <div class="col-xs-12">
         <h2>Add a range of issues</h2>
-        <p>If the series had a regular monthly release, you may enter the published date of the first issue.</p>
-        <p>Each entry will automatically have the month incremented.</p>
         <form id="input_select" method="post" action="<?php echo $filename; ?>?type=range#addrange">
           <div class="row">
             <div class="col-xs-12 col-md-6">
@@ -213,10 +186,6 @@
                     <input name="originalPurchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
                   </fieldset>
                 </div>
-                <div class="form-group">
-                  <label for="release_date">First Comic's Published Date</label>
-                  <input name="release_date" type="date" class="form-control" maxlength="10" placeholder="YYYY-MM-DD"/>
-                </div>
               </div>
             </div>
           </div>
@@ -224,11 +193,22 @@
           <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
         </form>
       </div>
-      <?php } else {
-        $wiki = new wikiQuery();
-        $wiki->addWikiID();
-        $wiki->addDetails();
-        echo $wiki->newWikiIDs; ?>
+      <?php } else { ?>
+        <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+          <div class="success-message">
+            <div class="row">
+              <div class="text-center">
+                <?php echo $addedList; ?>
+                <p><?php if ($messageNum != 51) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+              </div>
+            </div>
+            <div class="text-center center-block">
+              <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
+              <a href="/add.php#addissue" class="btn btn-lg btn-info">Add another?</a>
+            </div>
+          </div>
+        </div>
+        ?>
       <?php } ?>
     </div>
     <?php // ADD LIST ?>
@@ -246,7 +226,7 @@
           <p>Check the ComicVine link below the result to make sure it is the series you are looking for. Links open in a new tab.</p>
           <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline" id="add-series-search">
             <div class="form-group form-radio">
-              <label for="wiki_id">Choose the result that matches your series:</label>
+              <label for="add-series-search">Choose the result that matches your series:</label>
               <fieldset class="row">
                 <?php echo $seriesSearch->resultsList; ?>
               </fieldset>

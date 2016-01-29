@@ -37,23 +37,7 @@
           }
         }
         break;
-      // ADD SINGLE ISSUE: Part one of the single issue process. Displays Wikia results.
-      case 'issue-search':
-        $issueSearch = true;
-        $series_id = filter_input ( INPUT_POST, 'series_id' );
-        $comic = new comicSearch ();
-        $comic->seriesInfo ($series_id);
-        $series_name = $comic->series_name;
-        $series_vol = $comic->series_vol;
-        $publisherAPI = $comic->publisherShort;
-        $apiDetailURL = $comic->apiDetailURL;
-        $issue_number = filter_input ( INPUT_POST, 'issue_number' );
-        $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
-
-        $wiki = new wikiQuery();
-        $wiki->wikiSearch($publisherAPI, $query, 12);
-        break;
-      // ADD SINGLE ISSUE: Part two of the single issue process. Displays final fields and allows user to change details before adding to collection.
+      // ADD SINGLE ISSUE: Part one of the single issue process. Displays final fields and allows user to change details before adding to collection.
       case 'issue-add':
         $issueAdd = true;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
@@ -63,12 +47,12 @@
         $cvVolumeID = $seriesDetails->cvVolumeID;
         $issueDetails = new wikiQuery;
         $issueDetails->issueSearch($cvVolumeID, $issue_number);
-        $series_name = filter_input ( INPUT_POST, 'series_name' );
+        $series_name = $seriesDetails->series_name;
         $series_vol = $seriesDetails->series_vol;
         $wiki_id = filter_input (INPUT_POST, 'wiki_id');
         $publisherAPI = filter_input( INPUT_POST, 'publisherAPI' );
         break;
-      // ADD SINGLE ISSUE: Part three of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
+      // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
         $issueSubmit = true;
         $ownerID = $_SESSION['user_id'];
@@ -115,8 +99,8 @@
           }
         } else {
           // Comic does not exist in the master table. Add all details and then associate with the user table.
-          $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wiki_id, wikiUpdated)
-          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$wiki_id', 1)";
+          $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wikiUpdated)
+          VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
           if (mysqli_query ( $connection, $sql )) {
             $comic_id = mysqli_insert_id($connection);
             // Add to user_comics table
@@ -147,8 +131,8 @@
         $comic->seriesInfo ($series_id);
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
-        $publisherAPI = $comic->publisherShort;
-
+        $cvVolumeID = $comic->cvVolumeID;
+        $addedList = '';
         foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
           $comic->issueCheck($series_id, $issue_number);
           if ($comic->issueExists == 1) {
@@ -160,14 +144,9 @@
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           } else {
-            $query = $series_name . ' Vol ' . $series_vol . ' ' . $issue_number;
             $wiki = new wikiQuery();
-            $wiki->wikiSearch($publisherAPI, $query, 1);
-            $wiki_id = $wiki->wiki_id;
-            $wiki->comicCover( $publisherAPI, $wiki_id );
-            $wiki->comicDetails ( $publisherAPI, $wiki_id );
-
-            $release_date = $releaseDateArray[0] . "-" . $releaseDateArray[1] . "-" . $releaseDateArray[2];
+            $wiki->issueSearch($cvVolumeID, $issue_number);
+            $release_date = $wiki->releaseDate;
             $plot = addslashes( $wiki->synopsis );
             $story_name = addslashes( $wiki->storyName );
             $cover_image = $wiki->coverURL;
@@ -179,8 +158,7 @@
               $path = __ROOT__ . '/' . $cover_image_file;
               $wiki->downloadFile ( $cover_image, $path );
             }
-
-            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wiki_id, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', '$wiki_id', 1)";
+            $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
             if (mysqli_query ( $connection, $sql )) {
               $comic_id = mysqli_insert_id ( $connection );
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
@@ -194,13 +172,7 @@
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           }
-
-          // Checks the month of the release date array since it auto-increments. If the month is greater than 12, then it resets the month number back to 0 and start the incrementing again.
-          ++$releaseDateArray[1];
-          if ($releaseDateArray[1] > 12) {
-            ++$releaseDateArray[0];
-            $releaseDateArray[1] = 01;
-          }
+          $addedList .= '<h3> ' . $series_name . '<small>(Vol' . $series_vol . ')</small> #' . $issue_number . '</h3>';
         }
         break;
       case 'csv':
