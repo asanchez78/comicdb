@@ -34,7 +34,6 @@ class comicSearch {
   public $artist;
   public $writer;
   public $issue_list;
-  public $wiki_id;
   public $comic_id;
   public $series_name;
   public $series_id;
@@ -75,7 +74,6 @@ class comicSearch {
         $release_date = $row ['release_date'];
         $story_name = $row ['story_name'];
         $cover_image = $row ['cover_image'];
-        $wiki_id = $row['wiki_id'];
         $series_name = $row ['series_name'];
         $series_id = $row['series_id'];
         $originalPurchase = $row['originalPurchase'];
@@ -87,7 +85,6 @@ class comicSearch {
     $this->issue_number = $issue_number;
     $this->story_name = $story_name;
     $this->release_date = $release_date;
-    $this->wiki_id = $wiki_id;
     $this->comic_id = $comic_id;
     $this->series_name = $series_name;
     $this->originalPurchase = $originalPurchase;
@@ -165,7 +162,6 @@ class comicSearch {
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
         $this->comic_id = $row ['comic_id'];
-        $this->wiki_id = $row ['wiki_id'];
         $this->issue_number = $row ['issue_number'];
         $this->publisherShort = $row ['publisherShort'];
         $this->publisherName = $row ['publisherName'];
@@ -257,6 +253,7 @@ class comicSearch {
         $this->series_vol = $row ['series_vol'];
         $this->publisherName = $row ['publisherName'];
         $this->publisherShort = $row ['publisherShort'];
+        $this->cvVolumeID = $row ['cvVolumeID'];
       }
     } else {
       echo "0 results";
