@@ -254,7 +254,7 @@
             <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
             <input type="hidden" name="submitted" value="yes" />
-            <div class="text-center center-block">
+            <div class="text-center center-block button-block">
               <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
               <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
             </div>
