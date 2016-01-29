@@ -44,30 +44,6 @@
       }
       ?>
     </div>
-    <div class="issue-credits text-center">
-      <ul class="list-inline">
-        <li class="credit-writer">
-          <h3>Writer</h3>
-          Brian Michael Bendis
-        </li>
-        <li class="credit-artist">
-          <h3>Artist</h3>
-          Todd MacFarlane
-        </li>
-        <li class="credit-inker">
-          <h3>Colorist</h3>
-          Marte Gracia
-        </li>
-        <li class="credit-letters">
-          <h3>Letterer</h3>
-          Tyler Durden
-        </li>
-        <li class="credit-editor">
-          <h3>Editor</h3>
-          Mike Marts
-        </li>
-      </ul>
-    </div>
     <p>
       <?php
         if ($login->isUserLoggedIn () == true) { ?>
@@ -76,7 +52,35 @@
       ?>
     </p>
   </div>
-  <div class="col-md-4 issue-image">
-    <img src="<?php echo $comic->cover_image; ?>" alt="cover" />
+  <div class="col-md-4">
+    <div class="issue-image">
+      <img src="<?php echo $comic->cover_image; ?>" alt="cover" />
+    </div>
+    <div class="issue-credits">
+      <div class="row">
+        <div class="col-md-6 credit-writer">
+          <h3>Writer</h3>
+          Brian Michael Bendis
+        </div>
+        <div class="col-md-6 credit-artist">
+          <h3>Artist</h3>
+          Todd MacFarlane
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 credit-inker">
+          <h3>Colorist</h3>
+          Marte Gracia
+        </div>
+        <div class="col-md-4 credit-letters">
+          <h3>Letterer</h3>
+          Tyler Durden
+        </div>
+        <div class="col-md-4 credit-editor">
+          <h3>Editor</h3>
+          Mike Marts
+        </div>
+      </div>
+    </div>
   </div>
 </div>
