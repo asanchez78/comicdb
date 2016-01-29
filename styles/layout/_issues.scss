@@ -2,18 +2,11 @@
 .series-meta {
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 15px;
-
-  @media (min-width: $screen-md) {
-    width: 50%;
-    position: absolute;
-    right: 15px;
-    top: 8px;
-    text-align: right;
-  }
+  padding-top: 10px;
 
   ul > li {
     display: inline-block;
+    vertical-align: bottom;
     margin: 0 10px;
 
     @media (min-width: $screen-md) {
@@ -22,8 +15,6 @@
 
     &:first-of-type {
       margin-left: 0;
-      vertical-align: top;
-      margin-top: 4px;
     }
     
     &:last-of-type {
@@ -69,30 +60,56 @@
   margin-right: 15px;
 }
 
+
+/* Single Issue */
 .issue-story {
+  margin-top: 15px;
+
   h4 {
     margin-top: 0
   }
 }
 
+.issue-image {
+  margin-top: 20px;
+}
+
 .issue-credits {
-  text-align: center;
+  line-height: 1.2;
+  font-size: 12px;
+
+  > .row {
+    margin-bottom: 10px;
+  }
 
   h3 {
+    margin-top: 10px;
     margin-bottom: 2px;
   }
+
+  .credit-writer,
+  .credit-artist,
+  .credit-cover {
+    font-size: 14px;
+  }
+}
+
+.issue-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-right: 20px;
 }
 
 /* Logos */
 
 *[class*="logo-"] {
-  
-  background-repeat: no-repeat;
-  background-position: center left;
-
-   &:before {
+  &:before {
+    display: block;
     background-repeat: no-repeat;
     background-position: center left;
+    margin-right: 10px;
+  }
+  &.sm-logo:before {
     display: inline-block;
     vertical-align: top;
     margin-right: 5px;
@@ -103,19 +120,30 @@
 
 .logo-marvel {
   font-size: 0;
-  width: 40px;
-  height: 18px;
-  margin: 0 auto;
-  background-image: url('../assets/logos/marvel_comics.svg');
+  &:before {
+    content: "";
+    display: block;
+    background-image: url('../assets/logos/marvel_comics.svg');
+    width: 100px;
+    height: 46px;
+  }
+  &.sm-logo:before {
+    width: 40px;
+    height: 18px;
+  }
 }
 
 .logo-dc {
   &:before {
     content: "";
+    background-image: url('../assets/logos/dc_comics.svg');
+    width: 100px;
+    height: 100px;
+  }
+  &.sm-logo:before {
+    content: "";
     width: 18px;
     height: 18px;
-    background-image: url('../assets/logos/dc_comics.svg');
-    background-size: 18px 18px;
   }
 }
 
@@ -123,6 +151,11 @@
   &:before {
     content: "";
     background-image: url('../assets/logos/image_comics.svg');
+    background-size: 36px 80px;
+    width: 36px;
+    height: 80px;
+  }
+  &.sm-logo:before {
     background-size: 13px 18px;
   }
 }
@@ -131,7 +164,8 @@
   &:before {
     content: "";
     background-image: url('../assets/logos/dark_horse_comics.svg');
-    background-size: 13px 18px;
+    width: 66px;
+    height: 110px;
   }
 }
 
@@ -139,6 +173,26 @@
   &:before {
     content: "";
     background-image: url('../assets/logos/valiant_comics.png');
+    background-size: 66px 110px;
+    width: 66px;
+    height: 110px;
+  }
+  &.sm-logo:before {
     background-size: 13px 18px;
+  }
+}
+
+.logo-archie {
+  &:before {
+    content: "";
+    background-image: url('../assets/logos/archie_comics.png');
+    background-size: 110px 110px;
+    width: 110px;
+    height: 110px;
+  }
+  &.sm-logo:before {
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px;
   }
 }

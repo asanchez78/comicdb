@@ -3,7 +3,7 @@
   $listAllSeries = 0;
   $comic->seriesList ($listAllSeries);
   if ($comic->series_list_result->num_rows > 0) { ?>
-    <ul id="inventory-table" class="layout-thumb-lg">
+    <ul id="inventory-table" class="row layout-thumb-lg">
     <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {
       $series_id = $row ['series_id'];
       $series_name = $row ['series_name'];
@@ -30,7 +30,7 @@
         </div>
         <div class="series-extra">
           <div class="series-publisher hidden-xs hidden-sm hidden-md">
-            <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .'">' . $publisherName . '</div>'; } ?>
+            <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</div>'; } ?>
           </div>
           <div class="text-uppercase series-count">
             <?php echo $series_issue_count; ?>

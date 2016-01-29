@@ -20,30 +20,26 @@
 <body>
 <?php include 'views/header.php';?>
 	<div class="container issues-list content">
-		<div class="row">
-			<div class="col-sm-12">
+		<header class="row headline">
+			<div class="col-xs-12 col-md-7">
 				<h2><?php echo $series_name; ?></h2>
-				<div class="series-meta">
-					<ul class="nolist">
-						<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
-						<li><?php echo $issues->series_issue_count; ?></li>
-						<li>Volume <?php echo $series_vol; ?></li>
-						<li>
-							<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
-							<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
-							<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
-						</li>
-					</ul>
-				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<ul id="inventory-table" class="layout-thumb-lg">
-					<?php echo $issues->issue_list; ?>
+			<div class="col-xs-12 col-md-5 series-meta text-right">
+				<ul class="nolist">
+					<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</li>'; } ?>
+					<li><?php echo $issues->series_issue_count; ?></li>
+					<li>Volume <?php echo $series_vol; ?></li>
+					<li>
+						<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
+						<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
+						<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
+					</li>
 				</ul>
 			</div>
-		</div>
+		</header>
+		<ul id="inventory-table" class="row layout-thumb-lg">
+			<?php echo $issues->issue_list; ?>
+		</ul>
 	</div>
 	
 <?php include 'views/footer.php';?>
