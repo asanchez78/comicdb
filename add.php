@@ -69,6 +69,10 @@
               <div class="plot-output"><?php echo $issueDetails->synopsis; ?></div>
               <textarea name="plot" class="form-control" id="plotInput"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
             </div>
+            <div class="text-center center-block button-block">
+              <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            </div>
           </div>
           <div class="col-md-4 sidebar">
             <div class="issue-image">
@@ -142,10 +146,6 @@
           <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
           <input type="hidden" name="submitted" value="yes" />
-          <div class="col-xs-12 text-center center-block button-block">
-            <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
-          </div>
         </form>  
       <?php // ADD SINGLE ISSUE: Part 3/3: Displays success message and allows user to view issue or add another issue.
         } elseif ($issueSubmit == true) { ?>
