@@ -4130,9 +4130,6 @@ ul#inventory-table .issue-meta {
   min-height: 500px;
   display: none;
 }
-.add-block > div:not(.add-success) {
-  margin-top: 15px;
-}
 .add-block form {
   margin-bottom: 25px;
 }
