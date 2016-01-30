@@ -1,6 +1,6 @@
 <!-- Site wrapper begins -->
 <div id="wrapper">
-	<header>
+	<header class="global-header">
 		<div class="container">
 			<div class="row">
 				<!-- Title -->

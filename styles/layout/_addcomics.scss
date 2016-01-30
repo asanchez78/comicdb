@@ -106,16 +106,6 @@
   margin-bottom: 20px;
 }
 
-.headline {
-  position: relative;
-
-  a {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-  }
-}
-
 .edit-form input[type="text"] {
   width: 70%;
 }
@@ -140,6 +130,6 @@
   }
 }
 
-.form-add-series button[type="submit"] {
+.button-block {
   margin: 25px 0;
 }

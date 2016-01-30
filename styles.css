@@ -481,7 +481,7 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-size: 28px;
+  font-size: 38px;
 }
 
 h3, .h3 {
@@ -489,7 +489,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
-  font-size: 19px;
+  font-size: 28px;
 }
 
 h5, .h5 {
@@ -897,15 +897,15 @@ pre code {
   clear: both;
 }
 
-.row, #inventory-table {
+.row, ul#inventory-table {
   margin-left: -15px;
   margin-right: -15px;
 }
-.row:before, #inventory-table:before, .row:after, #inventory-table:after {
+.row:before, ul#inventory-table:before, .row:after, ul#inventory-table:after {
   content: " ";
   display: table;
 }
-.row:after, #inventory-table:after {
+.row:after, ul#inventory-table:after {
   clear: both;
 }
 
@@ -3195,11 +3195,6 @@ h1 {
   }
 }
 
-h2 {
-  margin: 5px 0 10px;
-  border-bottom: 2px solid gray;
-}
-
 h4 {
   margin-top: 0;
 }
@@ -3209,7 +3204,7 @@ a {
           transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-ul.nolist, ul#inventory-table {
+ul.nolist {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -3287,14 +3282,34 @@ ul.nolist, ul#inventory-table {
   border: 2px solid gray;
 }
 
-.sort-controls {
+.headline {
+  position: relative;
+  border-bottom: 2px solid gray;
+}
+.headline a {
   position: absolute;
-  top: 20px;
+  top: 5px;
   right: 15px;
+}
+.headline h2 {
+  margin: 0;
+}
+
+.sidebar {
+  background: -webkit-linear-gradient(#ffaa00, white);
+  background: linear-gradient(#ffaa00, white);
+  margin-right: 0;
+  padding-bottom: 55px;
+}
+.sidebar h2 {
+  font-size: 32px;
+}
+.sidebar h3 {
+  font-size: 14px;
 }
 
 /* Header */
-header {
+.global-header {
   background-color: white;
   opacity: 0.9;
   border-bottom: 2px solid gray;
@@ -3302,7 +3317,7 @@ header {
   position: relative;
   z-index: 999;
 }
-header a:hover, header a:focus {
+.global-header a:hover, .global-header a:focus {
   text-decoration: none;
 }
 
@@ -3487,25 +3502,34 @@ label {
   margin-bottom: 0 !important;
 }
 
+.form-login .form-submit {
+  margin-top: 27px;
+}
+
 /* Grid display styles */
-#inventory-table h3 {
+ul#inventory-table {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+ul#inventory-table h3 {
   margin: 0;
 }
-#inventory-table small {
+ul#inventory-table small {
   text-transform: uppercase;
   font-size: 10px;
 }
-#inventory-table .comic-image {
+ul#inventory-table .comic-image {
   overflow: hidden;
 }
-#inventory-table .series-count {
+ul#inventory-table .series-count {
   font-size: 11px;
   font-weight: bold;
 }
-#inventory-table .series-publisher {
+ul#inventory-table .series-publisher {
   display: none;
 }
-#inventory-table .issue-meta {
+ul#inventory-table .issue-meta {
   display: inline-block;
   font-weight: bold;
   font-size: 11px;
@@ -3658,6 +3682,9 @@ label {
   min-height: 130px;
 }
 
+#inventory-table.layout-thumb-sm {
+  padding: 0 10px;
+}
 #inventory-table.layout-thumb-sm h3 {
   font-size: 12px;
 }
@@ -3728,9 +3755,6 @@ label {
   display: none;
 }
 
-#inventory-table.layout-list > li {
-  padding: 0;
-}
 #inventory-table.layout-list li:nth-child(even) {
   background-color: #FFE4E1;
 }
@@ -3881,19 +3905,11 @@ label {
 .series-meta {
   font-size: 12px;
   font-weight: bold;
-  margin-bottom: 15px;
-}
-@media (min-width: 640px) {
-  .series-meta {
-    width: 50%;
-    position: absolute;
-    right: 15px;
-    top: 8px;
-    text-align: right;
-  }
+  padding-top: 10px;
 }
 .series-meta ul > li {
   display: inline-block;
+  vertical-align: bottom;
   margin: 0 10px;
 }
 @media (min-width: 640px) {
@@ -3903,8 +3919,6 @@ label {
 }
 .series-meta ul > li:first-of-type {
   margin-left: 0;
-  vertical-align: top;
-  margin-top: 4px;
 }
 .series-meta ul > li:last-of-type {
   margin-right: 0;
@@ -3947,18 +3961,49 @@ label {
   margin-right: 15px;
 }
 
+/* Single Issue */
+.issue-story {
+  margin-top: 15px;
+}
 .issue-story h4 {
   margin-top: 0;
 }
 
-/* Logos */
-*[class*="logo-"] {
-  background-repeat: no-repeat;
-  background-position: center left;
+.issue-image {
+  margin-top: 20px;
 }
+
+.issue-credits {
+  line-height: 1.2;
+  font-size: 12px;
+}
+.issue-credits > .row, .issue-credits > ul#inventory-table {
+  margin-bottom: 10px;
+}
+.issue-credits h3 {
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+.issue-credits .credit-writer,
+.issue-credits .credit-artist,
+.issue-credits .credit-cover {
+  font-size: 14px;
+}
+
+.issue-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-right: 20px;
+}
+
+/* Logos */
 *[class*="logo-"]:before {
+  display: block;
   background-repeat: no-repeat;
   background-position: center left;
+  margin-right: 10px;
+}
+*[class*="logo-"].sm-logo:before {
   display: inline-block;
   vertical-align: top;
   margin-right: 5px;
@@ -3968,36 +4013,71 @@ label {
 
 .logo-marvel {
   font-size: 0;
+}
+.logo-marvel:before {
+  content: "";
+  display: block;
+  background-image: url("../assets/logos/marvel_comics.svg");
+  width: 100px;
+  height: 46px;
+}
+.logo-marvel.sm-logo:before {
   width: 40px;
   height: 18px;
-  margin: 0 auto;
-  background-image: url("../assets/logos/marvel_comics.svg");
 }
 
 .logo-dc:before {
   content: "";
+  background-image: url("../assets/logos/dc_comics.svg");
+  width: 100px;
+  height: 100px;
+}
+.logo-dc.sm-logo:before {
+  content: "";
   width: 18px;
   height: 18px;
-  background-image: url("../assets/logos/dc_comics.svg");
-  background-size: 18px 18px;
 }
 
 .logo-imagecomics:before {
   content: "";
   background-image: url("../assets/logos/image_comics.svg");
+  background-size: 36px 80px;
+  width: 36px;
+  height: 80px;
+}
+.logo-imagecomics.sm-logo:before {
   background-size: 13px 18px;
 }
 
 .logo-darkhorse:before {
   content: "";
   background-image: url("../assets/logos/dark_horse_comics.svg");
-  background-size: 13px 18px;
+  width: 66px;
+  height: 110px;
 }
 
 .logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
+  background-size: 66px 110px;
+  width: 66px;
+  height: 110px;
+}
+.logo-valiant.sm-logo:before {
   background-size: 13px 18px;
+}
+
+.logo-archie:before {
+  content: "";
+  background-image: url("../assets/logos/archie_comics.png");
+  background-size: 110px 110px;
+  width: 110px;
+  height: 110px;
+}
+.logo-archie.sm-logo:before {
+  background-size: 18px 18px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Add Comics */
@@ -4096,15 +4176,6 @@ label {
   margin-bottom: 20px;
 }
 
-.headline {
-  position: relative;
-}
-.headline a {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-}
-
 .edit-form input[type="text"] {
   width: 70%;
 }
@@ -4126,7 +4197,7 @@ label {
   top: 5px;
 }
 
-.form-add-series button[type="submit"] {
+.button-block {
   margin: 25px 0;
 }
 

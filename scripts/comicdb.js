@@ -84,17 +84,17 @@ jQuery(document).ready(function($) {
     $($sortControls).removeClass('active');
     $(this).addClass('active');
     if(controlId == 'sort-thumb-lg') {
-      $($comicsList).attr('class','layout-thumb-lg');
+      $($comicsList).attr('class','row layout-thumb-lg');
       $.each($comics, function() {
         $(this).attr('class', layoutThumbLg);
       });
     } else if(controlId == 'sort-thumb-sm') {
-      $($comicsList).attr('class','layout-thumb-sm');
+      $($comicsList).attr('class','row layout-thumb-sm');
       $.each($comics, function() {
         $(this).attr('class', layoutThumbSm);
       });
     } else {
-      $($comicsList).attr('class','layout-list');
+      $($comicsList).attr('class','row layout-list');
       $.each($comics, function() {
         $(this).attr('class', layoutList);
       });

@@ -8,7 +8,7 @@
       <div class="col-sm-12">
         <!-- login form box -->
         <h2>Log into your Account</h2>
-        <form method="post" action="<?php echo filter_input ( INPUT_GET, 'return' ); ?>" name="loginform" class="form-inline">
+        <form method="post" action="<?php echo filter_input ( INPUT_GET, 'return' ); ?>" name="loginform" class="form-inline form-login">
         	<div class="form-group">
             <label for="login_input_username">Username</label>
           	<input id="login_input_username" class="login_input form-control" type="text" name="user_name" required />
@@ -17,7 +17,7 @@
             <label for="login_input_password">Password</label>
             <input id="login_input_password" class="login_input form-control" type="password" name="user_password" autocomplete="off" required />
           </div>
-        	<input type="submit" name="login" value="Log in" class="btn btn-default form-submit" />
+        	<input type="submit" name="login" value="Log in" class="btn btn-danger btn-lg form-submit" />
         </form>
       </div>
     </div>

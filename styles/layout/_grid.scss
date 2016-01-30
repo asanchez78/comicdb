@@ -1,7 +1,9 @@
 /* Grid display styles */
-#inventory-table {
-  @extend .nolist;
+ul#inventory-table {
   @extend .row;
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
 
   h3 {
     margin: 0;
@@ -194,6 +196,8 @@
 }
 
 #inventory-table.layout-thumb-sm {
+  padding: 0 10px;
+  
   h3 {
     font-size: 12px;
   }
@@ -275,9 +279,6 @@
 }
 
 #inventory-table.layout-list {
-  > li {
-    padding: 0;
-  }
 
   li:nth-child(even) {
     background-color: #FFE4E1;
