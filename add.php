@@ -39,10 +39,7 @@
     <?php // ADD SINGLE ISSUE ?>
     <div class="row add-block form-add-issue active">
       <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
-        if ($issueAdd == true) { 
-          $release_dateShort = DateTime::createFromFormat('Y-m-d', $issueDetails->releaseDate)->format('M Y');
-          $release_dateLong = DateTime::createFromFormat('Y-m-d', $issueDetails->releaseDate)->format('M d, Y');
-        ?>
+        if ($issueAdd == true) { ?>
         <header class="col-xs-12 headline">
           <h2>Add Issue: <?php echo $series_name; ?> #<?php echo $issue_number; ?></h2>
         </header>
@@ -50,11 +47,11 @@
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <label for="story_name">Story Name: </label>
-              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $issueDetails->storyName; ?>" />
+              <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $story_name; ?>" />
             </div>
             <div class="form-group">
               <label for="released_date">Cover Date:</label>
-              <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $issueDetails->releaseDate; ?>" type="date" placeholder="YYYY-MM-DD" />
+              <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $release_date; ?>" type="date" placeholder="YYYY-MM-DD" />
             </div>
             <div class="form-group form-radio">
               <label for="originalPurchase">Purchased When Released:</label>
@@ -67,7 +64,7 @@
               <a class="btn btn-xs btn-link pull-right" id="editPlot">[edit]</a>
               <label for="plot">Plot:</label>
               <div class="plot-output">
-                <?php echo $issueDetails->synopsis; ?>
+                <?php echo $plot; ?>
               </div>
               <div id="plotInput">
                 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -79,7 +76,7 @@
                     menubar: false
                   });
                 </script>
-                <textarea name="plot" class="form-control"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
+                <textarea name="plot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
               </div>
             </div>
             <div class="text-center center-block button-block">
@@ -89,12 +86,12 @@
           </div>
           <div class="col-md-4 sidebar">
             <div class="issue-image">
-              <img src="<?php echo $issueDetails->coverURL; ?>" alt="Cover" />
+              <img src="<?php echo $coverURL; ?>" alt="Cover" />
               <div class="form-group">
                 <label for="cover_image">Cover Image URL</label>
-                <input type="url" class="form-control" name="cover_image" value="<?php echo $issueDetails->coverURL; ?>" />
+                <input type="url" class="form-control" name="cover_image" value="<?php echo $coverURL; ?>" />
                 <small>Enter the URL of the image you wish to use. Default is the cover file from the ComicVine entry on this issue.</small>
-                <input type="hidden" name="cover_image_file" value="<?php echo $issueDetails->coverFile; ?>" />
+                <input type="hidden" name="cover_image_file" value="<?php echo $coverFile; ?>" />
               </div>
             </div>
             <div class="issue-details">
@@ -107,47 +104,47 @@
                 <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
               </p>
             </div>
-            <?php if ($issueDetails->script || $issueDetails->pencils || $issueDetails->colors || $issueDetails->letters || $issueDetails->editing || $issueDetails->cover) { ?>
+            <?php if ($script || $pencils || $colors || $letters || $editing || $cover) { ?>
             <div class="issue-credits text-center">
               <div class="row">
-                <?php if ($issueDetails->script) { ?>
-                <div class="<?php if ($issueDetails->pencils) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-writer">
+                <?php if ($script) { ?>
+                <div class="<?php if ($pencils) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-writer">
                   <h3>Script</h3>
-                  <?php echo $issueDetails->script; ?>
+                  <?php echo $script; ?>
                 </div>
                 <?php } ?>
-                <?php if ($issueDetails->pencils) { ?>
-                <div class="<?php if ($issueDetails->script) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-artist">
+                <?php if ($pencils) { ?>
+                <div class="<?php if ($script) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-artist">
                   <h3>Pencils</h3>
-                  <?php echo $issueDetails->pencils; ?>
+                  <?php echo $pencils; ?>
                 </div>
                 <?php } ?>
               </div>
               <div class="row">
-                <?php if ($issueDetails->colors) { ?>
-                <div class="col-xs-12 <?php if ($issueDetails->letters && $issueDetails->editing && $issueDetails->cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
+                <?php if ($colors) { ?>
+                <div class="col-xs-12 <?php if ($letters && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
                   <h3>Inks/Colors</h3>
-                  <?php echo $issueDetails->colors; ?>
+                  <?php echo $colors; ?>
                 </div>
                  <?php } ?>
-                <?php if ($issueDetails->letters) { ?>
-                <div class="col-xs-12 <?php if ($issueDetails->colors && $issueDetails->editing && $issueDetails->cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
+                <?php if ($letters) { ?>
+                <div class="col-xs-12 <?php if ($colors && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
                   <h3>Letters</h3>
-                  <?php echo $issueDetails->letters; ?>
+                  <?php echo $letters; ?>
                 </div>
                  <?php } ?>
-                <?php if ($issueDetails->editing) { ?>
-                <div class="col-xs-12 <?php if ($issueDetails->letters && $issueDetails->colors && $issueDetails->cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-editor">
+                <?php if ($editing) { ?>
+                <div class="col-xs-12 <?php if ($letters && $colors) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-editor">
                   <h3>Editing</h3>
-                  <?php echo $issueDetails->editing; ?>
+                  <?php echo $editing; ?>
                 </div>
                  <?php } ?>
               </div>
               <div class="row">
-                <?php if ($issueDetails->cover) { ?>
+                <?php if ($coverArtist) { ?>
                 <div class="col-xs-12 credit-cover">
                   <h3>Cover</h3>
-                  <?php echo $issueDetails->cover; ?>
+                  <?php echo $coverArtist; ?>
                 </div>
                 <?php } ?>
               </div>

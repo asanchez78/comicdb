@@ -42,21 +42,33 @@
         $issueAdd = true;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
-        $seriesDetails = new comicSearch();
-        $seriesDetails->seriesInfo($series_id);
-        $cvVolumeID = $seriesDetails->cvVolumeID;
+        $comic = new comicSearch();
+        $comic->seriesInfo($series_id);
+        $cvVolumeID = $comic->cvVolumeID;
 
-        if (isset($seriesDetails->publisherName)) {
-          $publisherName = $seriesDetails->publisherName;
-          $publisherShort = $seriesDetails->publisherShort;
+        if (isset($comic->publisherName)) {
+          $publisherName = $comic->publisherName;
+          $publisherShort = $comic->publisherShort;
         } else {
           $messageNum = 60;
         }
-        $issueDetails = new wikiQuery;
-        $issueDetails->issueSearch($cvVolumeID, $issue_number);
-        $series_name = $seriesDetails->series_name;
-        $series_vol = $seriesDetails->series_vol;
-        $wiki_id = filter_input (INPUT_POST, 'wiki_id');
+        $wiki = new wikiQuery;
+        $wiki->issueSearch($cvVolumeID, $issue_number);
+        $series_name = $comic->series_name;
+        $series_vol = $comic->series_vol;
+        $story_name = $wiki->storyName;
+        $plot = $wiki->synopsis;
+        $release_date = $wiki->releaseDate;
+        $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
+        $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
+        $script = $wiki->script;
+        $pencils = $wiki->pencils;
+        $colors = $wiki->colors;
+        $letters = $wiki->letters;
+        $editing = $wiki->editing;
+        $coverArtist = $wiki->coverArtist;
+        $coverURL = $wiki->coverURL;
+        $coverFile = $wiki->coverFile;
         break;
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
@@ -224,7 +236,7 @@
         $colors = $wiki->colors;
         $letters = $wiki->letters;
         $editing = $wiki->editing;
-        $cover = $wiki->cover;
+        $coverArtist = $wiki->coverArtist;
         $coverFile = $wiki->coverFile;
         break;
       case 'edit-save':

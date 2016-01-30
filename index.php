@@ -40,7 +40,6 @@
 			</div>
 			<div class="col-xs-12 col-md-5 series-meta text-right">
 				<ul class="nolist">
-					<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .'">' . $publisherName . '</li>'; } ?>
 					<li>XXXX Total Issues</li>
 					<li>XXX Total Series</li>
 					<li>

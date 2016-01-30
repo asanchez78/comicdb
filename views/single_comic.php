@@ -9,6 +9,7 @@
   } else {
     $messageNum = 60;
   }
+
   // Standardizes values for common variables for use in notifications
   if (isset($comic->series_name) || isset($comic->series_vol) || isset($comic->issue_number) || isset($comic->release_date)) {
     $series_name = $comic->series_name;
@@ -19,7 +20,22 @@
   } else {
     $messageNum = 99;
   }
-
+  /* Real variables for after dB is hooked up
+  $script = $comic->script;
+  $pencils = $comic->pencils;
+  $colors = $comic->colors;
+  $letters = $comic->letters;
+  $editing = $comic->editing;
+  $coverArtist = $comic->coverArtist;
+  
+  Temporary Vars below. Delete after dB is ready.
+  */
+  $script = 'Script Person';
+  $pencils = 'Artist Person';
+  $colors = 'Inker Person';
+  $letters = 'Letter Person';
+  $editing = 'Editor Person';
+  $coverArtist = 'Cover Artist Person';
 ?>
 <header class="row headline">
   <div class="col-xs-12 col-md-7">
@@ -66,40 +82,55 @@
         <big><strong><?php echo $series_name; ?></strong></big><br />
         <strong>Issue: #</strong><?php echo $issue_num; ?><br />
         <strong>Volume: </strong><?php echo $series_vol; ?><br />
-        <strong>Cover Date: </strong><br />
+        <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
       </p>
     </div>
+    <?php if ($script || $pencils || $colors || $letters || $editing || $cover) { ?>
     <div class="issue-credits text-center">
       <div class="row">
+        <?php if ($script) { ?>
         <div class="col-md-6 credit-writer">
           <h3>Script</h3>
-          <a href="#" title="View more comics written by AUTHOR NAME">Chris Claremont</a>, Len Wein, Roy Thomas, Arnold Drake, Linda Fite
+          <?php echo $script; ?>
         </div>
+        <?php } ?>
+        <?php if ($pencils) { ?>
         <div class="col-md-6 credit-artist">
           <h3>Pencils</h3>
-          <a href="#" title="View more comics drawn by ARTIST NAME">Gil Kane, Dave Cockrum, Werner Roth</a>
+          <?php echo $pencils; ?>
         </div>
-      </div>      
+        <?php } ?> 
+      </div> 
+        
       <div class="row">
+        <?php if ($colors) { ?>
         <div class="col-md-4 credit-inker">
           <h3>Inks/Colors</h3>
-          Dave Cockrum, Peter Iro, John Verpoorten, Sam Grainger
+          <?php echo $colors; ?>
         </div>
+        <?php } ?>
+        <?php if ($letters) { ?>     
         <div class="col-md-4 credit-letters">
           <h3>Letters</h3>
-          Tyler Durden
+          <?php echo $letters; ?>
         </div>
+        <?php } ?>
+        <?php if ($editing) { ?> 
         <div class="col-md-4 credit-editor">
           <h3>Editing</h3>
-          Mike Marts
+          <?php echo $editing; ?>
         </div>
+        <?php } ?>
       </div>
       <div class="row">
+        <?php if ($coverArtist) { ?>
         <div class="col-md-12 credit-cover">
           <h3>Cover</h3>
-          <a href="#" title="View more comics drawn by ARTIST NAME">Alex Ross</a>
+          <?php echo $coverArtist; ?>
         </div>
+        <?php } ?>
       </div>
     </div>
+    <?php } ?>
   </div>
 </div>

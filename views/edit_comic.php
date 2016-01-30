@@ -80,29 +80,29 @@
         </div>
         <div class="row">
           <?php if ($colors) { ?>
-          <div class="col-xs-12 <?php if ($letters && $editing && $cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
+          <div class="col-xs-12 <?php if ($letters && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
             <h3>Inks/Colors</h3>
             <?php echo $colors; ?>
           </div>
            <?php } ?>
           <?php if ($letters) { ?>
-          <div class="col-xs-12 <?php if ($colors && $editing && $cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
+          <div class="col-xs-12 <?php if ($colors && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
             <h3>Letters</h3>
             <?php echo $letters; ?>
           </div>
            <?php } ?>
           <?php if ($editing) { ?>
-          <div class="col-xs-12 <?php if ($letters && $colors && $cover) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-editor">
+          <div class="col-xs-12 <?php if ($letters && $colors) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-editor">
             <h3>Editing</h3>
             <?php echo $editing; ?>
           </div>
            <?php } ?>
         </div>
         <div class="row">
-          <?php if ($cover) { ?>
+          <?php if ($coverArtist) { ?>
           <div class="col-xs-12 credit-cover">
             <h3>Cover</h3>
-            <?php echo $cover; ?>
+            <?php echo $coverArtist; ?>
           </div>
           <?php } ?>
         </div>

@@ -107,7 +107,7 @@ class wikiQuery {
 		$this->pencils = '';
 		$this->script = '';
 		$this->colors = '';
-		$this->cover = '';
+		$this->coverArtist = '';
 		$this->editing = '';
 		$this->letters = '';
 
@@ -126,7 +126,7 @@ class wikiQuery {
 					$this->editing .= '<span>' . $item['name'] . '</span>';
 				}
 				if (strpos($item['role'], 'cover') !== FALSE) {
-					$this->cover .= '<span>' . $item['name'] . '</span>';
+					$this->coverArtist .= '<span>' . $item['name'] . '</span>';
 				}
 				if (strpos($item['role'], 'letterer') !== FALSE) {
 					$this->letters .= '<span>' . $item['name'] . '</span>';
