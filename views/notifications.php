@@ -85,10 +85,16 @@
         $messageText .= 'Publisher data missing.';
         break;
       case 61:
+        // Duplicate range addition issue.
         $messageText .= 'The issues are already in your collection.';
         break;
       case 62:
+        // Update Issue: Could not connect to database to update the issue.
         $messageText .= 'Could not update issue. An error occurred.';
+        break;
+      case 63:
+        // Update Issue: User tried to update an issue that is either not in their collection or they are not logged in.
+        $messageText .= 'Could not update issue. An error occurred: You are not logged in.';
         break;
       case 90:
         $messageText .= 'Sorry, no database connection.';

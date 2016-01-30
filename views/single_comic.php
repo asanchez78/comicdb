@@ -55,10 +55,14 @@
   <div class="col-md-8">
     <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
     <div class="issue-description">
-      <?php if ($comic->plot != '') {
-        echo $comic->plot; 
+      <?php if ($comic->custPlot != '') {
+        echo $comic->custPlot;
       } else {
-        echo '<p>Plot details have not been entered.</p>';
+        if ($comic->plot != '') {
+          echo $comic->plot; 
+        } else {
+          echo '<p>Plot details have not been entered.</p>';
+        }
       }
       ?>
     </div>

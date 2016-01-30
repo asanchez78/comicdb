@@ -259,21 +259,34 @@ class comicSearch {
       echo "0 results";
     }
 
-    // Gets the number of issues in each series and outputs a text string
+    // Gets custom information from the user table
     if (isset($ownerID)) {
       $sql = "SELECT *
         FROM comics
         LEFT JOIN users_comics
         ON comics.comic_id=users_comics.comic_id
         WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID";
+      
+      // Issue count
       $this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
       if ($this->series_issue_count == 1) {
         $this->series_issue_count = $this->series_issue_count . ' Issue';
       } else {
         $this->series_issue_count = $this->series_issue_count . ' Issues';
       }
-    }
 
+      // Custom Plot, Story Name, and Variant cover
+      $result = $this->db_connection->query ( $sql );
+      if ($result->num_rows > 0) {
+        while ( $row = $result->fetch_assoc () ) {
+          $this->custPlot = $row ['custPlot'];
+          $this->custStoryName = $row ['custStoryName'];
+          $this->variantCover = $row ['variantCover'];
+        }
+      } else {
+        echo "0 results";
+      }
+    }
 
     // Gets the latest comic book cover image for the series
     if (isset($ownerID)) {

@@ -76,7 +76,8 @@
                     menubar: false
                   });
                 </script>
-                <textarea name="plot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+                <textarea name="custPlot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+                <input type="hidden" name="plot" value="<?php echo htmlspecialchars($plot); ?>" />
               </div>
             </div>
             <div class="text-center center-block button-block">
