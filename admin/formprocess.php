@@ -37,7 +37,7 @@
           }
         }
         break;
-      // ADD SINGLE ISSUE: Part one of the single issue process. Displays final fields and allows user to change details before adding to collection.
+      // ADD SINGLE ISSUE: Part one of the single issue process. Passes basic information from user dropdown to begin search.
       case 'issue-add':
         $issueAdd = true;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
@@ -68,6 +68,12 @@
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
         $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
+        $art = filter_input ( INPUT_POST, 'art' );
+        $script = filter_input ( INPUT_POST, 'script' );
+        $colors = filter_input ( INPUT_POST, 'colors' );
+        $letters = filter_input ( INPUT_POST, 'letters' );
+        $editor = filter_input ( INPUT_POST, 'editor' );
+        $cover = filter_input ( INPUT_POST, 'cover' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {

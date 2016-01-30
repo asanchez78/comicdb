@@ -42,7 +42,6 @@ class wikiQuery {
 	public $siteDetailURL;
 
 
-
 	/**
 	 * queries ComicVine API to get the API URL of the series searched for
 	 * @param  int $seriesName name of the comic series being searched for
@@ -101,6 +100,45 @@ class wikiQuery {
 		$this->releaseDate = $detailResults['results']['cover_date'];
 		$this->synopsis = $detailResults['results']['description'];
 		$this->seriesName = $detailResults['results']['volume']['name'];
+		$issueCreditsArray = $detailResults['results']['person_credits'];
+		$this->issueCreditsArray = $issueCreditsArray;
+		$pencils = '';
+		$script = '';
+		$colors = '';
+		$cover = '';
+		$editing = '';
+		$letters = '';
+
+		if (count($issueCreditsArray) > 0) {
+			foreach($issueCreditsArray as $item) {
+				if ($item['role'] == 'artist' || $item['role'] == 'artist, other' || $item['role'] == 'penciler' || $item['role'] == 'penciler, other' || $item['role'] == 'writer, penciler, inker, cover' || $item['role'] == 'penciler, cover' || $item['role'] == 'artist, penciler, cover') {
+					$pencils .= '<span>' . $item['name'] . '</span>';
+				}
+				if ($item['role'] == 'writer' || $item['role'] == 'writer, other') {
+					$script .= '<span>' . $item['name'] . '</span>';
+				}
+				if ($item['role'] == 'colorist' || $item['role'] == 'colorist, other' || $item['role'] == 'inker' || $item['role'] == 'inker, other' || $item['role'] == 'writer, penciler, inker, cover') {
+					$colors .= '<span>' . $item['name'] . '</span>';
+				}
+				if ($item['role'] == 'editor' || $item['role'] == 'editor, other') {
+					$editing .= '<span>' . $item['name'] . '</span>';
+				}
+				if ($item['role'] == 'cover' || $item['role'] == 'writer, penciler, inker, cover' || $item['role'] == 'penciler, cover' || $item['role'] == 'artist, penciler, cover') {
+					$cover .= '<span>' . $item['name'] . '</span>';
+				}
+				if ($item['role'] == 'letterer') {
+					$letters .= '<span>' . $item['name'] . '</span>';
+				}
+			}
+		}
+
+		$this->pencils = $pencils;
+		$this->script = $script;
+		$this->colors = $colors;
+		$this->editing = $editing;
+		$this->cover = $cover;
+		$this->letters = $letters;
+
 		if ($detailResults['results']['image']['medium_url']) {
 			$subject = $detailResults['results']['image']['medium_url'];
 			$pattern = "/(?<=jpg|png|jpeg).*/";

@@ -127,6 +127,10 @@ ul.nolist {
   }
 }
 
+.form-group {
+  margin: 15px 0;
+}
+
 .sidebar {
   background: linear-gradient($brand-orange, white);
   margin-right: 0;
@@ -138,5 +142,24 @@ ul.nolist {
 
   h3 {
     font-size: 14px;
+  }
+
+  *[class*="credit-"] {
+    span {
+      display: inline;
+      margin-bottom: 3px;
+
+      &:after {
+        content: ", ";
+        display: inline;
+      }
+
+      &:last-of-type {
+        &:after {
+          content: "";
+          display: inline;
+        }
+      }
+    }
   }
 }
