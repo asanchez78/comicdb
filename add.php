@@ -68,7 +68,6 @@
               <label for="plot">Plot:</label>
               <div class="plot-output"><?php echo $issueDetails->synopsis; ?></div>
               <textarea name="plot" class="form-control" id="plotInput"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
-              <code><?php print_r($issueDetails->issueCreditsArray); ?></code>
             </div>
           </div>
           <div class="col-md-4 sidebar">
