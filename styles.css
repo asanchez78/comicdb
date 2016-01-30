@@ -3928,11 +3928,6 @@ ul#inventory-table .issue-meta {
   vertical-align: bottom;
   margin: 0 10px;
 }
-@media (min-width: 640px) {
-  .series-meta ul > li {
-    margin: 0 20px;
-  }
-}
 .series-meta ul > li:first-of-type {
   margin-left: 0;
 }
