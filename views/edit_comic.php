@@ -47,7 +47,7 @@
       <img src="<?php echo $coverURL; ?>" alt="Cover" />
       <div class="form-group">
         <label for="cover_image">Cover Image URL</label>
-        <input type="url" class="form-control" name="cover_image" placeholder="Enter the URL" value="<?php echo $coverURL; ?>" />
+        <input type="text" class="form-control" name="cover_image" placeholder="Enter the URL" value="<?php echo $coverURL; ?>" />
         <small>Enter the URL of the image you wish to use. Default is the cover file from the Wikia entry on this issue.</small>
         <input type="hidden" name="cover_image_file" value="<?php echo $coverFile; ?>" />
       </div>
