@@ -102,42 +102,37 @@ class wikiQuery {
 		$this->seriesName = $detailResults['results']['volume']['name'];
 		$issueCreditsArray = $detailResults['results']['person_credits'];
 		$this->issueCreditsArray = $issueCreditsArray;
-		$pencils = '';
-		$script = '';
-		$colors = '';
-		$cover = '';
-		$editing = '';
-		$letters = '';
+		
+		// Initializing the credit strings
+		$this->pencils = '';
+		$this->script = '';
+		$this->colors = '';
+		$this->cover = '';
+		$this->editing = '';
+		$this->letters = '';
 
 		if (count($issueCreditsArray) > 0) {
 			foreach($issueCreditsArray as $item) {
-				if ($item['role'] == 'artist' || $item['role'] == 'artist, other' || $item['role'] == 'penciler' || $item['role'] == 'penciler, other' || $item['role'] == 'writer, penciler, inker, cover' || $item['role'] == 'penciler, cover' || $item['role'] == 'artist, penciler, cover') {
-					$pencils .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
+					$this->pencils .= '<span>' . $item['name'] . '</span>';
 				}
-				if ($item['role'] == 'writer' || $item['role'] == 'writer, other') {
-					$script .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'writer') !== FALSE) {
+					$this->script .= '<span>' . $item['name'] . '</span>';
 				}
-				if ($item['role'] == 'colorist' || $item['role'] == 'colorist, other' || $item['role'] == 'inker' || $item['role'] == 'inker, other' || $item['role'] == 'writer, penciler, inker, cover') {
-					$colors .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
+					$this->colors .= '<span>' . $item['name'] . '</span>';
 				}
-				if ($item['role'] == 'editor' || $item['role'] == 'editor, other') {
-					$editing .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'editor') !== FALSE) {
+					$this->editing .= '<span>' . $item['name'] . '</span>';
 				}
-				if ($item['role'] == 'cover' || $item['role'] == 'writer, penciler, inker, cover' || $item['role'] == 'penciler, cover' || $item['role'] == 'artist, penciler, cover') {
-					$cover .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'cover') !== FALSE) {
+					$this->cover .= '<span>' . $item['name'] . '</span>';
 				}
-				if ($item['role'] == 'letterer') {
-					$letters .= '<span>' . $item['name'] . '</span>';
+				if (strpos($item['role'], 'letterer') !== FALSE) {
+					$this->letters .= '<span>' . $item['name'] . '</span>';
 				}
 			}
 		}
-
-		$this->pencils = $pencils;
-		$this->script = $script;
-		$this->colors = $colors;
-		$this->editing = $editing;
-		$this->cover = $cover;
-		$this->letters = $letters;
 
 		if ($detailResults['results']['image']['medium_url']) {
 			$subject = $detailResults['results']['image']['medium_url'];

@@ -44,7 +44,7 @@
           $release_dateLong = DateTime::createFromFormat('Y-m-d', $issueDetails->releaseDate)->format('M d, Y');
         ?>
         <header class="col-xs-12 headline">
-          <h2>Add Issue: <?php echo $series_name; ?> (Vol <?php echo $series_vol; ?>) #<?php echo $issue_number; ?></h2>
+          <h2>Add Issue: <?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h2>
         </header>
         <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
           <div class="col-md-8 col-sm-12">
@@ -64,9 +64,10 @@
               </fieldset>
             </div>
             <div class="plot form-group">
+              <a class="btn btn-xs btn-link pull-right" id="editPlot">[edit]</a>
               <label for="plot">Plot:</label>
-              <small><a href="#">[edit]</a></small>
-              <?php echo $issueDetails->synopsis; ?>
+              <div class="plot-output"><?php echo $issueDetails->synopsis; ?></div>
+              <textarea name="plot" class="form-control" id="plotInput"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
               <code><?php print_r($issueDetails->issueCreditsArray); ?></code>
             </div>
           </div>
@@ -140,7 +141,6 @@
           <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
           <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
           <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-          <input type="hidden" name="plot" value="<?php echo htmlspecialchars($issueDetails->synopsis); ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
           <input type="hidden" name="submitted" value="yes" />
           <div class="col-xs-12 text-center center-block button-block">

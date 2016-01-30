@@ -4202,10 +4202,20 @@ ul#inventory-table .issue-meta {
 .plot label {
   display: block;
 }
+.plot .plot-output {
+  margin-right: 20px;
+}
 .plot textarea {
+  display: none;
   width: 90%;
   height: 200px;
   border: 1px solid silver;
+  line-height: 1.4;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+.plot textarea.active {
+  display: block;
 }
 .plot small {
   position: absolute;

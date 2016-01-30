@@ -116,11 +116,23 @@
   label {
     display: block;
   }
+  
+  .plot-output {
+    margin-right: 20px;
+  }
 
   textarea {
+    display: none;
     width: 90%;
     height: 200px;
     border: 1px solid silver;
+    line-height: 1.4;
+    font-size: 16px;
+    padding: 10px 15px;
+
+    &.active {
+      display: block;
+    }
   }
 
   small {
