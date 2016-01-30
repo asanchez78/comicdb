@@ -8,9 +8,9 @@
   margin-top: -15px;
   margin-left: -15px;
   margin-right: -15px;
+  margin-bottom: 15px;
   border-bottom: 1px solid $border-color;
   background-color: $brand-red;
-  margin-bottom: 0;
   > li {
     text-align: center;
     width: 25%;
@@ -99,7 +99,7 @@
 }
 
 #add-issue button[type="submit"] {
-  margin-top: 27px;
+  margin-top: 42px;
 }
 
 .issue-details {
@@ -116,17 +116,36 @@
   label {
     display: block;
   }
+  
+  .plot-output {
+    margin-right: 20px;
+  }
 
   textarea {
     width: 90%;
     height: 200px;
     border: 1px solid silver;
+    line-height: 1.4;
+    font-size: 16px;
+    padding: 10px 15px;
+
+    &.active {
+      display: block;
+    }
   }
 
   small {
     position: absolute;
     right: 20px;
     top: 5px;
+  }
+
+  #plotInput {
+    display: none;
+
+    &.active {
+      display: block;
+    }
   }
 }
 

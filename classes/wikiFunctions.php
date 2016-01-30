@@ -42,7 +42,6 @@ class wikiQuery {
 	public $siteDetailURL;
 
 
-
 	/**
 	 * queries ComicVine API to get the API URL of the series searched for
 	 * @param  int $seriesName name of the comic series being searched for
@@ -101,6 +100,40 @@ class wikiQuery {
 		$this->releaseDate = $detailResults['results']['cover_date'];
 		$this->synopsis = $detailResults['results']['description'];
 		$this->seriesName = $detailResults['results']['volume']['name'];
+		$issueCreditsArray = $detailResults['results']['person_credits'];
+		$this->issueCreditsArray = $issueCreditsArray;
+		
+		// Initializing the credit strings
+		$this->pencils = '';
+		$this->script = '';
+		$this->colors = '';
+		$this->coverArtist = '';
+		$this->editing = '';
+		$this->letters = '';
+
+		if (count($issueCreditsArray) > 0) {
+			foreach($issueCreditsArray as $item) {
+				if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
+					$this->pencils .= '<span>' . $item['name'] . '</span>';
+				}
+				if (strpos($item['role'], 'writer') !== FALSE) {
+					$this->script .= '<span>' . $item['name'] . '</span>';
+				}
+				if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
+					$this->colors .= '<span>' . $item['name'] . '</span>';
+				}
+				if (strpos($item['role'], 'editor') !== FALSE) {
+					$this->editing .= '<span>' . $item['name'] . '</span>';
+				}
+				if (strpos($item['role'], 'cover') !== FALSE) {
+					$this->coverArtist .= '<span>' . $item['name'] . '</span>';
+				}
+				if (strpos($item['role'], 'letterer') !== FALSE) {
+					$this->letters .= '<span>' . $item['name'] . '</span>';
+				}
+			}
+		}
+
 		if ($detailResults['results']['image']['medium_url']) {
 			$subject = $detailResults['results']['image']['medium_url'];
 			$pattern = "/(?<=jpg|png|jpeg).*/";
