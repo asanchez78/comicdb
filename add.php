@@ -44,7 +44,7 @@
           $release_dateLong = DateTime::createFromFormat('Y-m-d', $issueDetails->releaseDate)->format('M d, Y');
         ?>
         <header class="col-xs-12 headline">
-          <h2>Add Issue: <?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h2>
+          <h2>Add Issue: <?php echo $series_name; ?> #<?php echo $issue_number; ?></h2>
         </header>
         <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
           <div class="col-md-8 col-sm-12">
@@ -66,12 +66,25 @@
             <div class="plot form-group">
               <a class="btn btn-xs btn-link pull-right" id="editPlot">[edit]</a>
               <label for="plot">Plot:</label>
-              <div class="plot-output"><?php echo $issueDetails->synopsis; ?></div>
-              <textarea name="plot" class="form-control" id="plotInput"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
+              <div class="plot-output">
+                <?php echo $issueDetails->synopsis; ?>
+              </div>
+              <div id="plotInput">
+                <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+                <script>
+                  tinymce.init({ 
+                    selector:'textarea',
+                    height: 300,
+                    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+                    menubar: false
+                  });
+                </script>
+                <textarea name="plot" class="form-control"><?php echo htmlspecialchars($issueDetails->synopsis); ?></textarea>
+              </div>
             </div>
             <div class="text-center center-block button-block">
               <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-save"></i> Save</button>
             </div>
           </div>
           <div class="col-md-4 sidebar">
@@ -195,7 +208,7 @@
               <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
           </form>
         </div>
       <?php } ?>

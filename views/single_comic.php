@@ -50,7 +50,7 @@
       <?php
         if ($login->isUserLoggedIn () == true) { ?>
           <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Comic</a>
-          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&wiki_id=<?php echo $comic->wiki_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
+          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
         <?php } 
       ?>
     </div>

@@ -4185,7 +4185,7 @@ ul#inventory-table .issue-meta {
 }
 
 #add-issue button[type="submit"] {
-  margin-top: 27px;
+  margin-top: 42px;
 }
 
 .issue-details {
@@ -4206,7 +4206,6 @@ ul#inventory-table .issue-meta {
   margin-right: 20px;
 }
 .plot textarea {
-  display: none;
   width: 90%;
   height: 200px;
   border: 1px solid silver;
@@ -4221,6 +4220,12 @@ ul#inventory-table .issue-meta {
   position: absolute;
   right: 20px;
   top: 5px;
+}
+.plot #plotInput {
+  display: none;
+}
+.plot #plotInput.active {
+  display: block;
 }
 
 .button-block {

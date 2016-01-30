@@ -99,7 +99,7 @@
 }
 
 #add-issue button[type="submit"] {
-  margin-top: 27px;
+  margin-top: 42px;
 }
 
 .issue-details {
@@ -122,7 +122,6 @@
   }
 
   textarea {
-    display: none;
     width: 90%;
     height: 200px;
     border: 1px solid silver;
@@ -139,6 +138,14 @@
     position: absolute;
     right: 20px;
     top: 5px;
+  }
+
+  #plotInput {
+    display: none;
+
+    &.active {
+      display: block;
+    }
   }
 }
 

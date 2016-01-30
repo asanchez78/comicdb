@@ -45,12 +45,18 @@
         $seriesDetails = new comicSearch();
         $seriesDetails->seriesInfo($series_id);
         $cvVolumeID = $seriesDetails->cvVolumeID;
+
+        if (isset($seriesDetails->publisherName)) {
+          $publisherName = $seriesDetails->publisherName;
+          $publisherShort = $seriesDetails->publisherShort;
+        } else {
+          $messageNum = 60;
+        }
         $issueDetails = new wikiQuery;
         $issueDetails->issueSearch($cvVolumeID, $issue_number);
         $series_name = $seriesDetails->series_name;
         $series_vol = $seriesDetails->series_vol;
         $wiki_id = filter_input (INPUT_POST, 'wiki_id');
-        $publisherAPI = filter_input( INPUT_POST, 'publisherAPI' );
         break;
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
@@ -93,6 +99,7 @@
 
         $comic = new comicSearch();
         $comic->issueCheck($series_id, $issue_number);
+
         if ($comic->issueExists == 1) {
           // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
           $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
@@ -185,23 +192,40 @@
         break;
       case 'edit':
         $comic_id = filter_input(INPUT_GET, 'comic_id');
-        $wiki_id = filter_input ( INPUT_GET, 'wiki_id' );
-        $wiki = new wikiQuery ();
         $comic = new comicSearch();
         $comic->issueLookup($comic_id);
         $series_id = $comic->series_id;
         $comic->seriesInfo ($series_id);
-        $publisherAPI = $comic->publisherShort;
-        $wiki->comicCover ($publisherAPI, $wiki_id );
-        $wiki->comicDetails ($publisherAPI, $wiki_id );
+        $issue_number = $comic->issue_number;
+        $cvVolumeID = $comic->cvVolumeID;
 
-        $series_id = $comic->series_id;
+        $wiki = new wikiQuery ();
+        $wiki->issueSearch($cvVolumeID, $issue_number);
+
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
-        $issue_number = $comic->issue_number;
+        
         $originalPurchase = $comic->originalPurchase;
-        $release_date = $comic->release_date;
-        $story_name = $comic->story_name;
+        $release_date = $wiki->releaseDate;
+        $release_dateShort = DateTime::createFromFormat('Y-m-d', $release_date)->format('M Y');
+        $release_dateLong = DateTime::createFromFormat('Y-m-d', $release_date)->format('M d, Y');
+
+        $story_name = $wiki->storyName;
+        $plot = $wiki->synopsis;
+        $coverURL = $comic->cover_image;
+        if (isset($comic->publisherName)) {
+          $publisherName = $comic->publisherName;
+          $publisherShort = $comic->publisherShort;
+        } else {
+          $messageNum = 60;
+        }
+        $script = $wiki->script;
+        $pencils = $wiki->pencils;
+        $colors = $wiki->colors;
+        $letters = $wiki->letters;
+        $editing = $wiki->editing;
+        $cover = $wiki->cover;
+        $coverFile = $wiki->coverFile;
         break;
       case 'edit-save':
         $sql = "UPDATE comics SET series_id='$series_id', issue_number='$issue_number', story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', wikiUpdated=1 WHERE comic_id='$comic_id'";

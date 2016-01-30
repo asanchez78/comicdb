@@ -103,7 +103,7 @@ jQuery(document).ready(function($) {
 
   $('#editPlot').click(function(e) {
     e.preventDefault;
-    $(this).text('[SAVE]');
+    $(this).text('');
     $('#plotInput').addClass('active');
     $('.plot-output').addClass('hidden');
   });
