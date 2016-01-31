@@ -15,8 +15,12 @@
     $series_name = $comic->series_name;
     $series_vol = $comic->series_vol;
     $issue_num = $comic->issue_number;
-    $release_dateShort = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y');
-    $release_dateLong = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M d, Y');
+    //making sure a release date exists or format function throws an error
+    if ($comic->release_date) {
+      $release_dateShort = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y');
+      $release_dateLong = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M d, Y');  
+    }
+    
   } else {
     $messageNum = 99;
   }
