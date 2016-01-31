@@ -19,6 +19,9 @@
     if ($comic->release_date) {
       $release_dateShort = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y');
       $release_dateLong = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M d, Y');  
+    } else {
+      $release_dateShort = '';
+      $release_dateLong = 'No Date Entered';
     }
     
   } else {
