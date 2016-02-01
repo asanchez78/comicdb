@@ -191,7 +191,9 @@ class comicSearch {
       die ( "Connection failed:" );
     }
     if ($listAllSeries == 1) {
-      $sql = "SELECT * FROM series ORDER BY series_name ASC, series_vol ASC";
+      $sql = "SELECT * , CASE WHEN series_name
+        LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
+        FROM series ORDER BY series_name2 ASC, series_vol ASC";
       $this->series_list_result = $this->db_connection->query ( $sql );
     } else {
       $sql = "SELECT DISTINCT comics.series_id
@@ -206,7 +208,10 @@ class comicSearch {
           $list .= "series_id=" . $row ['series_id'] . " or ";
         }
         $idList = preg_replace('/(or(?!.*or))/', '', $list);
-        $sql = "SELECT * FROM series where $idList ORDER BY series_name ASC, series_vol ASC";
+        $sql = "SELECT *, CASE WHEN series_name
+          LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
+          FROM series WHERE $idList
+          ORDER BY series_name2 ASC, series_vol ASC";
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
     }
