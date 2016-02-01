@@ -7,6 +7,7 @@
 	$issues->issuesList ( $series_id );
 	$issues->seriesInfo ( $series_id );
 
+  $publisherID = $issues->publisherID;
   $publisherName = $issues->publisherName;
   $publisherShort = $issues->publisherShort;
   $series_name = $issues->series_name;
@@ -26,7 +27,7 @@
 			</div>
 			<div class="col-xs-12 col-md-5 series-meta text-right">
 				<ul class="nolist">
-					<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</li>'; } ?>
+					<?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
 					<li><?php echo $issues->series_issue_count; ?></li>
 					<li>Volume <?php echo $series_vol; ?></li>
 					<li>

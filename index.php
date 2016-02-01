@@ -49,7 +49,9 @@
 					</ul>
 				</div>
 			</header>
-			<?php include ('views/series_list.php');
+			<?php 
+				$listAll = 0;
+				include ('views/series_list.php');
 		} ?>
 		<?php if (isset($user) AND $validUser !=1 ) {
 			$messageNum = 52;

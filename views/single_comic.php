@@ -4,6 +4,7 @@
   $comic->seriesInfo ( $comic->series_id );
 
   if (isset($comic->publisherName)) {
+    $publisherID = $comic->publisherID;
     $publisherName = $comic->publisherName;
     $publisherShort = $comic->publisherShort;
   } else {
@@ -50,7 +51,7 @@
   </div>
   <div class="col-xs-12 col-md-4 series-meta text-right">
     <ul class="nolist">
-      <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</li>'; } ?>
+      <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?publisher=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
       <li>Volume <?php echo $series_vol; ?></li>
       <?php if ($comic->release_date) { ?>
         <li><?php echo $release_dateShort; ?></li>
@@ -88,7 +89,7 @@
     </div>
     <div class="issue-details">
       <h2>Issue Details</h2>
-      <span class="logo-<?php echo $publisherShort; ?> pull-right"></span>
+      <a href="/publisher.php?pid=<?php echo $publisherID; ?>" class="logo-<?php echo $publisherShort; ?> pull-right"></a>
       <p>
         <big><strong><?php echo $series_name; ?></strong></big><br />
         <strong>Issue: #</strong><?php echo $issue_num; ?><br />

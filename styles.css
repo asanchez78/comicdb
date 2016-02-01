@@ -3286,11 +3286,6 @@ ul.nolist {
   position: relative;
   border-bottom: 2px solid gray;
 }
-.headline a {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-}
 .headline h2 {
   margin: 0;
 }
