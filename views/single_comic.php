@@ -45,10 +45,10 @@
   $coverArtist = 'Cover Artist Person';
 ?>
 <header class="row headline">
-  <div class="col-xs-12 col-md-7">
+  <div class="col-xs-12 col-md-8">
     <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
   </div>
-  <div class="col-xs-12 col-md-5 series-meta text-right">
+  <div class="col-xs-12 col-md-4 series-meta text-right">
     <ul class="nolist">
       <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</li>'; } ?>
       <li>Volume <?php echo $series_vol; ?></li>
