@@ -63,7 +63,7 @@
   <div class="col-md-8">
     <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
     <div class="issue-description">
-      <?php if ($comic->custPlot != '') {
+      <?php if (isset($comic->custPlot)) {
         echo $comic->custPlot;
       } else {
         if ($comic->plot != '') {
