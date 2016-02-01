@@ -184,18 +184,43 @@ class comicSearch {
   /**
    * Returns a list of comic series
    */
-  public function seriesList($listAllSeries) {
+  public function seriesList($listAll, $publisherSearchId) {
     $ownerID = $_SESSION ['user_id'];
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
     }
-    if ($listAllSeries == 1) {
+    // List all books/publishers
+    if ($listAll == 1) {
       $sql = "SELECT * , CASE WHEN series_name
         LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
         FROM series ORDER BY series_name2 ASC, series_vol ASC";
       $this->series_list_result = $this->db_connection->query ( $sql );
+    // List all owned books by publisher
+    } elseif ($listAll == 2) {
+      $sql = "SELECT DISTINCT comics.series_id
+          FROM comics
+          LEFT JOIN users_comics
+          ON comics.comic_id=users_comics.comic_id
+          LEFT JOIN series
+          ON comics.series_id=series.series_id
+          WHERE users_comics.user_id=$ownerID AND series.publisherID=$publisherSearchId
+          ORDER BY series_id;";
+      $result = $this->db_connection->query ( $sql );
+      if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+        $list = NULL;
+        while ($row = $result->fetch_assoc ()) {
+          $list .= "series_id=" . $row ['series_id'] . " or ";
+        }
+        $idList = preg_replace('/(or(?!.*or))/', '', $list);
+        $sql = "SELECT *, CASE WHEN series_name
+          LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
+          FROM series WHERE $idList
+          ORDER BY series_name2 ASC, series_vol ASC";
+        $this->series_list_result = $this->db_connection->query ( $sql ); 
+      }
     } else {
+    // List all owned books in a series
       $sql = "SELECT DISTINCT comics.series_id
           FROM comics
           JOIN users_comics
@@ -256,6 +281,7 @@ class comicSearch {
       while ( $row = $result->fetch_assoc () ) {
         $this->series_name = $row ['series_name'];
         $this->series_vol = $row ['series_vol'];
+        $this->publisherID = $row ['publisherID'];
         $this->publisherName = $row ['publisherName'];
         $this->publisherShort = $row ['publisherShort'];
         $this->cvVolumeID = $row ['cvVolumeID'];
@@ -264,21 +290,34 @@ class comicSearch {
       echo "0 results";
     }
 
-    // Gets the number of issues in each series and outputs a text string
+    // Gets custom information from the user table
     if (isset($ownerID)) {
       $sql = "SELECT *
         FROM comics
         LEFT JOIN users_comics
         ON comics.comic_id=users_comics.comic_id
         WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID";
+      
+      // Issue count
       $this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
       if ($this->series_issue_count == 1) {
         $this->series_issue_count = $this->series_issue_count . ' Issue';
       } else {
         $this->series_issue_count = $this->series_issue_count . ' Issues';
       }
-    }
 
+      // Custom Plot, Story Name, and Variant cover
+      $result = $this->db_connection->query ( $sql );
+      if ($result->num_rows > 0) {
+        while ( $row = $result->fetch_assoc () ) {
+          $this->custPlot = $row ['custPlot'];
+          $this->custStoryName = $row ['custStoryName'];
+          $this->variantCover = $row ['variantCover'];
+        }
+      } else {
+        echo "0 results";
+      }
+    }
 
     // Gets the latest comic book cover image for the series
     if (isset($ownerID)) {
@@ -292,6 +331,24 @@ class comicSearch {
         $this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
       } else {
         $this->series_latest_cover = "assets/nocover.jpg";
+      }
+    }
+  }
+
+  public function publisherInfo($publisher_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT *
+          FROM publishers
+          WHERE publisherID=$publisher_id";
+
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      while ( $row = $result->fetch_assoc () ) {
+        $this->publisherName = $row ['publisherName'];
+        $this->publisherShort = $row ['publisherShort'];
       }
     }
   }

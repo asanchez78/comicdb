@@ -481,7 +481,7 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-size: 38px;
+  font-size: 36px;
 }
 
 h3, .h3 {
@@ -3286,11 +3286,6 @@ ul.nolist {
   position: relative;
   border-bottom: 2px solid gray;
 }
-.headline a {
-  position: absolute;
-  top: 5px;
-  right: 15px;
-}
 .headline h2 {
   margin: 0;
 }
@@ -3519,7 +3514,7 @@ label {
 }
 
 .form-login .form-submit {
-  margin-top: 27px;
+  margin-top: 43px;
 }
 
 /* Grid display styles */
@@ -3928,11 +3923,6 @@ ul#inventory-table .issue-meta {
   vertical-align: bottom;
   margin: 0 10px;
 }
-@media (min-width: 640px) {
-  .series-meta ul > li {
-    margin: 0 20px;
-  }
-}
 .series-meta ul > li:first-of-type {
   margin-left: 0;
 }
@@ -4134,9 +4124,6 @@ ul#inventory-table .issue-meta {
   overflow: hidden;
   min-height: 500px;
   display: none;
-}
-.add-block > div:not(.add-success) {
-  margin-top: 15px;
 }
 .add-block form {
   margin-bottom: 25px;

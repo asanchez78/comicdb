@@ -1,7 +1,10 @@
 <?php 
   $comic = new comicSearch ();
-  $listAllSeries = 0;
-  $comic->seriesList ($listAllSeries);
+  $publisherSearchId = filter_input ( INPUT_GET, 'pid' );
+  if ($publisherSearchId == NULL) {
+    $publisherSearchId = 0;
+    $comic->seriesList ($listAll, $publisherSearchId);
+  }
   if ($comic->series_list_result->num_rows > 0) { ?>
     <ul id="inventory-table" class="row layout-thumb-lg">
     <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {

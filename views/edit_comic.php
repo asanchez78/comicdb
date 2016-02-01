@@ -34,7 +34,8 @@
             menubar: false
           });
         </script>
-        <textarea name="plot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+        <textarea name="custPlot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+        <input type="hidden" name="plot" value="<?php echo htmlspecialchars($plot); ?>" />
       </div>
     </div>
     <div class="col-xs-12 text-center center-block">
@@ -109,10 +110,5 @@
       </div>
       <?php } ?>
   </div>
-  <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
-  <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
-  <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
-  <input type="hidden" name="plot" value="<?php echo htmlspecialchars($wiki->synopsis); ?>" />
-  <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-  <input type="hidden" name="submitted" value="yes" />
+  <input type="hidden" name="updated" value="yes" />
 </form>

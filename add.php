@@ -76,7 +76,8 @@
                     menubar: false
                   });
                 </script>
-                <textarea name="plot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+                <textarea name="custPlot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+                <input type="hidden" name="plot" value="<?php echo htmlspecialchars($plot); ?>" />
               </div>
             </div>
             <div class="text-center center-block button-block">
@@ -178,10 +179,10 @@
         </div>
       <?php // ADD SINGLE ISSUE: Part 1/3: Allows user to pick the series to add an issue and its issue #
         } else { ?>
+        <header class="headline col-xs-12">
+          <h2>Add Issue</h2>
+        </header>
         <div class="col-xs-12">
-          <header class="headline">
-            <h2>Add Issue</h2>
-          </header>
           <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue">
             <div class="form-group">
               <label>Series</label>
@@ -213,8 +214,9 @@
     <?php // ADD RANGE ?>
     <div class="row add-block form-add-range">
       <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
+      <header class="headline col-xs-12"><h2>Add a range of issues</h2></header>
       <div class="col-xs-12">
-        <header class="headline"><h2>Add a range of issues</h2></header>
+        <p>Use the form below to add several issues of one series in consecutive order.</p>
         <form id="input_select" method="post" action="<?php echo $filename; ?>?type=range#addrange">
           <div class="row">
             <div class="col-xs-12 col-md-6">
@@ -287,7 +289,7 @@
     <?php // ADD LIST ?>
     <div class="row add-block form-add-list">
       <header class="col-xs-12 headline">
-        <h2>Add Series</h2>
+        <h2>Add List of Issues</h2>
       </header>
     </div>
     <?php // ADD SERIES ?>
@@ -322,8 +324,8 @@
           </div>
         </div>
       <?php } else {?>
+      <header class="headline col-xs-12"><h2>Add Series</h2></header>
       <div class="col-xs-12" id="form-series-add">
-        <header class="headline"><h2>Add Series</h2></header>
         <p>Use the form below to add a new series to your collection.</p>
         <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="add-series">
           <div class="form-group">

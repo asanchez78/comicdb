@@ -13,9 +13,9 @@
 					<?php if ($login->isUserLoggedIn () == true) { ?>
 						<li><a href="/add.php" id="button-add-comics">Add Comics</a>
 						</li>
-						<li><a href="/index.php?logout&m=49">Logout</a></li>
+						<li><a href="/index.php?logout&m=49" class="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 					<?php } else { ?>
-						<li><a href="/login.php?return=<?php echo $current_page; ?>">Login</a></li>
+						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login">Login <i class="fa fa-sign-in"></i></a></li>
 					<?php } ?>
 					</ul>
 				</nav>

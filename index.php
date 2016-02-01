@@ -26,36 +26,32 @@
 <body>
 	<?php include 'views/header.php';?>
 	<div class="container content">
-		<header class="row headline">
-			<div class="col-xs-12 col-md-7">
-				<h2>
-					<?php if ($login->isUserLoggedIn () == true or isset($user) AND $validUser == 1) {
-						if ($login->isUserLoggedIn () == true) {
+		<?php if ($login->isUserLoggedIn () == true or isset($user) AND $validUser == 1) { ?>
+			<header class="row headline">
+				<div class="col-xs-12 col-md-7">
+					<h2>
+						<?php if ($login->isUserLoggedIn () == true) {
 							echo 'Your collection';
 						} elseif (isset($user) AND $validUser == 1) {
 							echo $user . '&rsquo;s collection';
-						}
-					} ?>
-				</h2>
-			</div>
-			<div class="col-xs-12 col-md-5 series-meta text-right">
-				<ul class="nolist">
-					<li>XXXX Total Issues</li>
-					<li>XXX Total Series</li>
-					<li>
-						<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
-						<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
-						<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
-					</li>
-				</ul>
-			</div>
-		</header>
-		<?php if ($login->isUserLoggedIn () == true or isset($user) AND $validUser == 1) {
-				if ($login->isUserLoggedIn () == true) {
-					include ('views/series_list.php');
-				} elseif (isset($user) AND $validUser == 1) {
-					include ('views/series_list.php');
-				}
+						} ?>
+					</h2>
+				</div>
+				<div class="col-xs-12 col-md-5 series-meta text-right">
+					<ul class="nolist">
+						<li>XXXX Total Issues</li>
+						<li>XXX Total Series</li>
+						<li>
+							<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
+							<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
+							<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<?php 
+				$listAll = 0;
+				include ('views/series_list.php');
 		} ?>
 		<?php if (isset($user) AND $validUser !=1 ) {
 			$messageNum = 52;
