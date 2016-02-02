@@ -109,6 +109,7 @@ class wikiQuery {
 		$this->colors = '';
 		$this->coverArtist = '';
 		$this->editing = '';
+		$this->colorsList = '';
 		$this->letters = '';
 
 		if (count($issueCreditsArray) > 0) {
@@ -121,6 +122,7 @@ class wikiQuery {
 				}
 				if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
 					$this->colors .= '<span>' . $item['name'] . '</span>';
+					$this->colorsList .= $item['name'] . ',';
 				}
 				if (strpos($item['role'], 'editor') !== FALSE) {
 					$this->editing .= '<span>' . $item['name'] . '</span>';
@@ -132,6 +134,7 @@ class wikiQuery {
 					$this->letters .= '<span>' . $item['name'] . '</span>';
 				}
 			}
+			//$this->colorsList = preg_replace('/(,(?!.*,))/', '', $this->colorsList);
 		}
 
 		if ($detailResults['results']['image']['medium_url']) {
