@@ -34,7 +34,7 @@
   }
 
   // Checks for user entered custom plot, otherwise displays the original value.
-  if (isset($comic->custPlot)) {
+  if (isset($comic->custPlot) && $comic->custPlot != '') {
     $plot = $comic->custPlot;
   } elseif ($comic->plot != '') {
     $plot = $comic->plot;
