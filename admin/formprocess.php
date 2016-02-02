@@ -43,7 +43,7 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $comic = new comicSearch();
-        $comic->seriesInfo($series_id);
+        $comic->seriesInfo($series_id, NULL);
         $cvVolumeID = $comic->cvVolumeID;
 
         if (isset($comic->publisherName)) {
