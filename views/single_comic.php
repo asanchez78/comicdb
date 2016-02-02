@@ -1,33 +1,44 @@
 <?php 
   $comic = new comicSearch ();
   $comic->issueLookup ( $comic_id );
-  $comic->seriesInfo ( $comic->series_id );
-
-  if (isset($comic->publisherName)) {
+  
+  if (isset($userSetID) && $validUser == 1) {
+    $comic->seriesInfo ( $comic->series_id, $userSetID );
+  } else {
+    $comic->seriesInfo ( $comic->series_id, $userID );
+  }
+  // Required values
+  // Standardizes values for common variables
+  if (isset($comic->series_name) && isset($comic->series_vol) && isset($comic->issue_number) && isset($comic->publisherName)) {
+    $series_name = $comic->series_name;
+    $series_vol = $comic->series_vol;
+    $issue_num = $comic->issue_number;
     $publisherID = $comic->publisherID;
     $publisherName = $comic->publisherName;
     $publisherShort = $comic->publisherShort;
   } else {
-    $messageNum = 60;
-  }
-
-  // Standardizes values for common variables for use in notifications
-  if (isset($comic->series_name) || isset($comic->series_vol) || isset($comic->issue_number) || isset($comic->release_date)) {
-    $series_name = $comic->series_name;
-    $series_vol = $comic->series_vol;
-    $issue_num = $comic->issue_number;
-    //making sure a release date exists or format function throws an error
-    if ($comic->release_date) {
-      $release_dateShort = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y');
-      $release_dateLong = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M d, Y');  
-    } else {
-      $release_dateShort = '';
-      $release_dateLong = 'No Date Entered';
-    }
-    
-  } else {
     $messageNum = 99;
   }
+
+  // Optional values below
+  // Making sure a release date exists or format function throws an error
+  if (isset($comic->release_date)) {
+    $release_dateShort = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M Y');
+    $release_dateLong = DateTime::createFromFormat('Y-m-d', $comic->release_date)->format('M d, Y');  
+  } else {
+    $release_dateShort = '';
+    $release_dateLong = 'No Date Entered';
+  }
+
+  // Checks for user entered custom plot, otherwise displays the original value.
+  if ($comic->custPlot != '') {
+    $plot = $comic->custPlot;
+  } elseif ($comic->plot != '') {
+    $plot = $comic->plot;
+  } else {
+    $plot = '<p>Plot details have not been entered.</p>';
+  }
+
   /* Real variables for after dB is hooked up
   $script = $comic->script;
   $pencils = $comic->pencils;
@@ -51,7 +62,7 @@
   </div>
   <div class="col-xs-12 col-md-4 series-meta text-right">
     <ul class="nolist">
-      <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?publisher=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
+      <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
       <li>Volume <?php echo $series_vol; ?></li>
       <?php if ($comic->release_date) { ?>
         <li><?php echo $release_dateShort; ?></li>
@@ -63,16 +74,7 @@
   <div class="col-md-8">
     <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
     <div class="issue-description">
-      <?php if (isset($comic->custPlot)) {
-        echo $comic->custPlot;
-      } else {
-        if ($comic->plot != '') {
-          echo $comic->plot; 
-        } else {
-          echo '<p>Plot details have not been entered.</p>';
-        }
-      }
-      ?>
+      <?php echo $plot; ?>
     </div>
     <div class="button-block text-center">
       <?php

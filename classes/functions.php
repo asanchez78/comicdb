@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * functions relating to searching comic information
  * <pre>
@@ -16,9 +10,10 @@
  * seriesList
  * seriesFind
  * seriesInfo
+ * 
  * </pre>
  * @author asanchez
- *
+ * @author sloyless
  */
 class comicSearch {
   private $db_connection;
@@ -142,8 +137,7 @@ class comicSearch {
    *
    * @param int $series_id
    */
-  public function issuesList($series_id) {
-    $ownerID = $_SESSION ['user_id'];
+  public function issuesList($series_id, $ownerID) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
       die ( "Connect failed:" );
@@ -177,15 +171,12 @@ class comicSearch {
         $this->issue_list .= '<div class="issue-meta release-date text-uppercase">' . $this->release_date . '</div>';
         $this->issue_list .= '</li>';
       }
-    } else {
-      echo "0 results";
     }
   }
   /**
    * Returns a list of comic series
    */
-  public function seriesList($listAll, $publisherSearchId) {
-    $ownerID = $_SESSION ['user_id'];
+  public function seriesList($listAll, $publisherSearchId, $ownerID) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
@@ -261,11 +252,7 @@ class comicSearch {
     $this->series = $this->db_connection->query ( $sql );
   }
 
-  public function seriesInfo($series_id) {
-    if (isset($_SESSION['user_id'])) {
-      $ownerID = $_SESSION ['user_id'];
-    }
-    
+  public function seriesInfo($series_id, $ownerID) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
@@ -286,8 +273,6 @@ class comicSearch {
         $this->publisherShort = $row ['publisherShort'];
         $this->cvVolumeID = $row ['cvVolumeID'];
       }
-    } else {
-      echo "0 results";
     }
 
     // Gets custom information from the user table
@@ -314,8 +299,6 @@ class comicSearch {
           $this->custStoryName = $row ['custStoryName'];
           $this->variantCover = $row ['variantCover'];
         }
-      } else {
-        echo "0 results";
       }
     }
 
@@ -370,5 +353,17 @@ class comicSearch {
     } else {
       $this->issueExists = 0;
     }
+  }
+
+  public function collectionCount($user_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+
+    $sql = "SELECT user_id, comic_id, quantity
+        FROM users_comics
+        WHERE user_id = $user_id";
+    $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
 }
