@@ -3,7 +3,31 @@
   require_once(__ROOT__.'/classes/functions.php');
   require_once(__ROOT__.'/config/db.php');
   require_once(__ROOT__.'/classes/Login.php');
+  
   $login = new Login();
+  if ($login->isUserLoggedIn () == true) {
+    $user = $_SESSION ['user_name'];
+    $userID = $_SESSION ['user_id'];
+  }
+
+  // User browsing
+  $userSetName = filter_input(INPUT_GET, 'user');
+  if ($userSetName != '') {
+    if ($connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT user_id from users where user_name='$userSetName'";
+    $result = $connection->query ( $sql );
+    if (mysqli_fetch_row($connection->query ( $sql )) > 0) {
+      while ($row = $result->fetch_assoc ()) {
+        $userSetID = $row['user_id'];
+      }
+      $validUser=1;
+    } else {
+      $validUser=0;
+    }
+  }
+
   // This will get the current URL the user is on
   $current_page = htmlspecialchars(urlencode($_SERVER['REQUEST_URI']));
 ?>

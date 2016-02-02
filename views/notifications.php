@@ -9,7 +9,6 @@
       $notifyClass = "bg-danger";
       $messageText = '';
       $messageText .= '<strong>ERROR</strong>: ';
-      $sqlMessage .= '<strong class="text-danger">ERROR</strong>: ';
     }
 
     switch ($messageNum) {
@@ -57,7 +56,7 @@
         $messageText .= 'This issue is already in your collection.';
         break;
       case 52:
-        $messageText .= 'User "' . $user . '" not found. Here is a random comic instead.';
+        $messageText .= 'User "' . $userSetName . '" not found. Here is a random comic instead.';
         break;
       // Registration
       case 53:
@@ -95,6 +94,10 @@
       case 63:
         // Update Issue: User tried to update an issue that is either not in their collection or they are not logged in.
         $messageText .= 'Could not update issue. An error occurred: You are not logged in.';
+        break;
+      case 64:
+        // User search, logged in but invalid user name
+        $messageText .= 'User "' . $userSetName . '" not found.';
         break;
       case 90:
         $messageText .= 'Sorry, no database connection.';

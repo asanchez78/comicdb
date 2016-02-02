@@ -9,34 +9,19 @@
 	if ($publisherSearchId !== NULL) {
 		$listAll = 2;
 	}
+
 	$comic = new comicSearch ();
-	$comic->publisherInfo ( $publisherSearchId );
-	$publisherName = $comic->publisherName;
+  $comic->publisherInfo ( $publisherSearchId );
+  $publisherName = $comic->publisherName;
 ?>
   <title><?php echo $publisherName; ?> :: POW! Comic Book Manager</title>
 </head>
 <body>
 	<?php include 'views/header.php';?>
 	<div class="container content">
-		<?php if ($login->isUserLoggedIn () == true or isset($user) AND $validUser == 1) {
-			if ($publisherSearchId !== NULL) { ?>
-			<header class="row headline">
-				<div class="col-xs-12 col-md-7">
-					<h2><?php echo $publisherName; ?></h2>
-				</div>
-				<div class="col-xs-12 col-md-5 series-meta text-right">
-					<ul class="nolist">
-						<li>XXXX Total Issues</li>
-						<li>XX Total Series</li>
-						<li>
-							<button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
-							<button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
-							<button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
-						</li>
-					</ul>
-				</div>
-			</header>
-			<?php include ('views/series_list.php');
+		<?php if ($login->isUserLoggedIn () == true) {
+			if ($publisherSearchId !== NULL) {
+				include ('views/series_list.php');
 			} else { ?>
 				<p><span class="text-danger">ERROR:</span> No publisher was chosen. Please go back and try again.</p>
 			<?php }
