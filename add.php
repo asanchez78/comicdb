@@ -6,9 +6,9 @@
   $seriesSearch = false;
   $seriesAdd = false;
   $seriesSubmit = false;
-  $issueSearch = false;
   $issueAdd = false;
   $issueSubmit = false;
+  $listSearch = false;
   $rangeSearch = false;
   $submitted = filter_input ( INPUT_POST, 'submitted' );
   if ($submitted) { include('admin/formprocess.php'); }
@@ -24,16 +24,18 @@
     } ?>
     <ul class="add-menu nav nav-tabs" id="addTabs">
       <li role="presentation" class="active">
-        <a href="#addSingle" id="form-add-issue" aria-controls="addSingle" role="tab" data-toggle="tab"><i class="fa fa-plus"></i> Add Issue</a>
+        <a href="#addSingle" id="form-add-issue" aria-controls="addSingle" role="tab" data-toggle="tab"><i class="fa fa-plus"></i> <span class="hidden-sm hidden-xs">Add Issue</span></a>
       </li>
       <li role="presentation">
-        <a href="#addRange" id="form-add-range" aria-controls="addRange" role="tab" data-toggle="tab"><i class="fa fa-hashtag"></i> Add Range of Issues</a>
+        <a href="#addRange" id="form-add-range" aria-controls="addRange" role="tab" data-toggle="tab">
+          <i class="fa fa-hashtag"></i> <span class="hidden-sm hidden-xs">Add Range of Issues</span>
+        </a>
       </li>
       <li role="presentation">
-        <a href="#addList" id="form-add-list" aria-controls="addList" role="tab" data-toggle="tab"><i class="fa fa-archive"></i> Add List of Issues</a>
+        <a href="#addList" id="form-add-list" aria-controls="addList" role="tab" data-toggle="tab"><i class="fa fa-archive"></i> <span class="hidden-sm hidden-xs">Add List of Issues</span></a>
       </li>
       <li role="presentation">
-        <a href="#addSeries" id="form-add-series" aria-controls="addSeries" role="tab" data-toggle="tab"><i class="fa fa-folder-open"></i> Add Series</a>
+        <a href="#addSeries" id="form-add-series" aria-controls="addSeries" role="tab" data-toggle="tab"><i class="fa fa-folder-open"></i> <span class="hidden-sm hidden-xs">Add Series</span></a>
       </li>
     </ul>
     <div class="tab-content">
@@ -213,6 +215,8 @@
           </div>
         <?php } ?>
       </div>
+      
+
       <?php // ADD RANGE ?>
       <div class="row add-block form-add-range tab-pane fade" role="tabpanel" id="addRange">
         <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
@@ -289,12 +293,55 @@
           ?>
         <?php } ?>
       </div>
+      
+
       <?php // ADD LIST ?>
       <div class="row add-block form-add-list tab-pane fade" role="tabpanel" id="addList">
         <header class="col-xs-12 headline">
           <h2>Add List of Issues</h2>
         </header>
+        <div class="col-xs-12">
+          <?php if ($listSearch != true) { ?>
+          <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>?type=csv#addlist">
+            <p>Use the form below to add several issues of one series to your collection. Separate any issues with commas.</p>
+            <div class="form-group">
+              <label for="series_name">Series</label>
+              <select class="form-control" name="series_id" required>
+                <option value="" disabled selected>Choose a series</option>
+                <?php 
+                  $listAllSeries=1;
+                  $comic = new comicSearch ();
+                  $comic->seriesList ($listAllSeries, NULL, $userID);
+                  while ( $row = $comic->series_list_result->fetch_assoc () ) {
+                    $list_series_name = $row ['series_name'];
+                    $list_series_vol = $row ['series_vol'];
+                    $list_series_id = $row ['series_id'];
+                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (' . $list_series_vol . ')</option>';
+                  }  
+                ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="issueList">Comma separated list of issues</label>
+              <input type="text" class="form-control" name="issueList" placeholder="5,29,156" />
+            </div>
+            <div class="form-group form-radio">
+              <label for="originalPurchase">Purchased When Released</label>
+              <fieldset>
+                <input name="originalPurchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
+                <input name="originalPurchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+              </fieldset>
+            </div>
+            <input type="hidden" name="submitted" value="yes" />
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+          </form>
+          <?php } else { ?>
+
+          <?php } ?>
+        </div>
       </div>
+
+
       <?php // ADD SERIES ?>
       <div class="row add-block form-add-series tab-pane fade" role="tabpanel" id="addSeries">
         <?php if ($seriesSearch == true) { ?>

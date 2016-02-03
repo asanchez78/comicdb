@@ -4903,7 +4903,7 @@ ul#inventory-table .issue-meta {
 }
 .add-menu > li {
   text-align: center;
-  width: 25%;
+  width: 25.3%;
   font-size: 0;
   margin: 0;
   margin-right: -4px;
@@ -4915,10 +4915,6 @@ ul#inventory-table .issue-meta {
   color: white;
   font-size: 15px;
   padding: 8px 0;
-}
-.add-menu > li a:hover, .add-menu > li a:focus, .add-menu > li a.active {
-  background-color: #ffaa00;
-  text-decoration: none;
 }
 
 .add-block {
@@ -5068,6 +5064,20 @@ ul#inventory-table .issue-meta {
 
 .button-block {
   margin: 25px 0;
+}
+
+.nav-tabs > li > a {
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
+  background-color: #ffaa00;
+  border-color: transparent;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background-color: #ffaa00;
+  color: white;
+  border: 1px solid transparent;
 }
 
 /*# sourceMappingURL=styles.css.map */

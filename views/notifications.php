@@ -22,22 +22,25 @@
       case 3:
         $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
         break;
+      // Add Range Success
       case 4:
         $messageText = '<em>' . $series_name . ' #' . $first_issue . ' - ' . $last_issue . '</em> added to your collection successfully.';
         break;
-      // Single Issue
+      // Edit Issue
       case 5:
         $messageText = 'Issue updated successfully.';
         break;
+      // Cover Image Update        
       case 6:
         $messageText = 'Cover image updated successfully';
         break;
+      // Series Cover Set  
       case 7:
         $messageText = $series_name . ' #N cover now set as the series image.';
         break;
-      // Range addition
+      // CSV addition Success
       case 8:
-        $messageText = $series_name . ' #' . $series_csv_list . 'added to your collection successfully.';
+        $messageText = $series_name . ' #' . $filtered_issue_list . ' added to your collection successfully.';
         break;
       // Registration
       case 9:
