@@ -73,22 +73,16 @@ ul.nolist {
   position: absolute;
   top: 85px;
   width: 100%;
+  padding: 0 15px;
+  border-radius: 0;
 
   @media (min-width: $screen-md) {
     top: 64px;
   }
+}
 
-  &.notifications-hide {
-    display: none;
-  }
-
-  &.notifications-close {
-    height: 0;
-
-    > * {
-      display: none;
-    }
-  }
+.alert-dismissible .close {
+  right: 15px !important;
 }
 
 .content {

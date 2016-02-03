@@ -1,19 +1,6 @@
 jQuery(document).ready(function($) {
   var $notifyClose, $notifications, $addAnotherSeries, $backButton, $addComicsMenu;
 
-  $notifications = $('.notifications');
-  $notifyClose = $($notifications).find('.close');
-  $($notifyClose).click(function(e) {
-    e.preventDefault;
-    $($notifications).addClass('notifications-close');
-  });
-
-  if (!$notifications.hasClass('notifications-close')) {
-    setTimeout(function() {
-      $($notifications).addClass('notifications-close');
-    }, 6000);
-  }
-
   // Back button
   $backButton = $('.form-back');
   $($backButton).click(function(e) {
@@ -21,21 +8,9 @@ jQuery(document).ready(function($) {
     window.history.back();
   });
 
-  // Add comics tabs
-  $addComicsMenu = $('.add-menu').find('a');
-  $($addComicsMenu).click(function(e) {
-    e.preventDefault;
-    var $section = $(this).attr('id');
-    $($addComicsMenu).removeClass('active');
-    $(this).addClass('active');
-    var $addBlocks = $('.add-block');
-    $.each($addBlocks, function() {
-      if($(this).hasClass($section)) {
-        $(this).addClass('active');
-      } else {
-        $(this).removeClass('active');
-      }
-    });
+  $('#addTabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
   });
 
   // Detects a hashtag in url for add comics

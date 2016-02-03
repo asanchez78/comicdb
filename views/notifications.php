@@ -4,9 +4,9 @@
       $messageNum = $_GET['m'];
     }
     if ($messageNum < 50) {
-      $notifyClass = "bg-success";
+      $notifyClass = "alert-success";
     } else {
-      $notifyClass = "bg-danger";
+      $notifyClass = "alert-danger";
       $messageText = '';
       $messageText .= '<strong>ERROR</strong>: ';
     }
@@ -124,11 +124,11 @@
 </div>
 <?php } ?>
 <?php if(isset($messageText)) { ?>
-<div class="notifications <?php echo $notifyClass; ?>">
+<div class="alert alert-dismissible notifications <?php echo $notifyClass; ?>" role="alert">
   <div class="container">
     <div class="row">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <p class="col-xs-11 notification-text"><?php echo $messageText; ?></p>
-      <button type="button" class="close col-xs-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
   </div>
 </div>
