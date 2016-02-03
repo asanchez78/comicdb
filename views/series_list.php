@@ -25,7 +25,7 @@
     $comic->seriesList ($listAll, $publisherSearchId, $userID);
   }
 
-  if ($comic->series_list_result->num_rows > 0) { ?>
+  if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
     <header class="row headline">
       <div class="col-xs-12 col-md-7">
         <h2>
