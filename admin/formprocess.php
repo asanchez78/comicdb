@@ -21,7 +21,7 @@
         $seriesLookup->seriesLookup($apiDetailURL);
         $seriesSubmit = true;
         $series_name = $seriesLookup->seriesName;
-        $series_vol = filter_input(INPUT_POST, 'series_vol');
+        $series_vol = $seriesLookup->seriesStartYear;
         $publisherID = filter_input ( INPUT_POST, 'publisherID' );
         $sql = "INSERT INTO series (series_name, series_vol, publisherID, cvVolumeID, apiDetailURL, siteDetailURL)
                 VALUES ('$series_name', '$series_vol', '$publisherID', '$seriesLookup->cvVolumeID', '$seriesLookup->apiDetailURL', '$seriesLookup->siteDetailURL')";
@@ -43,7 +43,7 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $issue_number = filter_input ( INPUT_POST, 'issue_number' );
         $comic = new comicSearch();
-        $comic->seriesInfo($series_id, NULL);
+        $comic->seriesInfo($series_id, $userID);
         $cvVolumeID = $comic->cvVolumeID;
 
         if (isset($comic->publisherName)) {
@@ -54,21 +54,26 @@
         }
         $wiki = new wikiQuery;
         $wiki->issueSearch($cvVolumeID, $issue_number);
-        $series_name = $comic->series_name;
-        $series_vol = $comic->series_vol;
-        $story_name = $wiki->storyName;
-        $plot = $wiki->synopsis;
-        $release_date = $wiki->releaseDate;
-        $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
-        $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
-        $script = $wiki->script;
-        $pencils = $wiki->pencils;
-        $colors = $wiki->colors;
-        $letters = $wiki->letters;
-        $editing = $wiki->editing;
-        $coverArtist = $wiki->coverArtist;
-        $coverURL = $wiki->coverURL;
-        $coverFile = $wiki->coverFile;
+        $searchResults = $wiki->searchResults;
+        if ($searchResults != false) {
+          $series_name = $comic->series_name;
+          $series_vol = $comic->series_vol;
+          $story_name = $wiki->storyName;
+          $plot = $wiki->synopsis;
+          $release_date = $wiki->releaseDate;
+          $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
+          $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
+          $script = $wiki->script;
+          $pencils = $wiki->pencils;
+          $colors = $wiki->colors;
+          $letters = $wiki->letters;
+          $editing = $wiki->editing;
+          $coverArtist = $wiki->coverArtist;
+          $coverURL = $wiki->coverURL;
+          $coverFile = $wiki->coverFile;
+        } else {
+          $messageNum = 65;
+        }
         break;
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
@@ -148,9 +153,8 @@
           }
         }
         break;
-      // ADD RANGE: Submit all issues in input range using the first Wikia API entry as the result.
+      // ADD RANGE: Submit all issues in input range using the first ComicVine API entry as the result.
       case 'range':
-        $rangeSearch = true;
         $ownerID = $_SESSION['user_id'];
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $first_issue = filter_input ( INPUT_POST, 'first_issue' );
@@ -160,19 +164,20 @@
         $releaseDateArray = explode("-", $release_date);
 
         $comic = new comicSearch ();
-        $comic->seriesInfo ($series_id);
+        $comic->seriesInfo ($series_id, $userID);
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
         $cvVolumeID = $comic->cvVolumeID;
-        $addedList = '';
         foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
           $comic->issueCheck($series_id, $issue_number);
           if ($comic->issueExists == 1) {
             $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
             if (mysqli_query ( $connection, $sql )) {
               $messageNum = 4;
+              $rangeSearch = true;
             } else {
               $messageNum = 61;
+              $rangeSearch = false;
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           } else {
@@ -201,16 +206,21 @@
               $comic_id = mysqli_insert_id ( $connection );
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
+                $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+                $rangeSearch == true;
+                $messageNum = 4;
               } else {
+                $rangeSearch == false;
+                $messageNum = 51;
                 $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
               }
-              $messageNum = 4;
             } else {
               $messageNum = 51;
+              $rangeSearch == false;
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           }
-          $addedList .= '<h3> ' . $series_name . '<small>(Vol' . $series_vol . ')</small> #' . $issue_number . '</h3>';
+          $addedList = '<h3>#' . $first_issue . ' - ' . $last_issue . '</h3>';
         }
         break;
       case 'csv':
@@ -221,7 +231,7 @@
         $comic = new comicSearch();
         $comic->issueLookup($comic_id);
         $series_id = $comic->series_id;
-        $comic->seriesInfo ($series_id);
+        $comic->seriesInfo ($series_id, $userID);
         $issue_number = $comic->issue_number;
         $cvVolumeID = $comic->cvVolumeID;
 
@@ -238,7 +248,9 @@
 
         $story_name = $wiki->storyName;
         $plot = $wiki->synopsis;
-        $custPlot = $comic->custPlot;
+        if (isset($custPlot) && $custPlot != '') {
+          $custPlot = $comic->custPlot;
+        }
         $coverURL = $comic->cover_image;
         if (isset($comic->publisherName)) {
           $publisherName = $comic->publisherName;

@@ -25,7 +25,7 @@
     $comic->seriesList ($listAll, $publisherSearchId, $userID);
   }
 
-  if ($comic->series_list_result->num_rows > 0) { ?>
+  if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
     <header class="row headline">
       <div class="col-xs-12 col-md-7">
         <h2>
@@ -77,7 +77,7 @@
           <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
         </a>
         <div class="volume-number">
-          <span>Vol <?php echo $series_vol; ?></span>
+          <span><?php echo $series_vol; ?></span>
         </div>
         <div class="series-extra">
           <div class="series-publisher hidden-xs hidden-sm hidden-md">
