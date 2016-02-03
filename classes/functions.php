@@ -355,6 +355,64 @@ class comicSearch {
     }
   }
 
+  // Add creators to creators table
+  public function insertCreators($comic_id, $creatorsList) {
+    $connection = mysqli_connect ( 'localhost', 'comicdb', 'comicdb', 'comicdb' );
+    if (! $connection) {
+      die ( "Connection failed: " . mysqli_connect_error () );
+    }
+    $creatorsList = explode(";", $creatorsList);
+    foreach ($creatorsList as $creator) {
+      $creatorsArray  = explode(",", $creator);
+      $person = $creatorsArray[0];
+      $job = $creatorsArray[1];
+      $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+      if ($this->db_connection->connect_errno) {
+        die ( "Connection failed:" );
+      }
+      $sql = "SELECT *
+        FROM creators
+        WHERE name='$person' AND job='$job'";
+      $result = $this->db_connection->query ( $sql );
+      if ($result->num_rows > 0) {
+        $this->creatorExists = 1;
+        while ($row  = $result->fetch_assoc () ) {
+          $this->creator_id = $row['creator_id'];
+        }
+      } else {
+        $this->creatorExists = 0;
+      }
+      if ($this->creatorExists == 1) {
+        // Checks if the creators are already in the database. If so, just create the link to the new comic.
+        $creator_id = $this->creator_id;
+        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
+        if (mysqli_query ( $connection, $sql )) {
+          //messages here?
+          $success = true;
+        } else {
+          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
+          $messageNum = 51;
+        }
+      } else {
+        // Creator is not in the database. Add them and associate them with their issue.
+        $sql_creator = "INSERT INTO creators (name, job) VALUES ('$person', '$job')";
+        if (mysqli_query($connection, $sql_creator)) {
+          $creator_id = mysqli_insert_id($connection);
+          } else {
+          $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_creator . '<br>' . mysqli_error ( $connection );
+        }
+        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
+        if (mysqli_query ( $connection, $sql )) {
+          //messages here?
+          $success = true;
+        } else {
+          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
+          $messageNum = 51;
+        }
+      }
+    }
+  }
+
   public function collectionCount($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
