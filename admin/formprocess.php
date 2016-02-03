@@ -153,9 +153,8 @@
           }
         }
         break;
-      // ADD RANGE: Submit all issues in input range using the first Wikia API entry as the result.
+      // ADD RANGE: Submit all issues in input range using the first ComicVine API entry as the result.
       case 'range':
-        $rangeSearch = true;
         $ownerID = $_SESSION['user_id'];
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $first_issue = filter_input ( INPUT_POST, 'first_issue' );
@@ -165,7 +164,7 @@
         $releaseDateArray = explode("-", $release_date);
 
         $comic = new comicSearch ();
-        $comic->seriesInfo ($series_id);
+        $comic->seriesInfo ($series_id, $userID);
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
         $cvVolumeID = $comic->cvVolumeID;
@@ -176,8 +175,10 @@
             $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase')";
             if (mysqli_query ( $connection, $sql )) {
               $messageNum = 4;
+              $rangeSearch = true;
             } else {
               $messageNum = 61;
+              $rangeSearch = false;
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           } else {
@@ -206,16 +207,19 @@
               $comic_id = mysqli_insert_id ( $connection );
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
+                $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
               } else {
+                $rangeSearch == false;
                 $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
               }
               $messageNum = 4;
             } else {
               $messageNum = 51;
+              $rangeSearch == false;
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           }
-          $addedList .= '<h3> ' . $series_name . '<small>(Vol' . $series_vol . ')</small> #' . $issue_number . '</h3>';
+          $addedList = '<h3>#' . $first_issue . ' - ' . $last_issue . '</h3>';
         }
         break;
       case 'csv':

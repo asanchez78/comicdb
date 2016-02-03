@@ -39,8 +39,8 @@ label {
 
     &:checked + label:before {
       content: "";
-      background-color: gray;
-      border-color: gray;
+      background-color: $brand-red;
+      border-color: $brand-red;
       color: #f3f3f3;
       text-align: center;
     }
