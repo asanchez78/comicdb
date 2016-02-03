@@ -77,7 +77,7 @@
           <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
         </a>
         <div class="volume-number">
-          <span>Vol <?php echo $series_vol; ?></span>
+          <span><?php echo $series_vol; ?></span>
         </div>
         <div class="series-extra">
           <div class="series-publisher hidden-xs hidden-sm hidden-md">

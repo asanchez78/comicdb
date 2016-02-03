@@ -21,7 +21,7 @@
         $seriesLookup->seriesLookup($apiDetailURL);
         $seriesSubmit = true;
         $series_name = $seriesLookup->seriesName;
-        $series_vol = filter_input(INPUT_POST, 'series_vol');
+        $series_vol = $seriesLookup->seriesStartYear;
         $publisherID = filter_input ( INPUT_POST, 'publisherID' );
         $sql = "INSERT INTO series (series_name, series_vol, publisherID, cvVolumeID, apiDetailURL, siteDetailURL)
                 VALUES ('$series_name', '$series_vol', '$publisherID', '$seriesLookup->cvVolumeID', '$seriesLookup->apiDetailURL', '$seriesLookup->siteDetailURL')";

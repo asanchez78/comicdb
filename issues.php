@@ -34,7 +34,7 @@
         <ul class="nolist">
           <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
           <li><?php echo $comic->series_issue_count; ?></li>
-          <li>Volume <?php echo $series_vol; ?></li>
+          <li><?php echo $series_vol; ?></li>
           <li>
             <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
             <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>

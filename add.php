@@ -101,7 +101,7 @@
               <p>
                 <big><strong><?php echo $series_name; ?></strong></big><br />
                 <strong>Issue: #</strong><?php echo $issue_number; ?><br />
-                <strong>Volume: </strong><?php echo $series_vol; ?><br />
+                <strong>First Published: </strong><?php echo $series_vol; ?><br />
                 <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
               </p>
             </div>
@@ -164,10 +164,10 @@
           <div class="success-message">
             <div class="row">
               <div class="col-md-3 col-xs-hidden">
-                <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
+                <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
               </div>
               <div class="col-xs-12 col-md-9">
-                <h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
+                <h3><?php echo $series_name; ?> <small>(<?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
                 <p><?php if ($messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
               </div>
             </div>
@@ -186,17 +186,17 @@
           <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue">
             <div class="form-group">
               <label>Series</label>
-              <select class="form-control" name="series_id">
+              <select class="form-control" name="series_id" required>
                 <option value="" disabled selected>Choose a series</option>
                 <?php
                   $listAllSeries=1;
                   $comic = new comicSearch ();
-                  $comic->seriesList ($listAllSeries);
+                  $comic->seriesList ($listAllSeries, NULL, $userID);
                   while ( $row = $comic->series_list_result->fetch_assoc () ) {
                     $list_series_name = $row ['series_name'];
                     $list_series_vol = $row ['series_vol'];
                     $list_series_id = $row ['series_id'];
-                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (' . $list_series_vol . ')</option>';
                   } 
                 ?>
               </select>
@@ -222,17 +222,17 @@
             <div class="col-xs-12 col-md-6">
               <div class="form-group">
                 <label for="series_name">Series</label>
-                <select class="form-control" name="series_id">
+                <select class="form-control" name="series_id" required>
                   <option value="" disabled selected>Choose a series</option>
                   <?php 
                     $listAllSeries=1;
                     $comic = new comicSearch ();
-                    $comic->seriesList ($listAllSeries);
+                    $comic->seriesList ($listAllSeries, NULL, $userID);
                     while ( $row = $comic->series_list_result->fetch_assoc () ) {
                       $list_series_name = $row ['series_name'];
                       $list_series_vol = $row ['series_vol'];
                       $list_series_id = $row ['series_id'];
-                      echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                      echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (' . $list_series_vol . ')</option>';
                     }  
                   ?>
                 </select>
@@ -306,7 +306,6 @@
                 <?php echo $seriesSearch->resultsList; ?>
               </fieldset>
             </div>
-            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block button-block">
@@ -318,7 +317,7 @@
       <?php } elseif ($seriesSubmit == true) { ?>
         <div class="add-success bg-success col-xs-12">
           <div class="success-message text-center">
-            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
+            <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h2>
             <p>has been added to your collection.</p>
             <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
           </div>
@@ -347,23 +346,10 @@
             <label for="series_name">Series Name</label>
             <input name="series_name" class="form-control" type="text" size="50" value="" required />
           </div>
-          <div class="form-group">
-            <label for="series_vol">Volume #</label>
-            <select class="form-control" name="series_vol">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
           <input type="hidden" name="submitted" value="yes" />
-          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+          <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+          </div>
         </form>
       </div>
       <?php } ?>
