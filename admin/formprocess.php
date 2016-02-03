@@ -62,14 +62,20 @@
         $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
         $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
         $script = $wiki->script;
+        $scriptList = $wiki->scriptList;
         $pencils = $wiki->pencils;
+        $pencilsList = $wiki->pencilsList;
         $colors = $wiki->colors;
+        $colorsList = $wiki->colorsList;
         $letters = $wiki->letters;
+        $lettersList = $wiki->lettersList;
         $editing = $wiki->editing;
+        $editingList = $wiki->editingList;
         $coverArtist = $wiki->coverArtist;
+        $coverArtistList = $wiki->coverArtistList;
         $coverURL = $wiki->coverURL;
         $coverFile = $wiki->coverFile;
-        $colorsList = $wiki->colorsList;
+        
         break;
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
@@ -94,7 +100,12 @@
         $colorsList = filter_input ( INPUT_POST, 'colorsList' );
         $letters = filter_input ( INPUT_POST, 'letters' );
         $editor = filter_input ( INPUT_POST, 'editor' );
-        $coverArtist = filter_input ( INPUT_POST, 'coverArtist' );
+        $coverArtistList = filter_input ( INPUT_POST, 'coverArtistList' );
+        $scriptList = filter_input ( INPUT_POST, 'scriptList' );
+        $pencilsList = filter_input ( INPUT_POST, 'pencilsList' );
+        $colorsList = filter_input ( INPUT_POST, 'colorsList' );
+        $lettersList = filter_input ( INPUT_POST, 'lettersList' );
+        $editingList = filter_input ( INPUT_POST, 'editingList' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {
@@ -146,11 +157,11 @@
               $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_user . '<br>' . mysqli_error ( $connection );
             }
             //Add colorists to creators table
-            $colorsList = explode(",", $colorsList);
-            foreach ($colorsList as $person) {
-              $sql_colors = "INSERT INTO creators (name, job) VALUES ('$person', 'colorist')";
-              echo $sql_colors;
-              $sql_colors_link = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')",
+            $coverArtistList = explode(",", $coverArtistList);
+            foreach ($coverArtistList as $person) {
+              $sql_cover = "INSERT INTO creators (name, job) VALUES ('$person', 'Cover Artist')";
+              echo $sql_cover;
+              $sql_cover_link = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
             }
           } else {
             $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql . '<br>' . mysqli_error ( $connection );
