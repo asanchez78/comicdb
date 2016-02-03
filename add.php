@@ -39,11 +39,11 @@
     <?php // ADD SINGLE ISSUE ?>
     <div class="row add-block form-add-issue active">
       <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
-        if ($issueAdd == true) { ?>
+        if ($issueAdd == true && $searchResults == true) { ?>
         <header class="col-xs-12 headline">
           <h2>Add Issue: <?php echo $series_name; ?> #<?php echo $issue_number; ?></h2>
         </header>
-        <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
+        <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue" class="add-form">
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <label for="story_name">Story Name: </label>
@@ -101,7 +101,7 @@
               <p>
                 <big><strong><?php echo $series_name; ?></strong></big><br />
                 <strong>Issue: #</strong><?php echo $issue_number; ?><br />
-                <strong>Volume: </strong><?php echo $series_vol; ?><br />
+                <strong>First Published: </strong><?php echo $series_vol; ?><br />
                 <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
               </p>
             </div>
@@ -170,10 +170,10 @@
           <div class="success-message">
             <div class="row">
               <div class="col-md-3 col-xs-hidden">
-                <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(Vol ' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
+                <img src="<?php echo $cover_image_file; ?>" alt="<?php echo $series_name . '(' . $series_vol . ') #' . $issue_number; ?> Cover" class="" />
               </div>
               <div class="col-xs-12 col-md-9">
-                <h3><?php echo $series_name; ?> <small>(Vol <?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
+                <h3><?php echo $series_name; ?> <small>(<?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
                 <p><?php if ($messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
               </div>
             </div>
@@ -189,20 +189,21 @@
           <h2>Add Issue</h2>
         </header>
         <div class="col-xs-12">
-          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue">
+          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline add-form" id="add-issue">
+            <p>Add a single issue of a series. After submitting the series and issue, you will have a chance to edit the details before it's added to your collection.</p>
             <div class="form-group">
               <label>Series</label>
-              <select class="form-control" name="series_id">
+              <select class="form-control" name="series_id" required>
                 <option value="" disabled selected>Choose a series</option>
                 <?php
                   $listAllSeries=1;
                   $comic = new comicSearch ();
-                  $comic->seriesList ($listAllSeries);
+                  $comic->seriesList ($listAllSeries, NULL, $userID);
                   while ( $row = $comic->series_list_result->fetch_assoc () ) {
                     $list_series_name = $row ['series_name'];
                     $list_series_vol = $row ['series_vol'];
                     $list_series_id = $row ['series_id'];
-                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                    echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (' . $list_series_vol . ')</option>';
                   } 
                 ?>
               </select>
@@ -222,23 +223,23 @@
       <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
       <header class="headline col-xs-12"><h2>Add a range of issues</h2></header>
       <div class="col-xs-12">
-        <p>Use the form below to add several issues of one series in consecutive order.</p>
-        <form id="input_select" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+        <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+          <p>Use the form below to add several issues of one series in consecutive order.</p>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <div class="form-group">
                 <label for="series_name">Series</label>
-                <select class="form-control" name="series_id">
+                <select class="form-control" name="series_id" required>
                   <option value="" disabled selected>Choose a series</option>
                   <?php 
                     $listAllSeries=1;
                     $comic = new comicSearch ();
-                    $comic->seriesList ($listAllSeries);
+                    $comic->seriesList ($listAllSeries, NULL, $userID);
                     while ( $row = $comic->series_list_result->fetch_assoc () ) {
                       $list_series_name = $row ['series_name'];
                       $list_series_vol = $row ['series_vol'];
                       $list_series_id = $row ['series_id'];
-                      echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (Vol ' . $list_series_vol . ')</option>';
+                      echo '<option value="' . $list_series_id . '">' . $list_series_name . ' (' . $list_series_vol . ')</option>';
                     }  
                   ?>
                 </select>
@@ -275,17 +276,18 @@
         </form>
       </div>
       <?php } else { ?>
-        <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+        <div class="add-success col-xs-12 <?php if ($rangeSearch != false) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
           <div class="success-message">
             <div class="row">
               <div class="text-center">
+                <h2><?php echo $series_name; ?></h2>
                 <?php echo $addedList; ?>
-                <p><?php if ($messageNum != 51) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+                <p><?php if ($rangeSearch != false) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
               </div>
             </div>
             <div class="text-center center-block">
-              <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
-              <a href="/add.php#addissue" class="btn btn-lg btn-info">Add another?</a>
+              <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
+              <a href="/add.php#addrange" class="btn btn-lg btn-info">Add More</a>
             </div>
           </div>
         </div>
@@ -301,18 +303,19 @@
     <?php // ADD SERIES ?>
     <div class="row add-block form-add-series">
       <?php if ($seriesSearch == true) { ?>
-        <div class="col-xs-12">
+        <header class="headline col-xs-12">
           <h2>Your Search Results</h2>
-          <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
-          <p>Check the ComicVine link below the result to make sure it is the series you are looking for. Links open in a new tab.</p>
-          <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline" id="add-series-search">
+        </header>
+        <div class="col-xs-12">
+          <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline add-form" id="add-series-search">
+            <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
+            <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
             <div class="form-group form-radio">
               <label for="add-series-search">Choose the result that matches your series:</label>
               <fieldset class="row">
                 <?php echo $seriesSearch->resultsList; ?>
               </fieldset>
             </div>
-            <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
             <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
             <input type="hidden" name="submitted" value="yes" />
             <div class="text-center center-block button-block">
@@ -321,19 +324,30 @@
             </div>
           </form>
         </div>
-      <?php } elseif ($seriesSubmit == true) { ?>
+      <?php } elseif ($seriesSubmit == true) {
+        if ($seriesSubmitted == true) { ?>
         <div class="add-success bg-success col-xs-12">
           <div class="success-message text-center">
-            <h3><?php echo $series_name; ?><br /><small>(Vol <?php echo $series_vol; ?>)</small></h2>
+            <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h2>
             <p>has been added to your collection.</p>
-            <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
+            <a class="btn btn-lg btn-success add-another" href="/add.php#addseries"><i class="fa fa-plus-square"></i> Add another?</a>
           </div>
         </div>
+        <?php } else { ?>
+        <div class="add-success bg-danger col-xs-12">
+          <div class="success-message text-center">
+            <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h2>
+            <p>is already in your collection</p>
+            <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+            <a class="btn btn-lg btn-success add-another" href="/add.php#addseries"><i class="fa fa-plus-square"></i> Add another?</a>
+          </div>
+        </div>
+        <?php } ?>
       <?php } else {?>
       <header class="headline col-xs-12"><h2>Add Series</h2></header>
       <div class="col-xs-12" id="form-series-add">
-        <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="add-series">
+        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline add-form" id="form-add-series-1">
+          <p>Use the form below to add a new series to your collection.</p>
           <div class="form-group">
             <label for="publisherID">Publisher</label>
             <select class="form-control" name="publisherID" required>
@@ -353,23 +367,10 @@
             <label for="series_name">Series Name</label>
             <input name="series_name" class="form-control" type="text" size="50" value="" required />
           </div>
-          <div class="form-group">
-            <label for="series_vol">Volume #</label>
-            <select class="form-control" name="series_vol">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
           <input type="hidden" name="submitted" value="yes" />
-          <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+          <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+          </div>
         </form>
       </div>
       <?php } ?>
