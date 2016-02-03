@@ -5,6 +5,9 @@
   if (isset($userSetID) && $validUser == 1) {
     $comic->seriesInfo ( $comic->series_id, $userSetID );
   } else {
+    if (!isset($userID)) {
+      $userID=NULL;
+    }
     $comic->seriesInfo ( $comic->series_id, $userID );
   }
   // Required values
@@ -31,7 +34,7 @@
   }
 
   // Checks for user entered custom plot, otherwise displays the original value.
-  if ($comic->custPlot != '') {
+  if (isset($comic->custPlot) && $comic->custPlot != '') {
     $plot = $comic->custPlot;
   } elseif ($comic->plot != '') {
     $plot = $comic->plot;
