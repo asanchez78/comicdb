@@ -168,7 +168,6 @@
         $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
         $cvVolumeID = $comic->cvVolumeID;
-        $addedList = '';
         foreach ( range ( $first_issue, $last_issue ) as $issue_number ) {
           $comic->issueCheck($series_id, $issue_number);
           if ($comic->issueExists == 1) {
@@ -208,11 +207,13 @@
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
                 $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
+                $rangeSearch == true;
+                $messageNum = 4;
               } else {
                 $rangeSearch == false;
+                $messageNum = 51;
                 $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
               }
-              $messageNum = 4;
             } else {
               $messageNum = 51;
               $rangeSearch == false;
