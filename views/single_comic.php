@@ -60,13 +60,12 @@
   $coverArtist = 'Cover Artist Person';
 ?>
 <header class="row headline">
-  <div class="col-xs-12 col-md-8">
+  <div class="col-xs-12 col-md-9">
     <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
   </div>
-  <div class="col-xs-12 col-md-4 series-meta text-right">
+  <div class="col-xs-12 col-md-3 series-meta text-right">
     <ul class="nolist">
       <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
-      <li>Volume <?php echo $series_vol; ?></li>
       <?php if ($comic->release_date) { ?>
         <li><?php echo $release_dateShort; ?></li>
       <?php } ?>
