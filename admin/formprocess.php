@@ -64,19 +64,14 @@
           $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
           $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
           $script = $wiki->script;
-          $scriptList = $wiki->scriptList;
           $pencils = $wiki->pencils;
-          $pencilsList = $wiki->pencilsList;
           $colors = $wiki->colors;
-          $colorsList = $wiki->colorsList;
           $letters = $wiki->letters;
-          $lettersList = $wiki->lettersList;
           $editing = $wiki->editing;
-          $editingList = $wiki->editingList;
           $coverArtist = $wiki->coverArtist;
-          $coverArtistList = $wiki->coverArtistList;
           $coverURL = $wiki->coverURL;
           $coverFile = $wiki->coverFile;
+          $creatorsList = $wiki->creatorsList;
         } else {
           $messageNum = 65;
         }
@@ -110,6 +105,7 @@
         $colorsList = filter_input ( INPUT_POST, 'colorsList' );
         $lettersList = filter_input ( INPUT_POST, 'lettersList' );
         $editingList = filter_input ( INPUT_POST, 'editingList' );
+        $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {
@@ -152,6 +148,8 @@
           VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
           if (mysqli_query ( $connection, $sql )) {
             $comic_id = mysqli_insert_id($connection);
+            // Add creators to creators table
+            $comic->insertCreators($comic_id, $creatorsList);
             // Add to user_comics table
             $sql_user = "INSERT INTO users_comics (user_id, comic_id, originalPurchase, custPlot) VALUES ('$ownerID', '$comic_id', '$originalPurchase', '$custPlot')";
             if (mysqli_query ( $connection, $sql_user )) {
@@ -159,29 +157,6 @@
               $sqlMessage = '<strong class="text-success">Success</strong>: Issue did not exist in the current database. Issue added to database and users collection.';
             } else {
               $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_user . '<br>' . mysqli_error ( $connection );
-            }
-            //Add writer to creators table
-            $scriptList = explode(",", $scriptList);
-            foreach ($scriptList as $person) {
-              $comic->creatorCheck($person, 'writer');
-              if ($comic->creatorExists == 1) {
-                $creator_id = $comic->creator_id;
-                $sql_comic_link = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
-                if (mysqli_query ( $connection, $sql_cover_link )) {
-                  $messageNum = 1;
-                } else {
-                    $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql_cover_link . '<br>' . mysqli_error ( $connection );
-                    $messageNum = 51;
-                }
-              } else {
-                $sql_writer = "INSERT INTO creators (name, job) VALUES ('$person', 'writer')";
-                echo $sql_writer;
-                if (mysql_query($connection, $sql_writer)) {
-                  $creator_id = mysqli_insert_id($connection);
-                } else {
-                  $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_writer . '<br>' . mysqli_error ( $connection );
-                }
-              }
             }
           } else {
             $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql . '<br>' . mysqli_error ( $connection );
@@ -228,6 +203,7 @@
             $letters = $wiki->letters;
             $editing = $wiki->editing;
             $coverArtist = $wiki->coverArtist;
+            $creatorsList = $wiki->creatorsList;
 
             if ($cover_image == 'assets/nocover.jpg') {
               $cover_image_file = 'assets/nocover.jpg';
@@ -239,6 +215,9 @@
             $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
             if (mysqli_query ( $connection, $sql )) {
               $comic_id = mysqli_insert_id ( $connection );
+              // Add creators to creators table
+              $comic->insertCreators($comic_id, $creatorsList);
+              // Add to user_comics table
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
                 $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
