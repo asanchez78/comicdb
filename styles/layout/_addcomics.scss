@@ -49,14 +49,14 @@
   .headline {
     margin-top: 15px;
   }
-
-  p {
-    margin-top: 10px;
-  }
 }
 
 .add-block.active {
   display: block;
+}
+
+.add-form {
+  margin-top: 15px;
 }
 
 .add-success {
@@ -179,10 +179,6 @@
   .form-group:last-child {
     margin-top: 42px;
   }
-}
-
-#form-series-add {
-  margin-top: 15px;
 }
 
 .form-radio .series-search-result {

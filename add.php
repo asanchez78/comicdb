@@ -43,7 +43,7 @@
         <header class="col-xs-12 headline">
           <h2>Add Issue: <?php echo $series_name; ?> #<?php echo $issue_number; ?></h2>
         </header>
-        <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue">
+        <form method="post" action="<?php echo $filename; ?>?type=issue-submit#addissue" class="add-form">
           <div class="col-md-8 col-sm-12">
             <div class="form-group">
               <label for="story_name">Story Name: </label>
@@ -183,7 +183,8 @@
           <h2>Add Issue</h2>
         </header>
         <div class="col-xs-12">
-          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline" id="add-issue">
+          <form method="post" action="<?php echo $filename; ?>?type=issue-add#addissue" class="form-inline add-form" id="add-issue">
+            <p>Add a single issue of a series. After submitting the series and issue, you will have a chance to edit the details before it's added to your collection.</p>
             <div class="form-group">
               <label>Series</label>
               <select class="form-control" name="series_id" required>
@@ -216,8 +217,8 @@
       <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
       <header class="headline col-xs-12"><h2>Add a range of issues</h2></header>
       <div class="col-xs-12">
-        <p>Use the form below to add several issues of one series in consecutive order.</p>
-        <form id="input_select" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+        <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+          <p>Use the form below to add several issues of one series in consecutive order.</p>
           <div class="row">
             <div class="col-xs-12 col-md-6">
               <div class="form-group">
@@ -300,9 +301,9 @@
           <h2>Your Search Results</h2>
         </header>
         <div class="col-xs-12">
-          <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
-          <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
-          <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline" id="add-series-search">
+          <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline add-form" id="add-series-search">
+            <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
+            <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
             <div class="form-group form-radio">
               <label for="add-series-search">Choose the result that matches your series:</label>
               <fieldset class="row">
@@ -339,8 +340,8 @@
       <?php } else {?>
       <header class="headline col-xs-12"><h2>Add Series</h2></header>
       <div class="col-xs-12" id="form-series-add">
-        <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="form-add-series-1">
+        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline add-form" id="form-add-series-1">
+          <p>Use the form below to add a new series to your collection.</p>
           <div class="form-group">
             <label for="publisherID">Publisher</label>
             <select class="form-control" name="publisherID" required>
