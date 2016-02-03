@@ -15,22 +15,15 @@ jQuery(document).ready(function($) {
 
   // Detects a hashtag in url for add comics
   var hash = window.location.hash;
-  var $addBlocks = $('.add-block');
   if(hash) {
-    $($addBlocks).removeClass('active');
-    $($addComicsMenu).removeClass('active');
     if(hash == '#addseries') {
-      $('#form-add-series').addClass('active');
-      $('.form-add-series').addClass('active');
-    } else if(hash == '#addissue') {
-      $('#form-add-issue').addClass('active');
-      $('.form-add-issue').addClass('active');
+      $('#addTabs a[href="#addSeries"]').tab('show');
+    } else if(hash == '#addsingle') {
+      $('#addTabs a[href="#addSingle"]').tab('show');
     } else if(hash == '#addrange') {
-      $('#form-add-range').addClass('active');
-      $('.form-add-range').addClass('active');
+      $('#addTabs a[href="#addRange"]').tab('show');
     } else if(hash == '#addlist') {
-      $('#form-add-list').addClass('active');
-      $('.form-add-list').addClass('active');
+      $('#addTabs a[href="#addList"]').tab('show');
     }
   }
 
