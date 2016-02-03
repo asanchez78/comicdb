@@ -54,21 +54,26 @@
         }
         $wiki = new wikiQuery;
         $wiki->issueSearch($cvVolumeID, $issue_number);
-        $series_name = $comic->series_name;
-        $series_vol = $comic->series_vol;
-        $story_name = $wiki->storyName;
-        $plot = $wiki->synopsis;
-        $release_date = $wiki->releaseDate;
-        $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
-        $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
-        $script = $wiki->script;
-        $pencils = $wiki->pencils;
-        $colors = $wiki->colors;
-        $letters = $wiki->letters;
-        $editing = $wiki->editing;
-        $coverArtist = $wiki->coverArtist;
-        $coverURL = $wiki->coverURL;
-        $coverFile = $wiki->coverFile;
+        $searchResults = $wiki->searchResults;
+        if ($searchResults != false) {
+          $series_name = $comic->series_name;
+          $series_vol = $comic->series_vol;
+          $story_name = $wiki->storyName;
+          $plot = $wiki->synopsis;
+          $release_date = $wiki->releaseDate;
+          $release_dateShort = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M Y');
+          $release_dateLong = DateTime::createFromFormat('Y-m-d', $wiki->releaseDate)->format('M d, Y');
+          $script = $wiki->script;
+          $pencils = $wiki->pencils;
+          $colors = $wiki->colors;
+          $letters = $wiki->letters;
+          $editing = $wiki->editing;
+          $coverArtist = $wiki->coverArtist;
+          $coverURL = $wiki->coverURL;
+          $coverFile = $wiki->coverFile;
+        } else {
+          $messageNum = 65;
+        }
         break;
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':

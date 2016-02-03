@@ -39,7 +39,7 @@
     <?php // ADD SINGLE ISSUE ?>
     <div class="row add-block form-add-issue active">
       <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
-        if ($issueAdd == true) { ?>
+        if ($issueAdd == true && $searchResults == true) { ?>
         <header class="col-xs-12 headline">
           <h2>Add Issue: <?php echo $series_name; ?> #<?php echo $issue_number; ?></h2>
         </header>
@@ -269,17 +269,18 @@
         </form>
       </div>
       <?php } else { ?>
-        <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+        <div class="add-success col-xs-12 <?php if ($rangeSearch != false) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
           <div class="success-message">
             <div class="row">
               <div class="text-center">
+                <h2><?php echo $series_name; ?></h2>
                 <?php echo $addedList; ?>
-                <p><?php if ($messageNum != 51) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+                <p><?php if ($rangeSearch != false) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
               </div>
             </div>
             <div class="text-center center-block">
-              <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
-              <a href="/add.php#addissue" class="btn btn-lg btn-info">Add another?</a>
+              <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
+              <a href="/add.php#addrange" class="btn btn-lg btn-info">Add More</a>
             </div>
           </div>
         </div>

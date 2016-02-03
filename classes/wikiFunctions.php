@@ -52,19 +52,32 @@ class wikiQuery {
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->resultNum = 1;
-			foreach($results['results'] as $result) {
-				$this->seriesName = $result['name'];
-				$this->cvVolumeID = $result['id'];
-				$this->seriesStartYear = $result['start_year'];
-				$this->seriesURL = $result['site_detail_url'];
-				$this->apiURL = $result['api_detail_url'];
-				$this->resultsList .= '<div class="series-search-result col-xs-12 col-sm-6 col-md-4">
-											<input name="apiURL" id="apiURL-' . $this->cvVolumeID . '" value="' . $this->apiURL . '" type="radio" />
-												<label for="apiURL-' . $this->cvVolumeID . '">' . $this->resultNum . ': '  . $this->seriesName . ' ' . $this->seriesStartYear .'</label>
-											<a href="' . $this->seriesURL . '" target="_blank">' . $this->seriesURL . '</a>
-										</div>';
-				++$this->resultNum;
+
+		if ($results['number_of_page_results'] < 5) {
+			if ($results['number_of_page_results'] === 1) {
+				$sizeClasses = 'col-xs-6 col-md-3 col-lg-6';
+			} else {
+				$sizeClasses = 'col-xs-6 col-md-3 col-lg-3';
 			}
+		} else {
+			$sizeClasses = 'col-xs-6 col-md-3 col-lg-2';
+		}
+
+		foreach($results['results'] as $result) {
+			$this->seriesName = $result['name'];
+			$this->cvVolumeID = $result['id'];
+			$this->seriesStartYear = $result['start_year'];
+			$this->seriesURL = $result['site_detail_url'];
+			$this->apiURL = $result['api_detail_url'];
+			$this->thumb = $result['image']['thumb_url'];
+			$this->issueCount = $result['count_of_issues'];
+			$this->resultsList .= '<div class="series-search-result ' . $sizeClasses . '">
+										<input name="apiURL" id="apiURL-' . $this->cvVolumeID . '" value="' . $this->apiURL . '" type="radio" />
+										<label for="apiURL-' . $this->cvVolumeID . '" class="text-center"><a href="' . $this->seriesURL . '" target="_blank" class="center-block"><img src="' . $this->thumb . '" alt="" class="img-responsive" />' . $this->seriesName . ' (' . $this->seriesStartYear .')</a>
+										<small>' . $this->issueCount . ' issues</small></label>
+									</div>';
+			++$this->resultNum;
+		}
 	}
 
 	/**
