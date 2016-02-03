@@ -3205,6 +3205,9 @@ a {
 }
 a:hover, a:focus {
   text-decoration: none;
+}
+
+a:hover, a:focus, button:hover, button:focus {
   outline: none;
 }
 

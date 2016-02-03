@@ -95,7 +95,7 @@
       <p>
         <big><strong><?php echo $series_name; ?></strong></big><br />
         <strong>Issue: #</strong><?php echo $issue_num; ?><br />
-        <strong>Volume: </strong><?php echo $series_vol; ?><br />
+        <strong>First Published: </strong><?php echo $series_vol; ?><br />
         <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
       </p>
     </div>
