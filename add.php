@@ -156,12 +156,7 @@
           <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
           <input type="hidden" name="issue_number" value="<?php echo $issue_number; ?>" />
           <input type="hidden" name="series_id" value="<?php echo $series_id; ?>" />
-          <input type="hidden" name="pencilsList" value="<?php echo $pencilsList; ?>" />
-          <input type="hidden" name="scriptList" value="<?php echo $scriptList; ?>" />
-          <input type="hidden" name="colorsList" value="<?php echo $colorsList; ?>" />
-          <input type="hidden" name="coverArtistList" value="<?php echo $coverArtistList; ?>" />
-          <input type="hidden" name="editingList" value="<?php echo $editingList; ?>" />
-          <input type="hidden" name="lettersList" value="<?php echo $lettersList; ?>" />
+          <input type="hidden" name="creatorsList" value="<?php echo $creatorsList; ?>" />
           <input type="hidden" name="submitted" value="yes" />
         </form>  
       <?php // ADD SINGLE ISSUE: Part 3/3: Displays success message and allows user to view issue or add another issue.
