@@ -230,7 +230,7 @@
         $comic = new comicSearch();
         $comic->issueLookup($comic_id);
         $series_id = $comic->series_id;
-        $comic->seriesInfo ($series_id);
+        $comic->seriesInfo ($series_id, $userID);
         $issue_number = $comic->issue_number;
         $cvVolumeID = $comic->cvVolumeID;
 
@@ -247,7 +247,9 @@
 
         $story_name = $wiki->storyName;
         $plot = $wiki->synopsis;
-        $custPlot = $comic->custPlot;
+        if (isset($custPlot) && $custPlot != '') {
+          $custPlot = $comic->custPlot;
+        }
         $coverURL = $comic->cover_image;
         if (isset($comic->publisherName)) {
           $publisherName = $comic->publisherName;
