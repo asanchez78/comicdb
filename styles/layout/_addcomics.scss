@@ -8,7 +8,7 @@
   margin-top: -15px;
   margin-left: -15px;
   margin-right: -15px;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   border-bottom: 1px solid $border-color;
   background-color: $brand-red;
   > li {
@@ -39,11 +39,19 @@
 .add-block {
   position: relative;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 580px;
   display: none;
 
   form {
     margin-bottom: 25px;
+  }
+
+  .headline {
+    margin-top: 15px;
+  }
+
+  p {
+    margin-top: 10px;
   }
 }
 
@@ -56,7 +64,7 @@
   top: 0;
   left: 0;
   z-index: 98;
-  height: 500px;
+  height: 580px;
   transition: left 0.4s ease-out;
 
   &.success-hide {
@@ -142,6 +150,56 @@
     &.active {
       display: block;
     }
+  }
+}
+
+#add-series-search {
+  .series-search-result:nth-child(2n+3) {
+    clear: both;
+    @media (min-width: $screen-md) {
+      clear: none;
+    }
+  }
+  .series-search-result:nth-child(4n+5) {
+    @media (min-width: $screen-md) {
+      clear: both;
+    }
+    @media (min-width: $screen-lg) {
+      clear: none;
+    }
+  }
+  .series-search-result:nth-child(6n+7) {
+    @media (min-width: $screen-lg) {
+      clear: both;
+    }
+  }
+}
+
+#form-add-series-1 {
+  .form-group:last-child {
+    margin-top: 42px;
+  }
+}
+
+#form-series-add {
+  margin-top: 15px;
+}
+
+.form-radio .series-search-result {
+  min-height: 250px;
+  label {
+    margin-right: 0;
+  }
+
+  > a {
+    margin-bottom: 3px;
+  }
+}
+
+.form-add-range {
+  .success-message h3 {
+    display: inline-block;
+    margin-right: 10px;
   }
 }
 

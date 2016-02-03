@@ -106,61 +106,67 @@ class wikiQuery {
 		$apiURL = "http://www.comicvine.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691";
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
-		$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691";
-		$jsondata = file_get_contents($apiDetailURL);
-		$detailResults = json_decode($jsondata, true);
-		$this->storyName = $detailResults['results']['name'];
-		$this->releaseDate = $detailResults['results']['cover_date'];
-		$this->synopsis = $detailResults['results']['description'];
-		$this->seriesName = $detailResults['results']['volume']['name'];
-		$issueCreditsArray = $detailResults['results']['person_credits'];
-		$this->issueCreditsArray = $issueCreditsArray;
-		
-		// Initializing the credit strings
-		$this->pencils = '';
-		$this->script = '';
-		$this->colors = '';
-		$this->coverArtist = '';
-		$this->editing = '';
-		$this->letters = '';
+		// Checks if the results returned anything
+		if ($results['number_of_page_results'] > 0) {
+			$this->searchResults = true;
+			$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=8c685f7695c1dda5a4ecdf35c54402438a77b691";
+			$jsondata = file_get_contents($apiDetailURL);
+			$detailResults = json_decode($jsondata, true);
+			$this->storyName = $detailResults['results']['name'];
+			$this->releaseDate = $detailResults['results']['cover_date'];
+			$this->synopsis = $detailResults['results']['description'];
+			$this->seriesName = $detailResults['results']['volume']['name'];
+			$issueCreditsArray = $detailResults['results']['person_credits'];
+			$this->issueCreditsArray = $issueCreditsArray;
+			
+			// Initializing the credit strings
+			$this->pencils = '';
+			$this->script = '';
+			$this->colors = '';
+			$this->coverArtist = '';
+			$this->editing = '';
+			$this->letters = '';
 
-		if (count($issueCreditsArray) > 0) {
-			foreach($issueCreditsArray as $item) {
-				if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
-					$this->pencils .= '<span>' . $item['name'] . '</span>';
-				}
-				if (strpos($item['role'], 'writer') !== FALSE) {
-					$this->script .= '<span>' . $item['name'] . '</span>';
-				}
-				if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
-					$this->colors .= '<span>' . $item['name'] . '</span>';
-				}
-				if (strpos($item['role'], 'editor') !== FALSE) {
-					$this->editing .= '<span>' . $item['name'] . '</span>';
-				}
-				if (strpos($item['role'], 'cover') !== FALSE) {
-					$this->coverArtist .= '<span>' . $item['name'] . '</span>';
-				}
-				if (strpos($item['role'], 'letterer') !== FALSE) {
-					$this->letters .= '<span>' . $item['name'] . '</span>';
+			if (count($issueCreditsArray) > 0) {
+				foreach($issueCreditsArray as $item) {
+					if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
+						$this->pencils .= '<span>' . $item['name'] . '</span>';
+					}
+					if (strpos($item['role'], 'writer') !== FALSE) {
+						$this->script .= '<span>' . $item['name'] . '</span>';
+					}
+					if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
+						$this->colors .= '<span>' . $item['name'] . '</span>';
+					}
+					if (strpos($item['role'], 'editor') !== FALSE) {
+						$this->editing .= '<span>' . $item['name'] . '</span>';
+					}
+					if (strpos($item['role'], 'cover') !== FALSE) {
+						$this->coverArtist .= '<span>' . $item['name'] . '</span>';
+					}
+					if (strpos($item['role'], 'letterer') !== FALSE) {
+						$this->letters .= '<span>' . $item['name'] . '</span>';
+					}
 				}
 			}
-		}
 
-		if ($detailResults['results']['image']['medium_url']) {
-			$subject = $detailResults['results']['image']['medium_url'];
-			$pattern = "/(?<=jpg|png|jpeg).*/";
-			$replacement = "";
-			$this->coverURL = preg_replace($pattern, $replacement, $subject);
-			$fileparts = explode("/", $this->coverURL);
-			$this->coverFile = 'images/' . $fileparts[7];
-			$this->coverFile = str_replace("%28", "", $this->coverFile);
-			$this->coverFile = str_replace("%29", "", $this->coverFile);
-			$this->coverFile = str_replace("%3F", "", $this->coverFile);
+			if ($detailResults['results']['image']['medium_url']) {
+				$subject = $detailResults['results']['image']['medium_url'];
+				$pattern = "/(?<=jpg|png|jpeg).*/";
+				$replacement = "";
+				$this->coverURL = preg_replace($pattern, $replacement, $subject);
+				$fileparts = explode("/", $this->coverURL);
+				$this->coverFile = 'images/' . $fileparts[7];
+				$this->coverFile = str_replace("%28", "", $this->coverFile);
+				$this->coverFile = str_replace("%29", "", $this->coverFile);
+				$this->coverFile = str_replace("%3F", "", $this->coverFile);
+			} else {
+				$this->coverFile = 'assets/nocover.jpg';
+				$this->coverURL = 'assets/nocover.jpg';
+				$this->noCover = true;
+			}
 		} else {
-			$this->coverFile = 'assets/nocover.jpg';
-			$this->coverURL = 'assets/nocover.jpg';
-			$this->noCover = true;
+			$this->searchResults = false;
 		}
 	}
 

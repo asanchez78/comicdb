@@ -296,10 +296,12 @@
     <?php // ADD SERIES ?>
     <div class="row add-block form-add-series">
       <?php if ($seriesSearch == true) { ?>
-        <div class="col-xs-12">
+        <header class="headline col-xs-12">
           <h2>Your Search Results</h2>
+        </header>
+        <div class="col-xs-12">
           <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
-          <p>Check the ComicVine link below the result to make sure it is the series you are looking for. Links open in a new tab.</p>
+          <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
           <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline" id="add-series-search">
             <div class="form-group form-radio">
               <label for="add-series-search">Choose the result that matches your series:</label>
@@ -315,19 +317,30 @@
             </div>
           </form>
         </div>
-      <?php } elseif ($seriesSubmit == true) { ?>
+      <?php } elseif ($seriesSubmit == true) {
+        if ($seriesSubmitted == true) { ?>
         <div class="add-success bg-success col-xs-12">
           <div class="success-message text-center">
             <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h2>
             <p>has been added to your collection.</p>
-            <button class="btn btn-lg btn-success add-another"><i class="fa fa-plus-square"></i> Add another?</button>
+            <a class="btn btn-lg btn-success add-another" href="/add.php#addseries"><i class="fa fa-plus-square"></i> Add another?</a>
           </div>
         </div>
+        <?php } else { ?>
+        <div class="add-success bg-danger col-xs-12">
+          <div class="success-message text-center">
+            <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h2>
+            <p>is already in your collection</p>
+            <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
+            <a class="btn btn-lg btn-success add-another" href="/add.php#addseries"><i class="fa fa-plus-square"></i> Add another?</a>
+          </div>
+        </div>
+        <?php } ?>
       <?php } else {?>
       <header class="headline col-xs-12"><h2>Add Series</h2></header>
       <div class="col-xs-12" id="form-series-add">
         <p>Use the form below to add a new series to your collection.</p>
-        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="add-series">
+        <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline" id="form-add-series-1">
           <div class="form-group">
             <label for="publisherID">Publisher</label>
             <select class="form-control" name="publisherID" required>
