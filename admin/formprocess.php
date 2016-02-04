@@ -93,18 +93,6 @@
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
         $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
-        $art = filter_input ( INPUT_POST, 'art' );
-        $script = filter_input ( INPUT_POST, 'script' );
-        $colors = filter_input ( INPUT_POST, 'colors' );
-        $colorsList = filter_input ( INPUT_POST, 'colorsList' );
-        $letters = filter_input ( INPUT_POST, 'letters' );
-        $editor = filter_input ( INPUT_POST, 'editor' );
-        $coverArtistList = filter_input ( INPUT_POST, 'coverArtistList' );
-        $scriptList = filter_input ( INPUT_POST, 'scriptList' );
-        $pencilsList = filter_input ( INPUT_POST, 'pencilsList' );
-        $colorsList = filter_input ( INPUT_POST, 'colorsList' );
-        $lettersList = filter_input ( INPUT_POST, 'lettersList' );
-        $editingList = filter_input ( INPUT_POST, 'editingList' );
         $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
 
         // Formats date
