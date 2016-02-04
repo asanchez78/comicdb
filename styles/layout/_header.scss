@@ -1,125 +1,36 @@
 /* Header */
-.global-header {
-  background-color: white;
-  opacity: 0.9;
-  border-bottom: 2px solid $divider-color;
-  display: block;
-  position: relative;
-  z-index: 999;
-
-  a:hover, a:focus {
-    text-decoration: none
-  }
-}
-
 .logo {
-  text-align: center;
-
-  @media (min-width: $screen-sm) {
-    text-align: left;
-  }
-
-  img {
-    width: auto;
-    height: 52px;
-    margin: 0 auto;
-    display: block;
-
-    @media (min-width: $screen-sm) {
-      display: inline-block;
-      margin-right: 10px;
-    }
-  }
-
-  a:hover, a:focus {
-    color: $brand-red;
-  }
-}
-
-nav.sitenav {
-  position: relative;
-  text-align: right;
-
-  ul {
-    padding: 0;
-  }
-
-  > ul > li {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 10px;
-  }
-}
-
-#button-add-comics {
-  position: relative;
-  background: url('../assets/add-button.svg') no-repeat center center;
-  background-size: 40px 40px;
-  width: 40px;
-  font-size: 0;
-  padding: 0;
-
-  &:hover, &:focus {
-    background-image: url('../assets/add-button-hover.svg');
-  }
-}
-
-nav.sitenav > ul > li {
-  > a {
-    display: block;
-    padding: 0 10px;
-    line-height: 42px;
-    
-    @media (min-width: $screen-md) {
-      line-height: 62px;
-    }
-
-    &:hover,
-    &:focus {
-      text-decoration: none;
-    }
-  }
-
-  &:first-of-type > a {
-    margin-left: 0;
-  }
-
-  &:last-of-type > a {
-    margin-right: 0;
-  }
-}
-
-#comics-submenu {
-  display: none;
-  position: absolute;
-  padding: 10px;
-  background-color: gray;
-  transition: opacity 0.2s ease-in-out;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  text-align: left;
-
-  > li {
-    display: block;
-  }
+  background-color: $brand-red;
+  padding: 15px;
 
   a {
     color: white;
-    margin: 2px 0;
+  }
+}
 
-    &:hover, 
-    &:focus {
-      text-decoration: none;
-      color: yellow;
-    }
+.main-sidebar {
+  .menu-break {
+    border-top: 1px solid $divider-color;
+    margin-top: 15px;
+    padding-top: 15px;
+  }
+  
+  .navbar-default {
+    border-radius: 0;
   }
 
-  .expanded {
-    opacity: 1;
-    visibility: visible;
+  .navbar-collapse {
+    padding-left: 0;
+    padding-right: 0;
 
-    a {
-      display: block;
+    li {
+      width: 100%;
+      > a i.fa {
+        margin-right: 5px;
+      }
     }
+  }
+  .navbar .nolist {
+    margin-bottom: 5px;
   }
 }

@@ -477,7 +477,7 @@ h6 .small, .h6 small,
 }
 
 h1, .h1 {
-  font-size: 36px;
+  font-size: 17px;
 }
 
 h2, .h2 {
@@ -3989,7 +3989,7 @@ h1 {
 }
 @media (min-width: 640px) {
   h1 {
-    font-size: 36px;
+    font-size: 17px;
   }
 }
 
@@ -4036,23 +4036,15 @@ ul.nolist {
           transition: height 0.2s ease-in-out;
   height: 30px;
   position: absolute;
-  top: 85px;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 0 15px;
   border-radius: 0;
 }
-@media (min-width: 640px) {
-  .notifications {
-    top: 64px;
-  }
-}
 
 .alert-dismissible .close {
   right: 15px !important;
-}
-
-.content {
-  margin-top: 35px;
 }
 
 .notification-text, .notifications .close span {
@@ -4067,13 +4059,16 @@ ul.nolist {
 /* Layout */
 #wrapper {
   display: block;
+  background-color: white;
+  opacity: 0.95;
+  min-height: 100vh;
 }
 
-.content {
-  min-height: 80vh;
+main {
+  padding-top: 25px;
+  padding-bottom: 15px;
 }
 
-.content,
 .dev-messages {
   position: relative;
   background-color: white;
@@ -4081,12 +4076,12 @@ ul.nolist {
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 15px;
-  border: 2px solid gray;
+  border: 2px solid #e7e7e7;
 }
 
 .headline {
   position: relative;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid #e7e7e7;
 }
 .headline h2 {
   margin: 0;
@@ -4122,115 +4117,34 @@ ul.nolist {
 }
 
 /* Header */
-.global-header {
-  background-color: white;
-  opacity: 0.9;
-  border-bottom: 2px solid gray;
-  display: block;
-  position: relative;
-  z-index: 999;
-}
-.global-header a:hover, .global-header a:focus {
-  text-decoration: none;
-}
-
 .logo {
-  text-align: center;
+  background-color: #ff0300;
+  padding: 15px;
 }
-@media (min-width: 480px) {
-  .logo {
-    text-align: left;
-  }
-}
-.logo img {
-  width: auto;
-  height: 52px;
-  margin: 0 auto;
-  display: block;
-}
-@media (min-width: 480px) {
-  .logo img {
-    display: inline-block;
-    margin-right: 10px;
-  }
-}
-.logo a:hover, .logo a:focus {
-  color: #ff0300;
-}
-
-nav.sitenav {
-  position: relative;
-  text-align: right;
-}
-nav.sitenav ul {
-  padding: 0;
-}
-nav.sitenav > ul > li {
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 10px;
-}
-
-#button-add-comics {
-  position: relative;
-  background: url("../assets/add-button.svg") no-repeat center center;
-  background-size: 40px 40px;
-  width: 40px;
-  font-size: 0;
-  padding: 0;
-}
-#button-add-comics:hover, #button-add-comics:focus {
-  background-image: url("../assets/add-button-hover.svg");
-}
-
-nav.sitenav > ul > li > a {
-  display: block;
-  padding: 0 10px;
-  line-height: 42px;
-}
-@media (min-width: 640px) {
-  nav.sitenav > ul > li > a {
-    line-height: 62px;
-  }
-}
-nav.sitenav > ul > li > a:hover, nav.sitenav > ul > li > a:focus {
-  text-decoration: none;
-}
-nav.sitenav > ul > li:first-of-type > a {
-  margin-left: 0;
-}
-nav.sitenav > ul > li:last-of-type > a {
-  margin-right: 0;
-}
-
-#comics-submenu {
-  display: none;
-  position: absolute;
-  padding: 10px;
-  background-color: gray;
-  -webkit-transition: opacity 0.2s ease-in-out;
-          transition: opacity 0.2s ease-in-out;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  text-align: left;
-}
-#comics-submenu > li {
-  display: block;
-}
-#comics-submenu a {
+.logo a {
   color: white;
-  margin: 2px 0;
 }
-#comics-submenu a:hover, #comics-submenu a:focus {
-  text-decoration: none;
-  color: yellow;
+
+.main-sidebar .menu-break {
+  border-top: 1px solid #e7e7e7;
+  margin-top: 15px;
+  padding-top: 15px;
 }
-#comics-submenu .expanded {
-  opacity: 1;
-  visibility: visible;
+.main-sidebar .navbar-default {
+  border-radius: 0;
 }
-#comics-submenu .expanded a {
-  display: block;
+.main-sidebar .navbar-collapse {
+  padding-left: 0;
+  padding-right: 0;
+}
+.main-sidebar .navbar-collapse li {
+  width: 100%;
+}
+.main-sidebar .navbar-collapse li > a i.fa {
+  margin-right: 5px;
+}
+.main-sidebar .navbar .nolist {
+  margin-bottom: 5px;
 }
 
 /* Form Elements */
@@ -4894,11 +4808,11 @@ ul#inventory-table .issue-meta {
 }
 
 .add-menu {
-  margin-top: -15px;
+  margin-top: -25px;
   margin-left: -15px;
   margin-right: -15px;
   margin-bottom: 0;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #e7e7e7;
   background-color: #ff0300;
 }
 .add-menu > li {

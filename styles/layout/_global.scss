@@ -71,22 +71,15 @@ ul.nolist {
   transition: height 0.2s ease-in-out;
   height: 30px;
   position: absolute;
-  top: 85px;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 0 15px;
   border-radius: 0;
-
-  @media (min-width: $screen-md) {
-    top: 64px;
-  }
 }
 
 .alert-dismissible .close {
   right: 15px !important;
-}
-
-.content {
-  margin-top: 35px;
 }
 
 .notification-text, .notifications .close span {
@@ -101,13 +94,16 @@ ul.nolist {
 /* Layout */
 #wrapper {
   display: block;
+  background-color: white;
+  opacity: 0.95;
+  min-height: 100vh;
 }
 
-.content {
-  min-height: 80vh;
+main {
+  padding-top: 25px;
+  padding-bottom: 15px;
 }
 
-.content,
 .dev-messages {
   position: relative;
   background-color: white;

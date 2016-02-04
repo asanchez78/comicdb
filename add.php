@@ -17,7 +17,7 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <div class="container content add-container">
+  <div class="add-container fade in">
     <?php if ($login->isUserLoggedIn () == false) {
       include (__ROOT__."/views/not_logged_in.php");
       die ();

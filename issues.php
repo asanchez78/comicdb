@@ -25,7 +25,7 @@
 
 <body>
 <?php include 'views/header.php';?>
-  <div class="container issues-list content">
+  <div class="issues-list">
     <header class="row headline">
       <div class="col-xs-12 col-md-7">
         <h2><?php echo $series_name; ?></h2>

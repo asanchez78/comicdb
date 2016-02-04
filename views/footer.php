@@ -1,5 +1,6 @@
-	 <?php include('notifications.php'); ?>
-  </main>
+      <?php include('notifications.php'); ?>
+    </main>
+  </div>
   <!-- Site content ends -->
 </div>
 <!-- Site wrapper ends -->
@@ -9,3 +10,5 @@
 <script src="/scripts/comicdb.js"></script>
 <script src="/styles/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
 <script src="/styles/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+<script src="/styles/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+<script src="/styles/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>

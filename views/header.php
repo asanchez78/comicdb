@@ -1,26 +1,37 @@
 <!-- Site wrapper begins -->
-<div id="wrapper">
-	<header class="global-header">
-		<div class="container">
-			<div class="row">
-				<!-- Title -->
-				<div class="col-md-9 col-xs-8 logo">
-					<h1><a href="/index.php"><img src="../assets/logo.svg" alt="POW! Comic Book Manager" />Comic Book Manager</a></h1>
-				</div>
-				<!-- Navigation -->
-				<nav class="col-md-3 col-xs-4 sitenav">
-					<ul class="nolist">
+<div id="wrapper" class="container-fluid">
+	<!-- Site content begins -->
+	<div class="row">
+		<aside class="main-sidebar col-md-2">
+			<div class="logo row text-center">
+				<h1><a href="/index.php"><img src="../assets/logo.svg" alt="POW! Comic Book Manager" />Comic Book Manager</a></h1>
+			</div>
+			<!-- Navigation -->
+			<nav class="navbar navbar-default row" role="navigation">
+				<!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-collapse" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		    </div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+    		<div class="collapse navbar-collapse" id="main-nav-collapse">
+					<ul class="nav navbar-nav nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
-						<li><a href="/add.php" id="button-add-comics">Add Comics</a>
-						</li>
-						<li><a href="/index.php?logout&m=49" class="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+						<li class="active"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+						<li><a href="/add.php"><i class="fa fa-plus-circle"></i> Add Items</a></li>
+						<li class="menu-break"><a href="/feed.php"><i class="fa fa-users"></i> User Feed</a></li>
+						<li><a href="/settings.php"><i class="fa fa-cog"></i> Settings</a></li>
+						<li class="menu-break"><a href="/contact.php"><i class="fa fa-comment"></i> Contact Us</a></li>
+						<li><a href="/index.php?logout&m=49"><i class="fa fa-sign-out"></i> Logout</a></li>
 					<?php } else { ?>
-						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login">Login <i class="fa fa-sign-in"></i></a></li>
+						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login"><i class="fa fa-plus"></i> Register</a></li>
+						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login"><i class="fa fa-sign-in"></i> Login</a></li>
 					<?php } ?>
 					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<!-- Site content begins -->
-	<main>
+			</nav>
+		</aside>
+		<main class="col-md-10">

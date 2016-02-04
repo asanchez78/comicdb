@@ -6,7 +6,7 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <div class="container content">
+  <div>
     <?php if ($login->isUserLoggedIn () == true || isset ($validUser) && $validUser == 1) {
       include ('views/series_list.php');
     } else {
