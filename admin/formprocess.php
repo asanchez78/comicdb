@@ -71,6 +71,7 @@
           $coverArtist = $wiki->coverArtist;
           $coverURL = $wiki->coverURL;
           $coverFile = $wiki->coverFile;
+          $creatorsList = $wiki->creatorsList;
         } else {
           $messageNum = 65;
         }
@@ -95,9 +96,16 @@
         $art = filter_input ( INPUT_POST, 'art' );
         $script = filter_input ( INPUT_POST, 'script' );
         $colors = filter_input ( INPUT_POST, 'colors' );
+        $colorsList = filter_input ( INPUT_POST, 'colorsList' );
         $letters = filter_input ( INPUT_POST, 'letters' );
         $editor = filter_input ( INPUT_POST, 'editor' );
-        $coverArtist = filter_input ( INPUT_POST, 'coverArtist' );
+        $coverArtistList = filter_input ( INPUT_POST, 'coverArtistList' );
+        $scriptList = filter_input ( INPUT_POST, 'scriptList' );
+        $pencilsList = filter_input ( INPUT_POST, 'pencilsList' );
+        $colorsList = filter_input ( INPUT_POST, 'colorsList' );
+        $lettersList = filter_input ( INPUT_POST, 'lettersList' );
+        $editingList = filter_input ( INPUT_POST, 'editingList' );
+        $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {
@@ -140,6 +148,8 @@
           VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
           if (mysqli_query ( $connection, $sql )) {
             $comic_id = mysqli_insert_id($connection);
+            // Add creators to creators table
+            $comic->insertCreators($comic_id, $creatorsList);
             // Add to user_comics table
             $sql_user = "INSERT INTO users_comics (user_id, comic_id, originalPurchase, custPlot) VALUES ('$ownerID', '$comic_id', '$originalPurchase', '$custPlot')";
             if (mysqli_query ( $connection, $sql_user )) {
@@ -193,6 +203,7 @@
             $letters = $wiki->letters;
             $editing = $wiki->editing;
             $coverArtist = $wiki->coverArtist;
+            $creatorsList = $wiki->creatorsList;
 
             if ($cover_image == 'assets/nocover.jpg') {
               $cover_image_file = 'assets/nocover.jpg';
@@ -204,6 +215,9 @@
             $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
             if (mysqli_query ( $connection, $sql )) {
               $comic_id = mysqli_insert_id ( $connection );
+              // Add creators to creators table
+              $comic->insertCreators($comic_id, $creatorsList);
+              // Add to user_comics table
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
                 $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
