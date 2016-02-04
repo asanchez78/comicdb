@@ -17,7 +17,7 @@
   <hr />
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <img class="pull-left about-avatar" src="/assets/avatar-ant.jpg" alt="Anthony Sanchez" />
+      <img class="pull-left about-avatar img-circle" src="/assets/avatar-ant.jpg" alt="Anthony Sanchez" />
       <h4>Anthony Sanchez</h4>
       <p></p>
       <p><strong>Recommended Reads:</strong> </p>
@@ -30,7 +30,7 @@ https://www.linkedin.com/in/anthony-sanchez-92971618" class="btn btn-link btn-xs
       </ul>
     </div>
     <div class="col-xs-12 col-md-6">
-      <img class="pull-right about-avatar" src="/assets/avatar-sean.jpg" alt="Sean Loyless" />
+      <img class="pull-right about-avatar img-circle" src="/assets/avatar-sean.jpg" alt="Sean Loyless" />
       <h4>Sean Loyless</h4>
       <p>Sean has been a web designer/developer for almost 20 years, and a geek for 38 years. Sean's first comic book was <em>Transformers: Head Masters</em> when he was 7 years old.</p>
       <p><strong>Recommended Reads:</strong> Saga, Y: The Last Man, Secret Wars, The Maxx, The Walking Dead</p>
