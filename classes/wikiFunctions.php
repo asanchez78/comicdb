@@ -126,28 +126,36 @@ class wikiQuery {
 			$this->coverArtist = '';
 			$this->editing = '';
 			$this->letters = '';
+			$this->creatorsList = '';
 
 			if (count($issueCreditsArray) > 0) {
 				foreach($issueCreditsArray as $item) {
 					if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
 						$this->pencils .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 					if (strpos($item['role'], 'writer') !== FALSE) {
 						$this->script .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 					if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
 						$this->colors .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 					if (strpos($item['role'], 'editor') !== FALSE) {
 						$this->editing .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 					if (strpos($item['role'], 'cover') !== FALSE) {
 						$this->coverArtist .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 					if (strpos($item['role'], 'letterer') !== FALSE) {
 						$this->letters .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
 					}
 				}
+				$this->creatorsList = preg_replace('/(;(?!.*;))/', '', $this->creatorsList);
 			}
 
 			if ($detailResults['results']['image']['medium_url']) {
