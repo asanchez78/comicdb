@@ -41,6 +41,13 @@ class comicSearch {
   public $series_list_result;
   public $volume_number;
   public $publisherShort;
+  public $pencils;
+  public $script;
+  public $colors;
+  public $coverArtist;
+  public $editing;
+  public $letters;
+  public $creatorsList;
 
   /**
    * Looks up a single comic issue using comic_id
@@ -73,6 +80,39 @@ class comicSearch {
         $series_id = $row['series_id'];
         $originalPurchase = $row['originalPurchase'];
         $series_vol = $row['series_vol'];
+      }
+    }
+    $sql = "SELECT creators.name, creators.job
+      FROM creators_link
+      LEFT JOIN creators
+      ON creators.creator_id=creators_link.creator_id
+      WHERE comic_id=$comic_id";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      while ( $row = $result->fetch_assoc () ) {
+        $creatorName = $row ['name'];
+        $creatorJob = $row ['job'];
+        if ($creatorJob == 'pencils') {
+          $this->pencils .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'script') {
+          $this->script .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'inker') {
+          $this->colors .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'colors') {
+          $this->colors .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'editing') {
+          $this->editing .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'coverArtist') {
+          $this->coverArtist .= '<span>' . $creatorName . '</span>';
+        }
+        if ($creatorJob == 'letters') {
+          $this->letters .= '<span>' . $creatorName . '</span>';
+        }
       }
     }
     $this->cover_image = $cover_image;
