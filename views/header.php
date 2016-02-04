@@ -29,9 +29,12 @@
 						
 						<li class="menu-break"><a href="/about.php"><i class="fa fa-question text-center"></i> Who Are We?</a></li>
 						<li><a href="/contact.php"><i class="fa fa-comment text-center"></i> Contact Us</a></li>
+						<li><a href="https://github.com/asanchez78/comicdb/issues" target="_blank"><i class="fa fa-bug text-center"></i> Submit a Bug</a></li>
 						<li><a href="/index.php?logout&m=49"><i class="fa fa-sign-out text-center"></i> Logout</a></li>
 					<?php } else { ?>
-						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login"><i class="fa fa-plus text-center"></i> Register</a></li>
+						<li><a href="/about.php"><i class="fa fa-question text-center"></i> Who Are We?</a></li>
+						<li><a href="/contact.php"><i class="fa fa-comment text-center"></i> Contact Us</a></li>
+						<li class="menu-break"><a href="/admin/register.php?return=<?php echo $current_page; ?>" class="login"><i class="fa fa-plus text-center"></i> Register</a></li>
 						<li><a href="/login.php?return=<?php echo $current_page; ?>" class="login"><i class="fa fa-sign-in text-center"></i> Login</a></li>
 					<?php } ?>
 					</ul>

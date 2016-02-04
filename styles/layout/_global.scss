@@ -27,18 +27,12 @@ h4 {
   margin-top: 0;
 }
 
-a {
+a, button, .btn-link {
   transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 
   &:hover,
   &:focus {
     text-decoration: none;
-  }
-}
-
-a, button {
-  &:hover,
-  &:focus {
     outline: none;
   }
 }
@@ -97,11 +91,13 @@ ul.nolist {
   background-color: white;
   opacity: 0.95;
   min-height: 100vh;
+  position: relative;
 }
 
 main {
   padding-top: 25px;
   padding-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 .dev-messages {
@@ -158,4 +154,13 @@ main {
       }
     }
   }
+}
+
+footer.main-footer {
+  position: absolute;
+  bottom: 0;
+  background-color: $brand-red;
+  color: white;
+  padding-top: 7px;
+  font-size: 12px;
 }

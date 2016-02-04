@@ -34,4 +34,10 @@
   .navbar .nolist {
     margin-bottom: 5px;
   }
+
+  .navbar-nav > li > a {
+    &:hover, &:focus {
+      background-color: #e7e7e7;
+    }
+  }
 }

@@ -6,21 +6,19 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <div>
-    <?php if ($login->isUserLoggedIn () == true || isset ($validUser) && $validUser == 1) {
-      include ('views/series_list.php');
-    } else {
-      if (isset($userSetID) && $validUser != 1) {
-        $messageNum = 52;
-      }
-      $sql = "SELECT comic_id FROM comics ORDER BY RAND() LIMIT 0,1";
-      $result = $connection->query ( $sql );
-      while ($row = $result->fetch_assoc()) {
-        $comic_id = $row['comic_id'];
-      }
-      include 'views/single_comic.php';
-    } ?>
-  </div>
+  <?php if ($login->isUserLoggedIn () == true || isset ($validUser) && $validUser == 1) {
+    include ('views/series_list.php');
+  } else {
+    if (isset($userSetID) && $validUser != 1) {
+      $messageNum = 52;
+    }
+    $sql = "SELECT comic_id FROM comics ORDER BY RAND() LIMIT 0,1";
+    $result = $connection->query ( $sql );
+    while ($row = $result->fetch_assoc()) {
+      $comic_id = $row['comic_id'];
+    }
+    include 'views/single_comic.php';
+  } ?>
 <?php include 'views/footer.php';?>
 </body>
 </html>

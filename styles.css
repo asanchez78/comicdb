@@ -3997,15 +3997,12 @@ h4 {
   margin-top: 0;
 }
 
-a {
+a, button, .btn-link {
   -webkit-transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
           transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-a:hover, a:focus {
+a:hover, a:focus, button:hover, button:focus, .btn-link:hover, .btn-link:focus {
   text-decoration: none;
-}
-
-a:hover, a:focus, button:hover, button:focus {
   outline: none;
 }
 
@@ -4062,11 +4059,13 @@ ul.nolist {
   background-color: white;
   opacity: 0.95;
   min-height: 100vh;
+  position: relative;
 }
 
 main {
   padding-top: 25px;
   padding-bottom: 15px;
+  margin-bottom: 40px;
 }
 
 .dev-messages {
@@ -4116,6 +4115,15 @@ main {
   display: inline;
 }
 
+footer.main-footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #ff0300;
+  color: white;
+  padding-top: 7px;
+  font-size: 12px;
+}
+
 /* Header */
 .logo {
   background-color: #ff0300;
@@ -4146,6 +4154,9 @@ main {
 }
 .main-sidebar .navbar .nolist {
   margin-bottom: 5px;
+}
+.main-sidebar .navbar-nav > li > a:hover, .main-sidebar .navbar-nav > li > a:focus {
+  background-color: #e7e7e7;
 }
 
 /* Form Elements */
@@ -4990,6 +5001,38 @@ ul#inventory-table .series-extra {
   background-color: #ffaa00;
   color: white;
   border: 1px solid transparent;
+}
+
+.about-header-image {
+  margin-top: 15px;
+}
+
+.about-avatar {
+  width: 120px;
+  height: auto;
+}
+.about-avatar.pull-left {
+  margin-right: 10px;
+}
+.about-avatar.pull-right {
+  margin-left: 10px;
+}
+
+.about-social {
+  clear: both;
+  margin-top: 20px;
+  border: 1px solid #e7e7e7;
+  padding: 10px 0;
+}
+.about-social i.fa {
+  display: inline-block;
+  margin-right: 5px;
+}
+.about-social li:first-of-type {
+  padding-left: 0;
+}
+.about-social li:last-of-type {
+  padding-right: 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
