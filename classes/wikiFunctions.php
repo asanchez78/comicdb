@@ -131,28 +131,34 @@ class wikiQuery {
 			if (count($issueCreditsArray) > 0) {
 				foreach($issueCreditsArray as $item) {
 					if (strpos($item['role'], 'artist') !== FALSE || strpos($item['role'], 'penciler') !== FALSE) {
+						$this->role = 'pencils';
 						$this->pencils .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 					if (strpos($item['role'], 'writer') !== FALSE) {
+						$this->role = 'script';
 						$this->script .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 					if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
+						$this->role = 'colors';
 						$this->colors .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 					if (strpos($item['role'], 'editor') !== FALSE) {
+						$this->role = 'editing';
 						$this->editing .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 					if (strpos($item['role'], 'cover') !== FALSE) {
+						$this->role = 'coverArtist';
 						$this->coverArtist .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 					if (strpos($item['role'], 'letterer') !== FALSE) {
+						$this->role = 'letters';
 						$this->letters .= '<span>' . $item['name'] . '</span>';
-						$this->creatorsList .= $item['name'] . ',' . $item['role'] . ';';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
 				}
 				$this->creatorsList = preg_replace('/(;(?!.*;))/', '', $this->creatorsList);
