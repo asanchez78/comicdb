@@ -92,7 +92,7 @@
         $custPlot = addslashes ( filter_input ( INPUT_POST, 'custPlot' ) );
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
-        $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
+        $originalPurchase = filter_input ( INPUT_POST, 'singleOriginalPurchase' );
         $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
 
         // Formats date
@@ -157,7 +157,7 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $first_issue = filter_input ( INPUT_POST, 'first_issue' );
         $last_issue = filter_input ( INPUT_POST, 'last_issue' );
-        $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
+        $originalPurchase = filter_input ( INPUT_POST, 'rangeOriginalPurchase' );
         $release_date = filter_input(INPUT_POST, 'release_date');
         $releaseDateArray = explode("-", $release_date);
 
@@ -230,7 +230,7 @@
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $filtered_issue_list = filter_input ( INPUT_POST, 'issueList' );
         $issue_list =  explode ( ",", strtr($filtered_issue_list, array(' ' => '')));
-        $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
+        $originalPurchase = filter_input ( INPUT_POST, 'listOriginalPurchase' );
         $comic = new comicSearch ();
         $comic->seriesInfo ($series_id, $ownerID);
         $series_name = $comic->series_name;
@@ -245,6 +245,7 @@
             if (mysqli_query ( $connection, $sql )) {
               $listSearch = true;
             } else {
+              $messageNum = 61;
               $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
             }
           } else {

@@ -57,10 +57,10 @@
                 <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $release_date; ?>" type="date" placeholder="YYYY-MM-DD" />
               </div>
               <div class="form-group form-radio">
-                <label for="originalPurchase">Purchased When Released:</label>
+                <label for="singleOriginalPurchase">Purchased When Released:</label>
                 <fieldset>
-                  <input name="originalPurchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
-                  <input name="originalPurchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+                  <input name="singleOriginalPurchase" id="single-original-yes" value="1" type="radio" /> <label for="single-original-yes">Yes</label>
+                  <input name="singleOriginalPurchase" id="single-original-no" value="0" type="radio" /> <label for="single-original-no">No</label>
                 </fieldset>
               </div>
               <div class="plot form-group">
@@ -262,10 +262,10 @@
               <div class="col-md-12 col-xs-12">
                 <div class="form-inline">
                   <div class="form-group form-radio">
-                    <label for="originalPurchase">Purchased When Released</label>
+                    <label for="rangeOriginalPurchase">Purchased When Released</label>
                     <fieldset>
-                      <input name="originalPurchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
-                      <input name="originalPurchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+                      <input name="rangeOriginalPurchase" id="range-original-yes" value="1" type="radio" /> <label for="range-original-yes">Yes</label>
+                      <input name="rangeOriginalPurchase" id="range-original-no" value="0" type="radio" /> <label for="range-original-no">No</label>
                     </fieldset>
                   </div>
                 </div>
@@ -276,13 +276,13 @@
           </form>
         </div>
         <?php } else { ?>
-          <div class="add-success col-xs-12 <?php if ($rangeSearch != false) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+          <div class="add-success col-xs-12 bg-success">
             <div class="success-message">
               <div class="row">
                 <div class="text-center">
                   <h2><?php echo $series_name; ?></h2>
                   <?php echo $addedList; ?>
-                  <p><?php if ($rangeSearch != false) { echo 'have been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+                  <p>have been added to your collection.</p>
                 </div>
               </div>
               <div class="text-center center-block">
@@ -327,17 +327,31 @@
               <input type="text" class="form-control" name="issueList" placeholder="5,29,156" />
             </div>
             <div class="form-group form-radio">
-              <label for="originalPurchase">Purchased When Released</label>
+              <label for="listOriginalPurchase">Purchased When Released</label>
               <fieldset>
-                <input name="originalPurchase" id="original-yes" value="1" type="radio" /> <label for="original-yes">Yes</label>
-                <input name="originalPurchase" id="original-no" value="0" type="radio" /> <label for="original-no">No</label>
+                <input name="listOriginalPurchase" id="list-original-yes" value="1" type="radio" /> <label for="list-original-yes">Yes</label>
+                <input name="listOriginalPurchase" id="list-original-no" value="0" type="radio" /> <label for="list-original-no">No</label>
               </fieldset>
             </div>
             <input type="hidden" name="submitted" value="yes" />
             <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
           </form>
           <?php } else { ?>
-
+            <div class="add-success col-xs-12 bg-success">
+              <div class="success-message">
+                <div class="row">
+                  <div class="text-center">
+                    <h2><?php echo $series_name; ?></h2>
+                    #<?php echo $filtered_issue_list; ?>
+                    <p>have been added to your collection.</p>
+                  </div>
+                </div>
+                <div class="text-center center-block">
+                  <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
+                  <a href="/add.php#addrange" class="btn btn-lg btn-info">Add More</a>
+                </div>
+              </div>
+            </div>
           <?php } ?>
         </div>
       </div>

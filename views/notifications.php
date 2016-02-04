@@ -20,7 +20,7 @@
         $messageText = "Issues added successfully.";
         break;
       case 3:
-        $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
+        $messageText = '<em>' . $series_name . ' (' . $series_vol . ')</em> added to your collection successfully.';
         break;
       // Add Range Success
       case 4:
@@ -53,11 +53,13 @@
       // ERROR MESSAGES
       // Error messages are concatenated to append to ERROR: text above
       case 50:
-        $messageText .= 'Cannot add <em>' . $series_name . ' (Vol ' . $series_vol . ')</em> to your collection. Series already exists.';
+        $messageText .= 'Cannot add <em>' . $series_name . ' (' . $series_vol . ')</em> to your collection. Series already exists.';
         break;
+      // Single Issue Add duplicate
       case 51:
         $messageText .= 'This issue is already in your collection.';
         break;
+      // User search fail
       case 52:
         $messageText .= 'User "' . $userSetName . '" not found. Here is a random comic instead.';
         break;
@@ -65,6 +67,7 @@
       case 53:
         $messageText .= 'Sorry, registration has been disabled. Please try again later.';
         break;
+      // Registration account exist
       case 54:
         $messageText .= 'Sorry, that USERNAME/EMAIL exists. Try to login(link) or create a new account.';
         break;
@@ -87,7 +90,7 @@
         $messageText .= 'Publisher data missing.';
         break;
       case 61:
-        // Duplicate range addition issue.
+        // Duplicate range/list addition issue.
         $messageText .= 'The issues are already in your collection.';
         break;
       case 62:

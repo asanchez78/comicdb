@@ -140,7 +140,12 @@ class wikiQuery {
 						$this->script .= '<span>' . $item['name'] . '</span>';
 						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
 					}
-					if (strpos($item['role'], 'colorist') !== FALSE || strpos($item['role'], 'inker') !== FALSE) {
+					if (strpos($item['role'], 'inker') !== FALSE) {
+						$this->role = 'inker';
+						$this->colors .= '<span>' . $item['name'] . '</span>';
+						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
+					}
+					if (strpos($item['role'], 'colorist') !== FALSE) {
 						$this->role = 'colors';
 						$this->colors .= '<span>' . $item['name'] . '</span>';
 						$this->creatorsList .= $item['name'] . ',' . $this->role . ';';
