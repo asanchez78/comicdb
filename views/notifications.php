@@ -4,9 +4,9 @@
       $messageNum = $_GET['m'];
     }
     if ($messageNum < 50) {
-      $notifyClass = "bg-success";
+      $notifyClass = "alert-success";
     } else {
-      $notifyClass = "bg-danger";
+      $notifyClass = "alert-danger";
       $messageText = '';
       $messageText .= '<strong>ERROR</strong>: ';
     }
@@ -20,24 +20,27 @@
         $messageText = "Issues added successfully.";
         break;
       case 3:
-        $messageText = '<em>' . $series_name . ' (Vol ' . $series_vol . ')</em> added to your collection successfully.';
+        $messageText = '<em>' . $series_name . ' (' . $series_vol . ')</em> added to your collection successfully.';
         break;
+      // Add Range Success
       case 4:
         $messageText = '<em>' . $series_name . ' #' . $first_issue . ' - ' . $last_issue . '</em> added to your collection successfully.';
         break;
-      // Single Issue
+      // Edit Issue
       case 5:
         $messageText = 'Issue updated successfully.';
         break;
+      // Cover Image Update        
       case 6:
         $messageText = 'Cover image updated successfully';
         break;
+      // Series Cover Set  
       case 7:
         $messageText = $series_name . ' #N cover now set as the series image.';
         break;
-      // Range addition
+      // CSV addition Success
       case 8:
-        $messageText = $series_name . ' #' . $series_csv_list . 'added to your collection successfully.';
+        $messageText = $series_name . ' #' . $filtered_issue_list . ' added to your collection successfully.';
         break;
       // Registration
       case 9:
@@ -50,11 +53,13 @@
       // ERROR MESSAGES
       // Error messages are concatenated to append to ERROR: text above
       case 50:
-        $messageText .= 'Cannot add <em>' . $series_name . ' (Vol ' . $series_vol . ')</em> to your collection. Series already exists.';
+        $messageText .= 'Cannot add <em>' . $series_name . ' (' . $series_vol . ')</em> to your collection. Series already exists.';
         break;
+      // Single Issue Add duplicate
       case 51:
         $messageText .= 'This issue is already in your collection.';
         break;
+      // User search fail
       case 52:
         $messageText .= 'User "' . $userSetName . '" not found. Here is a random comic instead.';
         break;
@@ -62,6 +67,7 @@
       case 53:
         $messageText .= 'Sorry, registration has been disabled. Please try again later.';
         break;
+      // Registration account exist
       case 54:
         $messageText .= 'Sorry, that USERNAME/EMAIL exists. Try to login(link) or create a new account.';
         break;
@@ -84,7 +90,7 @@
         $messageText .= 'Publisher data missing.';
         break;
       case 61:
-        // Duplicate range addition issue.
+        // Duplicate range/list addition issue.
         $messageText .= 'The issues are already in your collection.';
         break;
       case 62:
@@ -124,11 +130,11 @@
 </div>
 <?php } ?>
 <?php if(isset($messageText)) { ?>
-<div class="notifications <?php echo $notifyClass; ?>">
+<div class="alert alert-dismissible notifications <?php echo $notifyClass; ?>" role="alert">
   <div class="container">
     <div class="row">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <p class="col-xs-11 notification-text"><?php echo $messageText; ?></p>
-      <button type="button" class="close col-xs-1" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     </div>
   </div>
 </div>

@@ -1,19 +1,6 @@
 jQuery(document).ready(function($) {
   var $notifyClose, $notifications, $addAnotherSeries, $backButton, $addComicsMenu;
 
-  $notifications = $('.notifications');
-  $notifyClose = $($notifications).find('.close');
-  $($notifyClose).click(function(e) {
-    e.preventDefault;
-    $($notifications).addClass('notifications-close');
-  });
-
-  if (!$notifications.hasClass('notifications-close')) {
-    setTimeout(function() {
-      $($notifications).addClass('notifications-close');
-    }, 6000);
-  }
-
   // Back button
   $backButton = $('.form-back');
   $($backButton).click(function(e) {
@@ -21,41 +8,22 @@ jQuery(document).ready(function($) {
     window.history.back();
   });
 
-  // Add comics tabs
-  $addComicsMenu = $('.add-menu').find('a');
-  $($addComicsMenu).click(function(e) {
-    e.preventDefault;
-    var $section = $(this).attr('id');
-    $($addComicsMenu).removeClass('active');
-    $(this).addClass('active');
-    var $addBlocks = $('.add-block');
-    $.each($addBlocks, function() {
-      if($(this).hasClass($section)) {
-        $(this).addClass('active');
-      } else {
-        $(this).removeClass('active');
-      }
-    });
+  $('#addTabs a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
   });
 
   // Detects a hashtag in url for add comics
   var hash = window.location.hash;
-  var $addBlocks = $('.add-block');
   if(hash) {
-    $($addBlocks).removeClass('active');
-    $($addComicsMenu).removeClass('active');
     if(hash == '#addseries') {
-      $('#form-add-series').addClass('active');
-      $('.form-add-series').addClass('active');
-    } else if(hash == '#addissue') {
-      $('#form-add-issue').addClass('active');
-      $('.form-add-issue').addClass('active');
+      $('#addTabs a[href="#addSeries"]').tab('show');
+    } else if(hash == '#addsingle') {
+      $('#addTabs a[href="#addSingle"]').tab('show');
     } else if(hash == '#addrange') {
-      $('#form-add-range').addClass('active');
-      $('.form-add-range').addClass('active');
+      $('#addTabs a[href="#addRange"]').tab('show');
     } else if(hash == '#addlist') {
-      $('#form-add-list').addClass('active');
-      $('.form-add-list').addClass('active');
+      $('#addTabs a[href="#addList"]').tab('show');
     }
   }
 

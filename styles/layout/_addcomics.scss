@@ -13,7 +13,7 @@
   background-color: $brand-red;
   > li {
     text-align: center;
-    width: 25%;
+    width: 25.3%;
     font-size: 0;
     margin: 0;
     margin-right: -4px;
@@ -25,13 +25,6 @@
       color: white;
       font-size: 15px;
       padding: 8px 0;
-
-      &:hover,
-      &:focus,
-      &.active {
-        background-color: $brand-orange;
-        text-decoration: none;
-      }
     }
   }
 }
@@ -40,7 +33,6 @@
   position: relative;
   overflow: hidden;
   min-height: 580px;
-  display: none;
 
   form {
     margin-bottom: 25px;
@@ -201,4 +193,26 @@
 
 .button-block {
   margin: 25px 0;
+}
+
+.nav-tabs {
+  > li {
+    > a {
+      border: 1px solid transparent;
+      border-radius: 0;
+
+      &:hover,
+      &:focus {
+        background-color: $brand-orange;
+        border-color: transparent;
+      }
+    }
+    &.active {
+      > a, > a:hover, > a:focus {
+        background-color: $brand-orange;
+        color: white;
+        border: 1px solid transparent;
+      }
+    }
+  }
 }
