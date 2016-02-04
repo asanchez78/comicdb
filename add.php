@@ -17,12 +17,12 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <div class="add-container fade in">
+  <div class="add-container">
     <?php if ($login->isUserLoggedIn () == false) {
       include (__ROOT__."/views/not_logged_in.php");
       die ();
     } ?>
-    <ul class="add-menu nav nav-tabs" id="addTabs">
+    <ul class="add-menu nav nav-tabs nav-justified" id="addTabs">
       <li role="presentation" class="active">
         <a href="#addSingle" id="form-add-issue" aria-controls="addSingle" role="tab" data-toggle="tab"><i class="fa fa-plus"></i> <span class="hidden-sm hidden-xs">Add Issue</span></a>
       </li>

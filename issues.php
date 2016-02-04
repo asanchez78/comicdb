@@ -27,14 +27,13 @@
 <?php include 'views/header.php';?>
   <div class="issues-list">
     <header class="row headline">
-      <div class="col-xs-12 col-md-7">
-        <h2><?php echo $series_name; ?></h2>
+      <div class="col-xs-12 col-lg-7">
+        <h2><?php echo $series_name; ?> (<?php echo $series_vol; ?>)</h2>
       </div>
-      <div class="col-xs-12 col-md-5 series-meta text-right">
+      <div class="col-xs-12 col-lg-5 series-meta">
         <ul class="nolist">
           <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
           <li><?php echo $comic->series_issue_count; ?></li>
-          <li><?php echo $series_vol; ?></li>
           <li>
             <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
             <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
