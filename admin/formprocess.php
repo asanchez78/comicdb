@@ -261,6 +261,7 @@
             $letters = $wiki->letters;
             $editing = $wiki->editing;
             $coverArtist = $wiki->coverArtist;
+            $creatorsList = $wiki->creatorsList;
 
             if ($cover_image == 'assets/nocover.jpg') {
               $cover_image_file = 'assets/nocover.jpg';
@@ -277,6 +278,8 @@
                 $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
                 $listSearch = true;
                 $messageNum = 8;
+                // Add creators to creators table
+                $comic->insertCreators($comic_id, $creatorsList);
               } else {
                 $listSearch = false;
                 $messageNum = 51;

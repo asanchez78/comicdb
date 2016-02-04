@@ -41,23 +41,14 @@
   } else {
     $plot = '<p>Plot details have not been entered.</p>';
   }
-
-  /* Real variables for after dB is hooked up
+  
   $script = $comic->script;
   $pencils = $comic->pencils;
   $colors = $comic->colors;
   $letters = $comic->letters;
   $editing = $comic->editing;
   $coverArtist = $comic->coverArtist;
-  
-  Temporary Vars below. Delete after dB is ready.
-  */
-  $script = 'Script Person';
-  $pencils = 'Artist Person';
-  $colors = 'Inker Person';
-  $letters = 'Letter Person';
-  $editing = 'Editor Person';
-  $coverArtist = 'Cover Artist Person';
+
 ?>
 <header class="row headline">
   <div class="col-xs-12 col-md-9">
@@ -101,7 +92,7 @@
         <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
       </p>
     </div>
-    <?php if ($script || $pencils || $colors || $letters || $editing || $cover) { ?>
+    <?php if ($script || $pencils || $colors || $letters || $editing || $coverArtist) { ?>
     <div class="issue-credits text-center">
       <div class="row">
         <?php if ($script) { ?>
