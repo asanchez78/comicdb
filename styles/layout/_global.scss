@@ -27,18 +27,12 @@ h4 {
   margin-top: 0;
 }
 
-a {
+a, button, .btn-link {
   transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 
   &:hover,
   &:focus {
     text-decoration: none;
-  }
-}
-
-a, button {
-  &:hover,
-  &:focus {
     outline: none;
   }
 }
@@ -71,22 +65,15 @@ ul.nolist {
   transition: height 0.2s ease-in-out;
   height: 30px;
   position: absolute;
-  top: 85px;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 0 15px;
   border-radius: 0;
-
-  @media (min-width: $screen-md) {
-    top: 64px;
-  }
 }
 
 .alert-dismissible .close {
   right: 15px !important;
-}
-
-.content {
-  margin-top: 35px;
 }
 
 .notification-text, .notifications .close span {
@@ -101,13 +88,18 @@ ul.nolist {
 /* Layout */
 #wrapper {
   display: block;
+  background-color: white;
+  opacity: 0.95;
+  min-height: 100vh;
+  position: relative;
 }
 
-.content {
-  min-height: 80vh;
+main {
+  padding-top: 25px;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
 }
 
-.content,
 .dev-messages {
   position: relative;
   background-color: white;
@@ -162,4 +154,13 @@ ul.nolist {
       }
     }
   }
+}
+
+footer.main-footer {
+  position: absolute;
+  bottom: 0;
+  background-color: $brand-red;
+  color: white;
+  padding-top: 7px;
+  font-size: 12px;
 }

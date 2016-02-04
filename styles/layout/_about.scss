@@ -1,0 +1,34 @@
+.about-header-image {
+  margin-top: 15px;
+}
+
+.about-avatar {
+  width: 120px;
+  height: auto;
+
+  &.pull-left {
+    margin-right: 10px;
+  }
+
+  &.pull-right {
+    margin-left: 10px;
+  }
+}
+
+.about-social {
+  clear: both;
+  margin-top: 20px;
+  border: 1px solid $border-color;
+  padding: 10px 0;
+
+  i.fa {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  li:first-of-type {
+    padding-left: 0;
+  }
+  li:last-of-type {
+    padding-right: 0;
+  }
+}

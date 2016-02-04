@@ -121,7 +121,7 @@
   }
 ?>
 <?php if(isset($sqlMessage)) { ?>
-<div class="dev-messages container">
+<div class="dev-messages">
   <div class="row">
     <div class="col-xs-12">
       <?php echo $sqlMessage; ?>
@@ -131,11 +131,9 @@
 <?php } ?>
 <?php if(isset($messageText)) { ?>
 <div class="alert alert-dismissible notifications <?php echo $notifyClass; ?>" role="alert">
-  <div class="container">
-    <div class="row">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <p class="col-xs-11 notification-text"><?php echo $messageText; ?></p>
-    </div>
+  <div class="row">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <p class="col-xs-11 notification-text"><?php echo $messageText; ?></p>
   </div>
 </div>
 <?php } ?>

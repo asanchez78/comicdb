@@ -5,7 +5,7 @@
 }
 
 .add-menu {
-  margin-top: -15px;
+  margin-top: -25px;
   margin-left: -15px;
   margin-right: -15px;
   margin-bottom: 0;
@@ -13,10 +13,8 @@
   background-color: $brand-red;
   > li {
     text-align: center;
-    width: 25.3%;
     font-size: 0;
     margin: 0;
-    margin-right: -4px;
     padding: 0;
 
     a {
@@ -195,7 +193,8 @@
   margin: 25px 0;
 }
 
-.nav-tabs {
+.nav-tabs.nav-justified {
+  width: 104%;
   > li {
     > a {
       border: 1px solid transparent;

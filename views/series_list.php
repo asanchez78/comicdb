@@ -27,7 +27,7 @@
 
   if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
     <header class="row headline">
-      <div class="col-xs-12 col-md-7">
+      <div class="col-xs-12 col-lg-6">
         <h2>
           <?php if (isset($userSetName) && $validUser == 1) {
             echo $userSetName . '&rsquo;s collection';
@@ -38,7 +38,7 @@
           } ?>
         </h2>
       </div>
-      <div class="col-xs-12 col-md-5 series-meta text-right">
+      <div class="col-xs-12 col-lg-6 series-meta">
         <ul class="nolist">
           <li><?php echo $totalIssues; ?> Total Issues</li>
           <li>XXX Total Series</li>
@@ -83,12 +83,8 @@
           <div class="series-publisher hidden-xs hidden-sm hidden-md">
             <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</div>'; } ?>
           </div>
-          <div class="text-uppercase series-count">
+          <div class="text-uppercase text-center">
             <?php echo $series_issue_count; ?>
-          </div>
-          <div class="hidden-xs hidden-sm text-right series-controls">
-            <button class="btn btn-link btn-xs" title="Add New Issue"><i class="fa fa-plus-square"></i></button>
-            <button class="btn btn-link btn-xs" title="Edit this Series"><i class="fa fa-cog"></i></button>
           </div>
         </div>
       </li>

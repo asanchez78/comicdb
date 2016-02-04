@@ -13,7 +13,7 @@
 
 <body>
   <?php include 'views/header.php';?>
-  <div class="container content">
+  <div>
     <?php if ($editMode == 'edit') { include 'views/edit_comic.php'; } else { include 'views/single_comic.php'; } ?>
   </div>
   <?php include 'views/footer.php';?>
