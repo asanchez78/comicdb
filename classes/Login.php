@@ -88,6 +88,7 @@ class Login {
 						$_SESSION ['user_email'] = $result_row->user_email;
 						$_SESSION ['user_login_status'] = 1;
 						$_SESSION ['user_id'] = $result_row->user_id;
+						$_SESSION ['apiKey'] = $result_row->apiKey;
 					} else {
 						$this->errors [] = "Wrong password. Try again.";
 						$messageNum = 57;
