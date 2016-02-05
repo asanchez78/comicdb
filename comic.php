@@ -6,7 +6,7 @@
   $comic->issueLookup ( $comic_id );
 
   $editMode = filter_input ( INPUT_GET, 'type' );
-  if ($editMode == 'edit' /*|| $editMode == 'edit-save'*/) { include('admin/formprocess.php'); }
+  if ($editMode == 'edit' || $editMode == 'edit-save') { include('admin/formprocess.php'); }
 ?>
   <title><?php echo $comic->series_name . " #" . $comic->issue_number; ?> :: POW! Comic Book Manager</title>
 </head>

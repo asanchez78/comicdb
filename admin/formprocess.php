@@ -295,44 +295,201 @@
         break;
       case 'edit':
         $ownerID = $_SESSION['user_id'];
+        $updatedSet = '';
         $comic_id = filter_input(INPUT_GET, 'comic_id');
         $comic = new comicSearch();
+        $wiki = new wikiQuery ();
         $comic->issueLookup($comic_id);
         $series_id = $comic->series_id;
         $comic->seriesInfo ($series_id, $userID);
         $issue_number = $comic->issue_number;
         $cvVolumeID = $comic->cvVolumeID;
-
-        $wiki = new wikiQuery ();
-        $wiki->issueSearch($cvVolumeID, $issue_number);
-
-        $series_name = $comic->series_name;
         $series_vol = $comic->series_vol;
-        
+        $series_name = $comic->series_name;
         $originalPurchase = $comic->originalPurchase;
-        $release_date = $wiki->releaseDate;
-        $release_dateShort = DateTime::createFromFormat('Y-m-d', $release_date)->format('M Y');
-        $release_dateLong = DateTime::createFromFormat('Y-m-d', $release_date)->format('M d, Y');
-
-        $story_name = $wiki->storyName;
-        $plot = $wiki->synopsis;
-        if (isset($custPlot) && $custPlot != '') {
-          $custPlot = $comic->custPlot;
+        
+        // Wiki updates automatically if field is blank
+        $wiki->issueSearch($cvVolumeID, $issue_number);
+        $creatorsList = $wiki->creatorsList;
+        
+        // Release Date
+        if ($comic->release_date != '') {
+          if ($wiki->releaseDate !== '' && $wiki->releaseDate == $comic->release_date) {
+            $releaseDate = $comic->release_date;
+          } else {
+            $releaseDate = $wiki->releaseDate;
+            $updatedSet .= 'Release Date; ';
+          }
+          
+        } else {
+          if ($wiki->releaseDate !== '') {
+            $releaseDate = $wiki->releaseDate;
+            $updatedSet .= 'Release Date; ';
+          }
         }
-        $coverURL = $comic->cover_image;
+        $release_dateShort = DateTime::createFromFormat('Y-m-d', $releaseDate)->format('M Y');
+        $release_dateLong = DateTime::createFromFormat('Y-m-d', $releaseDate)->format('M d, Y');
+
+        // Plot and Custom Plot
+        if ($comic->plot !== '') {
+          if ($wiki->synopsis !== '' && $wiki->synopsis == $comic->plot) {
+            $plot = $comic->plot;
+          } else {
+            $plot = $wiki->synopsis;
+            $updatedSet .= 'Plot; ';
+          }
+        } else {
+          if ($wiki->synopsis !== '') {
+            $plot = $wiki->synopsis;
+            $updatedSet .= 'Plot; ';
+          }
+        }
+
+        if ($comic->custPlot != '') {
+          if ($comic->custPlot != $plot) {
+            $custPlot = $comic->custPlot;
+          }
+        } else {
+          $custPlot = '';
+        }
+
+        // Story Name and Custom Story Name
+        if ($comic->story_name !== '') {
+          if ($wiki->storyName !== '' && $wiki->storyName == $comic->story_name) {
+            $story_name = $comic->story_name;
+          } else {
+            $story_name = $wiki->storyName;
+            $updatedSet .= 'Story Name; ';
+          }
+        } else {
+          if ($wiki->storyName !== '') {
+            $story_name = $wiki->storyName;
+            $updatedSet .= 'Story Name; ';
+          }
+        }
+
+        // Creators
+        if ($comic->script != '') {
+          if ($wiki->script !== '' && $wiki->script == $comic->script) {
+            $script = $comic->script;
+          } else {
+            $script = $wiki->script;
+            $updatedSet .= 'Script; ';
+          }
+        } else {
+          if ($wiki->script !== '') {
+            $script = $wiki->script;
+            $updatedSet .= 'Script; ';
+          }
+        }
+
+        // Pencils
+        if ($comic->pencils != '') {
+          if ($wiki->pencils !== '' && $wiki->pencils == $comic->pencils) {
+            $pencils = $comic->pencils;
+          } else {
+            $pencils = $wiki->pencils;
+            $updatedSet .= 'Pencils; ';
+          }
+        } else {
+          if ($wiki->pencils !== '') {
+            $pencils = $wiki->pencils;
+            $updatedSet .= 'Pencils; ';
+          }
+        }
+
+        // Colors
+        if ($comic->colors != '') {
+          if ($wiki->colors !== '' && $wiki->colors == $comic->colors) {
+            $colors = $comic->colors;
+          } else {
+            $colors = $wiki->colors;
+            $updatedSet .= 'Colors; ';
+          }
+        } else {
+          if ($wiki->colors !== '') {
+            $colors = $wiki->colors;
+            $updatedSet .= 'Colors; ';
+          }
+        }
+
+        // Inks
+        if ($comic->inks != '') {
+          if ($wiki->inks !== '' && $wiki->inks == $comic->inks) {
+            $inks = $comic->inks;
+          } else {
+            $inks = $wiki->inks;
+            $updatedSet .= 'Inks; ';
+          }
+        } else {
+          if ($wiki->inks !== '') {
+            $inks = $wiki->inks;
+            $updatedSet .= 'Inks; ';
+          }
+        }
+
+        // Letters
+        if ($comic->letters != '') {
+          if ($wiki->letters !== '' && $wiki->letters == $comic->letters) {
+            $letters = $comic->letters;
+          } else {
+            $letters = $wiki->letters;
+            $updatedSet .= 'Letters; ';
+          }
+        } else {
+          if ($wiki->letters !== '') {
+            $letters = $wiki->letters;
+            $updatedSet .= 'Letters; ';
+          }
+        }
+
+        // Editing
+        if ($comic->editing != '') {
+          if ($wiki->editing !== '' && $wiki->editing == $comic->editing) {
+            $editing = $comic->editing;
+          } else {
+            $editing = $wiki->editing;
+            $updatedSet .= 'Editing; ';
+          }
+        } else {
+          if ($wiki->editing !== '') {
+            $editing = $wiki->editing;
+            $updatedSet .= 'Editing; ';
+          }
+        }
+
+        // CoverArtist
+        if ($comic->coverArtist != '') {
+          if ($wiki->coverArtist !== '' && $wiki->coverArtist == $comic->coverArtist) {
+            $coverArtist = $comic->coverArtist;
+          } else {
+            $coverArtist = $wiki->coverArtist;
+            $updatedSet .= 'Cover Artist; ';
+          }
+        } else {
+          if ($wiki->coverArtist !== '') {
+            $coverArtist = $wiki->coverArtist;
+            $updatedSet .= 'Cover Artist; ';
+          }
+        }
+
+        // Cover Image
+        if ($comic->cover_image != '') {
+          $coverURL = $comic->cover_image;
+          $coverFile = $comic->cover_image;
+        } else {
+          $coverURL = $wiki->coverURL;
+          $coverFile = $wiki->coverFile;
+          $updatedSet .= 'Cover Artist; ';
+        }
+        
+        // Publisher
         if (isset($comic->publisherName)) {
           $publisherName = $comic->publisherName;
           $publisherShort = $comic->publisherShort;
         } else {
           $messageNum = 60;
         }
-        $script = $wiki->script;
-        $pencils = $wiki->pencils;
-        $colors = $wiki->colors;
-        $letters = $wiki->letters;
-        $editing = $wiki->editing;
-        $coverArtist = $wiki->coverArtist;
-        $coverFile = $wiki->coverFile;
         break;
       case 'edit-save':
         $issueEdit = true;
@@ -345,12 +502,8 @@
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
         $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
         $originalPurchase = filter_input ( INPUT_POST, 'originalPurchase' );
-        $art = filter_input ( INPUT_POST, 'art' );
-        $script = filter_input ( INPUT_POST, 'script' );
-        $colors = filter_input ( INPUT_POST, 'colors' );
-        $letters = filter_input ( INPUT_POST, 'letters' );
-        $editor = filter_input ( INPUT_POST, 'editor' );
-        $coverArtist = filter_input ( INPUT_POST, 'coverArtist' );
+        $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
+        $updatedSet = filter_input ( INPUT_POST, 'updatedSet' );
 
         // Formats date
         if ($released_date == 0000 - 00 - 00) {
@@ -359,30 +512,24 @@
           $release_date = $released_date;
         }
 
-        // Downloads the cover from Wikia and stores is locally, otherwise show the nocover.jpg image.
-        if ($cover_image == 'assets/nocover.jpg') {
-          $cover_image_file = 'assets/nocover.jpg';
-        } else {
-          $path = __ROOT__ . '/' . $cover_image_file;
-          $wiki = new wikiQuery();
-          $wiki->downloadFile ( $cover_image, $path );
-        }
-
         // Checks if the plot has been modified by the user
         if ($custPlot == $plot) {
           // If it's the same as the API data, then clear it out.
           $custPlot = '';
         }
 
-        $sql = "UPDATE comics SET story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='images/$cover_image_file', wikiUpdated=1 WHERE comic_id='$comic_id'";
+        $sql = "UPDATE comics SET story_name='$story_name', release_date='$release_date', plot='$plot', cover_image='$cover_image_file', wikiUpdated=1 WHERE comic_id='$comic_id'";
         if (mysqli_query ( $connection, $sql )) {
-          $sql_user = "UPDATE users_comics SET originalPurchase='$originalPurchase', custPlot='$custPlot' WHERE comic_id='$comic_id', user_id='$ownerID'";
+          $sqlMessage = '<strong class="text-success">Comic Database Update Success</strong>: Issue updated<br /><code>' . $sql . '</code><br /><br />';
+          // Add creators to creators table
+          $comic->insertCreators($comic_id, $creatorsList);
+          $sql_user = "UPDATE users_comics SET originalPurchase='$originalPurchase', custPlot='$custPlot' WHERE user_id='$ownerID' AND comic_id='$comic_id'";
           if (mysqli_query ( $connection, $sql_user )) {
             $messageNum = 5;
-            $sqlMessage = '<strong class="text-success">Success</strong>: Issue updated ' . $sql_user;
+            $sqlMessage .= '<strong class="text-success">User Database Update Success</strong>: Issue updated<br /><code>' . $sql_user . '</code>';
           } else {
             $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_user . '<br>' . mysqli_error ( $connection );
-            $messageNum = 63;
+            $messageNum = 66;
           }
         } else {
             $messageNum = 62;

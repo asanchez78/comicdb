@@ -28,7 +28,7 @@
         break;
       // Edit Issue
       case 5:
-        $messageText = 'Issue updated successfully.';
+        $messageText = 'Issue updated successfully. The following fields were updated: ' . $updatedSet;
         break;
       // Cover Image Update        
       case 6:
@@ -108,6 +108,10 @@
       case 65:
         // Add Single Comic: Cannot find issue on ComicVine
         $messageText .= 'Cannot find this issue on ComicVine. Please try again or check the issue number.';
+        break;
+      case 66:
+        // SQL Error: Syntax
+        $messageText .= 'A problem occurred with the server. Please try again later.';
         break;
       case 90:
         $messageText .= 'Sorry, no database connection.';

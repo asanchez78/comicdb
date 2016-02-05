@@ -3,14 +3,15 @@
   $articleID = "comic" . $comic_id;
   $comic = new comicSearch ();
   $comic->issueLookup ( $comic_id );
+  $series_id = $comic->series_id;
   
   if (isset($userSetID) && $validUser == 1) {
-    $comic->seriesInfo ( $comic->series_id, $userSetID );
+    $comic->seriesInfo ( $series_id, $userSetID );
   } else {
     if (!isset($userID)) {
       $userID=NULL;
     }
-    $comic->seriesInfo ( $comic->series_id, $userID );
+    $comic->seriesInfo ( $series_id, $userID );
   }
   // Required values
   // Standardizes values for common variables
@@ -47,6 +48,7 @@
   $script = $comic->script;
   $pencils = $comic->pencils;
   $colors = $comic->colors;
+  $inks = $comic->inks;
   $letters = $comic->letters;
   $editing = $comic->editing;
   $coverArtist = $comic->coverArtist;
@@ -72,12 +74,10 @@
       <?php echo $plot; ?>
     </div>
     <div class="button-block text-center">
-      <?php
-        if ($login->isUserLoggedIn () == true) { ?>
-          <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Comic</a>
-          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
-        <?php } 
-      ?>
+      <?php if ($login->isUserLoggedIn () == true) { ?>
+        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Comic</a>
+        <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
+      <?php } ?>
     </div>
     <div class="disqus-block">
       <div id="disqus_thread"></div>
@@ -106,9 +106,9 @@
       <h2>Issue Details</h2>
       <a href="/publisher.php?pid=<?php echo $publisherID; ?>" class="logo-<?php echo $publisherShort; ?> pull-right"></a>
       <p>
-        <big><strong><?php echo $series_name; ?></strong></big><br />
+        <big><strong><?php if ($login->isUserLoggedIn () == true) { ?><a href="/issues.php?series_id=<?php echo $series_id; ?>" title="View more comics in this series"><?php echo $series_name; ?></a><?php } else { ?><?php echo $series_name; ?><?php } ?></strong></big><br />
         <strong>Issue: #</strong><?php echo $issue_num; ?><br />
-        <strong>First Published: </strong><?php echo $series_vol; ?><br />
+        <strong>Series Published: </strong><?php echo $series_vol; ?><br />
         <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
       </p>
     </div>
@@ -131,27 +131,33 @@
         
       <div class="row">
         <?php if ($colors) { ?>
-        <div class="col-md-4 credit-inker">
-          <h3>Inks/Colors</h3>
+        <div class="col-xs-12 <?php if ($letters && $inks) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
+          <h3>Colors</h3>
           <?php echo $colors; ?>
         </div>
         <?php } ?>
+        <?php if ($inks) { ?>
+        <div class="col-xs-12 <?php if ($colors && $letters) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inks">
+          <h3>Inks</h3>
+          <?php echo $inks; ?>
+        </div>
+        <?php } ?>
         <?php if ($letters) { ?>     
-        <div class="col-md-4 credit-letters">
+        <div class="col-xs-12 <?php if ($colors && $inks) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
           <h3>Letters</h3>
           <?php echo $letters; ?>
         </div>
         <?php } ?>
+      </div>
+      <div class="row">
         <?php if ($editing) { ?> 
-        <div class="col-md-4 credit-editor">
+        <div class="col-xs-12 <?php if ($coverArtist) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-editor">
           <h3>Editing</h3>
           <?php echo $editing; ?>
         </div>
         <?php } ?>
-      </div>
-      <div class="row">
         <?php if ($coverArtist) { ?>
-        <div class="col-md-12 credit-cover">
+        <div class="col-xs-12 <?php if ($editing) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-cover">
           <h3>Cover</h3>
           <?php echo $coverArtist; ?>
         </div>

@@ -5,11 +5,11 @@
   <div class="col-md-8 col-sm-12">
     <div class="form-group">
       <label for="story_name">Story Name: </label>
-      <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $comic->story_name; ?>" />
+      <input class="form-control" name="story_name" type="text" maxlength="255" value="<?php echo $story_name; ?>" />
     </div>
     <div class="form-group">
       <label for="released_date">Release Date:</label>
-      <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php if ($release_date) { echo $release_date; } ?>" type="date" placeholder="YYYY-MM-DD" />
+      <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php if ($releaseDate) { echo $releaseDate; } ?>" type="date" placeholder="YYYY-MM-DD" />
     </div>
     <div class="form-group form-radio">
       <label for="originalPurchase">Purchased When Released:</label>
@@ -22,7 +22,7 @@
       <a class="btn btn-xs btn-link pull-right" id="editPlot">[edit]</a>
       <label for="plot">Plot:</label>
       <div class="plot-output">
-        <?php echo $plot; ?>
+        <?php if ($custPlot != '') { echo $custPlot; } else { echo $plot; }?>
       </div>
       <div id="plotInput">
         <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
@@ -34,7 +34,7 @@
             menubar: false
           });
         </script>
-        <textarea name="custPlot" class="form-control"><?php echo htmlspecialchars($plot); ?></textarea>
+        <textarea name="custPlot" class="form-control"><?php echo htmlspecialchars($custPlot); ?></textarea>
         <input type="hidden" name="plot" value="<?php echo htmlspecialchars($plot); ?>" />
       </div>
     </div>
@@ -49,7 +49,7 @@
       <div class="form-group">
         <label for="cover_image">Cover Image URL</label>
         <input type="text" class="form-control" name="cover_image" placeholder="Enter the URL" value="<?php echo $coverURL; ?>" />
-        <small>Enter the URL of the image you wish to use. Default is the cover file from the Wikia entry on this issue.</small>
+        <small>Enter the URL of the image you wish to use. Default is the cover file from the ComicVine entry on this issue.</small>
         <input type="hidden" name="cover_image_file" value="<?php echo $coverFile; ?>" />
       </div>
     </div>
@@ -59,49 +59,57 @@
       <p>
         <big><strong><?php echo $series_name; ?></strong></big><br />
         <strong>Issue: #</strong><?php echo $issue_number; ?><br />
-        <strong>Volume: </strong><?php echo $series_vol; ?><br />
+        <strong>Series Published: </strong><?php echo $series_vol; ?><br />
         <strong>Cover Date: </strong><?php echo $release_dateLong; ?><br />
       </p>
     </div>
-    <?php if ($script || $pencils || $colors || $letters || $editing || $cover) { ?>
+    <?php if (isset($script) || isset($pencils) || isset($colors) || isset($inks) || isset($letters) || isset($editing) || isset($coverArtist)) { ?>
       <div class="issue-credits text-center">
         <div class="row">
-          <?php if ($script) { ?>
-          <div class="<?php if ($pencils) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-writer">
+          <?php if (isset($script)) { ?>
+          <div class="<?php if (isset($pencils)) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-writer">
             <h3>Script</h3>
             <?php echo $script; ?>
           </div>
           <?php } ?>
-          <?php if ($pencils) { ?>
-          <div class="<?php if ($script) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-artist">
+          <?php if (isset($pencils)) { ?>
+          <div class="<?php if (isset($script)) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-artist">
             <h3>Pencils</h3>
             <?php echo $pencils; ?>
           </div>
           <?php } ?>
         </div>
+
         <div class="row">
-          <?php if ($colors) { ?>
-          <div class="col-xs-12 <?php if ($letters && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
-            <h3>Inks/Colors</h3>
+          <?php if (isset($colors)) { ?>
+          <div class="col-xs-12 <?php if (isset($letters) && isset($inks)) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
+            <h3>Colors</h3>
             <?php echo $colors; ?>
           </div>
            <?php } ?>
-          <?php if ($letters) { ?>
-          <div class="col-xs-12 <?php if ($colors && $editing) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
+          <?php if (isset($inks)) { ?>
+          <div class="col-xs-12 <?php if (isset($colors) && isset($letters)) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inks">
+            <h3>Inks</h3>
+            <?php echo $inks; ?>
+          </div>
+           <?php } ?>
+          <?php if (isset($letters)) { ?>
+          <div class="col-xs-12 <?php if (isset($colors) && isset($inks)) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
             <h3>Letters</h3>
             <?php echo $letters; ?>
           </div>
            <?php } ?>
-          <?php if ($editing) { ?>
-          <div class="col-xs-12 <?php if ($letters && $colors) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-editor">
+        </div>
+        
+        <div class="row">
+          <?php if (isset($editing)) { ?>
+          <div class="col-xs-12 <?php if (isset($coverArtist)) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-editor">
             <h3>Editing</h3>
             <?php echo $editing; ?>
           </div>
            <?php } ?>
-        </div>
-        <div class="row">
-          <?php if ($coverArtist) { ?>
-          <div class="col-xs-12 credit-cover">
+          <?php if (isset($coverArtist)) { ?>
+          <div class="col-xs-12 <?php if (isset($editing)) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-cover">
             <h3>Cover</h3>
             <?php echo $coverArtist; ?>
           </div>
@@ -110,5 +118,10 @@
       </div>
       <?php } ?>
   </div>
+  <input type="hidden" name="comic_id" value="<?php echo $comic_id; ?>" />
+  <input type="hidden" name="series_name" value="<?php echo $series_name; ?>" />
+  <input type="hidden" name="series_vol" value="<?php echo $series_vol; ?>" />
+  <input type="hidden" name="creatorsList" value="<?php echo $creatorsList; ?>" />
+  <input type="hidden" name="updatedSet" value="<?php echo $updatedSet; ?>" />
   <input type="hidden" name="updated" value="yes" />
 </form>
