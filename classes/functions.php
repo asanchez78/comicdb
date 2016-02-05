@@ -404,7 +404,7 @@ class comicSearch {
     }
     $creatorsList = explode(";", $creatorsList);
     foreach ($creatorsList as $creator) {
-      $creatorsArray  = explode(",", $creator);
+      $creatorsArray  = explode("_", $creator);
       $person = $creatorsArray[0];
       $job = $creatorsArray[1];
       $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
