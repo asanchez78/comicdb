@@ -122,7 +122,7 @@
 
         if ($comic->issueExists == 1) {
           // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
-          $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase, custPlot) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase', $custPlot)";
+          $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase, custPlot) VALUES ('$ownerID', '$comic->comic_id', '$originalPurchase', '$custPlot')";
           $comic_id = $comic->comic_id;
           if (mysqli_query ( $connection, $sql )) {
             $messageNum = 1;
