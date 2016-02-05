@@ -275,11 +275,11 @@
               $comic_id = mysqli_insert_id ( $connection );
               $sql = "INSERT INTO users_comics (user_id, comic_id, originalPurchase) VALUES ('$ownerID', '$comic_id', '$originalPurchase')";
               if (mysqli_query ( $connection, $sql )) {
+                // Add creators to creators table
+                $comic->insertCreators($comic_id, $creatorsList);
                 $sqlMessage = '<strong class="text-success">Success</strong>: ' . $sql . '<br><code>' . mysqli_error ( $connection ) . '</code>';
                 $listSearch = true;
                 $messageNum = 8;
-                // Add creators to creators table
-                $comic->insertCreators($comic_id, $creatorsList);
               } else {
                 $listSearch = false;
                 $messageNum = 51;
