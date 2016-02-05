@@ -44,6 +44,7 @@ class comicSearch {
   public $pencils;
   public $script;
   public $colors;
+  public $inks;
   public $coverArtist;
   public $editing;
   public $letters;
@@ -99,7 +100,7 @@ class comicSearch {
           $this->script .= '<span>' . $creatorName . '</span>';
         }
         if ($creatorJob == 'inker') {
-          $this->colors .= '<span>' . $creatorName . '</span>';
+          $this->inks .= '<span>' . $creatorName . '</span>';
         }
         if ($creatorJob == 'colors') {
           $this->colors .= '<span>' . $creatorName . '</span>';
@@ -397,7 +398,7 @@ class comicSearch {
 
   // Add creators to creators table
   public function insertCreators($comic_id, $creatorsList) {
-    $connection = mysqli_connect ( 'localhost', 'comicdb', 'comicdb', 'comicdb' );
+    $connection = mysqli_connect ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if (! $connection) {
       die ( "Connection failed: " . mysqli_connect_error () );
     }
@@ -427,7 +428,7 @@ class comicSearch {
         $creator_id = $this->creator_id;
         $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
         if (mysqli_query ( $connection, $sql )) {
-          //messages here?
+          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
           $success = true;
         } else {
           $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
@@ -443,7 +444,7 @@ class comicSearch {
         }
         $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
         if (mysqli_query ( $connection, $sql )) {
-          //messages here?
+          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
           $success = true;
         } else {
           $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
