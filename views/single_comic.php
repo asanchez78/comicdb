@@ -1,4 +1,6 @@
 <?php 
+  $canonUrl = "http://comicmanager.com$_SERVER[REQUEST_URI]";
+  $articleID = "comic" . $comic_id;
   $comic = new comicSearch ();
   $comic->issueLookup ( $comic_id );
   
@@ -77,6 +79,24 @@
         <?php } 
       ?>
     </div>
+    <div class="disqus-block">
+      <div id="disqus_thread"></div>
+      <script>
+      var disqus_config = function () {
+      this.page.url = '<?php echo $canonUrl; ?>'; // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = '<?php echo $articleID; ?>'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+
+      s.src = '//powcbm.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>
   </div>
   <div class="col-md-4 sidebar">
     <div class="issue-image">
@@ -141,3 +161,4 @@
     <?php } ?>
   </div>
 </div>
+<script id="dsq-count-scr" src="//powcbm.disqus.com/count.js" async></script>
