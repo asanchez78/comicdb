@@ -6,8 +6,8 @@
   
   $login = new Login();
   if ($login->isUserLoggedIn () == true) {
-    $user = $_SESSION ['user_name'];
-    $userID = $_SESSION ['user_id'];
+    $user = $_COOKIE ['user_name'];
+    $userID = $_COOKIE ['user_id'];
   }
 
   // User browsing
