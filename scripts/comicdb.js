@@ -81,4 +81,12 @@ jQuery(document).ready(function($) {
   $('.form-submit').click(function() {
     $(this).addClass('loading');
   });
+
+  // Hides the notification bar after 6 seconds (6000ms)
+  var $notifications = $('.notifications');
+  if($notifications) {
+    setTimeout(function() {
+      $($notifications).addClass('notify-hide');
+    }, 6000);
+  }
 });

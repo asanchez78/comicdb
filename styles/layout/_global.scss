@@ -69,10 +69,16 @@ ul.nolist {
   width: 100%;
   padding: 0 15px;
   border-radius: 0;
+
+  &.notify-hide {
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 .alert-dismissible .close {
-  right: 15px !important;
+  right: 15px;
+  top: 1px;
 }
 
 .notification-text, .notifications .close span {
