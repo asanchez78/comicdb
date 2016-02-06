@@ -29,4 +29,12 @@
     border-top: none;
     text-align: center;
   }
+
+  input[type="radio"] {
+    &:checked + label:before {
+      content: "";
+      background-color: black;
+      border-color: black;
+    }
+  }
 }

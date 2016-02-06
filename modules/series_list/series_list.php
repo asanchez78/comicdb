@@ -24,7 +24,7 @@ if (isset($userSetID) && $validUser == 1) {
   $totalIssues = $comic->total_issue_count;
   $comic->seriesList ($listAll, $publisherSearchId, $userID);
 } ?>
-<section data-module="series_list" data-series-id="<?php echo $series_id; ?>">
+<section data-module="series_list">
 <?php if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
   <header class="row headline">
     <div class="col-xs-12 col-lg-6">

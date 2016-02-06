@@ -5000,6 +5000,11 @@ label {
   border-top: none;
   text-align: center;
 }
+[data-module="login_modal"] input[type="radio"]:checked + label:before {
+  content: "";
+  background-color: black;
+  border-color: black;
+}
 
 /* Grid display styles */
 ul#inventory-table {
