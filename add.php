@@ -208,7 +208,7 @@
               </div>
               <div class="form-group">
                 <label for="issue_number">Issue #</label>
-                <input name="issue_number" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" size="3" maxlength="4" value="" required aria-required="true" />
+                <input name="issue_number" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" size="3" maxlength="4" value="" required aria-required="true" />
               </div>
               <input type="hidden" name="submitted" value="yes" />
               <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
@@ -249,11 +249,11 @@
                 <div class="form-inline">
                   <div class="form-group">
                     <label for="first_issue">First Issue</label>
-                    <input name="first_issue" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" maxlength="3" size="3" />
+                    <input name="first_issue" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" class="form-control" maxlength="3" size="3" />
                   </div>
                   <div class="form-group">
                     <label for="last_issue">Last Issue</label>
-                    <input name="last_issue" type="number" pattern="[0-9]*" inputmode="numeric" class="form-control" maxlength="3" size="3" />
+                    <input name="last_issue" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" class="form-control" maxlength="3" size="3" />
                   </div>
                 </div>
               </div>
@@ -324,7 +324,7 @@
             </div>
             <div class="form-group">
               <label for="issueList">Comma separated list of issues</label>
-              <input type="text" class="form-control" name="issueList" placeholder="5,29,156" />
+              <input type="text" class="form-control" name="issueList" placeholder="5,29,156" autocomplete="off" />
             </div>
             <div class="form-group form-radio">
               <label for="listOriginalPurchase">Purchased When Released</label>
