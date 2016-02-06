@@ -85,7 +85,7 @@
               </div>
               <div class="text-center center-block button-block">
                 <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-paper-plane"></i> Save</span></button>
+                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-save"></i> Save</span></button>
               </div>
             </div>
             <div class="col-md-4 sidebar">
