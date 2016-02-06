@@ -4026,6 +4026,28 @@ ul.nolist {
   display: none;
 }
 
+/* Hide only visually, but have it available for screenreaders: h5bp.com/v */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
 /* Notifications */
 .notifications {
   -webkit-transition: height 0.2s ease-in-out;
@@ -4152,8 +4174,7 @@ footer.main-footer {
   width: 100%;
 }
 .main-sidebar .navbar-collapse li > a i.fa {
-  margin-right: 5px;
-  min-width: 15px;
+  margin-right: 3px;
 }
 .main-sidebar .navbar .nolist {
   margin-bottom: 5px;
@@ -4258,10 +4279,6 @@ label {
 }
 .issue-search-result label {
   margin-bottom: 0 !important;
-}
-
-.form-login .form-submit {
-  margin-top: 43px;
 }
 
 /* Grid display styles */
