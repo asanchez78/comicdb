@@ -12,14 +12,18 @@
       <?php if ($login->isUserLoggedIn () != true) { ?>
       <form method="post" action="<?php echo filter_input ( INPUT_GET, 'return' ); ?>" name="loginform" class="form-inline form-login">
       	<div class="form-group">
-          <label for="login_input_username">Username</label>
-        	<input id="login_input_username" class="login_input form-control" type="text" name="user_name" required />
+          <label for="login_input_username" class="visuallyhidden">Username</label>
+          <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+        	<input id="login_input_username" class="login_input form-control" type="text" name="user_name" placeholder="User Name" required />
         </div>
         <div class="form-group">
-          <label for="login_input_password">Password</label>
-          <input id="login_input_password" class="login_input form-control" type="password" name="user_password" autocomplete="off" required />
+          <label for="login_input_password" class="visuallyhidden">Password</label>
+           <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+          <input id="login_input_password" class="login_input form-control" type="password" name="user_password" autocomplete="off" placeholder="Password" required />
         </div>
-        <button type="submit" name="login" class="btn btn-danger btn-lg form-submit"><i class="fa fa-sign-in"></i> Login</button>
+        <div class="form-group">
+          <button type="submit" name="login" class="btn btn-danger btn-lg form-submit"><i class="fa fa-sign-in"></i> Login</button>
+        </div>
       </form>
       <?php } else { ?>
         <p>You are already signed in!</p>

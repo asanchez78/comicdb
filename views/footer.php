@@ -1,10 +1,15 @@
-      <?php include('notifications.php'); ?>
+      <?php include(__ROOT__.'/modules/notifications/notifications.php'); ?>
     </main>
     <footer class="main-footer col-xs-12 text-center center-block">
       <p>&copy;<?php echo date("Y"); ?> Anthony Sanchez and Sean Loyless. All content from ComicVine</p>
     </footer>
   </div>
   <!-- Site content ends -->
+  <?php if ($login->isUserLoggedIn () != true) { ?>
+    <?php include(__ROOT__.'/modules/login/login_modal.php'); ?>
+  <?php } else { ?>
+    <?php include(__ROOT__.'/modules/login/logout_modal.php'); ?>
+  <?php } ?>  
 </div>
 <!-- Site wrapper ends -->
 
@@ -15,3 +20,4 @@
 <script src="/scripts/bootstrap/tab.js"></script>
 <script src="/scripts/bootstrap/transition.js"></script>
 <script src="/scripts/bootstrap/collapse.js"></script>
+<script src="/scripts/bootstrap/modal.js"></script>

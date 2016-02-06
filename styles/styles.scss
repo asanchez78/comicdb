@@ -22,6 +22,8 @@
 @import "bootstrap-sass/assets/stylesheets/bootstrap/alerts";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/navs";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/navbar";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/modals";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
 
 // Core
 @import "includes/mixins";
@@ -30,7 +32,11 @@
 @import "layout/global";
 @import "layout/header";
 @import "layout/forms";
-@import "layout/grid";
 @import "layout/issues";
 @import "layout/addcomics";
 @import "layout/about";
+
+// Modules
+@import "../modules/login/login";
+@import "../modules/series_list/series_list";
+@import "../modules/single_comic/single_comic";

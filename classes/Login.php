@@ -31,7 +31,7 @@ class Login {
 		
 		// check the possible login actions:
 		// if user tried to log out (happen when user clicks logout button)
-		if (isset ( $_GET ["logout"] )) {
+		if (isset ( $_POST ["logout"] )) {
 			$this->doLogout ();
 		} // login via post data (if user just submitted a login form)
 		elseif (isset ( $_POST ["login"] )) {
@@ -115,9 +115,6 @@ class Login {
 		setcookie("user_id", "", time() -60, "/","", 0);
 		setcookie("apiKey", "", time() -60, "/","", 0);
 		setcookie("user_login_status", "0", time() -60, "/","", 0);
-		// return a little feeedback message
-		$this->messages [] = "You have been logged out.";
-		$messageNum = 49;
 	}
 	
 	/**

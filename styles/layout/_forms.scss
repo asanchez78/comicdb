@@ -5,7 +5,6 @@
   font-size: 20px;
   outline: none;
   padding: 0 10px;
-  line-height: 48px;
   height: 48px;
 
   &:focus {
@@ -13,6 +12,10 @@
     outline: none;
     color: initial;
   }
+}
+
+input[type="number"].form-control {
+  width: 80px;
 }
 
 .form-inline .form-group {
@@ -29,10 +32,6 @@ label {
 }
 
 .form-radio {
-  label:first-of-type {
-    margin-bottom: 15px;
-  }
-
   input[type="radio"] {
     padding: 0;
     display: none;
@@ -70,6 +69,11 @@ label {
     }
   }
 }
+.form-purchase {
+  label:first-of-type {
+    margin-bottom: 15px;
+  }
+}
 
 .btn {
   text-transform: uppercase;
@@ -78,6 +82,21 @@ label {
 .form-submit {
   transition: background-color 0.1s ease-in-out;
   vertical-align: top;
+
+  span.icon-loading {
+    display: none;
+    width: 92px;
+  }
+
+  &.loading {
+    background-color: $brand-orange;
+    span.icon-loading {
+      display: block;
+    }
+    span.text-submit {
+      display: none;
+    }
+  }
 }
 
 .issue-search-result {
@@ -85,11 +104,5 @@ label {
 
   label {
     margin-bottom: 0 !important;
-  }
-}
-
-.form-login {
-  .form-submit {
-    margin-top: 43px;
   }
 }

@@ -56,7 +56,7 @@
                 <label for="released_date">Cover Date:</label>
                 <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $release_date; ?>" type="date" placeholder="YYYY-MM-DD" />
               </div>
-              <div class="form-group form-radio">
+              <div class="form-group form-radio form-purchase">
                 <label for="singleOriginalPurchase">Purchased When Released:</label>
                 <fieldset>
                   <input name="singleOriginalPurchase" id="single-original-yes" value="1" type="radio" /> <label for="single-original-yes">Yes</label>
@@ -85,7 +85,7 @@
               </div>
               <div class="text-center center-block button-block">
                 <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-save"></i> Save</button>
+                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-save"></i> Save</span></button>
               </div>
             </div>
             <div class="col-md-4 sidebar">
@@ -208,10 +208,10 @@
               </div>
               <div class="form-group">
                 <label for="issue_number">Issue #</label>
-                <input name="issue_number" class="form-control" type="text" size="3" maxlength="4" value="" required aria-required="true" />
+                <input name="issue_number" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" size="3" maxlength="4" value="" required aria-required="true" />
               </div>
               <input type="hidden" name="submitted" value="yes" />
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
             </form>
           </div>
         <?php } ?>
@@ -249,11 +249,11 @@
                 <div class="form-inline">
                   <div class="form-group">
                     <label for="first_issue">First Issue</label>
-                    <input name="first_issue" type="text" class="form-control" maxlength="3" size="3" />
+                    <input name="first_issue" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" class="form-control" maxlength="3" size="3" />
                   </div>
                   <div class="form-group">
                     <label for="last_issue">Last Issue</label>
-                    <input name="last_issue" type="text" class="form-control" maxlength="3" size="3" />
+                    <input name="last_issue" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" class="form-control" maxlength="3" size="3" />
                   </div>
                 </div>
               </div>
@@ -261,7 +261,7 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="form-inline">
-                  <div class="form-group form-radio">
+                  <div class="form-group form-radio form-purchase">
                     <label for="rangeOriginalPurchase">Purchased When Released</label>
                     <fieldset>
                       <input name="rangeOriginalPurchase" id="range-original-yes" value="1" type="radio" /> <label for="range-original-yes">Yes</label>
@@ -272,7 +272,7 @@
               </div>
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
           </form>
         </div>
         <?php } else { ?>
@@ -324,9 +324,9 @@
             </div>
             <div class="form-group">
               <label for="issueList">Comma separated list of issues</label>
-              <input type="text" class="form-control" name="issueList" placeholder="5,29,156" />
+              <input type="text" class="form-control" name="issueList" placeholder="5,29,156" autocomplete="off" />
             </div>
-            <div class="form-group form-radio">
+            <div class="form-group form-radio form-purchase">
               <label for="listOriginalPurchase">Purchased When Released</label>
               <fieldset>
                 <input name="listOriginalPurchase" id="list-original-yes" value="1" type="radio" /> <label for="list-original-yes">Yes</label>
@@ -334,7 +334,7 @@
               </fieldset>
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
           </form>
           <?php } else { ?>
             <div class="add-success col-xs-12 bg-success">
@@ -348,7 +348,7 @@
                 </div>
                 <div class="text-center center-block">
                   <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
-                  <a href="/add.php#addrange" class="btn btn-lg btn-info">Add More</a>
+                  <a href="/add.php#addlist" class="btn btn-lg btn-info">Add More</a>
                 </div>
               </div>
             </div>
@@ -377,7 +377,7 @@
               <input type="hidden" name="submitted" value="yes" />
               <div class="text-center center-block button-block">
                 <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
               </div>
             </form>
           </div>
@@ -426,7 +426,7 @@
             </div>
             <input type="hidden" name="submitted" value="yes" />
             <div class="form-group">
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-search"></i> Search</span></button>
             </div>
           </form>
         </div>

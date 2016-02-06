@@ -1,7 +1,10 @@
 <?php 
-  if (isset($messageNum) || isset($_GET['m'])) {
+  if (isset($messageNum) || isset($_GET['m']) || isset ($_POST ["messageNum"])) {
     if (!isset($messageNum) && isset($_GET['m'])) {
       $messageNum = $_GET['m'];
+    }
+    if (!isset($messageNum) && isset($_POST ["messageNum"])) {
+      $messageNum = $_POST ["messageNum"];
     }
     if ($messageNum < 50) {
       $notifyClass = "alert-success";
