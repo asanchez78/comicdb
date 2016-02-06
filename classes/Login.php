@@ -31,7 +31,7 @@ class Login {
 		
 		// check the possible login actions:
 		// if user tried to log out (happen when user clicks logout button)
-		if (isset ( $_GET ["logout"] )) {
+		if (isset ( $_POST ["logout"] )) {
 			$this->doLogout ();
 		} // login via post data (if user just submitted a login form)
 		elseif (isset ( $_POST ["login"] )) {
@@ -111,9 +111,6 @@ class Login {
 		// delete the session of the user
 		$_SESSION = array ();
 		session_destroy ();
-		// return a little feeedback message
-		$this->messages [] = "You have been logged out.";
-		$messageNum = 49;
 	}
 	
 	/**

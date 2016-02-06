@@ -5,6 +5,11 @@
     </footer>
   </div>
   <!-- Site content ends -->
+  <?php if ($login->isUserLoggedIn () != true) { ?>
+    <?php include(__ROOT__.'/modules/login/login_modal.php'); ?>
+  <?php } else { ?>
+    <?php include(__ROOT__.'/modules/login/logout_modal.php'); ?>
+  <?php } ?>  
 </div>
 <!-- Site wrapper ends -->
 
