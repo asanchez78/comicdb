@@ -13,9 +13,7 @@
 
 <body>
   <?php include 'views/header.php';?>
-  <div>
-    <?php if ($editMode == 'edit') { include 'views/edit_comic.php'; } else { include 'views/single_comic.php'; } ?>
-  </div>
+  <?php if ($editMode == 'edit') { include 'modules/edit_comic/edit_comic.php'; } else { include 'modules/single_comic/single_comic.php'; } ?>
   <?php include 'views/footer.php';?>
 </body>
 </html>

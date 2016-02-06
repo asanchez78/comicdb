@@ -7,7 +7,7 @@
 <body>
   <?php include 'views/header.php';?>
   <?php if ($login->isUserLoggedIn () == true || isset ($validUser) && $validUser == 1) {
-    include ('views/series_list.php');
+    include ('modules/series_list/series_list.php');
   } else {
     if (isset($userSetID) && $validUser != 1) {
       $messageNum = 52;
@@ -17,7 +17,7 @@
     while ($row = $result->fetch_assoc()) {
       $comic_id = $row['comic_id'];
     }
-    include 'views/single_comic.php';
+    include 'modules/single_comic/single_comic.php';
   } ?>
 <?php include 'views/footer.php';?>
 </body>

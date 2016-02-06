@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     project: {
       app: ['.'],
-      css: ['<%= project.app %>/styles']
+      css: ['<%= project.app %>/styles'],
+      components: ['<%= project.app %>/modules']
     },
     // Sass -> CSS
     sass: {
@@ -62,7 +63,7 @@ module.exports = function(grunt) {
     },
     watch: {
       sass: {
-        files: ['<%= project.css %>/**/*.{scss,sass}'],
+        files: ['<%= project.css %>/**/*.{scss,sass}','<%= project.components %>/**/*.{scss,sass}'],
         tasks: ['sass:dev','notify:sass']
       },
       autoprefixer: {
@@ -77,7 +78,8 @@ module.exports = function(grunt) {
               '<%= project.app %>/styles.css',
               '<%= project.app %>/**/*.js',
               '<%= project.app %>/**/*.{png,jpg,jpeg,gif,webp,svg}',
-              '<%= project.app %>/**/*.{php,html}'
+              '<%= project.app %>/**/*.{php,html}',
+              '<%= project.components %>/**/*.{php,html}'
           ]
         },
         options: {

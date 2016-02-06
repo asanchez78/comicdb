@@ -60,47 +60,6 @@
   margin-right: 15px;
 }
 
-
-/* Single Issue */
-.issue-story {
-  margin-top: 15px;
-
-  h4 {
-    margin-top: 0
-  }
-}
-
-.issue-image {
-  margin-top: 15px;
-}
-
-.issue-credits {
-  line-height: 1.2;
-  font-size: 12px;
-
-  > .row {
-    margin-bottom: 10px;
-  }
-
-  h3 {
-    margin-top: 10px;
-    margin-bottom: 2px;
-  }
-
-  .credit-writer,
-  .credit-artist,
-  .credit-editor,
-  .credit-cover {
-    font-size: 14px;
-  }
-}
-
-.issue-description {
-  font-size: 14px;
-  line-height: 1.4;
-  margin-right: 20px;
-}
-
 /* Logos */
 
 *[class*="logo-"] {

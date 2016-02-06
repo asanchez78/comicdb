@@ -29,6 +29,13 @@
         margin-right: 3px;
       }
     }
+
+    .btn-link {
+      text-transform: none;
+      > .fa {
+        margin-right: 4px;
+      }
+    }
   }
   .navbar .nolist {
     margin-bottom: 5px;

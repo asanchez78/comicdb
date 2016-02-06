@@ -79,6 +79,7 @@ ul.nolist {
   &.notify-hide {
     height: 0;
     overflow: hidden;
+    top: -5px;
   }
 }
 
