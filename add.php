@@ -85,7 +85,7 @@
               </div>
               <div class="text-center center-block button-block">
                 <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-save"></i> Save</button>
+                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-paper-plane"></i> Save</span></button>
               </div>
             </div>
             <div class="col-md-4 sidebar">
@@ -211,7 +211,7 @@
                 <input name="issue_number" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" size="3" maxlength="4" value="" required aria-required="true" />
               </div>
               <input type="hidden" name="submitted" value="yes" />
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
             </form>
           </div>
         <?php } ?>
@@ -272,7 +272,7 @@
               </div>
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
           </form>
         </div>
         <?php } else { ?>
@@ -334,7 +334,7 @@
               </fieldset>
             </div>
             <input type="hidden" name="submitted" value="yes" />
-            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+            <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
           </form>
           <?php } else { ?>
             <div class="add-success col-xs-12 bg-success">
@@ -377,7 +377,7 @@
               <input type="hidden" name="submitted" value="yes" />
               <div class="text-center center-block button-block">
                 <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-paper-plane"></i> Submit</button>
+                <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
               </div>
             </form>
           </div>
@@ -426,7 +426,7 @@
             </div>
             <input type="hidden" name="submitted" value="yes" />
             <div class="form-group">
-              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-search"></i> Search</span></button>
             </div>
           </form>
         </div>

@@ -81,6 +81,21 @@ label {
 .form-submit {
   transition: background-color 0.1s ease-in-out;
   vertical-align: top;
+
+  span.icon-loading {
+    display: none;
+    width: 92px;
+  }
+
+  &.loading {
+    background-color: $brand-orange;
+    span.icon-loading {
+      display: block;
+    }
+    span.text-submit {
+      display: none;
+    }
+  }
 }
 
 .issue-search-result {

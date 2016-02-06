@@ -4234,6 +4234,19 @@ label {
           transition: background-color 0.1s ease-in-out;
   vertical-align: top;
 }
+.form-submit span.icon-loading {
+  display: none;
+  width: 92px;
+}
+.form-submit.loading {
+  background-color: #ffaa00;
+}
+.form-submit.loading span.icon-loading {
+  display: block;
+}
+.form-submit.loading span.text-submit {
+  display: none;
+}
 
 .issue-search-result {
   margin-bottom: 10px;
