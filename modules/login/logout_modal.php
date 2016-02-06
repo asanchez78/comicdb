@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <form method="post" action="" name="logoutform" class="form-horizontal">
-        <header class="modal-header">
+        <header class="modal-header text-center">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="logoutFormModalLabel">Are you sure you want to sign out?</h4>
         </header>

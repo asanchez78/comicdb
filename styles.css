@@ -4535,9 +4535,6 @@ label {
   color: red;
 }
 
-.form-radio label:first-of-type {
-  margin-bottom: 15px;
-}
 .form-radio input[type="radio"] {
   padding: 0;
   display: none;
@@ -4570,6 +4567,10 @@ label {
   background-color: silver;
   border: 4px solid silver;
   border-radius: 25px;
+}
+
+.form-purchase label:first-of-type {
+  margin-bottom: 15px;
 }
 
 .btn {
@@ -4974,8 +4975,30 @@ label {
   padding-right: 0;
 }
 
+[data-module="login_modal"] .modal-content,
+[data-module="logout_modal"] .modal-content {
+  color: white;
+  background-color: #c9302c;
+  opacity: 0.95;
+}
+[data-module="login_modal"] .modal-header,
+[data-module="logout_modal"] .modal-header {
+  border-bottom: none;
+}
+
+[data-module="login_modal"] .modal-header {
+  padding: 15px 20px 0;
+}
 [data-module="login_modal"] .modal-body {
-  padding: 15px 35px;
+  padding: 0 35px;
+}
+[data-module="login_modal"] .modal-logo {
+  width: 50%;
+}
+[data-module="login_modal"] .modal-footer {
+  padding-top: 0;
+  border-top: none;
+  text-align: center;
 }
 
 /* Grid display styles */

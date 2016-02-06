@@ -32,10 +32,6 @@ label {
 }
 
 .form-radio {
-  label:first-of-type {
-    margin-bottom: 15px;
-  }
-
   input[type="radio"] {
     padding: 0;
     display: none;
@@ -71,6 +67,11 @@ label {
       border: 4px solid silver;
       border-radius: 25px;
     }
+  }
+}
+.form-purchase {
+  label:first-of-type {
+    margin-bottom: 15px;
   }
 }
 

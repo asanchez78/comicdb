@@ -56,7 +56,7 @@
                 <label for="released_date">Cover Date:</label>
                 <input class="form-control" name="released_date" size="10" maxlength="10" value="<?php echo $release_date; ?>" type="date" placeholder="YYYY-MM-DD" />
               </div>
-              <div class="form-group form-radio">
+              <div class="form-group form-radio form-purchase">
                 <label for="singleOriginalPurchase">Purchased When Released:</label>
                 <fieldset>
                   <input name="singleOriginalPurchase" id="single-original-yes" value="1" type="radio" /> <label for="single-original-yes">Yes</label>
@@ -261,7 +261,7 @@
             <div class="row">
               <div class="col-md-12 col-xs-12">
                 <div class="form-inline">
-                  <div class="form-group form-radio">
+                  <div class="form-group form-radio form-purchase">
                     <label for="rangeOriginalPurchase">Purchased When Released</label>
                     <fieldset>
                       <input name="rangeOriginalPurchase" id="range-original-yes" value="1" type="radio" /> <label for="range-original-yes">Yes</label>
@@ -326,7 +326,7 @@
               <label for="issueList">Comma separated list of issues</label>
               <input type="text" class="form-control" name="issueList" placeholder="5,29,156" autocomplete="off" />
             </div>
-            <div class="form-group form-radio">
+            <div class="form-group form-radio form-purchase">
               <label for="listOriginalPurchase">Purchased When Released</label>
               <fieldset>
                 <input name="listOriginalPurchase" id="list-original-yes" value="1" type="radio" /> <label for="list-original-yes">Yes</label>
