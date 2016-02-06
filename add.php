@@ -348,7 +348,7 @@
                 </div>
                 <div class="text-center center-block">
                   <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
-                  <a href="/add.php#addrange" class="btn btn-lg btn-info">Add More</a>
+                  <a href="/add.php#addlist" class="btn btn-lg btn-info">Add More</a>
                 </div>
               </div>
             </div>
