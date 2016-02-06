@@ -1,8 +1,8 @@
 <?php
 	require_once('views/head.php');
 	require_once('config/db.php');
-	if (isset($_SESSION ['user_name'])) {
-		$user = $_SESSION ['user_name'];
+	if (isset($_COOKIE ['user_name'])) {
+		$user = $_COOKIE ['user_name'];
 		$validUser=1;
 	} 
 	$publisherSearchId = filter_input ( INPUT_GET, 'pid' );
