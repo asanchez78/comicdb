@@ -4163,13 +4163,16 @@ footer.main-footer {
   font-size: 20px;
   outline: none;
   padding: 0 10px;
-  line-height: 48px;
   height: 48px;
 }
 .form-control:focus {
   border-color: gray;
   outline: none;
   color: initial;
+}
+
+input[type="number"].form-control {
+  width: 80px;
 }
 
 .form-inline .form-group {
@@ -5000,6 +5003,10 @@ ul#inventory-table .series-extra {
   background-color: #ffaa00;
   color: white;
   border: 1px solid transparent;
+}
+
+#addList input[type="number"].form-control {
+  width: 100%;
 }
 
 .about-header-image {
