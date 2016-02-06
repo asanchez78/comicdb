@@ -48,7 +48,7 @@ class wikiQuery {
 	 * @return string             list of results
 	 */
 	public function seriesSearch ($seriesName) {
-		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . $_COOKIE["apiKey"];
+		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . $apiKey;
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->resultNum = 1;
@@ -86,7 +86,7 @@ class wikiQuery {
 	 * @return string               gets series name, volume ID, series start year, and details URLs
 	 */
 	public function seriesLookup ($apiDetailURL) {
-		$apiURL = $apiDetailURL . "?format=json&api_key=" . $_COOKIE["apiKey"];
+		$apiURL = $apiDetailURL . "?format=json&api_key=" . $apiKey;
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->seriesName = $results['results']['name'];

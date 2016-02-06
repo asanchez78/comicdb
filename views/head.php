@@ -8,6 +8,7 @@
   if ($login->isUserLoggedIn () == true) {
     $user = $_COOKIE ['user_name'];
     $userID = $_COOKIE ['user_id'];
+    $apiKey = $_COOKIE ['api_key'];
   }
 
   // User browsing
