@@ -47,7 +47,7 @@ class wikiQuery {
 	 * @return string             list of results
 	 */
 	public function seriesSearch ($seriesName) {
-		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . $_COOKIE['apiKey'];
+		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->resultNum = 1;
@@ -85,7 +85,7 @@ class wikiQuery {
 	 * @return string               gets series name, volume ID, series start year, and details URLs
 	 */
 	public function seriesLookup ($apiDetailURL) {
-		$apiURL = $apiDetailURL . "?format=json&api_key=" . $_COOKIE['apiKey'];
+		$apiURL = $apiDetailURL . "?format=json&api_key=" . __apiKey__;
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->seriesName = $results['results']['name'];
@@ -108,7 +108,7 @@ class wikiQuery {
 		// Checks if the results returned anything
 		if ($results['number_of_page_results'] > 0) {
 			$this->searchResults = true;
-			$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=" . $_COOKIE["apiKey"];
+			$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=" . __apiKey__;
 			$jsondata = file_get_contents($apiDetailURL);
 			$detailResults = json_decode($jsondata, true);
 			$this->storyName = $detailResults['results']['name'];

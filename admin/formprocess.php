@@ -79,7 +79,7 @@
       // ADD SINGLE ISSUE: Part two of the single issue process. Checks the database for existing comics, and then adds all to the user's database. 
       case 'issue-submit':
         $issueSubmit = true;
-        $ownerID = $_COOKIE['user_id'];
+        $ownerID = __userID__;
         $series_name = filter_input ( INPUT_POST, 'series_name' );
         $series_vol = filter_input(INPUT_POST, 'series_vol');
         $series_id = filter_input ( INPUT_POST, 'series_id' );
@@ -153,7 +153,7 @@
         break;
       // ADD RANGE: Submit all issues in input range using the first ComicVine API entry as the result.
       case 'range':
-        $ownerID = $_COOKIE['user_id'];
+        $ownerID = __userID__;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $first_issue = filter_input ( INPUT_POST, 'first_issue' );
         $last_issue = filter_input ( INPUT_POST, 'last_issue' );
@@ -226,7 +226,7 @@
         }
         break;
       case 'csv':
-        $ownerID = $_COOKIE['user_id'];
+        $ownerID = __userID__;
         $series_id = filter_input ( INPUT_POST, 'series_id' );
         $filtered_issue_list = filter_input ( INPUT_POST, 'issueList' );
         $issue_list =  explode ( ",", strtr($filtered_issue_list, array(' ' => '')));
@@ -294,7 +294,7 @@
         }
         break;
       case 'edit':
-        $ownerID = $_COOKIE['user_id'];
+        $ownerID = __userID__;
         $updatedSet = '';
         $comic_id = filter_input(INPUT_GET, 'comic_id');
         $comic = new comicSearch();
@@ -493,7 +493,7 @@
         break;
       case 'edit-save':
         $issueEdit = true;
-        $ownerID = $_COOKIE['user_id'];
+        $ownerID = __userID__;
         $comic_id = filter_input ( INPUT_POST, 'comic_id' );
         $released_date = filter_input ( INPUT_POST, 'released_date' );
         $story_name = addslashes ( filter_input ( INPUT_POST, 'story_name' ) );
