@@ -1,5 +1,10 @@
 <?php
   define('__ROOT__', dirname(dirname(__FILE__)));
+  if (isset($_COOKIE['apiKey']) && isset($_COOKIE['user_id']) && isset($_COOKIE['user_name'])) {
+    define('__apiKey__', $_COOKIE['apiKey']);
+    define('__userID__', $_COOKIE['user_id']);
+    define('__userName__', $_COOKIE['user_name']);
+  }
   require_once(__ROOT__.'/classes/functions.php');
   require_once(__ROOT__.'/config/db.php');
   require_once(__ROOT__.'/classes/Login.php');
