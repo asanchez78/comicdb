@@ -4768,7 +4768,7 @@ label {
 }
 *[class*="logo-"].sm-logo:before {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
   margin-right: 5px;
   width: 13px;
   height: 18px;
@@ -5107,14 +5107,16 @@ label {
 .series-meta {
   font-size: 11px;
   font-weight: bold;
-  border-top: 1px solid #e7e7e7;
+  border-top: 2px solid #e7e7e7;
   padding-top: 5px;
+  margin-top: 5px;
 }
 @media (min-width: 641px) {
   .series-meta {
     border-top: none;
     text-align: right;
     float: right;
+    margin-top: 0;
   }
 }
 .series-meta li {
@@ -5124,7 +5126,7 @@ label {
 }
 @media (min-width: 900px) {
   .series-meta li {
-    padding-top: 5px;
+    line-height: 25px;
   }
 }
 .series-meta li > span {
@@ -5134,6 +5136,15 @@ label {
 @media (min-width: 900px) {
   .series-meta li > span {
     display: inline;
+  }
+}
+.series-meta li.issue-publisher {
+  text-align: left;
+  line-height: 25px;
+}
+@media (min-width: 900px) {
+  .series-meta li.issue-publisher {
+    text-align: center;
   }
 }
 .series-meta .sort-control-container {
@@ -5170,6 +5181,9 @@ ul#inventory-table .series-count {
 ul#inventory-table .series-publisher {
   display: none;
 }
+ul#inventory-table .story-name {
+  display: none;
+}
 ul#inventory-table .issue-meta {
   display: inline-block;
   font-weight: bold;
@@ -5204,6 +5218,15 @@ ul#inventory-table .series-extra {
 #inventory-table.layout-thumb-sm .series-title {
   text-align: center;
   width: 100%;
+}
+#inventory-table.layout-thumb-lg .issue-number,
+#inventory-table.layout-thumb-lg .release-date,
+#inventory-table.layout-thumb-sm .issue-number,
+#inventory-table.layout-thumb-sm .release-date {
+  display: inline-block;
+  font-size: 12px;
+  width: 50%;
+  font-weight: bold;
 }
 
 #inventory-table.layout-thumb-lg h3 {
@@ -5402,6 +5425,23 @@ ul#inventory-table .series-extra {
 }
 
 /* List View */
+#inventory-table.layout-list {
+  /* Setting font sizes */
+}
+#inventory-table.layout-list .volume-number,
+#inventory-table.layout-list .issue-number,
+#inventory-table.layout-list .story-name,
+#inventory-table.layout-list .release-date {
+  font-size: 11px;
+}
+@media (min-width: 900px) {
+  #inventory-table.layout-list .volume-number,
+  #inventory-table.layout-list .issue-number,
+  #inventory-table.layout-list .story-name,
+  #inventory-table.layout-list .release-date {
+    font-size: 13px;
+  }
+}
 #inventory-table.layout-list li:nth-child(even) {
   background-color: #FFE4E1;
 }
@@ -5454,16 +5494,45 @@ ul#inventory-table .series-extra {
   }
 }
 
+#inventory-table.layout-list .issue-info {
+  position: relative;
+  float: left;
+  width: 58.33333%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 900px) {
+  #inventory-table.layout-list .issue-info {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width: 900px) and (min-width: 641px) {
+  #inventory-table.layout-list .issue-info {
+    float: left;
+    width: 66.66667%;
+  }
+}
+
 #inventory-table.layout-list .series-title,
 #inventory-table.layout-list .volume-number,
-#inventory-table.layout-list .series-extra {
-  padding-top: 8px;
+#inventory-table.layout-list .series-extra,
+#inventory-table.layout-list .story-name,
+#inventory-table.layout-list .issue-number,
+#inventory-table.layout-list .release-date {
+  padding-top: 12px;
 }
 @media (min-width: 900px) {
   #inventory-table.layout-list .series-title,
   #inventory-table.layout-list .volume-number,
-  #inventory-table.layout-list .series-extra {
-    padding-top: 6px;
+  #inventory-table.layout-list .series-extra,
+  #inventory-table.layout-list .story-name,
+  #inventory-table.layout-list .issue-number,
+  #inventory-table.layout-list .release-date {
+    padding-top: 16px;
   }
 }
 #inventory-table.layout-list .comic-image {
@@ -5512,6 +5581,9 @@ ul#inventory-table .series-extra {
   }
 }
 
+#inventory-table.layout-list .story-name {
+  display: block;
+}
 #inventory-table.layout-list h3 {
   font-size: 12px;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -5522,10 +5594,9 @@ ul#inventory-table .series-extra {
     font-size: 16px;
   }
 }
-#inventory-table.layout-list .volume-number {
-  display: inline-block;
+#inventory-table.layout-list .volume-number,
+#inventory-table.layout-list .issue-number {
   text-align: center;
-  font-size: 11px;
   position: relative;
   float: left;
   width: 16.66667%;
@@ -5533,6 +5604,21 @@ ul#inventory-table .series-extra {
   padding-left: 15px;
   padding-right: 15px;
 }
+@media (min-width: 900px) {
+  #inventory-table.layout-list .issue-number {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width: 900px) and (min-width: 641px) {
+  #inventory-table.layout-list .issue-number {
+    float: left;
+    width: 16.66667%;
+  }
+}
+
 #inventory-table.layout-list .series-extra {
   display: inline-block;
   text-align: right;
@@ -5596,6 +5682,7 @@ ul#inventory-table .series-extra {
 
 #inventory-table.layout-list .series-count {
   text-align: right;
+  font-weight: normal;
   position: relative;
   float: left;
   width: 100%;
@@ -5615,6 +5702,29 @@ ul#inventory-table .series-extra {
   #inventory-table.layout-list .series-count {
     float: left;
     width: 41.66667%;
+  }
+}
+
+#inventory-table.layout-list .release-date {
+  position: relative;
+  float: left;
+  width: 25%;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 900px) {
+  #inventory-table.layout-list .release-date {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width: 900px) and (min-width: 900px) {
+  #inventory-table.layout-list .release-date {
+    float: left;
+    width: 16.66667%;
   }
 }
 

@@ -27,14 +27,16 @@
 <?php include 'views/header.php';?>
   <div class="issues-list">
     <header class="row headline">
-      <div class="col-xs-12 col-lg-7">
+      <div class="col-xs-12 col-md-8 col-lg-7">
         <h2><?php echo $series_name; ?> (<?php echo $series_vol; ?>)</h2>
       </div>
-      <div class="col-xs-12 col-lg-5 series-meta">
-        <ul class="nolist">
-          <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
-          <li><?php echo $comic->series_issue_count; ?></li>
-          <li>
+      <div class="col-xs-12 col-md-4 col-lg-5 series-meta">
+        <ul class="nolist row">
+          <li class="col-xs-4 hidden-md col-lg-4 issue-publisher">
+            <?php if ($publisherName) { echo '<a href="/publisher.php?pid=' . $publisherID . '" class="logo-' . $publisherShort .' sm-logo ">' . $publisherName . '</a>'; } ?>
+          </li>
+          <li class="col-xs-3 col-md-5 col-lg-3 issue-count"><?php echo $comic->series_issue_count; ?></li>
+          <li class="col-xs-5 col-md-7 col-lg-5 sort-control-container">
             <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
             <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
             <button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>

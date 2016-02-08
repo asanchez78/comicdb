@@ -2,22 +2,24 @@
 .series-meta {
   font-size: 11px;
   font-weight: bold;
-  border-top: 1px solid $border-color;
+  border-top: 2px solid $border-color;
   padding-top: 5px;
+  margin-top: 5px;
 
   @media (min-width: $screen-md) {
     border-top: none;
     text-align: right;
     float: right;
+    margin-top: 0;
   }
 
   li {
     height: 100%;
     text-align: center;
     line-height: 1.2;
-
+    
     @media (min-width: $screen-lg) {
-      padding-top: 5px;
+      line-height: 25px;
     }
     
     > span {
@@ -25,6 +27,14 @@
       font-size: 12px;
       @media (min-width: $screen-lg) {
         display: inline;
+      }
+    }
+
+    &.issue-publisher {
+      text-align: left;
+      line-height: 25px;
+      @media (min-width: $screen-lg) {
+        text-align: center;
       }
     }
   }
@@ -70,6 +80,10 @@ ul#inventory-table {
   .series-publisher {
     display: none;
   }
+  
+  .story-name {
+    display: none;
+  }
 
   .issue-meta {
     display: inline-block;
@@ -108,6 +122,18 @@ ul#inventory-table {
   .series-title {
     text-align: center;
     width: 100%;
+  }
+
+  .issue-number,
+  .release-date {
+    display: inline-block;
+    font-size: 12px;
+    width: 50%;
+    font-weight: bold;
+  }
+
+  .issue-number {
+
   }
 }
 
@@ -316,6 +342,18 @@ ul#inventory-table {
 
 /* List View */
 #inventory-table.layout-list {
+  /* Setting font sizes */
+  .volume-number,
+  .issue-number,
+  .story-name,
+  .release-date {
+    font-size: 11px;
+
+    @media (min-width: $screen-lg) {
+      font-size: 13px;
+    }
+  }
+
   li:nth-child(even) {
     background-color: #FFE4E1;
   }
@@ -335,14 +373,25 @@ ul#inventory-table {
       @include make-md-column(6);
     }
   }
+
+  .issue-info {
+    @include make-xs-column(7);
+
+    @media (min-width: $screen-lg) {
+      @include make-md-column(8);
+    }
+  }
   
   .series-title,
   .volume-number,
-  .series-extra {
-    padding-top: 8px;
+  .series-extra,
+  .story-name,
+  .issue-number,
+  .release-date {
+    padding-top: 12px;
 
     @media (min-width: $screen-lg) {
-      padding-top: 6px;
+      padding-top: 16px;
     }
   }
 
@@ -362,6 +411,10 @@ ul#inventory-table {
     }
   }
 
+  .story-name {
+    display: block;
+  }
+  
   h3 {
     font-size: 12px;
     font-family: $font-family-sans-serif;
@@ -372,11 +425,16 @@ ul#inventory-table {
     }
   }
 
-  .volume-number {
-    display: inline-block;
+  .volume-number,
+  .issue-number {
     text-align: center;
-    font-size: 11px;
     @include make-xs-column(2);
+  }
+
+  .issue-number {
+    @media (min-width: $screen-lg) {
+      @include make-md-column(2);
+    }
   }
 
   .series-extra {
@@ -406,10 +464,19 @@ ul#inventory-table {
 
   .series-count {
     text-align: right;
+    font-weight: normal;
     @include make-xs-column(12);
 
     @media(min-width: $screen-lg) {
       @include make-lg-column(5);
+    }
+  }
+
+  .release-date {
+    @include make-xs-column(3);
+
+    @media(min-width: $screen-lg) {
+      @include make-lg-column(2);
     }
   }
 }
