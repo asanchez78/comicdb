@@ -101,7 +101,7 @@ class wikiQuery {
 	 * @param  int $issue_number issue number of the comic
 	 * @return string               issue's story name, plot, etc.
 	 */
-	public function issueSearch ($cvVolumeID, $issue_number) {
+	public function issueSearch ($cvVolumeID, $issue_number, $series_vol) {
 		$apiURL = "http://www.comicvine.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
@@ -175,10 +175,11 @@ class wikiQuery {
 				$replacement = "";
 				$this->coverURL = preg_replace($pattern, $replacement, $subject);
 				$fileparts = explode("/", $this->coverURL);
-				$this->coverFile = 'images/' . $fileparts[7];
-				$this->coverFile = str_replace("%28", "", $this->coverFile);
-				$this->coverFile = str_replace("%29", "", $this->coverFile);
-				$this->coverFile = str_replace("%3F", "", $this->coverFile);
+				//$this->coverFile = 'images/' . $fileparts[7];
+				//$this->coverFile = str_replace("%28", "", $this->coverFile);
+				//$this->coverFile = str_replace("%29", "", $this->coverFile);
+				//$this->coverFile = str_replace("%3F", "", $this->coverFile);
+				$this->coverFile = 'images/' . str_replace(" ", "_", $this->seriesName) . '_' . $issue_number . '_v' . $series_vol . '-medium.jpg';
 			} else {
 				$this->coverFile = 'assets/nocover.jpg';
 				$this->coverURL = 'assets/nocover.jpg';
