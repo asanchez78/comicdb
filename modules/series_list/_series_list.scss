@@ -1,3 +1,57 @@
+/* Series Meta */
+.series-meta {
+  font-size: 11px;
+  font-weight: bold;
+  border-top: 2px solid $border-color;
+  padding-top: 5px;
+  margin-top: 5px;
+
+  @media (min-width: $screen-md) {
+    border-top: none;
+    text-align: right;
+    float: right;
+    margin-top: 0;
+  }
+
+  li {
+    height: 100%;
+    text-align: center;
+    line-height: 1.2;
+    
+    @media (min-width: $screen-lg) {
+      line-height: 25px;
+    }
+    
+    > span {
+      display: block;
+      font-size: 12px;
+      @media (min-width: $screen-lg) {
+        display: inline;
+      }
+    }
+
+    &.issue-publisher {
+      text-align: left;
+      line-height: 25px;
+      @media (min-width: $screen-lg) {
+        text-align: center;
+      }
+    }
+  }
+  
+  .sort-control-container {
+    text-align: right;
+    padding-top: 0;
+  }
+  .sort-control {
+    margin-right: 3px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
 /* Grid display styles */
 ul#inventory-table {
   @extend .row;
@@ -24,6 +78,10 @@ ul#inventory-table {
   }
 
   .series-publisher {
+    display: none;
+  }
+  
+  .story-name {
     display: none;
   }
 
@@ -64,6 +122,18 @@ ul#inventory-table {
   .series-title {
     text-align: center;
     width: 100%;
+  }
+
+  .issue-number,
+  .release-date {
+    display: inline-block;
+    font-size: 12px;
+    width: 50%;
+    font-weight: bold;
+  }
+
+  .issue-number {
+
   }
 }
 
@@ -106,7 +176,7 @@ ul#inventory-table {
       }
     }
 
-    > a:first-of-type {
+    .series-info {
       transition: box-shadow 0.2s ease-in-out;
       box-shadow: 0px 0px 15px 1px transparent;
       color: white;
@@ -189,6 +259,7 @@ ul#inventory-table {
   }
 }
 
+// Small Thumbnail View
 #inventory-table.layout-thumb-sm {
   padding: 0 10px;
   
@@ -201,7 +272,7 @@ ul#inventory-table {
     padding-left: 5px;
     padding-right: 5px;
 
-    &:nth-child(3n+4) {
+    &:nth-child(4n+5) {
       clear: both;
       @media (min-width: $screen-sm) {
         clear: none;
@@ -269,126 +340,144 @@ ul#inventory-table {
   }
 }
 
+/* List View */
 #inventory-table.layout-list {
+  /* Setting font sizes */
+  .volume-number,
+  .issue-number,
+  .story-name,
+  .release-date {
+    font-size: 11px;
+
+    @media (min-width: $screen-lg) {
+      font-size: 13px;
+    }
+  }
+
   li:nth-child(even) {
     background-color: #FFE4E1;
   }
+  
+  .series-list-row {
+    @include make_row();
+  }
 
-  .comic-image {
-    height: 45px;
-    width: 8%;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 20px;
-    
-    @media (min-width: $screen-sm) {
-      width: 7%;
-    }
-    
+  .series-info {
+    @include make-xs-column(7);
+
     @media (min-width: $screen-md) {
-      width: 4%;
+      @include make-md-column(8);
     }
 
     @media (min-width: $screen-lg) {
-      width: 3%;
+      @include make-md-column(6);
+    }
+  }
+
+  .issue-info {
+    @include make-xs-column(7);
+
+    @media (min-width: $screen-lg) {
+      @include make-md-column(8);
+    }
+  }
+  
+  .series-title,
+  .volume-number,
+  .series-extra,
+  .story-name,
+  .issue-number,
+  .release-date {
+    padding-top: 12px;
+
+    @media (min-width: $screen-lg) {
+      padding-top: 16px;
+    }
+  }
+
+  .comic-image {
+    @include make-xs-column(4);
+
+    @media (min-width: $screen-md) {
+      @include make-md-column(2);
     }
   }
 
   .series-title {
-    display: inline-block;
-    width: 55%;
+    @include make-xs-column(8);
 
     @media (min-width: $screen-md) {
-      width: 45%;
-    }
-
-    @media (min-width: $screen-lg) {
-      width: 35%;
+      @include make-md-column(10);
     }
   }
 
+  .story-name {
+    display: block;
+  }
+  
   h3 {
-    font-size: 14px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50%;
+    font-size: 12px;
+    font-family: $font-family-sans-serif;
+    letter-spacing: 0;
 
     @media (min-width: $screen-md) {
       font-size: 16px;
-      width: auto;
-      position: static;
-      top: auto;
-      transform: none;
     }
   }
 
-  .volume-number {
-    display: inline-block;
-    width: 8%;
+  .volume-number,
+  .issue-number {
     text-align: center;
-    font-size: 11px;
-    
-    @media (min-width: $screen-sm) {
-      width: 7%;
-    }
+    @include make-xs-column(2);
+  }
 
-    @media (min-width: $screen-md) {
-      width: 13%;
-    }
-
+  .issue-number {
     @media (min-width: $screen-lg) {
-      width: 7%;
+      @include make-md-column(2);
     }
   }
 
   .series-extra {
     display: inline-block;
-    width: 17%;
     text-align: right;
+    @include make-xs-column(3);
 
-    @media (min-width: $screen-sm) {
-      width: 20%;
-    } 
-    
     @media (min-width: $screen-md) {
-      width: 31%;
       text-align: left;
+      @include make-md-column(2);
     }    
     
     @media (min-width: $screen-lg) {
-      width: 50%;
-    }
-
-    > * {
-      display: inline-block;
-      vertical-align: middle;
+      @include make-lg-column(4);
     }
   }
 
   .series-publisher {
     font-size: 12px;
     text-align: center;
-    
-    @media (min-width: $screen-lg) {
-      width: 45%;
+
+    @media(min-width: $screen-lg) {
+      display: block;
+      @include make-lg-column(7);
     }
   }
-  
+
   .series-count {
-    text-align: center;
+    text-align: right;
+    font-weight: normal;
+    @include make-xs-column(12);
 
-    @media (min-width: $screen-md) {
-      width: 47%;
-    }
-
-    @media (min-width: $screen-lg) {
-      width: 40%;
+    @media(min-width: $screen-lg) {
+      @include make-lg-column(5);
     }
   }
 
-  .issue-meta {
-    width: 40%;
+  .release-date {
+    @include make-xs-column(3);
+
+    @media(min-width: $screen-lg) {
+      @include make-lg-column(2);
+    }
   }
 }
 

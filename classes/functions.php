@@ -198,6 +198,7 @@ class comicSearch {
       while ( $row = $result->fetch_assoc () ) {
         $this->comic_id = $row ['comic_id'];
         $this->issue_number = $row ['issue_number'];
+        $this->story_name = $row ['story_name'];
         $this->publisherShort = $row ['publisherShort'];
         $this->publisherName = $row ['publisherName'];
         if ($row['release_date']) {
@@ -206,11 +207,14 @@ class comicSearch {
           $this->release_date = "";
         }
         $this->cover_image = $row ['cover_image'];
-        $this->issue_list .= '<li class="col-xs-6 col-sm-4 col-md-3 col-lg-2" id="issue-' . $this->issue_number . '">';
-        $this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="series-info"><div class="comic-image"><img src="' . $this->cover_image . '" alt="" class="img-responsive" /></div></a>';
-        $this->issue_list .= '<div class="issue-meta issue-number text-uppercase">#' . $this->issue_number . '</div>';
-        $this->issue_list .= '<div class="issue-meta release-date text-uppercase">' . $this->release_date . '</div>';
-        $this->issue_list .= '</li>';
+        $this->issue_list .= '<li class="col-xs-6 col-sm-4 col-md-3 col-lg-2" id="issue-' . $this->issue_number . '"><div class="series-list-row">';
+        $this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="issue-info"><div class="series-list-row">';
+          $this->issue_list .= '<div class="comic-image"><img src="' . $this->cover_image . '" alt="" class="img-responsive" /></div>';
+          $this->issue_list .= '<div class="story-name"><h3>' . $this->story_name . '</h3></div>';
+        $this->issue_list .= '</div></a>';
+        $this->issue_list .= '<div class="issue-number text-uppercase">#' . $this->issue_number . '</div>';
+        $this->issue_list .= '<div class="release-date text-uppercase">' . $this->release_date . '</div>';
+        $this->issue_list .= '</div></li>';
       }
     }
   }
@@ -327,9 +331,9 @@ class comicSearch {
       // Issue count
       $this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
       if ($this->series_issue_count == 1) {
-        $this->series_issue_count = $this->series_issue_count . ' Issue';
+        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issue';
       } else {
-        $this->series_issue_count = $this->series_issue_count . ' Issues';
+        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issues';
       }
 
       // Custom Plot, Story Name, and Variant cover

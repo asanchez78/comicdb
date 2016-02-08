@@ -32,11 +32,13 @@ $divider-color: #e7e7e7;
 $imageUrl: 'images';
 
 $screen-xs: 320px;
-$screen-sm: 480px;
+$screen-sm: 410px;
 $screen-md: 641px;
-$screen-lg: 901px;
+$screen-lg: 900px;
 
 $container-xs: 300px;
 $container-sm: 460px;
 $container-md: 748px;
 $container-lg: 1000px;
+
+$grid-float-breakpoint: $screen-md

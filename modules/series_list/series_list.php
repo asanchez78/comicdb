@@ -27,7 +27,7 @@ if (isset($userSetID) && $validUser == 1) {
 <section data-module="series_list">
 <?php if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
   <header class="row headline">
-    <div class="col-xs-12 col-lg-6">
+    <div class="col-xs-12 col-md-5 col-lg-6">
       <h2>
         <?php if (isset($userSetName) && $validUser == 1) {
           echo $userSetName . '&rsquo;s collection';
@@ -38,11 +38,11 @@ if (isset($userSetID) && $validUser == 1) {
         } ?>
       </h2>
     </div>
-    <div class="col-xs-12 col-lg-6 series-meta">
-      <ul class="nolist">
-        <li><?php echo $totalIssues; ?> Total Issues</li>
-        <li>XXX Total Series</li>
-        <li>
+    <div class="col-xs-12 col-md-7 col-lg-6 series-meta">
+      <ul class="nolist row">
+        <li class="col-xs-4 col-md-4 col-lg-4"><span class="text-danger"><?php echo $totalIssues; ?></span> Total Issues</li>
+        <li class="col-xs-3 col-md-3 col-lg-4"><span class="text-danger">XXX</span> Total Series</li>
+        <li class="col-xs-5 col-md-5 col-lg-4 sort-control-container">
           <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
           <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
           <button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
@@ -70,21 +70,27 @@ if (isset($userSetID) && $validUser == 1) {
     ?>
 
     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-      <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
-        <div class="comic-image">
-          <img src="/<?php echo $series_cover; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
+      <div class="series-list-row">
+        <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
+          <div class="series-list-row">
+            <div class="comic-image">
+              <img src="/<?php echo $series_cover; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
+            </div>
+            <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
+          </div>
+        </a>
+        <div class="volume-number">
+          <span><?php echo $series_vol; ?></span>
         </div>
-        <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
-      </a>
-      <div class="volume-number">
-        <span><?php echo $series_vol; ?></span>
-      </div>
-      <div class="series-extra">
-        <div class="series-publisher hidden-xs hidden-sm hidden-md">
-          <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</div>'; } ?>
-        </div>
-        <div class="text-uppercase text-center">
-          <?php echo $series_issue_count; ?>
+        <div class="series-extra">
+          <div class="series-list-row">
+            <div class="series-publisher hidden-xs hidden-sm hidden-md">
+              <?php if ($publisherName) { echo '<div class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</div>'; } ?>
+            </div>
+            <div class="series-count text-uppercase text-center">
+              <?php echo $series_issue_count; ?>
+            </div>
+          </div>
         </div>
       </div>
     </li>
