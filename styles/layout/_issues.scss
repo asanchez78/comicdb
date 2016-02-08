@@ -1,28 +1,4 @@
 /* Issues List */
-.series-meta {
-  font-size: 12px;
-  font-weight: bold;
-
-  @media (min-width: $screen-lg) {
-    text-align: right;
-
-  }
-
-  ul > li {
-    display: inline-block;
-    vertical-align: bottom;
-    margin: 0 10px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-    
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-}
-
 .list-row, .list-heading {
   display: block;
   margin: 5px 0;

@@ -40,7 +40,7 @@ jQuery(document).ready(function($) {
     
     // Layouts
     layoutThumbLg = 'col-xs-6 col-sm-4 col-md-3 col-lg-2';
-    layoutThumbSm = 'col-xs-4 col-sm-3 col-md-2 col-lg-1';
+    layoutThumbSm = 'col-xs-3 col-sm-3 col-md-2 col-lg-1';
     layoutList = 'col-xs-12';
 
     // Clears the active state from all buttons

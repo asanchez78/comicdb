@@ -40,6 +40,11 @@ ul.nolist {
   list-style-type: none;
   margin: 0;
   padding: 0;
+
+  &.row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
 }
 
 .button {
@@ -106,9 +111,12 @@ ul.nolist {
 }
 
 main {
-  padding-top: 25px;
   padding-bottom: 15px;
   margin-bottom: 40px;
+
+  @media (min-width: $screen-md) {
+    padding-top: 25px;
+  }
 }
 
 .dev-messages {
@@ -124,6 +132,7 @@ main {
 .headline {
   position: relative;
   border-bottom: 2px solid $divider-color;
+  padding-bottom: 5px;
 
   h2 {
     margin: 0;
