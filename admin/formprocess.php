@@ -29,6 +29,10 @@
           $messageNum = 3;
           $seriesSubmitted = true;
           $sqlMessage = '<strong class="text-success">Success</strong>: <code>' . $sql . '</code>';
+          $seriesDir = __ROOT__.'/images/' . preg_replace('/[^a-z0-9]+/i', '_', $series_name) . '-v' . $series_vol;
+          if (!file_exists($seriesDir)) {
+            mkdir($seriesDir, 0777, true);
+          }
         } else {
           $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br /><code>' . mysqli_error ( $connection ) . $connection->errno . '</code>';
           $seriesSubmitted = false;
