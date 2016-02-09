@@ -252,3 +252,21 @@ footer.main-footer {
   padding-top: 7px;
   font-size: 12px;
 }
+
+.modal-content {
+  color: white;
+  background-color: #c9302c;
+  opacity: 0.95; 
+}
+
+.modal-logo {
+  width: 50%;
+}
+
+.modal-body {
+  h5 {
+    font-family: $font-family-sans-serif;
+    font-weight: bold;
+    color: yellow;
+  }
+}

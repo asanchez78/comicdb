@@ -74,16 +74,18 @@
         <img src="<?php echo $comic->cover_image; ?>" alt="cover" class="img-responsive" />
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 issue-content">
+      <?php if ($login->isUserLoggedIn () == true) { ?>
+      <div class="manage-comic-container">
+        <div class="text-center">
+          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-sm btn-warning" title="Edit the details of this issue"><i class="fa fa-fw fa-pencil-square-o"></i> <span class="sr-only">Update Comic</span></a>
+          <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-danger" title="Delete this issue from your collection"><i class="fa fa-fw fa-trash"></i> <span class="sr-only">Delete Comic</span></button>
+        </div>
+      </div>
+      <?php } ?>
       <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
       <div class="issue-description">
         <?php echo $plot; ?>
-      </div>
-      <div class="button-block text-center">
-        <?php if ($login->isUserLoggedIn () == true) { ?>
-          <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i> Delete Comic</a>
-          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
-        <?php } ?>
       </div>
       <div class="disqus-block hidden-xs hidden-sm">
         <div id="disqus_thread"></div>
@@ -175,3 +177,28 @@
   </div>
   <script id="dsq-count-scr" src="//powcbm.disqus.com/count.js" async></script>
 </section>
+<?php if ($login->isUserLoggedIn () == true) { ?>
+<section data-module="delete_modal" class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form method="post" action="" name="deleteform" class="form-horizontal">
+        <header class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-logo center-block text-center" id="loginFormModalLabel"><img src="../assets/logo.svg" alt="POW! Comic Book Manager" />Comic Book Manager</h4>
+        </header>
+        <div class="modal-body">
+          <h5>Are you sure you want to remove this issue from your collection?</h5>
+          <p>Any custom images and details will be removed.</p>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="comic_id" value="<?php echo $comic_id; ?>" />
+          <input type="hidden" name="user_id" value="<?php echo $userID; ?>" />
+          <input type="hidden" name="delete" value="true" />
+          <button class="btn btn-lg btn-default" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+          <button type="submit" name="delete" class="btn btn-lg btn-success form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-fw fa-check"></i> Delete</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<?php } ?>

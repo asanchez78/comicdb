@@ -493,7 +493,7 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 h6, .h6 {
@@ -4544,6 +4544,22 @@ footer.main-footer {
   font-size: 12px;
 }
 
+.modal-content {
+  color: white;
+  background-color: #c9302c;
+  opacity: 0.95;
+}
+
+.modal-logo {
+  width: 50%;
+}
+
+.modal-body h5 {
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: yellow;
+}
+
 /* Header */
 .main-sidebar .menu-break {
   border-top: 1px solid #e7e7e7;
@@ -5183,12 +5199,6 @@ label {
   padding-right: 0;
 }
 
-[data-module="login_modal"] .modal-content,
-[data-module="logout_modal"] .modal-content {
-  color: white;
-  background-color: #c9302c;
-  opacity: 0.95;
-}
 [data-module="login_modal"] .modal-header,
 [data-module="logout_modal"] .modal-header {
   border-bottom: none;
@@ -5199,9 +5209,6 @@ label {
 }
 [data-module="login_modal"] .modal-body {
   padding: 0 35px;
-}
-[data-module="login_modal"] .modal-logo {
-  width: 50%;
 }
 [data-module="login_modal"] .modal-footer {
   padding-top: 0;
@@ -5789,6 +5796,13 @@ ul#inventory-table .series-extra {
 }
 
 /* Single Issue */
+@media (min-width: 641px) {
+  [data-module="single_comic"]
+  .issue-content {
+    overflow: hidden;
+  }
+}
+
 .issue-story {
   margin-top: 15px;
 }
@@ -5796,9 +5810,15 @@ ul#inventory-table .series-extra {
   margin-top: 0;
 }
 
-.mobile-issue-image .issue-image {
-  margin-top: 15px;
-  margin-bottom: 15px;
+@media (min-width: 641px) {
+  .manage-comic-container + .issue-story {
+    width: 75%;
+  }
+}
+@media (min-width: 900px) {
+  .manage-comic-container + .issue-story {
+    width: 82%;
+  }
 }
 
 .issue-details h2 {
@@ -5830,6 +5850,53 @@ ul#inventory-table .series-extra {
   font-size: 14px;
   line-height: 1.4;
   margin-right: 20px;
+}
+
+.manage-comic-container {
+  position: absolute;
+  top: -15px;
+  right: 10px;
+  padding: 5px;
+  background-color: #e7e7e7;
+  border: 1px solid #e7e7e7;
+  border-top: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  opacity: 0.95;
+}
+@media (min-width: 641px) {
+  .manage-comic-container {
+    top: 0;
+  }
+}
+@media (min-width: 900px) {
+  .manage-comic-container {
+    top: -15px;
+    right: 15px;
+    opacity: 0.65;
+    -webkit-transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+            transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+  }
+}
+.manage-comic-container:hover {
+  opacity: 0.95;
+  top: -15px;
+}
+@media (min-width: 641px) {
+  .manage-comic-container:hover {
+    top: 0;
+  }
+}
+
+.mobile-issue-image .issue-image {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.disqus-block {
+  padding-top: 10px;
+  border-top: 1px solid #e7e7e7;
+  margin-top: 25px;
 }
 
 /*# sourceMappingURL=styles.css.map */
