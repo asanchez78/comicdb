@@ -123,52 +123,7 @@ class comicSearch {
       }
     }
   }
-  /**
-   * Looks up the artist of a given comic using comic_id
-   *
-   * @param int $comic_id
-   */
-  public function artistLookup($comic_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed: " );
-    }
 
-    $sql = "SELECT artist_name FROM artist_link LEFT JOIN artists ON (artists.artist_id = artist_link.artist_id) WHERE artist_link.comic_id = $comic_id";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        $this->artist = $row ['artist_name'];
-      }
-    }
-
-    if ($result->num_rows == 0) {
-      $this->artist = "";
-    }
-  }
-  /**
-   * Looks up the writer of a given comic using comic_id
-   *
-   * @param int $comic_id
-   */
-  public function writerLookup($comic_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed: " );
-    }
-
-    $sql = "SELECT writer_name FROM writer_link LEFT JOIN writers ON (writers.writer_id = writer_link.writer_id) WHERE writer_link.comic_id = $comic_id";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        $this->writer = $row ['writer_name'];
-      }
-    }
-
-    if ($result->num_rows == 0) {
-      $this->writer = "";
-    }
-  }
   /**
    * Lists issues of a given series
    *
