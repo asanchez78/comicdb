@@ -45,6 +45,14 @@ label {
     }
   }
 
+  label[data-selected="true"]:before {
+    content: "";
+    background-color: $brand-red;
+    border-color: $brand-red;
+    color: #f3f3f3;
+    text-align: center;
+  }
+
   fieldset label {
     display: inline-block;
     cursor: pointer;
@@ -85,7 +93,6 @@ label {
 
   span.icon-loading {
     display: none;
-    width: 92px;
   }
 
   &.loading {

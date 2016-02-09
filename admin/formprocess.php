@@ -307,6 +307,7 @@
         $series_vol = $comic->series_vol;
         $series_name = $comic->series_name;
         $originalPurchase = $comic->originalPurchase;
+        $quantity = $comic->issue_quantity;
         
         // Wiki updates automatically if field is blank
         $wiki->issueSearch($cvVolumeID, $issue_number);
@@ -366,6 +367,14 @@
             $story_name = $wiki->storyName;
             $updatedSet .= 'Story Name; ';
           }
+        }
+
+        if ($comic->custStoryName != '') {
+          if ($comic->custStoryName != $story_name) {
+            $custStoryName = $comic->custStoryName;
+          }
+        } else {
+          $custStoryName = '';
         }
 
         // Creators
@@ -497,6 +506,8 @@
         $comic_id = filter_input ( INPUT_POST, 'comic_id' );
         $released_date = filter_input ( INPUT_POST, 'released_date' );
         $story_name = addslashes ( filter_input ( INPUT_POST, 'story_name' ) );
+        $custStoryName = addslashes ( filter_input ( INPUT_POST, 'custStoryName' ) );
+        $quantity = addslashes ( filter_input ( INPUT_POST, 'quantity' ) );
         $plot = addslashes ( filter_input ( INPUT_POST, 'plot' ) );
         $custPlot = addslashes ( filter_input ( INPUT_POST, 'custPlot' ) );
         $cover_image = filter_input ( INPUT_POST, 'cover_image' );
@@ -513,6 +524,12 @@
         }
 
         // Checks if the plot has been modified by the user
+        if ($custStoryName == $story_name) {
+          // If it's the same as the API data, then clear it out.
+          $custStoryName = '';
+        }
+
+        // Checks if the plot has been modified by the user
         if ($custPlot == $plot) {
           // If it's the same as the API data, then clear it out.
           $custPlot = '';
@@ -523,7 +540,7 @@
           $sqlMessage = '<strong class="text-success">Comic Database Update Success</strong>: Issue updated<br /><code>' . $sql . '</code><br /><br />';
           // Add creators to creators table
           $comic->insertCreators($comic_id, $creatorsList);
-          $sql_user = "UPDATE users_comics SET originalPurchase='$originalPurchase', custPlot='$custPlot' WHERE user_id='$ownerID' AND comic_id='$comic_id'";
+          $sql_user = "UPDATE users_comics SET quantity='$quantity', originalPurchase='$originalPurchase', custPlot='$custPlot', custStoryName='$custStoryName' WHERE user_id='$ownerID' AND comic_id='$comic_id'";
           if (mysqli_query ( $connection, $sql_user )) {
             $messageNum = 5;
             $sqlMessage .= '<strong class="text-success">User Database Update Success</strong>: Issue updated<br /><code>' . $sql_user . '</code>';

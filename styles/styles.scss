@@ -33,10 +33,10 @@
 @import "layout/header";
 @import "layout/forms";
 @import "layout/logos";
-@import "layout/addcomics";
 @import "layout/about";
 
 // Modules
 @import "../modules/login/login";
+@import "../modules/add_comic/add_comic";
 @import "../modules/series_list/series_list";
 @import "../modules/single_comic/single_comic";

@@ -71,23 +71,29 @@ class comicSearch {
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
-        $comic_id = $row ['comic_id'];
-        $issue_number = $row ['issue_number'];
-        $plot = $row ['plot'];
-        $release_date = $row ['release_date'];
-        $story_name = $row ['story_name'];
-        $cover_image = $row ['cover_image'];
-        $series_name = $row ['series_name'];
-        $series_id = $row['series_id'];
-        $originalPurchase = $row['originalPurchase'];
-        $series_vol = $row['series_vol'];
+        $this->comic_id = $row ['comic_id'];
+        $this->issue_number = $row ['issue_number'];
+        $this->plot = $row ['plot'];
+        $this->release_date = $row ['release_date'];
+        $this->story_name = $row ['story_name'];
+        $this->cover_image = $row ['cover_image'];
+        $this->series_name = $row ['series_name'];
+        $this->series_id = $row ['series_id'];
+        $this->series_vol = $row ['series_vol'];
+
+        // Custom User fields
+        $this->originalPurchase = $row ['originalPurchase'];
+        $this->issue_quantity = $row ['quantity'];
+        $this->custPlot = $row ['custPlot'];
+        $this->var_cover_image = $row ['variantCover'];
+        $this->custStoryName = $row ['custStoryName'];
       }
     }
     $sql = "SELECT creators.name, creators.job
       FROM creators_link
       LEFT JOIN creators
       ON creators.creator_id=creators_link.creator_id
-      WHERE comic_id=$comic_id";
+      WHERE comic_id=$this->comic_id";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
@@ -116,16 +122,6 @@ class comicSearch {
         }
       }
     }
-    $this->cover_image = $cover_image;
-    $this->plot = $plot;
-    $this->issue_number = $issue_number;
-    $this->story_name = $story_name;
-    $this->release_date = $release_date;
-    $this->comic_id = $comic_id;
-    $this->series_name = $series_name;
-    $this->originalPurchase = $originalPurchase;
-    $this->series_id = $series_id;
-    $this->series_vol = $series_vol;
   }
   /**
    * Looks up the artist of a given comic using comic_id
@@ -334,16 +330,6 @@ class comicSearch {
         $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issue';
       } else {
         $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issues';
-      }
-
-      // Custom Plot, Story Name, and Variant cover
-      $result = $this->db_connection->query ( $sql );
-      if ($result->num_rows > 0) {
-        while ( $row = $result->fetch_assoc () ) {
-          $this->custPlot = $row ['custPlot'];
-          $this->custStoryName = $row ['custStoryName'];
-          $this->variantCover = $row ['variantCover'];
-        }
       }
     }
 
