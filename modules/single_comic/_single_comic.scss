@@ -7,8 +7,21 @@
   }
 }
 
-.issue-image {
-  margin-top: 15px;
+.mobile-issue-image {
+  .issue-image {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+.issue-details {
+  h2 {
+    margin-top: 0;
+  }
+
+  .pull-right {
+    margin-left: 10px;
+  }
 }
 
 .issue-credits {

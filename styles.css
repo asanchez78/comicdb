@@ -4433,6 +4433,12 @@ main {
 }
 .headline h2 {
   margin: 0;
+  font-size: 26px;
+}
+@media (min-width: 641px) {
+  .headline h2 {
+    font-size: 30px;
+  }
 }
 
 .form-group {
@@ -4444,6 +4450,7 @@ main {
   background: linear-gradient(#ffaa00, white);
   margin-right: 0;
   padding-bottom: 55px;
+  padding-top: 15px;
 }
 .sidebar h2 {
   font-size: 32px;
@@ -4462,6 +4469,70 @@ main {
 .sidebar *[class*="credit-"] span:last-of-type:after {
   content: "";
   display: inline;
+}
+
+/* Series Meta */
+.series-meta {
+  font-size: 11px;
+  font-weight: bold;
+  border-top: 2px solid #e7e7e7;
+  padding-top: 5px;
+  margin-top: 5px;
+}
+@media (min-width: 641px) {
+  .series-meta {
+    border-top: none;
+    text-align: right;
+    float: right;
+    margin-top: 0;
+  }
+}
+.series-meta li {
+  height: 100%;
+  text-align: center;
+  line-height: 1.2;
+}
+@media (min-width: 900px) {
+  .series-meta li {
+    line-height: 25px;
+  }
+}
+.series-meta li > span {
+  display: block;
+  font-size: 12px;
+}
+@media (min-width: 900px) {
+  .series-meta li > span {
+    display: inline;
+  }
+}
+.series-meta li.issue-publisher {
+  text-align: left;
+  line-height: 25px;
+}
+@media (min-width: 900px) {
+  .series-meta li.issue-publisher {
+    text-align: center;
+  }
+}
+.series-meta li.release-date {
+  line-height: 25px;
+  text-align: right;
+}
+@media (min-width: 900px) {
+  .series-meta li.release-date {
+    text-align: center;
+  }
+}
+.series-meta .sort-control-container {
+  text-align: right;
+  padding-top: 0;
+}
+.series-meta .sort-control {
+  margin-right: 3px;
+}
+.series-meta .sort-control:last-of-type {
+  margin-right: 0;
 }
 
 footer.main-footer {
@@ -4746,6 +4817,19 @@ label {
   width: 100px;
   height: 46px;
 }
+@media (min-width: 641px) {
+  .logo-marvel:before {
+    width: 60px;
+    height: 27px;
+    margin-bottom: 15px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-marvel:before {
+    width: 100px;
+    height: 46px;
+  }
+}
 .logo-marvel.sm-logo:before {
   width: 40px;
   height: 18px;
@@ -4757,6 +4841,18 @@ label {
   width: 100px;
   height: 100px;
 }
+@media (min-width: 641px) {
+  .logo-dc:before {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-dc:before {
+    width: 100px;
+    height: 100px;
+  }
+}
 .logo-dc.sm-logo:before {
   content: "";
   width: 18px;
@@ -4766,9 +4862,23 @@ label {
 .logo-imagecomics:before {
   content: "";
   background-image: url("../assets/logos/image_comics.svg");
-  background-size: 36px 80px;
+  background-size: auto 80px;
   width: 36px;
   height: 80px;
+}
+@media (min-width: 641px) {
+  .logo-imagecomics:before {
+    background-size: auto 60px;
+    width: 26px;
+    height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-imagecomics:before {
+    background-size: auto 80px;
+    width: 36px;
+    height: 80px;
+  }
 }
 .logo-imagecomics.sm-logo:before {
   background-size: 13px 18px;
@@ -4776,17 +4886,44 @@ label {
 
 .logo-darkhorse:before {
   content: "";
+  background-color: white;
   background-image: url("../assets/logos/dark_horse_comics.svg");
   width: 66px;
   height: 110px;
+}
+@media (min-width: 641px) {
+  .logo-darkhorse:before {
+    width: 41px;
+    height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-darkhorse:before {
+    width: 66px;
+    height: 110px;
+  }
 }
 
 .logo-valiant:before {
   content: "";
   background-image: url("../assets/logos/valiant_comics.png");
-  background-size: 66px 110px;
+  background-size: auto 110px;
   width: 66px;
   height: 110px;
+}
+@media (min-width: 641px) {
+  .logo-valiant:before {
+    background-size: auto 60px;
+    width: 40px;
+    height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-valiant:before {
+    background-size: auto 110px;
+    width: 100px;
+    height: 100px;
+  }
 }
 .logo-valiant.sm-logo:before {
   background-size: 13px 18px;
@@ -4798,6 +4935,18 @@ label {
   background-size: 110px 110px;
   width: 110px;
   height: 110px;
+}
+@media (min-width: 641px) {
+  .logo-archie:before {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .logo-archie:before {
+    width: 110px;
+    height: 110px;
+  }
 }
 .logo-archie.sm-logo:before {
   background-size: 18px 18px;
@@ -5063,61 +5212,6 @@ label {
   content: "";
   background-color: black;
   border-color: black;
-}
-
-/* Series Meta */
-.series-meta {
-  font-size: 11px;
-  font-weight: bold;
-  border-top: 2px solid #e7e7e7;
-  padding-top: 5px;
-  margin-top: 5px;
-}
-@media (min-width: 641px) {
-  .series-meta {
-    border-top: none;
-    text-align: right;
-    float: right;
-    margin-top: 0;
-  }
-}
-.series-meta li {
-  height: 100%;
-  text-align: center;
-  line-height: 1.2;
-}
-@media (min-width: 900px) {
-  .series-meta li {
-    line-height: 25px;
-  }
-}
-.series-meta li > span {
-  display: block;
-  font-size: 12px;
-}
-@media (min-width: 900px) {
-  .series-meta li > span {
-    display: inline;
-  }
-}
-.series-meta li.issue-publisher {
-  text-align: left;
-  line-height: 25px;
-}
-@media (min-width: 900px) {
-  .series-meta li.issue-publisher {
-    text-align: center;
-  }
-}
-.series-meta .sort-control-container {
-  text-align: right;
-  padding-top: 0;
-}
-.series-meta .sort-control {
-  margin-right: 3px;
-}
-.series-meta .sort-control:last-of-type {
-  margin-right: 0;
 }
 
 /* Grid display styles */
@@ -5702,8 +5796,16 @@ ul#inventory-table .series-extra {
   margin-top: 0;
 }
 
-.issue-image {
+.mobile-issue-image .issue-image {
   margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.issue-details h2 {
+  margin-top: 0;
+}
+.issue-details .pull-right {
+  margin-left: 10px;
 }
 
 .issue-credits {

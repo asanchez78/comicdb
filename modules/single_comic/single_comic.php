@@ -56,19 +56,24 @@
 ?>
 <section data-module="single_comic" data-series-id="<?php echo $series_id; ?>" data-comic-id="<?php echo $comic_id; ?>">
   <header class="row headline">
-    <div class="col-xs-12 col-lg-8">
+    <div class="col-xs-12 col-md-7 col-lg-8">
       <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
     </div>
-    <div class="col-xs-12 col-lg-4 series-meta">
-      <ul class="nolist">
-        <?php if ($publisherName) { echo '<li class="logo-' . $publisherShort .' sm-logo"><a href="/publisher.php?pid=' . $publisherID . '">' . $publisherName . '</a></li>'; } ?>
+    <div class="col-xs-12 col-md-5 col-lg-4 series-meta">
+      <ul class="nolist row">
+        <?php if ($publisherName) { echo '<li class="col-xs-6 issue-publisher"><a href="/publisher.php?pid=' . $publisherID . '" class="logo-' . $publisherShort .' sm-logo">' . $publisherName . '</a></li>'; } ?>
         <?php if ($comic->release_date) { ?>
-          <li><?php echo $release_dateShort; ?></li>
+          <li class="col-xs-6 release-date"><?php echo $release_dateShort; ?></li>
         <?php } ?>
       </ul>
     </div>
   </header>
   <div class="row">
+    <div class="col-xs-12 hidden-md hidden-lg mobile-issue-image">
+      <div class="issue-image">
+        <img src="<?php echo $comic->cover_image; ?>" alt="cover" class="img-responsive" />
+      </div>
+    </div>
     <div class="col-md-8">
       <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
       <div class="issue-description">
@@ -80,7 +85,7 @@
           <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-warning"><i class="fa fa-pencil-square-o"></i> Update Comic</a>
         <?php } ?>
       </div>
-      <div class="disqus-block">
+      <div class="disqus-block hidden-xs hidden-sm">
         <div id="disqus_thread"></div>
         <script>
         var disqus_config = function () {
@@ -100,8 +105,8 @@
       </div>
     </div>
     <div class="col-md-4 sidebar">
-      <div class="issue-image">
-        <img src="<?php echo $comic->cover_image; ?>" alt="cover" />
+      <div class="issue-image hidden-xs hidden-sm">
+        <img src="<?php echo $comic->cover_image; ?>" alt="cover" class="img-responsive" />
       </div>
       <div class="issue-details">
         <h2>Issue Details</h2>
@@ -117,13 +122,13 @@
       <div class="issue-credits text-center">
         <div class="row">
           <?php if ($script) { ?>
-          <div class="col-md-6 credit-writer">
+          <div class="<?php if ($script) { ?>col-xs-6<?php } else { ?>col-xs-12<?php } ?> credit-writer">
             <h3>Script</h3>
             <?php echo $script; ?>
           </div>
           <?php } ?>
           <?php if ($pencils) { ?>
-          <div class="col-md-6 credit-artist">
+          <div class="<?php if ($script) { ?>col-xs-6<?php } else { ?>col-xs-12<?php } ?> credit-artist">
             <h3>Pencils</h3>
             <?php echo $pencils; ?>
           </div>
@@ -132,19 +137,19 @@
           
         <div class="row">
           <?php if ($colors) { ?>
-          <div class="col-xs-12 <?php if ($letters && $inks) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inker">
+          <div class="<?php if ($letters && $inks) { ?>col-xs-4<?php } else { ?>col-xs-6<?php } ?> credit-inker">
             <h3>Colors</h3>
             <?php echo $colors; ?>
           </div>
           <?php } ?>
           <?php if ($inks) { ?>
-          <div class="col-xs-12 <?php if ($colors && $letters) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-inks">
+          <div class="<?php if ($colors && $letters) { ?>col-xs-4<?php } else { ?>col-xs-6<?php } ?> credit-inks">
             <h3>Inks</h3>
             <?php echo $inks; ?>
           </div>
           <?php } ?>
           <?php if ($letters) { ?>     
-          <div class="col-xs-12 <?php if ($colors && $inks) { ?>col-md-4<?php } else { ?>col-md-6<?php } ?> credit-letters">
+          <div class="<?php if ($colors && $inks) { ?>col-xs-4<?php } else { ?>col-xs-6<?php } ?> credit-letters">
             <h3>Letters</h3>
             <?php echo $letters; ?>
           </div>
@@ -152,13 +157,13 @@
         </div>
         <div class="row">
           <?php if ($editing) { ?> 
-          <div class="col-xs-12 <?php if ($coverArtist) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-editor">
+          <div class="<?php if ($coverArtist) { ?>col-xs-6<?php } else { ?>col-xs-12<?php } ?> credit-editor">
             <h3>Editing</h3>
             <?php echo $editing; ?>
           </div>
           <?php } ?>
           <?php if ($coverArtist) { ?>
-          <div class="col-xs-12 <?php if ($editing) { ?>col-md-6<?php } else { ?>col-md-12<?php } ?> credit-cover">
+          <div class="<?php if ($editing) { ?>col-xs-6<?php } else { ?>col-xs-12<?php } ?> credit-cover">
             <h3>Cover</h3>
             <?php echo $coverArtist; ?>
           </div>
