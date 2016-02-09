@@ -5,14 +5,10 @@
   $comic->issueLookup ( $comic_id );
   $series_id = $comic->series_id;
   
-  if (isset($userSetID) && $validUser == 1) {
-    $comic->seriesInfo ( $series_id, $userSetID );
-  } else {
-    if (!isset($userID)) {
-      $userID=NULL;
-    }
-    $comic->seriesInfo ( $series_id, $userID );
+  if (!isset($userID)) {
+    $userID=NULL;
   }
+  $comic->seriesInfo ( $series_id, $userID );
   // Required values
   // Standardizes values for common variables
   if (isset($comic->series_name) && isset($comic->series_vol) && isset($comic->issue_number) && isset($comic->publisherName)) {
@@ -43,6 +39,14 @@
     $plot = $comic->plot;
   } else {
     $plot = '<p>Plot details have not been entered.</p>';
+  }
+
+  if (isset($comic->custStoryName) && $comic->custStoryName != '') {
+    $story_name = $comic->custStoryName;
+  } elseif ($comic->story_name != '') {
+    $story_name = $comic->story_name;
+  } else {
+    $story_name = '';
   }
   
   $script = $comic->script;
@@ -83,7 +87,7 @@
         </div>
       </div>
       <?php } ?>
-      <div class="issue-story"><h4><?php echo $comic->story_name; ?></h4></div>
+      <div class="issue-story"><h4><?php echo $story_name; ?></h4></div>
       <div class="issue-description">
         <?php echo $plot; ?>
       </div>

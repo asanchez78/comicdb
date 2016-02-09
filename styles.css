@@ -4751,6 +4751,13 @@ label {
   color: #f3f3f3;
   text-align: center;
 }
+.form-radio label[data-selected="true"]:before {
+  content: "";
+  background-color: #ff0300;
+  border-color: #ff0300;
+  color: #f3f3f3;
+  text-align: center;
+}
 .form-radio fieldset label {
   display: inline-block;
   cursor: pointer;
@@ -4789,7 +4796,6 @@ label {
 }
 .form-submit span.icon-loading {
   display: none;
-  width: 92px;
 }
 .form-submit.loading {
   background-color: #ffaa00;
@@ -5797,56 +5803,66 @@ ul#inventory-table .series-extra {
 
 /* Single Issue */
 @media (min-width: 641px) {
-  [data-module="single_comic"]
-  .issue-content {
+  [data-module="single_comic"] .issue-content,
+  [data-module="edit_comic"] .issue-content {
     overflow: hidden;
   }
 }
-
-.issue-story {
+[data-module="single_comic"] .issue-story,
+[data-module="edit_comic"] .issue-story {
   margin-top: 15px;
 }
-.issue-story h4 {
+[data-module="single_comic"] .issue-story h4,
+[data-module="edit_comic"] .issue-story h4 {
   margin-top: 0;
 }
-
 @media (min-width: 641px) {
-  .manage-comic-container + .issue-story {
+  [data-module="single_comic"] .manage-comic-container + .issue-story,
+  [data-module="edit_comic"] .manage-comic-container + .issue-story {
     width: 75%;
   }
 }
 @media (min-width: 900px) {
-  .manage-comic-container + .issue-story {
+  [data-module="single_comic"] .manage-comic-container + .issue-story,
+  [data-module="edit_comic"] .manage-comic-container + .issue-story {
     width: 82%;
   }
 }
-
-.issue-details h2 {
+[data-module="single_comic"] .issue-details h2,
+[data-module="edit_comic"] .issue-details h2 {
   margin-top: 0;
 }
-.issue-details .pull-right {
+[data-module="single_comic"] .issue-details .pull-right,
+[data-module="edit_comic"] .issue-details .pull-right {
   margin-left: 10px;
 }
-
-.issue-credits {
+[data-module="single_comic"] .issue-credits,
+[data-module="edit_comic"] .issue-credits {
   line-height: 1.2;
   font-size: 12px;
 }
-.issue-credits > .row, .issue-credits > ul#inventory-table {
+[data-module="single_comic"] .issue-credits > .row, [data-module="single_comic"] .issue-credits > ul#inventory-table,
+[data-module="edit_comic"] .issue-credits > .row,
+[data-module="edit_comic"] .issue-credits > ul#inventory-table {
   margin-bottom: 10px;
 }
-.issue-credits h3 {
+[data-module="single_comic"] .issue-credits h3,
+[data-module="edit_comic"] .issue-credits h3 {
   margin-top: 10px;
   margin-bottom: 2px;
 }
-.issue-credits .credit-writer,
-.issue-credits .credit-artist,
-.issue-credits .credit-editor,
-.issue-credits .credit-cover {
+[data-module="single_comic"] .issue-credits .credit-writer,
+[data-module="single_comic"] .issue-credits .credit-artist,
+[data-module="single_comic"] .issue-credits .credit-editor,
+[data-module="single_comic"] .issue-credits .credit-cover,
+[data-module="edit_comic"] .issue-credits .credit-writer,
+[data-module="edit_comic"] .issue-credits .credit-artist,
+[data-module="edit_comic"] .issue-credits .credit-editor,
+[data-module="edit_comic"] .issue-credits .credit-cover {
   font-size: 14px;
 }
-
-.issue-description {
+[data-module="single_comic"] .issue-description,
+[data-module="edit_comic"] .issue-description {
   font-size: 14px;
   line-height: 1.4;
   margin-right: 20px;
