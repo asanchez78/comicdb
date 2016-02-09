@@ -13,7 +13,7 @@
       <div class="form-group">
         <label for="story_name">Story Name: </label>
         <input class="form-control" name="custStoryName" type="text" maxlength="255" value="<?php if ($custStoryName != '') { echo $custStoryName; } else { echo $story_name; }?>" placeholder="<?php echo $story_name; ?>" />
-        <small>Enter a custom story name, other leave blank to import ComicVine entry</small>
+        <small>Enter a custom story name, otherwise leave blank to import ComicVine entry.</small>
         <input type="hidden" name="story_name" value="<?php echo $story_name; ?>" />
       </div>
       <div class="row">
