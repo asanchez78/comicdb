@@ -1,11 +1,5 @@
 [data-module="login_modal"],
 [data-module="logout_modal"] {
-  .modal-content {
-    color: white;
-    background-color: #c9302c;
-    opacity: 0.95;
-  }
-
   .modal-header {
     border-bottom: none;
   }
@@ -18,10 +12,6 @@
 
   .modal-body {
     padding: 0 35px;
-  }
-
-  .modal-logo {
-    width: 50%;
   }
 
   .modal-footer {

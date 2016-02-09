@@ -1,13 +1,6 @@
 /* Add Comics */
-
-.add-container {
-  padding-bottom: 0;
-}
-
 .add-menu {
   margin-top: -25px;
-  margin-left: -15px;
-  margin-right: -15px;
   margin-bottom: 0;
   border-bottom: 1px solid $border-color;
   background-color: $brand-red;
@@ -23,6 +16,37 @@
       color: white;
       font-size: 15px;
       padding: 8px 0;
+
+      @media (min-width: $screen-md) {
+        font-size: 12px;
+      }
+
+      @media (min-width: $screen-lg) {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+// Bootstrap overrides
+.nav-tabs {
+  > li {
+    > a {
+      border: 1px solid transparent;
+      border-radius: 0;
+
+      &:hover,
+      &:focus {
+        background-color: $brand-orange;
+        border-color: transparent;
+      }
+    }
+    &.active {
+      > a, > a:hover, > a:focus {
+        background-color: $brand-orange;
+        color: white;
+        border: 1px solid transparent;
+      }
     }
   }
 }
@@ -191,29 +215,6 @@
 
 .button-block {
   margin: 25px 0;
-}
-
-.nav-tabs.nav-justified {
-  width: 103.6%;
-  > li {
-    > a {
-      border: 1px solid transparent;
-      border-radius: 0;
-
-      &:hover,
-      &:focus {
-        background-color: $brand-orange;
-        border-color: transparent;
-      }
-    }
-    &.active {
-      > a, > a:hover, > a:focus {
-        background-color: $brand-orange;
-        color: white;
-        border: 1px solid transparent;
-      }
-    }
-  }
 }
 
 #addList {
