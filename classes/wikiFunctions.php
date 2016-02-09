@@ -174,12 +174,9 @@ class wikiQuery {
 				$pattern = "/(?<=jpg|png|jpeg).*/";
 				$replacement = "";
 				$this->coverURL = preg_replace($pattern, $replacement, $subject);
-				$fileparts = explode("/", $this->coverURL);
-				//$this->coverFile = 'images/' . $fileparts[7];
-				//$this->coverFile = str_replace("%28", "", $this->coverFile);
-				//$this->coverFile = str_replace("%29", "", $this->coverFile);
-				//$this->coverFile = str_replace("%3F", "", $this->coverFile);
-				$this->coverFile = 'images/' . str_replace(" ", "_", $this->seriesName) . '_' . $issue_number . '_v' . $series_vol . '-medium.jpg';
+				$imageDir = __ROOT__.'/images/';
+				$seriesPlain = preg_replace('/[^a-z0-9]+/i', '_', $this->series_name) . '-v' . $series_vol;
+				$this->coverFile = $imageDir . $seriesPlain . '/' . $seriesPlain . '_' . $issue_number . '_v' . $series_vol . '-medium.jpg';
 			} else {
 				$this->coverFile = 'assets/nocover.jpg';
 				$this->coverURL = 'assets/nocover.jpg';
