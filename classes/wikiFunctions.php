@@ -174,9 +174,9 @@ class wikiQuery {
 				$pattern = "/(?<=jpg|png|jpeg).*/";
 				$replacement = "";
 				$this->coverURL = preg_replace($pattern, $replacement, $subject);
-				$imageDir = __ROOT__.'/images/';
-				$seriesPlain = preg_replace('/[^a-z0-9]+/i', '_', $this->series_name) . '-v' . $series_vol;
-				$this->coverFile = $imageDir . $seriesPlain . '/' . $seriesPlain . '_' . $issue_number . '_v' . $series_vol . '-medium.jpg';
+				$imageDir = 'images/';
+				$seriesPlain = preg_replace('/[^a-z0-9]+/i', '_', $this->seriesName) . '-v' . $series_vol;
+				$this->coverFile = $imageDir . $seriesPlain . '/' . $seriesPlain . '_' . $issue_number . '-medium.jpg';
 			} else {
 				$this->coverFile = 'assets/nocover.jpg';
 				$this->coverURL = 'assets/nocover.jpg';
