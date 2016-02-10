@@ -1,10 +1,15 @@
-<section data-module="add_list" class="row add-block form-add-list tab-pane fade" role="tabpanel" id="addList">
+<?php
+  $addListSubmit = filter_input ( INPUT_POST, 'addListSubmit' );
+  if ($addListSubmit) { include(__ROOT__.'/modules/add_comic/add_list/form-submit.php'); }
+?>
+
+<section data-module="add_list" class="row add-block tab-pane fade" role="tabpanel" id="addList">
   <header class="col-xs-12 headline">
     <h2>Add List of Issues</h2>
   </header>
   <div class="col-xs-12">
-    <?php if ($listSearch != true) { ?>
-    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>?type=csv#addlist">
+    <?php if ($addListSubmit != true) { ?>
+    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>#addlist">
       <p>Use the form below to add several issues of one series to your collection. Separate any issues with commas.</p>
       <div class="form-group">
         <label for="series_name">Series</label>
@@ -34,7 +39,7 @@
           <input name="listOriginalPurchase" id="list-original-no" value="0" type="radio" /> <label for="list-original-no">No</label>
         </fieldset>
       </div>
-      <input type="hidden" name="submitted" value="yes" />
+      <input type="hidden" name="addListSubmit" value="true" />
       <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
     </form>
     <?php } else { ?>

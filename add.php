@@ -6,8 +6,6 @@
   $seriesSearch = false;
   $seriesAdd = false;
   $seriesSubmit = false;
-  $issueAdd = false;
-  $issueSubmit = false;
   $listSearch = false;
   $rangeSearch = false;
   $submitted = filter_input ( INPUT_POST, 'submitted' );
@@ -47,16 +45,16 @@
   </div>
   <div class="tab-content">
     <?php // ADD SINGLE ISSUE ?>
-    <?php include(__ROOT__.'/modules/add_comic/add_issue.php'); ?>
+    <?php include(__ROOT__.'/modules/add_comic/add_issue/add_issue.php'); ?>
 
     <?php // ADD RANGE ?>
-    <?php include(__ROOT__.'/modules/add_comic/add_range.php'); ?>
+    <?php include(__ROOT__.'/modules/add_comic/add_range/add_range.php'); ?>
     
     <?php // ADD LIST ?>
-    <?php include(__ROOT__.'/modules/add_comic/add_list.php'); ?>
+    <?php include(__ROOT__.'/modules/add_comic/add_list/add_list.php'); ?>
 
     <?php // ADD SERIES ?>
-    <?php include(__ROOT__.'/modules/add_comic/add_series.php'); ?>
+    <?php include(__ROOT__.'/modules/add_comic/add_series/add_series.php'); ?>
   </div>
 <?php include 'views/footer.php';?>
 </body>

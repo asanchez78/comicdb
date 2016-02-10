@@ -4458,6 +4458,9 @@ main {
 .sidebar h3 {
   font-size: 14px;
 }
+.sidebar .issue-image {
+  margin-bottom: 15px;
+}
 .sidebar *[class*="credit-"] span {
   display: inline;
   margin-bottom: 3px;
@@ -5215,16 +5218,16 @@ label {
   margin-bottom: 3px;
 }
 
-.form-add-range .success-message h3 {
-  display: inline-block;
-  margin-right: 10px;
-}
-
 .button-block {
   margin: 25px 0;
 }
 
-#addList input[type="number"].form-control {
+[data-module="add_range"] .success-message h3 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+[data-module="add_list"] input[type="number"].form-control {
   width: 100%;
 }
 
@@ -5805,50 +5808,61 @@ ul#inventory-table .series-extra {
 /* Single Issue */
 @media (min-width: 641px) {
   [data-module="single_comic"] .issue-content,
-  [data-module="edit_comic"] .issue-content {
+  [data-module="edit_comic"] .issue-content,
+  [data-module="add_issue"] .issue-content {
     overflow: hidden;
   }
 }
 [data-module="single_comic"] .issue-story,
-[data-module="edit_comic"] .issue-story {
+[data-module="edit_comic"] .issue-story,
+[data-module="add_issue"] .issue-story {
   margin-top: 15px;
 }
 [data-module="single_comic"] .issue-story h4,
-[data-module="edit_comic"] .issue-story h4 {
+[data-module="edit_comic"] .issue-story h4,
+[data-module="add_issue"] .issue-story h4 {
   margin-top: 0;
 }
 @media (min-width: 641px) {
   [data-module="single_comic"] .manage-comic-container + .issue-story,
-  [data-module="edit_comic"] .manage-comic-container + .issue-story {
+  [data-module="edit_comic"] .manage-comic-container + .issue-story,
+  [data-module="add_issue"] .manage-comic-container + .issue-story {
     width: 75%;
   }
 }
 @media (min-width: 900px) {
   [data-module="single_comic"] .manage-comic-container + .issue-story,
-  [data-module="edit_comic"] .manage-comic-container + .issue-story {
+  [data-module="edit_comic"] .manage-comic-container + .issue-story,
+  [data-module="add_issue"] .manage-comic-container + .issue-story {
     width: 82%;
   }
 }
 [data-module="single_comic"] .issue-details h2,
-[data-module="edit_comic"] .issue-details h2 {
+[data-module="edit_comic"] .issue-details h2,
+[data-module="add_issue"] .issue-details h2 {
   margin-top: 0;
 }
 [data-module="single_comic"] .issue-details .pull-right,
-[data-module="edit_comic"] .issue-details .pull-right {
+[data-module="edit_comic"] .issue-details .pull-right,
+[data-module="add_issue"] .issue-details .pull-right {
   margin-left: 10px;
 }
 [data-module="single_comic"] .issue-credits,
-[data-module="edit_comic"] .issue-credits {
+[data-module="edit_comic"] .issue-credits,
+[data-module="add_issue"] .issue-credits {
   line-height: 1.2;
   font-size: 12px;
 }
 [data-module="single_comic"] .issue-credits > .row, [data-module="single_comic"] .issue-credits > ul#inventory-table,
 [data-module="edit_comic"] .issue-credits > .row,
-[data-module="edit_comic"] .issue-credits > ul#inventory-table {
+[data-module="edit_comic"] .issue-credits > ul#inventory-table,
+[data-module="add_issue"] .issue-credits > .row,
+[data-module="add_issue"] .issue-credits > ul#inventory-table {
   margin-bottom: 10px;
 }
 [data-module="single_comic"] .issue-credits h3,
-[data-module="edit_comic"] .issue-credits h3 {
+[data-module="edit_comic"] .issue-credits h3,
+[data-module="add_issue"] .issue-credits h3 {
   margin-top: 10px;
   margin-bottom: 2px;
 }
@@ -5859,11 +5873,16 @@ ul#inventory-table .series-extra {
 [data-module="edit_comic"] .issue-credits .credit-writer,
 [data-module="edit_comic"] .issue-credits .credit-artist,
 [data-module="edit_comic"] .issue-credits .credit-editor,
-[data-module="edit_comic"] .issue-credits .credit-cover {
+[data-module="edit_comic"] .issue-credits .credit-cover,
+[data-module="add_issue"] .issue-credits .credit-writer,
+[data-module="add_issue"] .issue-credits .credit-artist,
+[data-module="add_issue"] .issue-credits .credit-editor,
+[data-module="add_issue"] .issue-credits .credit-cover {
   font-size: 14px;
 }
 [data-module="single_comic"] .issue-description,
-[data-module="edit_comic"] .issue-description {
+[data-module="edit_comic"] .issue-description,
+[data-module="add_issue"] .issue-description {
   font-size: 14px;
   line-height: 1.4;
   margin-right: 20px;

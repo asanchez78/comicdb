@@ -1,27 +1,35 @@
-<section data-module="add_series" class="row add-block form-add-series tab-pane fade" role="tabpanel" id="addSeries">
-  <?php if ($seriesSearch == true) { ?>
+<?php
+  $addSeriesSearch = filter_input ( INPUT_POST, 'addSeriesSearch' );
+  $addSeriesSubmit = filter_input ( INPUT_POST, 'addSeriesSubmit' );
+
+  if ($addSeriesSearch) { include(__ROOT__.'/modules/add_comic/add_series/form-search.php'); }
+  if ($addSeriesSubmit) { include(__ROOT__.'/modules/add_comic/add_series/form-submit.php'); }
+?>
+
+<section data-module="add_series" class="row add-block tab-pane fade" role="tabpanel" id="addSeries">
+  <?php if ($addSeriesSearch == 'true') { ?>
   <header class="headline col-xs-12">
     <h2>Your Search Results</h2>
   </header>
   <div class="col-xs-12">
-    <form method="post" action="<?php echo $filename; ?>?type=series-submit#addseries" class="form-inline add-form" id="add-series-search">
+    <form method="post" action="<?php echo $filename; ?>#addseries" class="form-inline add-form" id="add-series-search">
       <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
       <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
       <div class="form-group form-radio">
         <label for="add-series-search">Choose the result that matches your series:</label>
         <fieldset class="row">
-          <?php echo $seriesSearch->resultsList; ?>
+          <?php echo $wiki->resultsList; ?>
         </fieldset>
       </div>
       <input type="hidden" name="publisherID" value="<?php echo $publisherID; ?>" />
-      <input type="hidden" name="submitted" value="yes" />
+      <input type="hidden" name="addSeriesSubmit" value="true" />
       <div class="text-center center-block button-block">
         <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
       </div>
     </form>
   </div>
-  <?php } elseif ($seriesSubmit == true) {
+  <?php } elseif ($addSeriesSubmit == 'true') {
     if ($seriesSubmitted == true) { ?>
     <div class="add-success bg-success col-xs-12">
       <div class="success-message text-center">
@@ -43,7 +51,7 @@
   <?php } else {?>
   <header class="headline col-xs-12"><h2>Add Series</h2></header>
   <div class="col-xs-12" id="form-series-add">
-    <form method="post" action="<?php echo $filename; ?>?type=series-search#addseries" class="form-inline add-form" id="form-add-series-1">
+    <form method="post" action="<?php echo $filename; ?>#addseries" class="form-inline add-form" id="form-add-series-1">
       <p>Use the form below to add a new series to your collection.</p>
       <div class="form-group">
         <label for="publisherID">Publisher</label>
@@ -64,7 +72,7 @@
         <label for="series_name">Series Name</label>
         <input name="series_name" class="form-control" type="text" size="50" value="" required />
       </div>
-      <input type="hidden" name="submitted" value="yes" />
+      <input type="hidden" name="addSeriesSearch" value="true" />
       <div class="form-group">
         <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-search"></i> Search</span></button>
       </div>

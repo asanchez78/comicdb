@@ -87,6 +87,7 @@ class comicSearch {
         $this->custPlot = $row ['custPlot'];
         $this->var_cover_image = $row ['variantCover'];
         $this->custStoryName = $row ['custStoryName'];
+        $this->issue_condition = $row ['issueCondition'];
       }
     }
     $sql = "SELECT creators.name, creators.job

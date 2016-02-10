@@ -1,8 +1,15 @@
-<section data-module="add_range" class="row add-block form-add-range tab-pane fade" role="tabpanel" id="addRange">
-  <?php if ($rangeSearch != true) { // This shows the form if the user has not submitted yet. ?>
-  <header class="headline col-xs-12"><h2>Add a range of issues</h2></header>
+<?php
+  $addRangeSubmit = filter_input ( INPUT_POST, 'addRangeSubmit' );
+  if ($addRangeSubmit) { include(__ROOT__.'/modules/add_comic/add_range/form-submit.php'); }
+?>
+
+<section data-module="add_range" class="row add-block tab-pane fade" role="tabpanel" id="addRange">
+  <?php if ($addRangeSubmit != true) { // This shows the form if the user has not submitted yet. ?>
+  <header class="headline col-xs-12">
+    <h2>Add a range of issues</h2>
+  </header>
   <div class="col-xs-12">
-    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>?type=range#addrange">
+    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>#addrange">
       <p>Use the form below to add several issues of one series in consecutive order. To add details like <strong>quantity</strong>, <strong>custom story name</strong>, <strong>custom plot</strong>, and <strong>variant cover</strong> please edit the individual issues after submitting.</p>
       <div class="row">
         <div class="col-xs-12 col-md-6">
@@ -50,7 +57,7 @@
           </div>
         </div>
       </div>
-      <input type="hidden" name="submitted" value="yes" />
+      <input type="hidden" name="addRangeSubmit" value="true" />
       <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
     </form>
   </div>
