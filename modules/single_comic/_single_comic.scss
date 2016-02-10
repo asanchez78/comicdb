@@ -1,6 +1,7 @@
 /* Single Issue */
 [data-module="single_comic"],
-[data-module="edit_comic"] {
+[data-module="edit_comic"],
+[data-module="add_issue"] {
   .issue-content {
     @media (min-width: $screen-md) {
       overflow: hidden;

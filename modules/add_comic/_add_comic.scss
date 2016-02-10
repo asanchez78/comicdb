@@ -206,18 +206,20 @@
   }
 }
 
-.form-add-range {
+.button-block {
+  margin: 25px 0;
+}
+
+// Module Specific Styles
+
+[data-module="add_range"] {
   .success-message h3 {
     display: inline-block;
     margin-right: 10px;
   }
 }
 
-.button-block {
-  margin: 25px 0;
-}
-
-#addList {
+[data-module="add_list"] {
   input[type="number"].form-control {
     width: 100%;
   }

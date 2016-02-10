@@ -18,12 +18,10 @@
       </div>
       <div class="row">
         <div class="col-xs-3">
-          <div>
-            <label for="quantity">Quantity</label>
-            <input name="quantity" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" size="3" maxlength="4" value="<?php echo $quantity; ?>" required aria-required="true" />
-          </div>
+          <label for="quantity">Quantity</label>
+          <input name="quantity" class="form-control" type="number" pattern="[0-9]*" inputmode="numeric" autocomplete="off" size="3" maxlength="4" value="<?php echo $quantity; ?>" required aria-required="true" />
         </div>
-        <div class="col-xs-9">
+        <div class="col-xs-4">
           <div class="form-radio">
             <label for="originalPurchase">Purchased When Released:</label>
             <fieldset>
@@ -31,6 +29,10 @@
               <input name="originalPurchase" id="original-no" value="0" type="radio" <?php if ($originalPurchase == 0) { echo 'selected'; } ?> /> <label for="original-no">No</label>
             </fieldset>
           </div>
+        </div>
+        <div class="col-xs-5">
+          <label for="condition">Condition</label>
+          <input name="condition" class="form-control" type="text" autocomplete="off" value="" placeholder="Mint, CCG 9.5, etc." />
         </div>
       </div>
       <div class="plot form-group">
