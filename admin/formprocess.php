@@ -29,6 +29,10 @@
           $messageNum = 3;
           $seriesSubmitted = true;
           $sqlMessage = '<strong class="text-success">Success</strong>: <code>' . $sql . '</code>';
+          $seriesDir = __ROOT__.'/images/' . preg_replace('/[^a-z0-9]+/i', '_', $series_name) . '-v' . $series_vol;
+          if (!file_exists($seriesDir)) {
+            mkdir($seriesDir, 0777, true);
+          }
         } else {
           $sqlMessage = '<strong class="text-danger">Error</strong>: ' . $sql . '<br /><code>' . mysqli_error ( $connection ) . $connection->errno . '</code>';
           $seriesSubmitted = false;
@@ -45,6 +49,7 @@
         $comic = new comicSearch();
         $comic->seriesInfo($series_id, $userID);
         $cvVolumeID = $comic->cvVolumeID;
+        $series_vol = $comic->series_vol;
 
         if (isset($comic->publisherName)) {
           $publisherName = $comic->publisherName;
@@ -53,11 +58,10 @@
           $messageNum = 60;
         }
         $wiki = new wikiQuery;
-        $wiki->issueSearch($cvVolumeID, $issue_number);
+        $wiki->issueSearch($cvVolumeID, $issue_number, $series_vol);
         $searchResults = $wiki->searchResults;
         if ($searchResults != false) {
           $series_name = $comic->series_name;
-          $series_vol = $comic->series_vol;
           $story_name = $wiki->storyName;
           $plot = $wiki->synopsis;
           $release_date = $wiki->releaseDate;
@@ -180,7 +184,7 @@
             }
           } else {
             $wiki = new wikiQuery();
-            $wiki->issueSearch($cvVolumeID, $issue_number);
+            $wiki->issueSearch($cvVolumeID, $issue_number, $series_vol);
             $release_date = $wiki->releaseDate;
             $plot = addslashes( $wiki->synopsis );
             $story_name = addslashes( $wiki->storyName );
@@ -250,7 +254,7 @@
             }
           } else {
             $wiki = new wikiQuery();
-            $wiki->issueSearch($cvVolumeID, $issue_number);
+            $wiki->issueSearch($cvVolumeID, $issue_number, $series_vol);
             $release_date = $wiki->releaseDate;
             $plot = addslashes( $wiki->synopsis );
             $story_name = addslashes( $wiki->storyName );
