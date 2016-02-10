@@ -25,7 +25,7 @@
       <input type="hidden" name="addSeriesSubmit" value="true" />
       <div class="text-center center-block button-block">
         <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><i class="fa fa-plus"></i> Add</button>
+        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
       </div>
     </form>
   </div>
