@@ -43,7 +43,6 @@
     $noThumb=1;
   } else {
     $path = __ROOT__ . '/' . $coverThumbFile;
-    $wiki = new wikiQuery();
     $wiki->downloadFile ( $coverThumbURL, $path );
   }
 
@@ -51,7 +50,6 @@
     $noSmall=1;
   } else {
     $path = __ROOT__ . '/' . $coverSmallFile;
-    $wiki = new wikiQuery();
     $wiki->downloadFile ( $coverSmallURL, $path );
   }
 
