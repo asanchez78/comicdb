@@ -411,4 +411,19 @@ class comicSearch {
         WHERE user_id = $user_id";
     $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
+
+  public function userMeta($user_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+
+    $sql = "SELECT meta_key, meta_value
+        FROM users_meta
+        LEFT JOIN users
+        ON user_id=user_id";
+    $result = $this->db_connection->query ( $sql );
+    print_r ($result);
+    
+  }
 }
