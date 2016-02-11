@@ -41,8 +41,8 @@
             </div>
           </div>
           <div class="col-xs-5">
-            <label for="condition">Condition</label>
-            <input name="condition" class="form-control" type="text" autocomplete="off" value="" placeholder="Mint, CCG 9.5, etc." />
+            <label for="issueCondition">Condition</label>
+            <input name="issueCondition" class="form-control" type="text" autocomplete="off" value="" placeholder="Mint, CCG 9.5, etc." />
           </div>
         </div>
         <div class="plot form-group">
@@ -149,7 +149,7 @@
 
   <?php // ADD SINGLE ISSUE: Part 3/3: Displays success message and allows user to view issue or add another issue.
     } elseif ($addIssueSubmit == 'true') { ?>
-    <div class="add-success col-xs-12 <?php if ($messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
+    <div class="add-success col-xs-12 <?php if (isset($messageNum) && $messageNum != 51) { echo 'bg-success'; } else { echo 'bg-danger'; } ?>">
       <div class="success-message">
         <div class="row">
           <div class="col-md-3 col-xs-hidden">
@@ -157,7 +157,7 @@
           </div>
           <div class="col-xs-12 col-md-9">
             <h3><?php echo $series_name; ?> <small>(<?php echo $series_vol; ?>)</small> #<?php echo $issue_number; ?></h3>
-            <p><?php if ($messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
+            <p><?php if (isset($messageNum) && $messageNum != 51) { echo 'has been added to your collection.'; } else { echo 'already exists in your collection.'; } ?></p>
           </div>
         </div>
         <div class="text-center center-block">

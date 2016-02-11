@@ -21,7 +21,7 @@
   $originalPurchase = filter_input ( INPUT_POST, 'singleOriginalPurchase' );
   $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
   $quantity = filter_input ( INPUT_POST, 'quantity' );
-  $condition = filter_input ( INPUT_POST, 'condition' );
+  $issueCondition = filter_input ( INPUT_POST, 'issueCondition' );
 
   // Formats date
   if ($released_date == 0000 - 00 - 00) {
@@ -59,13 +59,15 @@
     $custPlot = '';
   }
 
+  if (!isset($issueCondition) && $issueCondition !== '') {
+    $issueCondition = 'Mint';
+  }
   $comic = new comicSearch();
   $comic->issueCheck($series_id, $issue_number);
 
   if ($comic->issueExists == 1) {
     // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
-    $sql = "INSERT INTO users_comics (user_id, comic_id, quantity, originalPurchase, custPlot, custStoryName) VALUES ('$ownerID', '$comic->comic_id', '$quantity', '$originalPurchase', '$custPlot', '$custStoryName')";
-    $comic_id = $comic->comic_id;
+    $sql = "INSERT INTO users_comics (user_id, comic_id, quantity, originalPurchase, custPlot, custStoryName, issueCondition) VALUES ('$ownerID', '$comic->comic_id', '$quantity', '$originalPurchase', '$custPlot', '$custStoryName', '$issueCondition')";
     if (mysqli_query ( $connection, $sql )) {
       $messageNum = 1;
     } else {
@@ -81,7 +83,7 @@
       // Add creators to creators table
       $comic->insertCreators($comic_id, $creatorsList);
       // Add to user_comics table
-      $sql_user = "INSERT INTO users_comics (user_id, comic_id, originalPurchase, custPlot) VALUES ('$ownerID', '$comic_id', '$originalPurchase', '$custPlot')";
+      $sql_user = "INSERT INTO users_comics (user_id, comic_id, quantity, originalPurchase, custPlot, custStoryName, issueCondition) VALUES ('$ownerID', '$comic_id', '$quantity', '$originalPurchase', '$custPlot', '$custStoryName', '$issueCondition')";
       if (mysqli_query ( $connection, $sql_user )) {
         $messageNum = 1;
         $sqlMessage = '<strong class="text-success">Success</strong>: Issue did not exist in the current database. Issue added to database and users collection.';
