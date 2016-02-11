@@ -15,17 +15,14 @@ jQuery(document).ready(function($) {
 
   // Detects a hashtag in url for add comics
   var hash = window.location.hash;
-  if(hash) {
-    if(hash == '#addseries') {
-      $('#addTabs a[href="#addSeries"]').tab('show');
-    } else if(hash == '#addsingle') {
-      $('#addTabs a[href="#addSingle"]').tab('show');
-    } else if(hash == '#addrange') {
-      $('#addTabs a[href="#addRange"]').tab('show');
-    } else if(hash == '#addlist') {
-      $('#addTabs a[href="#addList"]').tab('show');
-    }
+  if(hash && hash !== '') {
+    $('#addTabs a[href="' + hash + '"]').tab('show');
   }
+
+  $('#addTabs a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+    window.location.hash = e.target.hash.substr(1) ; 
+    return false;
+  });
 
   // Sort display controls
   var $sortControls, $comics, $comicsList;

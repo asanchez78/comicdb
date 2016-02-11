@@ -6,13 +6,13 @@
   if ($addSeriesSubmit) { include(__ROOT__.'/modules/add_comic/add_series/form-submit.php'); }
 ?>
 
-<section data-module="add_series" class="row add-block tab-pane fade" role="tabpanel" id="addSeries">
+<section data-module="add_series" class="row add-block">
   <?php if ($addSeriesSearch == 'true') { ?>
   <header class="headline col-xs-12">
     <h2>Your Search Results</h2>
   </header>
   <div class="col-xs-12">
-    <form method="post" action="<?php echo $filename; ?>#addseries" class="form-inline add-form" id="add-series-search">
+    <form method="post" action="<?php echo $filename; ?>#addSeries" class="form-inline add-form" id="add-series-search">
       <p>We found the following series on ComicVine related to: <em><?php echo $series_name; ?></em></p>
       <p>Check if it's the correct series by clicking the thumbnail of each of the results from ComicVine to open it in a new tab.</p>
       <div class="form-group form-radio">
@@ -44,14 +44,14 @@
         <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h3>
         <p>is already in your collection</p>
         <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-        <a class="btn btn-lg btn-success add-another" href="/add.php#addseries"><i class="fa fa-plus-square"></i> Add another?</a>
+        <a class="btn btn-lg btn-success add-another" href="/add.php#addSeries"><i class="fa fa-plus-square"></i> Add another?</a>
       </div>
     </div>
     <?php } ?>
   <?php } else {?>
   <header class="headline col-xs-12"><h2>Add Series</h2></header>
   <div class="col-xs-12" id="form-series-add">
-    <form method="post" action="<?php echo $filename; ?>#addseries" class="form-inline add-form" id="form-add-series-1">
+    <form method="post" action="<?php echo $filename; ?>#addSeries" class="form-inline add-form" id="form-add-series-1">
       <p>Use the form below to add a new series to your collection.</p>
       <div class="form-group">
         <label for="publisherID">Publisher</label>
