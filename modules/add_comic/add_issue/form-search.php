@@ -32,6 +32,10 @@
     $coverArtist = $wiki->coverArtist;
     $coverURL = $wiki->coverURL;
     $coverFile = $wiki->coverFile;
+    $coverThumbURL = $wiki->coverThumbURL;
+    $coverThumbFile = $wiki->coverThumbFile;
+    $coverSmallURL = $wiki->coverSmallURL;
+    $coverSmallFile = $wiki->coverSmallFile;
     $creatorsList = $wiki->creatorsList;
   } else {
     $messageNum = 65;

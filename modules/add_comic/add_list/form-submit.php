@@ -31,6 +31,8 @@
       $plot = addslashes( $wiki->synopsis );
       $story_name = addslashes( $wiki->storyName );
       $cover_image = $wiki->coverURL;
+      $coverThumbURL = $wiki->coverThumbURL;
+      $coverSmallURL = $wiki->coverSmallURL;
       $script = $wiki->script;
       $pencils = $wiki->pencils;
       $colors = $wiki->colors;
@@ -46,6 +48,21 @@
         $path = __ROOT__ . '/' . $cover_image_file;
         $wiki->downloadFile ( $cover_image, $path );
       }
+
+      if ($coverSmallURL == 'assets/nocover.jpg') {
+        $noSmall=1;
+      } else {
+        $path = __ROOT__ . '/' . $wiki->coverSmallFile;
+        $wiki->downloadFile ( $coverSmallURL, $path );
+      }
+
+      if ($coverThumbURL == 'assets/nocover.jpg') {
+        $noThumb=1;
+      } else {
+        $path = __ROOT__ . '/' . $wiki->coverThumbFile;
+        $wiki->downloadFile ( $coverThumbURL, $path );
+      }
+
       $sql = "INSERT INTO comics (series_id, issue_number, story_name, release_date, plot, cover_image, wikiUpdated) VALUES ('$series_id', '$issue_number', '$story_name', '$release_date', '$plot', '$cover_image_file', 1)";
       if (mysqli_query ( $connection, $sql )) {
         $comic_id = mysqli_insert_id ( $connection );

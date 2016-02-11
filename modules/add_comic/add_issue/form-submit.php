@@ -14,6 +14,10 @@
   $custPlot = addslashes ( filter_input ( INPUT_POST, 'custPlot' ) );
   $cover_image = filter_input ( INPUT_POST, 'cover_image' );
   $cover_image_file = filter_input ( INPUT_POST, 'cover_image_file' );
+  $coverThumbURL = filter_input ( INPUT_POST, 'coverThumbURL' );
+  $coverThumbFile = filter_input ( INPUT_POST, 'coverThumbFile' );
+  $coverSmallURL = filter_input ( INPUT_POST, 'coverSmallURL' );
+  $coverSmallFile = filter_input ( INPUT_POST, 'coverSmallFile' );
   $originalPurchase = filter_input ( INPUT_POST, 'singleOriginalPurchase' );
   $creatorsList = filter_input ( INPUT_POST, 'creatorsList' );
   $quantity = filter_input ( INPUT_POST, 'quantity' );
@@ -33,6 +37,20 @@
     $path = __ROOT__ . '/' . $cover_image_file;
     $wiki = new wikiQuery();
     $wiki->downloadFile ( $cover_image, $path );
+  }
+
+  if ($coverThumbFile == 'assets/nocover.jpg') {
+    $noThumb=1;
+  } else {
+    $path = __ROOT__ . '/' . $coverThumbFile;
+    $wiki->downloadFile ( $coverThumbURL, $path );
+  }
+
+  if ($coverSmallFile == 'assets/nocover.jpg') {
+    $noSmall=1;
+  } else {
+    $path = __ROOT__ . '/' . $coverSmallFile;
+    $wiki->downloadFile ( $coverSmallURL, $path );
   }
 
   // Checks if the plot has been modified by the user
