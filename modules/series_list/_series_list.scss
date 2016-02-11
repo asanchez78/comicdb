@@ -45,8 +45,8 @@ ul#inventory-table {
   }
 }
 
-#inventory-table.layout-thumb-lg,
-#inventory-table.layout-thumb-sm {
+#inventory-table.layout-thumbLg,
+#inventory-table.layout-thumbSm {
   .series-info {
     display: block;
     position: relative;
@@ -83,7 +83,7 @@ ul#inventory-table {
   }
 }
 
-#inventory-table.layout-thumb-lg {
+#inventory-table.layout-thumbLg {
   h3 {
     font-size: 14px;
   }
@@ -206,11 +206,13 @@ ul#inventory-table {
 }
 
 // Small Thumbnail View
-#inventory-table.layout-thumb-sm {
+#inventory-table.layout-thumbSm {
   padding: 0 10px;
   
   h3 {
-    font-size: 12px;
+    font-size: 11px;
+    font-family: $font-family-sans-serif;
+    letter-spacing: 0;
   }
 
   li {
@@ -273,7 +275,7 @@ ul#inventory-table {
   }
 
   .series-count {
-    margin-top: 2px;
+    display: none;
   }
   
   .issue-number {
