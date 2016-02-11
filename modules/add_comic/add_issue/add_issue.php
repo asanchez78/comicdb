@@ -74,6 +74,10 @@
             <input type="url" class="form-control" name="cover_image" value="<?php echo $coverURL; ?>" />
             <small>Enter the URL of the image you wish to use. Default is the cover file from the ComicVine entry on this issue.</small>
             <input type="hidden" name="cover_image_file" value="<?php echo $coverFile; ?>" />
+            <input type="hidden" name="coverThumbURL" value="<?php echo $coverThumbURL; ?>" />
+            <input type="hidden" name="coverThumbFile" value="<?php echo $coverThumbFile; ?>" />
+            <input type="hidden" name="coverSmallURL" value="<?php echo $coverSmallURL; ?>" />
+            <input type="hidden" name="coverSmallFile" value="<?php echo $coverSmallFile; ?>" />
           </div>
         </div>
         <div class="issue-details">
