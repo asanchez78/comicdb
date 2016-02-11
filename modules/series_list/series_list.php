@@ -50,7 +50,7 @@ if (isset($userSetID) && $validUser == 1) {
       </ul>
     </div>
   </header>
-  <ul id="inventory-table" class="row layout-thumb-lg">
+  <ul id="inventory-table" class="row layout-thumbLg">
   <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {
     $series_id = $row ['series_id'];
     $series_name = $row ['series_name'];

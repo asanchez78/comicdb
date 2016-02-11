@@ -1,4 +1,53 @@
 jQuery(document).ready(function($) {
+  var displayChange = function (type) {
+    var layoutThumbLg, layoutThumbSm, layoutList, days, myDate, cookieString, $comics, $comicsList, typeClass;
+    
+    // Set Cookie to remember list display
+    days=30;
+    myDate = new Date();
+    myDate.setTime(myDate.getTime()+(days*24*60*60*1000));
+    cookieString = 'DisplayStyle=' + type + '; expires=' + myDate.toGMTString() + '; path=/';
+    document.cookie = cookieString;
+    
+    // Layouts
+    layoutThumbLg = 'col-xs-6 col-sm-4 col-md-3 col-lg-2';
+    layoutThumbSm = 'col-xs-3 col-sm-3 col-md-2 col-lg-1';
+    layoutList = 'col-xs-12';
+
+    // Grab the objects
+    $comicsList = $('#inventory-table');
+    $comics = $($comicsList).find('li');
+
+    // Reset rows and classes on each cell
+    $($comicsList).attr('class','row layout-' + type);
+    if (type == 'thumbLg') {
+      typeClass = layoutThumbLg;
+    } else if (type == 'thumbSm') {
+      typeClass = layoutThumbSm;
+    } else {
+      typeClass = layoutList;
+    };
+    $.each($comics, function() {
+      $(this).attr('class', typeClass);
+    });
+  }
+
+  var $sortControls, displayCookie;
+  $sortControls = $('.sort-control');
+
+  displayCookie = document.cookie.split(';').map(function(x){ return x.trim().split('='); }).filter(function(x){ return x[0]==='DisplayStyle'; }).pop();
+
+  if (displayCookie !== undefined) {
+    if (displayCookie[1] == 'thumbSm') {
+      $($sortControls).removeClass('active');
+      $('#sort-thumb-sm').addClass('active');
+      displayChange('thumbSm');
+    } else if (displayCookie[1] == 'list') {
+      $($sortControls).removeClass('active');
+      $('#sort-list').addClass('active');
+      displayChange('list');
+    }
+  }
 
   // Back button. Triggers native browser back state
   var $backButton = $('.form-back');
@@ -24,21 +73,10 @@ jQuery(document).ready(function($) {
     return false;
   });
 
-  // Sort display controls
-  var $sortControls, $comics, $comicsList;
-
-  $sortControls = $('.sort-control');
-  $comicsList = $('#inventory-table');
-  $comics = $($comicsList).find('li');
-
-  $($sortControls).click(function() {
-    var controlId, layoutThumbLg, layoutThumbSm, layoutList;
+  // Sort display control
+  $($sortControls).on("click", function() {
+    var controlId;
     controlId = $(this).attr('id');
-    
-    // Layouts
-    layoutThumbLg = 'col-xs-6 col-sm-4 col-md-3 col-lg-2';
-    layoutThumbSm = 'col-xs-3 col-sm-3 col-md-2 col-lg-1';
-    layoutList = 'col-xs-12';
 
     // Clears the active state from all buttons
     $($sortControls).removeClass('active');
@@ -46,21 +84,11 @@ jQuery(document).ready(function($) {
     $(this).addClass('active');
 
     if(controlId == 'sort-thumb-lg') {
-      $($comicsList).attr('class','row layout-thumb-lg');
-      // Loop through all of the grid items on the page and reset their CSS classes with the styles defined above
-      $.each($comics, function() {
-        $(this).attr('class', layoutThumbLg);
-      });
+      displayChange('thumbLg');
     } else if(controlId == 'sort-thumb-sm') {
-      $($comicsList).attr('class','row layout-thumb-sm');
-      $.each($comics, function() {
-        $(this).attr('class', layoutThumbSm);
-      });
+      displayChange('thumbSm');
     } else {
-      $($comicsList).attr('class','row layout-list');
-      $.each($comics, function() {
-        $(this).attr('class', layoutList);
-      });
+      displayChange('list');
     }
   });
 

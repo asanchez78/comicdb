@@ -5269,108 +5269,108 @@ ul#inventory-table .series-extra {
   font-weight: bold;
 }
 
-#inventory-table.layout-thumb-lg .series-info,
-#inventory-table.layout-thumb-sm .series-info {
+#inventory-table.layout-thumbLg .series-info,
+#inventory-table.layout-thumbSm .series-info {
   display: block;
   position: relative;
 }
-#inventory-table.layout-thumb-lg .series-info:hover,
-#inventory-table.layout-thumb-sm .series-info:hover {
+#inventory-table.layout-thumbLg .series-info:hover,
+#inventory-table.layout-thumbSm .series-info:hover {
   text-decoration: none;
 }
-#inventory-table.layout-thumb-lg li,
-#inventory-table.layout-thumb-sm li {
+#inventory-table.layout-thumbLg li,
+#inventory-table.layout-thumbSm li {
   position: relative;
 }
-#inventory-table.layout-thumb-lg .comic-image,
-#inventory-table.layout-thumb-sm .comic-image {
+#inventory-table.layout-thumbLg .comic-image,
+#inventory-table.layout-thumbSm .comic-image {
   width: 100%;
   display: block;
 }
-#inventory-table.layout-thumb-lg .series-title,
-#inventory-table.layout-thumb-sm .series-title {
+#inventory-table.layout-thumbLg .series-title,
+#inventory-table.layout-thumbSm .series-title {
   text-align: center;
   width: 100%;
 }
-#inventory-table.layout-thumb-lg .issue-number,
-#inventory-table.layout-thumb-lg .release-date,
-#inventory-table.layout-thumb-sm .issue-number,
-#inventory-table.layout-thumb-sm .release-date {
+#inventory-table.layout-thumbLg .issue-number,
+#inventory-table.layout-thumbLg .release-date,
+#inventory-table.layout-thumbSm .issue-number,
+#inventory-table.layout-thumbSm .release-date {
   display: inline-block;
   font-size: 12px;
   width: 50%;
   font-weight: bold;
 }
 
-#inventory-table.layout-thumb-lg h3 {
+#inventory-table.layout-thumbLg h3 {
   font-size: 14px;
 }
-#inventory-table.layout-thumb-lg li {
+#inventory-table.layout-thumbLg li {
   margin-bottom: 20px;
 }
-#inventory-table.layout-thumb-lg li:nth-child(2n+3) {
+#inventory-table.layout-thumbLg li:nth-child(2n+3) {
   clear: both;
 }
 @media (min-width: 410px) {
-  #inventory-table.layout-thumb-lg li:nth-child(2n+3) {
+  #inventory-table.layout-thumbLg li:nth-child(2n+3) {
     clear: none;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-lg li:nth-child(2n+3) {
+  #inventory-table.layout-thumbLg li:nth-child(2n+3) {
     clear: none;
   }
 }
 @media (min-width: 410px) {
-  #inventory-table.layout-thumb-lg li:nth-child(3n+4) {
+  #inventory-table.layout-thumbLg li:nth-child(3n+4) {
     clear: both;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-lg li:nth-child(3n+4) {
+  #inventory-table.layout-thumbLg li:nth-child(3n+4) {
     clear: none;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-lg li:nth-child(4n+5) {
+  #inventory-table.layout-thumbLg li:nth-child(4n+5) {
     clear: both;
   }
 }
 @media (min-width: 900px) {
-  #inventory-table.layout-thumb-lg li:nth-child(4n+5) {
+  #inventory-table.layout-thumbLg li:nth-child(4n+5) {
     clear: none;
   }
 }
 @media (min-width: 900px) {
-  #inventory-table.layout-thumb-lg li:nth-child(6n+7) {
+  #inventory-table.layout-thumbLg li:nth-child(6n+7) {
     clear: both;
   }
 }
-#inventory-table.layout-thumb-lg li .series-info {
+#inventory-table.layout-thumbLg li .series-info {
   -webkit-transition: box-shadow 0.2s ease-in-out;
           transition: box-shadow 0.2s ease-in-out;
   box-shadow: 0px 0px 15px 1px transparent;
   color: white;
 }
-#inventory-table.layout-thumb-lg li .series-info:hover, #inventory-table.layout-thumb-lg li .series-info:focus {
+#inventory-table.layout-thumbLg li .series-info:hover, #inventory-table.layout-thumbLg li .series-info:focus {
   text-decoration: none;
   box-shadow: 0px 0px 15px 1px gray;
 }
-#inventory-table.layout-thumb-lg li .issue-meta {
+#inventory-table.layout-thumbLg li .issue-meta {
   width: 50%;
   vertical-align: top;
 }
-#inventory-table.layout-thumb-lg .series-title {
+#inventory-table.layout-thumbLg .series-title {
   position: absolute;
   bottom: 0;
   background: black;
   opacity: 0.9;
   padding: 5px 10px;
 }
-#inventory-table.layout-thumb-lg .series-title a {
+#inventory-table.layout-thumbLg .series-title a {
   color: white;
 }
-#inventory-table.layout-thumb-lg .volume-number {
+#inventory-table.layout-thumbLg .volume-number {
   width: 45px;
   height: 48px;
   overflow: hidden;
@@ -5378,7 +5378,7 @@ ul#inventory-table .series-extra {
   top: -3px;
   right: 13px;
 }
-#inventory-table.layout-thumb-lg .volume-number span {
+#inventory-table.layout-thumbLg .volume-number span {
   display: block;
   color: white;
   text-align: center;
@@ -5393,107 +5393,109 @@ ul#inventory-table .series-extra {
   font-size: 10px;
   font-weight: bold;
 }
-#inventory-table.layout-thumb-lg .release-date {
+#inventory-table.layout-thumbLg .release-date {
   text-align: right;
 }
-#inventory-table.layout-thumb-lg .series-extra {
+#inventory-table.layout-thumbLg .series-extra {
   padding-top: 5px;
 }
-#inventory-table.layout-thumb-lg .series-count {
+#inventory-table.layout-thumbLg .series-count {
   display: inline-block;
   margin: 0 auto;
   width: 100%;
   text-align: center;
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-lg .series-count {
+  #inventory-table.layout-thumbLg .series-count {
     width: 58%;
     text-align: left;
   }
 }
-#inventory-table.layout-thumb-lg .series-controls {
+#inventory-table.layout-thumbLg .series-controls {
   display: inline-block;
   width: 38%;
 }
-#inventory-table.layout-thumb-lg .series-controls button {
+#inventory-table.layout-thumbLg .series-controls button {
   padding: 1px 2px;
 }
 
-#inventory-table.layout-thumb-sm {
+#inventory-table.layout-thumbSm {
   padding: 0 10px;
 }
-#inventory-table.layout-thumb-sm h3 {
-  font-size: 12px;
+#inventory-table.layout-thumbSm h3 {
+  font-size: 11px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
-#inventory-table.layout-thumb-sm li {
+#inventory-table.layout-thumbSm li {
   margin-bottom: 15px;
   padding-left: 5px;
   padding-right: 5px;
 }
-#inventory-table.layout-thumb-sm li:nth-child(4n+5) {
+#inventory-table.layout-thumbSm li:nth-child(4n+5) {
   clear: both;
 }
 @media (min-width: 410px) {
-  #inventory-table.layout-thumb-sm li:nth-child(4n+5) {
+  #inventory-table.layout-thumbSm li:nth-child(4n+5) {
     clear: none;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-sm li:nth-child(4n+5) {
+  #inventory-table.layout-thumbSm li:nth-child(4n+5) {
     clear: none;
   }
 }
 @media (min-width: 410px) {
-  #inventory-table.layout-thumb-sm li:nth-child(4n+5) {
+  #inventory-table.layout-thumbSm li:nth-child(4n+5) {
     clear: both;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-sm li:nth-child(4n+5) {
+  #inventory-table.layout-thumbSm li:nth-child(4n+5) {
     clear: none;
   }
 }
 @media (min-width: 641px) {
-  #inventory-table.layout-thumb-sm li:nth-child(6n+7) {
+  #inventory-table.layout-thumbSm li:nth-child(6n+7) {
     clear: both;
   }
 }
 @media (min-width: 900px) {
-  #inventory-table.layout-thumb-sm li:nth-child(6n+7) {
+  #inventory-table.layout-thumbSm li:nth-child(6n+7) {
     clear: none;
   }
 }
 @media (min-width: 900px) {
-  #inventory-table.layout-thumb-sm li:nth-child(12n+13) {
+  #inventory-table.layout-thumbSm li:nth-child(12n+13) {
     clear: both;
   }
 }
-#inventory-table.layout-thumb-sm .series-title {
+#inventory-table.layout-thumbSm .series-title {
   margin-top: 5px;
 }
-#inventory-table.layout-thumb-sm .volume-number {
+#inventory-table.layout-thumbSm .volume-number {
   margin-top: 2px;
   text-transform: uppercase;
   font-size: 9px;
   font-weight: bold;
   text-align: center;
 }
-#inventory-table.layout-thumb-sm .volume-number:before {
+#inventory-table.layout-thumbSm .volume-number:before {
   content: "( ";
   display: inline;
 }
-#inventory-table.layout-thumb-sm .volume-number:after {
+#inventory-table.layout-thumbSm .volume-number:after {
   content: ")";
   display: inline;
 }
-#inventory-table.layout-thumb-sm .series-count {
-  margin-top: 2px;
+#inventory-table.layout-thumbSm .series-count {
+  display: none;
 }
-#inventory-table.layout-thumb-sm .issue-number {
+#inventory-table.layout-thumbSm .issue-number {
   width: 100%;
   text-align: center;
 }
-#inventory-table.layout-thumb-sm .release-date {
+#inventory-table.layout-thumbSm .release-date {
   display: none;
 }
 
