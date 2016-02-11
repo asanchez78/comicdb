@@ -1,15 +1,6 @@
 <?php
   require_once('views/head.php');
   $filename = $_SERVER["PHP_SELF"];
-  
-  // Reset all our form flags
-  $seriesSearch = false;
-  $seriesAdd = false;
-  $seriesSubmit = false;
-  $listSearch = false;
-  $rangeSearch = false;
-  $submitted = filter_input ( INPUT_POST, 'submitted' );
-  if ($submitted) { include('admin/formprocess.php'); }
 ?>
   <title>Add :: POW! Comic Book Manager</title>
 </head>
@@ -45,16 +36,23 @@
   </div>
   <div class="tab-content">
     <?php // ADD SINGLE ISSUE ?>
-    <?php include(__ROOT__.'/modules/add_comic/add_issue/add_issue.php'); ?>
-
+    <div class="tab-pane fade in active" role="tabpanel" id="addSingle">
+      <?php include(__ROOT__.'/modules/add_comic/add_issue/add_issue.php'); ?>
+    </div>
     <?php // ADD RANGE ?>
+    <div class="tab-pane fade" role="tabpanel" id="addRange">
     <?php include(__ROOT__.'/modules/add_comic/add_range/add_range.php'); ?>
+    </div>
     
     <?php // ADD LIST ?>
+    <div class="tab-pane fade" role="tabpanel" id="addList">
     <?php include(__ROOT__.'/modules/add_comic/add_list/add_list.php'); ?>
+    </div>
 
     <?php // ADD SERIES ?>
+    <div class="tab-pane fade" role="tabpanel" id="addSeries">
     <?php include(__ROOT__.'/modules/add_comic/add_series/add_series.php'); ?>
+    </div>
   </div>
 <?php include 'views/footer.php';?>
 </body>

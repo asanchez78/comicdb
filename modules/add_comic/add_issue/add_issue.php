@@ -6,7 +6,7 @@
   if ($addIssueSubmit) { include(__ROOT__.'/modules/add_comic/add_issue/form-submit.php'); }
 ?>
 
-<section data-module="add_issue" class="row add-block tab-pane fade in active" role="tabpanel" id="addSingle">
+<section data-module="add_issue" class="row add-block">
   <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
     if ($addIssueSearch == 'true' && $searchResults == 'true') { ?>
     <header class="col-xs-12 headline">
@@ -158,7 +158,7 @@
         </div>
         <div class="text-center center-block">
           <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
-          <a href="/add.php#addissue" class="btn btn-lg btn-info">Add another?</a>
+          <a href="/add.php#addSingle" class="btn btn-lg btn-info">Add another?</a>
         </div>
       </div>
     </div>

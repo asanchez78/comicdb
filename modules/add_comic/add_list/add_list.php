@@ -3,13 +3,13 @@
   if ($addListSubmit) { include(__ROOT__.'/modules/add_comic/add_list/form-submit.php'); }
 ?>
 
-<section data-module="add_list" class="row add-block tab-pane fade" role="tabpanel" id="addList">
+<section data-module="add_list" class="row add-block">
   <header class="col-xs-12 headline">
     <h2>Add List of Issues</h2>
   </header>
   <div class="col-xs-12">
     <?php if ($addListSubmit != true) { ?>
-    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>#addlist">
+    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>#addList">
       <p>Use the form below to add several issues of one series to your collection. Separate any issues with commas.</p>
       <div class="form-group">
         <label for="series_name">Series</label>
@@ -54,7 +54,7 @@
           </div>
           <div class="text-center center-block">
             <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
-            <a href="/add.php#addlist" class="btn btn-lg btn-info">Add More</a>
+            <a href="/add.php#addList" class="btn btn-lg btn-info">Add More</a>
           </div>
         </div>
       </div>
