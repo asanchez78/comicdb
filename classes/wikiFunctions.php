@@ -182,6 +182,32 @@ class wikiQuery {
 				$this->coverURL = 'assets/nocover.jpg';
 				$this->noCover = true;
 			}
+			if ($detailResults['results']['image']['thumb_url']) {
+				$subject = $detailResults['results']['image']['thumb_url'];
+				$pattern = "/(?<=jpg|png|jpeg).*/";
+				$replacement = "";
+				$this->coverThumbURL = preg_replace($pattern, $replacement, $subject);
+				$imageDir = 'images/';
+				$seriesPlain = preg_replace('/[^a-z0-9]+/i', '_', $this->seriesName) . '-v' . $series_vol;
+				$this->coverThumbFile = $imageDir . $seriesPlain . '/' . $seriesPlain . '_' . $issue_number . '-thumb.jpg';
+			} else {
+				$this->coverThumbFile = 'assets/nocover.jpg';
+				$this->coverThumbURL = 'assets/nocover.jpg';
+				$this->noThumbCover = true;
+			}
+			if ($detailResults['results']['image']['small_url']) {
+				$subject = $detailResults['results']['image']['small_url'];
+				$pattern = "/(?<=jpg|png|jpeg).*/";
+				$replacement = "";
+				$this->coverSmallURL = preg_replace($pattern, $replacement, $subject);
+				$imageDir = 'images/';
+				$seriesPlain = preg_replace('/[^a-z0-9]+/i', '_', $this->seriesName) . '-v' . $series_vol;
+				$this->coverSmallFile = $imageDir . $seriesPlain . '/' . $seriesPlain . '_' . $issue_number . '-small.jpg';
+			} else {
+				$this->coverSmallFile = 'assets/nocover.jpg';
+				$this->coverSmallURL = 'assets/nocover.jpg';
+				$this->noSmallCover = true;
+			}
 		} else {
 			$this->searchResults = false;
 		}
