@@ -418,12 +418,33 @@ class comicSearch {
       die ( "Connection failed:" );
     }
 
-    $sql = "SELECT meta_key, meta_value
+    $sql = "SELECT *
         FROM users_meta
-        LEFT JOIN users
-        ON user_id=user_id";
+        WHERE user_id = $user_id";
     $result = $this->db_connection->query ( $sql );
-    print_r ($result);
+    if ($result->num_rows > 0) {
+      $this->meta_key = array();
+      $this->meta_val = array();
+      while ( $row = $result->fetch_assoc () ) {
+        array_push($this->meta_key, $row ['meta_key']);
+        array_push($this->meta_val, $row ['meta_value']);
+      }
+      // Loops through the meta_key array for values, then gets their associated key and assigns it to a global var.
+      for ($i = 0; $i <= sizeof($this->meta_key); $i++) {
+        if ($this->meta_key[$i] === 'first_name') {
+           $this->user_first_name = $this->meta_val[$i];
+        }
+        if ($this->meta_key[$i] === 'last_name') {
+           $this->user_last_name = $this->meta_val[$i];
+        }
+        if ($this->meta_key[$i] === 'location') {
+           $this->user_location = $this->meta_val[$i];
+        }
+        if ($this->meta_key[$i] === 'avatar') {
+           $this->user_avatar = $this->meta_val[$i];
+        }
+      }
+    }
     
   }
 }

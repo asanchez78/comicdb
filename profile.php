@@ -5,6 +5,10 @@
   $comic->userMeta($userID);
   $comic->collectionCount ($userID);
   $totalIssues = $comic->total_issue_count;
+  $first_name = $comic->user_first_name;
+  $last_name = $comic->user_last_name;
+  $location = $comic->user_location;
+  $avatar = $comic->user_avatar;
 ?>
   <title>Your Collection :: POW! Comic Book Manager</title>
 </head>
@@ -16,7 +20,7 @@
   } ?>
   <header class="row headline">
     <div class="col-xs-12 col-md-5 col-lg-6">
-      <h2>Your Profile</h2>
+      <div class="user-avatar pull-left" style="width: 80px;"><img src="<?php echo $avatar;?>" alt="" class="img-circle img-responsive" /></div><h2>Your Profile</h2>
     </div>
     <div class="col-xs-12 col-md-7 col-lg-6 series-meta">
       <ul class="nolist row">
@@ -32,8 +36,7 @@
   </header>
   <div class="row">
     <div class="col-md-8">
-      Hello <?php echo $first_name . ' ' . $last_name; ?><br />
-      
+    Hello <?php echo $first_name . ' ' . $last_name . ' in ' . $location; ?><br />
     </div>
     <div class="col-md-4 sidebar">
       
