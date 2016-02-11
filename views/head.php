@@ -47,3 +47,5 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" href="/assets/pow.png">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/scripts/comicdb.js"></script>
