@@ -10,6 +10,8 @@
  * seriesList
  * seriesFind
  * seriesInfo
+ * userMeta
+ * userLookup
  * 
  * </pre>
  * @author asanchez
@@ -429,8 +431,10 @@ class comicSearch {
         array_push($this->meta_key, $row ['meta_key']);
         array_push($this->meta_val, $row ['meta_value']);
       }
+      // offset 1 for 0 array position
+      $array_size = sizeof($this->meta_key) -1;
       // Loops through the meta_key array for values, then gets their associated key and assigns it to a global var.
-      for ($i = 0; $i <= sizeof($this->meta_key); $i++) {
+      for ($i = 0; $i <= $array_size; $i++) {
         if ($this->meta_key[$i] === 'first_name') {
            $this->user_first_name = $this->meta_val[$i];
         }
@@ -443,8 +447,26 @@ class comicSearch {
         if ($this->meta_key[$i] === 'avatar') {
            $this->user_avatar = $this->meta_val[$i];
         }
+        if ($this->meta_key[$i] === 'user_follows') {
+           $this->user_follows = $this->meta_val[$i];
+        }
       }
     }
-    
+  }
+
+  public function userLookup($profile_name) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT user_id
+        FROM users
+        WHERE user_name = '$profile_name'";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      while ( $row = $result->fetch_assoc () ) {
+        $this->browse_user_id = $row ['user_id'];
+      }
+    }
   }
 }

@@ -1,16 +1,51 @@
 <?php
   require_once('views/head.php');
 
+  $profile_name = filter_input(INPUT_GET, 'user');
   $comic = new comicSearch ();
-  $comic->userMeta($userID);
-  $comic->collectionCount ($userID);
+  if (isset($profile_name) && $profile_name != '') {
+    $comic->userLookup($profile_name);
+    $comic->userMeta($comic->browse_user_id);
+    $comic->collectionCount ($comic->browse_user_id);
+  } else {
+    $comic->userMeta($userID);
+    $comic->collectionCount ($userID);
+  }
   $totalIssues = $comic->total_issue_count;
-  $first_name = $comic->user_first_name;
-  $last_name = $comic->user_last_name;
-  $location = $comic->user_location;
-  $avatar = $comic->user_avatar;
+  if (isset($comic->user_first_name)) {
+    $first_name = $comic->user_first_name;  
+  } else {
+    $first_name = '';
+  }
+  if (isset($comic->user_last_name)) {
+    $last_name = $comic->user_last_name;
+  } else {
+    $last_name = '';
+  }
+  if (isset($comic->user_location)) {
+    $location = $comic->user_location;
+  } else {
+    $location = '';
+  }
+  if (isset($comic->user_avatar)) {
+    $avatar = $comic->user_avatar;
+  } else {
+    $avatar = '';
+  }
+  if (isset($comic->user_follows)) {
+    $follows = $comic->user_follows;
+    $user = new comicSearch ();
+    $user->userMeta($follows);
+    if (isset($user->user_avatar)) {
+      $followAvatar = '<a href="/profiles.php?user='. $profile_name . '"><img src="' . $user->user_avatar . '" alt="" class="img-circle img-responsive" /></a>';
+    } else {
+      $followAvatar = '';
+    }
+  } else {
+    $follows = '';
+  }
 ?>
-  <title>Your Collection :: POW! Comic Book Manager</title>
+  <title><?php if (isset($profile_name) && $profile_name != '') { echo $first_name . ' ' . $last_name; } else { echo 'Your Profile'; } ?> :: POW! Comic Book Manager</title>
 </head>
 <body>
   <?php include 'views/header.php';?>
@@ -20,7 +55,8 @@
   } ?>
   <header class="row headline">
     <div class="col-xs-12 col-md-5 col-lg-6">
-      <div class="user-avatar pull-left" style="width: 80px;"><img src="<?php echo $avatar;?>" alt="" class="img-circle img-responsive" /></div><h2>Your Profile</h2>
+      <div class="user-avatar pull-left" style="width: 80px;"><img src="<?php echo $avatar;?>" alt="" class="img-circle img-responsive" /></div>
+      <h2><?php if (isset($profile_name) && $profile_name != '') { echo $first_name . ' ' . $last_name; } else { echo 'Your Profile'; } ?></h2>
     </div>
     <div class="col-xs-12 col-md-7 col-lg-6 series-meta">
       <ul class="nolist row">
@@ -39,7 +75,11 @@
     Hello <?php echo $first_name . ' ' . $last_name . ' in ' . $location; ?><br />
     </div>
     <div class="col-md-4 sidebar">
-      
+      Following: 
+      <ul class="list-inline follow-list">
+        <li class="col-xs-2"><?php echo $followAvatar; ?></li>
+        <li class="col-xs-2"><?php echo $followAvatar; ?></li>
+      </ul>
     </div>
   </div>
 <?php include 'views/footer.php';?>
