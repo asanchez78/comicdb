@@ -160,10 +160,12 @@ class comicSearch {
         } else {
           $this->release_date = "";
         }
-        $this->cover_image = $row ['cover_image'];
+        $this->coverMed = $row ['cover_image'];
+        $this->coverSmall = str_replace('-medium.', '-small.', $this->coverMed);
+        $this->coverThumb = str_replace('-medium.', '-thumb.', $this->coverMed);
         $this->issue_list .= '<li class="col-xs-6 col-sm-4 col-md-3 col-lg-2" id="issue-' . $this->issue_number . '"><div class="series-list-row">';
         $this->issue_list .= '<a href="comic.php?comic_id=' . $this->comic_id . '" class="issue-info"><div class="series-list-row">';
-          $this->issue_list .= '<div class="comic-image"><img src="' . $this->cover_image . '" alt="" class="img-responsive" /></div>';
+          $this->issue_list .= '<div class="comic-image"><img src="' . $this->coverSmall . '" alt="" class="img-responsive" /></div>';
           $this->issue_list .= '<div class="story-name"><h3>' . $this->story_name . '</h3></div>';
         $this->issue_list .= '</div></a>';
         $this->issue_list .= '<div class="issue-number text-uppercase">#' . $this->issue_number . '</div>';
@@ -300,9 +302,11 @@ class comicSearch {
           WHERE users_comics.user_id=$ownerID AND series_id=$series_id
           ORDER BY issue_number DESC LIMIT 1";
       if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
-        $this->series_latest_cover = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+        $this->latestCoverMed = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+        $this->latestCoverSmall = str_replace('-medium.', '-small.', $this->latestCoverMed);
+        $this->latestCoverThumb = str_replace('-medium.', '-thumb.', $this->latestCoverMed);
       } else {
-        $this->series_latest_cover = "assets/nocover.jpg";
+        $this->latestCoverSmall = "assets/nocover.jpg";
       }
     }
   }
