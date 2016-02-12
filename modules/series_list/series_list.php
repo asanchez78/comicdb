@@ -61,9 +61,11 @@ if (isset($userSetID) && $validUser == 1) {
       $comic->seriesInfo($series_id, $userID);
     }
     $series_issue_count = $comic->series_issue_count;
-    $series_cover = $comic->latestCoverSmall;
-    if ($series_cover == NULL) {
-      $series_cover = 'assets/nocover.jpg';
+    $latestCoverMed = $comic->latestCoverMed;
+    $latestCoverSmall = $comic->latestCoverSmall;
+    $latestCoverThumb = $comic->latestCoverThumb;
+    if ($latestCoverMed == NULL) {
+      $latestCoverMed = 'assets/nocover.jpg';
     } 
     $publisherName = $comic->publisherName;
     $publisherShort = $comic->publisherShort;
@@ -74,7 +76,7 @@ if (isset($userSetID) && $validUser == 1) {
         <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
           <div class="series-list-row">
             <div class="comic-image">
-              <img src="/<?php echo $series_cover; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
+              <img src="/<?php echo $latestCoverMed; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
             </div>
             <div class="series-title"><h3><?php echo $series_name; ?></h3></div>
           </div>
