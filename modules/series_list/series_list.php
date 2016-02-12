@@ -61,7 +61,7 @@ if (isset($userSetID) && $validUser == 1) {
       $comic->seriesInfo($series_id, $userID);
     }
     $series_issue_count = $comic->series_issue_count;
-    $series_cover = $comic->series_latest_cover;
+    $series_cover = $comic->latestCoverSmall;
     if ($series_cover == NULL) {
       $series_cover = 'assets/nocover.jpg';
     } 
