@@ -1,0 +1,123 @@
+<?php
+  $comic->collectionCount ($profileID);
+  $comic->seriesCount ($profileID);
+  $totalIssues = $comic->total_issue_count;
+
+  if (isset($comic->user_location)) {
+    $location = $comic->user_location;
+  } else {
+    $location = '';
+  }
+
+  if (isset($comic->user_avatar)) {
+    $avatar = $comic->user_avatar;
+  } else {
+    $avatar = '';
+  }
+
+  if (isset($comic->user_follows)) {
+    $followAvatar = '';
+    $followList = explode(',', $comic->user_follows);
+    $followCount = count($followList);
+    foreach ($followList as $followUser) {
+      $user = new comicSearch ();
+      $user->userFollows($followUser);
+      $user->userMeta($followUser);
+      if (isset($user->user_first_name)) {
+        $follow_first_name = $user->user_first_name;  
+      } else {
+        $follow_first_name = '';
+      }
+      if (isset($user->user_last_name)) {
+        $follow_last_name = $user->user_last_name;
+      } else {
+        $follow_last_name = '';
+      }
+      if (isset($user->user_avatar)) {
+        $followAvatar .= '<li><a href="/profile.php?user='. $user->follow_username . '"><img src="' . $user->user_avatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" /></a></li>';
+      } else {
+        $followAvatar .= '';
+      }
+    }
+  } else {
+    $follows = '';
+  }
+
+  if (isset($comic->facebook_url)) {
+    $facebook_url = $comic->facebook_url;
+  } else {
+    $facebook_url = '';
+  }
+
+  if (isset($comic->twitter_url)) {
+    $twitter_url = $comic->twitter_url;
+  } else {
+    $twitter_url = '';
+  }
+
+  if (isset($comic->instagram_url)) {
+    $instagram_url = $comic->instagram_url;
+  } else {
+    $instagram_url = '';
+  }
+?>
+
+<div data-module="user-meta">
+  <div class="row">
+    <div class="col-xs-2 user-avatar">
+      <img src="<?php echo $avatar;?>" alt="" class="img-circle img-responsive" />
+    </div>
+    <div class="col-xs-10 user-meta-block">
+      <div class="row">
+        <div class="col-xs-6 col-md-12 user-name">
+          <h2><?php echo $first_name . ' ' . $last_name; ?></h2>
+          <?php echo $location; // http://bit.ly/1SmEFhh ?>
+          <div class="social-icons">
+            <?php if ($facebook_url != '') { ?>
+              <a href="<?php echo $facebook_url; ?>" title="View <?php echo $first_name; ?>'s Facebook Profile" target="_blank"><i class="fa fa-fw fa-facebook"></i><span class="sr-only">Facebook</span></a>
+            <?php } ?>
+            <?php if ($twitter_url != '') { ?>
+              <a href="<?php echo $twitter_url; ?>" title="View <?php echo $first_name; ?>'s Twitter Profile" target="_blank"><i class="fa fa-fw fa-twitter"></i><span class="sr-only">Twitter</span></a>
+            <?php } ?>
+            <?php if ($instagram_url != '') { ?>
+              <a href="<?php echo $instagram_url; ?>" title="View <?php echo $first_name; ?>'s Instagram Gallery" target="_blank"><i class="fa fa-fw fa-instagram"></i><span class="sr-only">Instagram</span></a>
+            <?php } ?>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-12 user-count">
+          <div class="row">
+            <div class="col-xs-6 col-md-2 text-center">
+              <h3 class="big-red"><?php echo $totalIssues; ?></h3>
+              comics
+            </div>
+            <div class="hidden-xs hidden-sm col-md-2 text-center">
+              <h3 class="big-red"><?php echo $comic->total_series_count; ?></h3>
+              series
+            </div>
+            <div class="col-xs-6 col-md-4 text-center">
+              <?php if ($comic->user_follows != '') { ?>
+              <h3 class="big-red hidden-md hidden-lg"><?php echo $followCount; ?></h3>
+              following
+              <div class="hidden-xs hidden-sm">
+                <ul class="nolist follow-list">
+                  <?php echo $followAvatar; ?>
+                </ul>
+              </div>
+              <?php } ?>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-4 text-center">
+              <?php if ($comic->user_follows != '') { ?>
+              followers
+              <div class="hidden-xs hidden-sm">
+                <ul class="nolist follow-list">
+                  <?php echo $followAvatar; ?>
+                </ul>
+              </div>
+              <?php } ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

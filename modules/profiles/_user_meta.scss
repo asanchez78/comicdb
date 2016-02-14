@@ -1,0 +1,146 @@
+[data-module="user-meta"] {
+  font-size: 11px;
+  background: white;
+  position: absolute;
+  bottom: 0;
+  opacity: 0.9;
+  width: 100%;
+
+  @media (min-width: $screen-md) {
+    font-size: 12px;
+
+    > .row {
+      margin-right: 0;
+    }
+  }
+
+  h2 {
+    font-size: 16px;
+    margin: 0;
+
+    @media (min-width: $screen-md) {
+      font-size: 32px;
+      margin-bottom: -4px;
+    }
+  }
+
+  .user-avatar {
+    padding-right: 0;
+    margin-top: -12px;
+    margin-bottom: 5px;
+
+    > img {
+      border: 2px solid $brand-orange;
+      box-shadow: 0 0 5px #333;
+      margin-left: 5px;
+      width: 100%;
+    }
+  }
+  
+  .user-meta-block {
+    padding-right: 0;
+    > .row {
+      margin-right: 15px;
+
+      @media (min-width: $screen-md) {
+        margin-right: -15px;
+      }
+    }
+
+    @media (min-width: $screen-md) {
+      margin-left: -15px;
+      padding-left: 30px;
+    }
+  }
+
+  .user-name {
+    margin-top: 10px;
+    border-right: 1px solid $border-color;
+
+    @media (min-width: $screen-md) {
+      border-right: none;
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 5px;
+    }
+  }
+  
+  .user-count {
+    margin-top: 10px;
+
+    @media (min-width: $screen-md) {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    > .row > div {
+      padding-left: 5px;
+      padding-right: 5px;
+      &:last-of-type {
+        padding-left: 0;
+        padding-right: 15px;
+        border-left: 1px solid $border-color;
+      }
+    }
+  }
+
+  .follow-list li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0 3px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  .social-icons {
+    display: inline-block;
+
+    &:before {
+      content: '•';
+      display: inline;
+      margin: 0 5px;
+    }
+    
+    @media (min-width: $screen-md) {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      font-size: 18px;
+
+      &:before {
+        display: none;
+        margin: 0;
+      }
+    }
+
+    a {
+      display: inline;
+      color: $text-color;
+      cursor: pointer;
+      @media (min-width: $screen-md) {
+        opacity: 0.5;
+      }
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+  }
+
+  .big-red {
+    margin: 0 0 -3px 0;
+    font-size: 20px;
+    color: $brand-red;
+
+    @media (min-width: $screen-md) {
+      font-size: 30px;
+    }
+  }
+}

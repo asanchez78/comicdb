@@ -418,6 +418,21 @@ class comicSearch {
     $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
 
+  public function seriesCount($user_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+
+    $sql = "SELECT user_id, comics.comic_id, users_comics.comic_id, series_id
+      FROM comics
+      JOIN users_comics
+      ON comics.comic_id=users_comics.comic_id
+      WHERE users_comics.user_id=$user_id
+      GROUP BY series_id";
+    $this->total_series_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+  }
+
   public function userMeta($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -454,6 +469,15 @@ class comicSearch {
         if ($this->meta_key[$i] === 'user_follows') {
            $this->user_follows = $this->meta_val[$i];
         }
+        if ($this->meta_key[$i] === 'facebook_url') {
+           $this->facebook_url = $this->meta_val[$i];
+        }
+        if ($this->meta_key[$i] === 'twitter_url') {
+           $this->twitter_url = $this->meta_val[$i];
+        }
+        if ($this->meta_key[$i] === 'instagram_url') {
+           $this->instagram_url = $this->meta_val[$i];
+        }
       }
     }
   }
@@ -470,6 +494,45 @@ class comicSearch {
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
         $this->browse_user_id = $row ['user_id'];
+      }
+    }
+  }
+
+  public function userFollows($profile_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT user_name
+        FROM users
+        WHERE user_id = '$profile_id'";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      while ( $row = $result->fetch_assoc () ) {
+        $this->follow_username = $row ['user_name'];
+      }
+    }
+  }
+
+  public function userCovers($user_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connect failed:" );
+    }
+    $sql = "SELECT cover_image
+        FROM comics
+        LEFT JOIN users_comics
+        ON comics.comic_id=users_comics.comic_id
+        WHERE users_comics.user_id=$user_id 
+        ORDER BY RAND()
+        LIMIT 36";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      $this->cover_list = '';
+      while ( $row = $result->fetch_assoc () ) {
+        $this->coverMed = $row ['cover_image'];
+        $this->coverThumb = str_replace('-medium.', '-thumb.', $this->coverMed);
+        $this->cover_list .= '<div class="col-xs-2 col-md-1 profile-bg-image"><img src="' . $this->coverThumb . '" alt="" class="img-responsive" /></div>';
       }
     }
   }
