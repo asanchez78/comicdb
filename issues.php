@@ -44,7 +44,7 @@
         </ul>
       </div>
     </header>
-    <ul id="inventory-table" class="row layout-thumb-lg">
+    <ul id="inventory-table" class="row layout-thumbLg">
       <?php echo $comic->issue_list; ?>
     </ul>
   </div>

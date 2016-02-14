@@ -4,6 +4,13 @@ ul#inventory-table {
   margin-top: 20px;
   list-style-type: none;
   padding: 0;
+  margin-left: -10px;
+  margin-right: -10px;
+  
+  > li {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
   h3 {
     margin: 0;
@@ -77,10 +84,6 @@ ul#inventory-table {
     width: 50%;
     font-weight: bold;
   }
-
-  .issue-number {
-
-  }
 }
 
 #inventory-table.layout-thumbLg {
@@ -89,7 +92,7 @@ ul#inventory-table {
   }
 
   li {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     &:nth-child(2n+3) {
       clear: both;
@@ -188,20 +191,6 @@ ul#inventory-table {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-
-    @media (min-width: $screen-md) {
-      width: 58%;
-      text-align: left;
-    }
-  }
-
-  .series-controls {
-    display: inline-block;
-    width: 38%;
-
-    button {
-      padding: 1px 2px;
-    }
   }
 }
 
