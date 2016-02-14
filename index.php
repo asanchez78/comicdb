@@ -6,19 +6,19 @@
 </head>
 <body>
   <?php include 'views/header.php';?>
-  <?php if ($login->isUserLoggedIn () == true || isset ($validUser) && $validUser == 1) {
-    include ('modules/series_list/series_list.php');
+  <?php
+  // If users is logged in, shows a random comic from their collection. Otherwise just shows a random comic.
+  if ($login->isUserLoggedIn () == true) {
+    $sql = "SELECT comics.comic_id, users_comics.comic_id FROM comics LEFT JOIN users_comics ON comics.comic_id=users_comics.comic_id WHERE users_comics.user_id=$userID ORDER BY RAND() LIMIT 1";
   } else {
-    if (isset($userSetID) && $validUser != 1) {
-      $messageNum = 52;
-    }
-    $sql = "SELECT comic_id FROM comics ORDER BY RAND() LIMIT 0,1";
-    $result = $connection->query ( $sql );
-    while ($row = $result->fetch_assoc()) {
-      $comic_id = $row['comic_id'];
-    }
-    include 'modules/single_comic/single_comic.php';
-  } ?>
+    $sql = "SELECT comic_id FROM comics ORDER BY RAND() LIMIT 1";
+  }
+  $result = $connection->query ( $sql );
+  while ($row = $result->fetch_assoc()) {
+    $comic_id = $row['comic_id'];
+  }
+  include 'modules/single_comic/single_comic.php';
+  ?>
 <?php include 'views/footer.php';?>
 </body>
 </html>
