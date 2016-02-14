@@ -6,12 +6,12 @@
   opacity: 0.9;
   width: 100%;
 
-  @media (min-width: $screen-md) {
-    font-size: 12px;
-
-    > .row {
+  > .row {
       margin-right: 0;
     }
+
+  @media (min-width: $screen-md) {
+    font-size: 12px;
   }
 
   h2 {
@@ -34,22 +34,6 @@
       box-shadow: 0 0 5px #333;
       margin-left: 5px;
       width: 100%;
-    }
-  }
-  
-  .user-meta-block {
-    padding-right: 0;
-    > .row {
-      margin-right: 15px;
-
-      @media (min-width: $screen-md) {
-        margin-right: -15px;
-      }
-    }
-
-    @media (min-width: $screen-md) {
-      margin-left: -15px;
-      padding-left: 30px;
     }
   }
 

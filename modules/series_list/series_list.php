@@ -18,11 +18,9 @@
     $series_id = $row ['series_id'];
     $series_name = $row ['series_name'];
     $series_vol = $row ['series_vol'];
-    if (isset($userSetID) && $validUser == 1) {
-      $comic->seriesInfo($series_id, $userSetID);
-    } else {
-      $comic->seriesInfo($series_id, $userID);
-    }
+    
+    $comic->seriesInfo($series_id, $profileID);
+    
     $series_issue_count = $comic->series_issue_count;
     $latestCoverMed = $comic->latestCoverMed;
     $latestCoverSmall = $comic->latestCoverSmall;

@@ -5309,7 +5309,7 @@ ul#inventory-table .series-extra {
 #inventory-table.layout-thumbSm .issue-number,
 #inventory-table.layout-thumbSm .release-date {
   display: inline-block;
-  font-size: 12px;
+  font-size: 11px;
   width: 50%;
   font-weight: bold;
 }
@@ -6037,12 +6037,12 @@ ul#inventory-table .series-extra {
   opacity: 0.9;
   width: 100%;
 }
+[data-module="user-meta"] > .row, [data-module="user-meta"] > ul#inventory-table {
+  margin-right: 0;
+}
 @media (min-width: 641px) {
   [data-module="user-meta"] {
     font-size: 12px;
-  }
-  [data-module="user-meta"] > .row, [data-module="user-meta"] > ul#inventory-table {
-    margin-right: 0;
   }
 }
 [data-module="user-meta"] h2 {
@@ -6065,23 +6065,6 @@ ul#inventory-table .series-extra {
   box-shadow: 0 0 5px #333;
   margin-left: 5px;
   width: 100%;
-}
-[data-module="user-meta"] .user-meta-block {
-  padding-right: 0;
-}
-[data-module="user-meta"] .user-meta-block > .row, [data-module="user-meta"] .user-meta-block > ul#inventory-table {
-  margin-right: 15px;
-}
-@media (min-width: 641px) {
-  [data-module="user-meta"] .user-meta-block > .row, [data-module="user-meta"] .user-meta-block > ul#inventory-table {
-    margin-right: -15px;
-  }
-}
-@media (min-width: 641px) {
-  [data-module="user-meta"] .user-meta-block {
-    margin-left: -15px;
-    padding-left: 30px;
-  }
 }
 [data-module="user-meta"] .user-name {
   margin-top: 10px;

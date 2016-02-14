@@ -494,7 +494,10 @@ class comicSearch {
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
         $this->browse_user_id = $row ['user_id'];
+        $validUser=1;
       }
+    } else {
+      $validUser=0;
     }
   }
 
