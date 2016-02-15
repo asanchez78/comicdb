@@ -614,7 +614,6 @@ class comicSearch {
         }
       }
       $this->followerCount = count($this->followerList);
-      echo '<br />Total followers: ' . $this->followerCount . '<br />';
     }
   }
 }

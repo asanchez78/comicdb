@@ -40,7 +40,6 @@
       }
     }
     if (mysqli_query ( $connection, $sql )) {
-      echo $sql;
       //$sqlMessage .= '<strong class="text-success">Success</strong>: User ' . $profile_id . ' follow status updated.<br />' . $sql . '<br />';
     } else {
       //$sqlMessage .= '<strong class="text-success">Failure</strong>: User ' . $profile_id . ' follow status not updated.<br />' . $sql . '<br />' . $sql . '<code>' . mysqli_error ( $connection ) . '</code><br />';
