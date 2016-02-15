@@ -87,7 +87,7 @@
               <a href="<?php echo $instagram_url; ?>" title="View <?php echo $first_name; ?>'s Instagram Gallery" target="_blank"><i class="fa fa-fw fa-instagram"></i><span class="sr-only">Instagram</span></a>
             <?php } ?>
           </div>
-          <?php if (isset($profile_name) && $profile_name != '') { ?>
+          <?php if (isset($profile_name) && $profile_name != '' && $profile_name != $userName) { ?>
           <div class="hidden-xs hidden-sm">
             <?php include (__ROOT__.'/modules/profiles/follow_button/follow_button.php'); ?>
           </div>

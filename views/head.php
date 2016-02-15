@@ -12,7 +12,7 @@
   
   $login = new Login();
   if ($login->isUserLoggedIn () == true) {
-    $user = $_COOKIE ['user_name'];
+    $userName = $_COOKIE ['user_name'];
     $userID = $_COOKIE ['user_id'];
     $apiKey = $_COOKIE ['apiKey'];
     $userEmail = $_COOKIE ['user_email'];

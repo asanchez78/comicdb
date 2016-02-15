@@ -250,20 +250,20 @@ class comicSearch {
             } else {
               $userBrowse = '';
             }
-            if (isset($this->pageNum) && $i === $this->pageNum) {
+            if (isset($this->pageNum) && $i == $this->pageNum) {
               $this->pagination .= '<li class="active"><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
             } else {
               $this->pagination .= '<li><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
             }
           }
-          if ($this->pageNum === 1) {
-            $this->previousPage = ' <li class="disabled"><a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+          if ($this->pageNum == 1) {
+            $this->previousPage = '';
           } else {
             $previousPageNum = $this->pageNum - 1;
             $this->previousPage = ' <li><a href="/profile.php?' . $userBrowse . 'page=' . $previousPageNum . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
           }
-          if ($this->pageNum === $this->numPages) {
-            $this->nextPage = ' <li class="disabled"><a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+          if ($this->pageNum == $this->numPages) {
+            $this->nextPage = '';
           } else {
             $nextPageNum = $this->pageNum + 1;
             $this->nextPage = ' <li><a href="/profile.php?' . $userBrowse . 'page=' . $nextPageNum . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';

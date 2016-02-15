@@ -31,7 +31,7 @@
     if (isset($profile_name) && $profile_name != '') {
       $first_name = $profile_name;
     } else {
-      $first_name = $user;
+      $first_name = $userName;
     }
   }
 
@@ -45,6 +45,11 @@
 
   if (isset($editMode) && $editMode === 'true') {
     include ('modules/profiles/edit_profile/form_submit.php');
+  }
+
+  $followToggle = filter_input ( INPUT_POST, 'followed' );
+  if (isset($followToggle)) {
+    include(__ROOT__.'/modules/profiles/follow_button/form_submit.php');
   }
 ?>
   <title><?php if (isset($profile_name) && $profile_name != '') { echo $first_name . ' ' . $last_name; } else { echo 'Your Profile'; } ?> :: POW! Comic Book Manager</title>
@@ -71,7 +76,7 @@
     <div class="profile-button-block">
       <?php if ($login->isUserLoggedIn () == true && !isset($profile_name)) { ?>
         <button class="btn btn-link button-settings" data-toggle="modal" data-target="#editProfileModal"><i class="fa fa-fw fa-gear"></i> <span class="sr-only">Edit Profile</span></button>
-      <?php } elseif (isset($profile_name) && $profile_name != '') { ?>
+      <?php } elseif (isset($profile_name) && $profile_name != '' && $profile_name != $userName) { ?>
         <div class="hidden-md hidden-lg">
           <?php include (__ROOT__.'/modules/profiles/follow_button/follow_button.php'); ?>
         </div>
