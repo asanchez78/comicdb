@@ -36,14 +36,21 @@
 
 .profile-background {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: -43%;
   width: 100%;
   opacity: 0.9;
 
+  @media (min-width: $screen-md) {
+    top: 0;
+  }
+
+  @media (min-width: $screen-lg) {
+    top: -10%;
+  }
+
   .profile-bg-image {
     padding: 0;
-    height: 95px;
+    height: 85px;
     overflow: hidden;
     position: relative;
 
@@ -56,10 +63,6 @@
     }
 
     > img {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      
       @media (min-width: $screen-md) {
         min-height: 90px;
       }
@@ -76,8 +79,11 @@
   top: 5px;
   right: 5px;
 
-  > button {
+  > * {
     display: inline-block;
+  }
+
+  > button {
     padding: 0 5px;
     font-size: 24px;
     color: white;

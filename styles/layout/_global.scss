@@ -148,7 +148,8 @@ main {
 }
 
 .sidebar {
-  background: linear-gradient($brand-orange, white);
+  background-color: $brand-orange;
+  background-image: linear-gradient($brand-orange, white);
   margin-right: 0;
   padding-bottom: 55px;
   padding-top: 15px;

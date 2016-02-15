@@ -6,33 +6,41 @@
   if (isset($comic->user_avatar)) {
     $avatar = $comic->user_avatar;
   } else {
-    $gravatar_hash = $userEmail;
-    $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=mm';
+    $gravatar_hash = $profileEmail;
+    $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
   }
 
   if (isset($comic->user_follows)) {
-    $followAvatar = '';
+    $followBlock = '';
     $followList = explode(',', $comic->user_follows);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
       $user = new comicSearch ();
       $user->userFollows($followUser);
       $user->userMeta($followUser);
+
       if (isset($user->user_first_name)) {
         $follow_first_name = $user->user_first_name;  
       } else {
         $follow_first_name = '';
       }
+
       if (isset($user->user_last_name)) {
         $follow_last_name = $user->user_last_name;
       } else {
         $follow_last_name = '';
       }
+
+      $followBlock .= '<li><a href="/profile.php?user='. $user->follow_username . '">';
       if (isset($user->user_avatar)) {
-        $followAvatar .= '<li><a href="/profile.php?user='. $user->follow_username . '"><img src="' . $user->user_avatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" /></a></li>';
+        $followAvatar = $user->user_avatar;
+        $followBlock .= '<img src="' . $user->user_avatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" />';
       } else {
-        $followAvatar .= '';
+        $gravatar_hash = $user->follow_email_hash;
+        $followAvatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=60&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
+        $followBlock .= '<img src="' . $followAvatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" />';
       }
+      $followBlock .= '</a></li>';
     }
   } else {
     $follows = '';
@@ -79,6 +87,11 @@
               <a href="<?php echo $instagram_url; ?>" title="View <?php echo $first_name; ?>'s Instagram Gallery" target="_blank"><i class="fa fa-fw fa-instagram"></i><span class="sr-only">Instagram</span></a>
             <?php } ?>
           </div>
+          <?php if (isset($profile_name) && $profile_name != '') { ?>
+          <div class="hidden-xs hidden-sm">
+            <?php include (__ROOT__.'/modules/profiles/follow_button/follow_button.php'); ?>
+          </div>
+          <?php } ?>
         </div>
         <div class="col-xs-6 col-md-12 user-count">
           <div class="row">
@@ -96,7 +109,7 @@
               following
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">
-                  <?php echo $followAvatar; ?>
+                  <?php echo $followBlock; ?>
                 </ul>
               </div>
               <?php } ?>
@@ -106,7 +119,7 @@
               followers
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">
-                  <?php echo $followAvatar; ?>
+                  <?php echo $followBlock; ?>
                 </ul>
               </div>
               <?php } ?>

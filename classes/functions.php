@@ -487,13 +487,14 @@ class comicSearch {
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
     }
-    $sql = "SELECT user_id
+    $sql = "SELECT user_id, user_email
         FROM users
         WHERE user_name = '$profile_name'";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
         $this->browse_user_id = $row ['user_id'];
+        $this->browse_user_email_hash = md5(strtolower(trim( $row ['user_email'] )));
         $validUser=1;
       }
     } else {
@@ -506,13 +507,14 @@ class comicSearch {
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
     }
-    $sql = "SELECT user_name
+    $sql = "SELECT user_name, user_email
         FROM users
         WHERE user_id = '$profile_id'";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
         $this->follow_username = $row ['user_name'];
+        $this->follow_email_hash = md5( strtolower( trim( $row ['user_email'] ) ) );
       }
     }
   }

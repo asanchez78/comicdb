@@ -7,8 +7,10 @@
   if (isset($profile_name) && $profile_name != '') {
     $comic->userLookup($profile_name);
     $profileID = $comic->browse_user_id;
+    $profileEmail = $comic->browse_user_email_hash;
   } else {
     $profileID = $userID;
+    $profileEmail = $userEmail;
   }
   // Grab all fields from users_meta for the user ID
   $comic->userMeta($profileID);
@@ -69,6 +71,10 @@
     <div class="profile-button-block">
       <?php if ($login->isUserLoggedIn () == true && !isset($profile_name)) { ?>
         <button class="btn btn-link button-settings" data-toggle="modal" data-target="#editProfileModal"><i class="fa fa-fw fa-gear"></i> <span class="sr-only">Edit Profile</span></button>
+      <?php } elseif (isset($profile_name) && $profile_name != '') { ?>
+        <div class="hidden-md hidden-lg">
+          <?php include (__ROOT__.'/modules/profiles/follow_button/follow_button.php'); ?>
+        </div>
       <?php } ?>
       <button class="btn btn-link button-share"><i class="fa fa-fw fa-share"></i></button>
     </div>
