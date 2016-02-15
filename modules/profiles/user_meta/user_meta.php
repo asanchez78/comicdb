@@ -6,7 +6,8 @@
   if (isset($comic->user_avatar)) {
     $avatar = $comic->user_avatar;
   } else {
-    $avatar = '';
+    $gravatar_hash = $userEmail;
+    $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=mm';
   }
 
   if (isset($comic->user_follows)) {
