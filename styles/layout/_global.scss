@@ -135,6 +135,7 @@ main {
   border-bottom: 2px solid $divider-color;
   padding-top: 5px;
   padding-bottom: 5px;
+  line-height: 30px;
 
   h2 {
     margin: 0;
@@ -144,10 +145,6 @@ main {
       font-size: 30px;
     }
   }
-}
-
-.form-group {
-  margin: 15px 0;
 }
 
 .sidebar {
@@ -266,7 +263,11 @@ footer.main-footer {
 }
 
 .modal-logo {
-  width: 50%;
+  font-size: 18px;
+
+  > img {
+    max-width: 115px;
+  }
 }
 
 .modal-body {

@@ -3,12 +3,6 @@
   $comic->seriesCount ($profileID);
   $totalIssues = $comic->total_issue_count;
 
-  if (isset($comic->user_location)) {
-    $location = $comic->user_location;
-  } else {
-    $location = '';
-  }
-
   if (isset($comic->user_avatar)) {
     $avatar = $comic->user_avatar;
   } else {
@@ -60,6 +54,7 @@
   } else {
     $instagram_url = '';
   }
+
 ?>
 
 <div data-module="user-meta">
@@ -71,7 +66,7 @@
       <div class="row">
         <div class="col-xs-6 col-md-12 user-name">
           <h2><?php echo $first_name . ' ' . $last_name; ?></h2>
-          <?php echo $location; // http://bit.ly/1SmEFhh ?>
+          <?php echo $user_location; ?>
           <div class="social-icons">
             <?php if ($facebook_url != '') { ?>
               <a href="<?php echo $facebook_url; ?>" title="View <?php echo $first_name; ?>'s Facebook Profile" target="_blank"><i class="fa fa-fw fa-facebook"></i><span class="sr-only">Facebook</span></a>
@@ -95,7 +90,7 @@
               series
             </div>
             <div class="col-xs-6 col-md-4 text-center">
-              <?php if ($comic->user_follows != '') { ?>
+              <?php if (isset($comic->user_follows) && $comic->user_follows != '') { ?>
               <h3 class="big-red hidden-md hidden-lg"><?php echo $followCount; ?></h3>
               following
               <div class="hidden-xs hidden-sm">
@@ -106,7 +101,7 @@
               <?php } ?>
             </div>
             <div class="hidden-xs hidden-sm col-md-4 text-center">
-              <?php if ($comic->user_follows != '') { ?>
+              <?php if (isset($comic->user_follows) && $comic->user_follows != '') { ?>
               followers
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">

@@ -46,6 +46,11 @@
       border-bottom: 1px solid $border-color;
       padding-bottom: 5px;
     }
+
+    @media (min-width: $screen-lg) {
+      padding-bottom: 10px;
+      padding-left: 20px;
+    }
   }
   
   .user-count {
@@ -54,6 +59,12 @@
     @media (min-width: $screen-md) {
       margin-top: 5px;
       margin-bottom: 5px;
+    }
+    
+    @media (min-width: $screen-lg) {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-left: 20px;
     }
 
     > .row > div {
