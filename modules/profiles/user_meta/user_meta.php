@@ -1,6 +1,7 @@
 <?php
   $comic->collectionCount ($profileID);
   $comic->seriesCount ($profileID);
+  $comic->userFollowedBy ($profileID);
   $totalIssues = $comic->total_issue_count;
 
   if (isset($comic->user_avatar)) {
@@ -44,6 +45,10 @@
     }
   } else {
     $follows = '';
+  }
+
+  if (isset($comic->followerCount)) {
+    $followerCount = $comic->followerCount;
   }
 
   if (isset($comic->facebook_url)) {
@@ -95,15 +100,15 @@
         </div>
         <div class="col-xs-6 col-md-12 user-count">
           <div class="row">
-            <div class="col-xs-6 col-md-2 text-center">
+            <div class="col-xs-6 col-md-2 text-center meta-total-issues">
               <h3 class="big-red"><?php echo $totalIssues; ?></h3>
               comics
             </div>
-            <div class="hidden-xs hidden-sm col-md-2 text-center">
+            <div class="hidden-xs hidden-sm col-md-2 text-center meta-total-series">
               <h3 class="big-red"><?php echo $comic->total_series_count; ?></h3>
               series
             </div>
-            <div class="col-xs-6 col-md-4 text-center">
+            <div class="col-xs-6 col-md-4 text-center meta-following">
               <?php if (isset($comic->user_follows) && $comic->user_follows != '') { ?>
               <h3 class="big-red hidden-md hidden-lg"><?php echo $followCount; ?></h3>
               following
@@ -114,12 +119,13 @@
               </div>
               <?php } ?>
             </div>
-            <div class="hidden-xs hidden-sm col-md-4 text-center">
-              <?php if (isset($comic->user_follows) && $comic->user_follows != '') { ?>
+            <div class="hidden-xs hidden-sm col-md-4 text-center meta-followers">
+              <?php if (isset($comic->followerList) && $comic->followerList != '') { ?>
+              <h3 class="big-red"><?php echo $followerCount; ?></h3>
               followers
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">
-                  <?php echo $followBlock; ?>
+                  
                 </ul>
               </div>
               <?php } ?>

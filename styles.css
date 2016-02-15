@@ -6207,7 +6207,14 @@ ul#inventory-table .series-extra {
 [data-module="user-meta"] .user-count > .row > div:last-of-type, [data-module="user-meta"] .user-count > ul#inventory-table > div:last-of-type {
   padding-left: 0;
   padding-right: 15px;
+}
+[data-module="user-meta"] .meta-total-series, [data-module="user-meta"] .meta-following, [data-module="user-meta"] .meta-followers {
   border-left: 1px solid #e7e7e7;
+}
+@media (min-width: 641px) {
+  [data-module="user-meta"] .meta-total-series, [data-module="user-meta"] .meta-following, [data-module="user-meta"] .meta-followers {
+    min-height: 53px;
+  }
 }
 [data-module="user-meta"] .follow-list li {
   display: inline-block;

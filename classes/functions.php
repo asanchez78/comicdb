@@ -586,4 +586,35 @@ class comicSearch {
       }
     }
   }
+
+  public function userFollowedBy($user_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT user_id, meta_key, meta_value
+        FROM users_meta
+        WHERE meta_key = 'user_follows' AND user_id != '$user_id'";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      // Initialize our final array
+      $this->followerList = array();
+
+      while ( $row = $result->fetch_assoc () ) {
+        // Grab the user_follows value from all users except logged in user
+        $followerField = $row ['meta_value'];
+        // Split string into array
+        $followSplitList = preg_split('/\D/', $followerField, NULL, PREG_SPLIT_NO_EMPTY);
+        // Count the # ids
+        $preCount = count($followSplitList);
+        for ($i = 0; $i <= $preCount; $i++) {
+          if(isset($followSplitList[$i]) && $followSplitList[$i] == $user_id) {
+            array_push($this->followerList, $followSplitList[$i]);
+          }
+        }
+      }
+      $this->followerCount = count($this->followerList);
+      echo '<br />Total followers: ' . $this->followerCount . '<br />';
+    }
+  }
 }
