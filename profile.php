@@ -25,6 +25,14 @@
     $last_name = '';
   }
 
+  if ($first_name === '' && $last_name === '') {
+    if (isset($profile_name) && $profile_name != '') {
+      $first_name = $profile_name;
+    } else {
+      $first_name = $user;
+    }
+  }
+
   if (isset($comic->user_location)) {
     $user_location = $comic->user_location;
   } else {
