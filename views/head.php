@@ -1,9 +1,10 @@
 <?php
   define('__ROOT__', dirname(dirname(__FILE__)));
-  if (isset($_COOKIE['apiKey']) && isset($_COOKIE['user_id']) && isset($_COOKIE['user_name'])) {
+  if (isset($_COOKIE['apiKey']) && isset($_COOKIE['user_id']) && isset($_COOKIE['user_name']) && isset($_COOKIE['user_email'])) {
     define('__apiKey__', $_COOKIE['apiKey']);
     define('__userID__', $_COOKIE['user_id']);
     define('__userName__', $_COOKIE['user_name']);
+    define('__userEmail__', $_COOKIE['user_email']);
   }
   require_once(__ROOT__.'/classes/functions.php');
   require_once(__ROOT__.'/config/db.php');
@@ -11,29 +12,11 @@
   
   $login = new Login();
   if ($login->isUserLoggedIn () == true) {
-    $user = $_COOKIE ['user_name'];
+    $userName = $_COOKIE ['user_name'];
     $userID = $_COOKIE ['user_id'];
     $apiKey = $_COOKIE ['apiKey'];
+    $userEmail = $_COOKIE ['user_email'];
   }
-
-  // User browsing
-  $userSetName = filter_input(INPUT_GET, 'user');
-  if ($userSetName != '') {
-    if ($connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT user_id from users where user_name='$userSetName'";
-    $result = $connection->query ( $sql );
-    if (mysqli_fetch_row($connection->query ( $sql )) > 0) {
-      while ($row = $result->fetch_assoc ()) {
-        $userSetID = $row['user_id'];
-      }
-      $validUser=1;
-    } else {
-      $validUser=0;
-    }
-  }
-
   // This will get the current URL the user is on
   $current_page = htmlspecialchars(urlencode($_SERVER['REQUEST_URI']));
 ?>
@@ -47,5 +30,5 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" href="/assets/pow.png">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="/scripts/jquery-2.2.0.min.js"></script>
   <script src="/scripts/comicdb.js"></script>

@@ -64,6 +64,10 @@ ul.nolist {
   }
 }
 
+.smalltext {
+  font-size: 10px;
+}
+
 /* Hide only visually, but have it available for screenreaders: h5bp.com/v */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 
@@ -113,10 +117,6 @@ ul.nolist {
 main {
   padding-bottom: 15px;
   margin-bottom: 40px;
-
-  @media (min-width: $screen-md) {
-    padding-top: 25px;
-  }
 }
 
 .dev-messages {
@@ -131,8 +131,11 @@ main {
 
 .headline {
   position: relative;
+  border-top: 2px solid $divider-color;
   border-bottom: 2px solid $divider-color;
+  padding-top: 5px;
   padding-bottom: 5px;
+  line-height: 30px;
 
   h2 {
     margin: 0;
@@ -144,12 +147,9 @@ main {
   }
 }
 
-.form-group {
-  margin: 15px 0;
-}
-
 .sidebar {
-  background: linear-gradient($brand-orange, white);
+  background-color: $brand-orange;
+  background-image: linear-gradient($brand-orange, white);
   margin-right: 0;
   padding-bottom: 55px;
   padding-top: 15px;
@@ -234,17 +234,17 @@ main {
       }
     }
   }
-  
-  .sort-control-container {
-    text-align: right;
-    padding-top: 0;
-  }
-  .sort-control {
-    margin-right: 3px;
+}
 
-    &:last-of-type {
-      margin-right: 0;
-    }
+.sort-control-container {
+  text-align: right;
+  padding-top: 0;
+}
+.sort-control {
+  margin-right: 3px;
+
+  &:last-of-type {
+    margin-right: 0;
   }
 }
 
@@ -264,7 +264,11 @@ footer.main-footer {
 }
 
 .modal-logo {
-  width: 50%;
+  font-size: 18px;
+
+  > img {
+    max-width: 115px;
+  }
 }
 
 .modal-body {

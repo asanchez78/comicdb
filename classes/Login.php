@@ -85,8 +85,10 @@ class Login {
 						
 						// write user data into PHP SESSION (a file on your server)
 						$numberOfDays = 30;
+						$userEmailHash = md5( strtolower( trim( $result_row->user_email )));
 						setcookie("user_name", "$result_row->user_name", time() + 60 * 60 * 24 * $numberOfDays, "/","", 0);
 						setcookie("user_id", "$result_row->user_id", time() + 60 * 60 * 24 * $numberOfDays, "/","", 0);
+						setcookie("user_email", "$userEmailHash", time() + 60 * 60 * 24 * $numberOfDays, "/","", 0);
 						setcookie("apiKey", "$result_row->apiKey", time() + 60 * 60 * 24 * $numberOfDays, "/","", 0);
 						setcookie("user_login_status", "1", time() + 60 * 60 * 24 * $numberOfDays, "/","", 0);
 					} else {

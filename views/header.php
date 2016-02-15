@@ -22,7 +22,7 @@
     		<div class="collapse navbar-collapse" id="main-nav-collapse">
 					<ul class="nav navbar-nav nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
-						<li class="active"><a href="/"><i class="fa fa-fw fa-home"></i> Home</a></li>
+						<li><a href="/profile.php"><i class="fa fa-fw fa-archive"></i> Collection</a></li>
 						<li><a href="/add.php"><i class="fa fa-fw fa-plus-circle text-center"></i> Add Items</a></li>
 						
 						<li class="menu-break"><a href="/feed.php"><i class="fa fa-fw fa-users"></i> User Feed</a></li>

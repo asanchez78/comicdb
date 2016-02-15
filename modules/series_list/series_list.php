@@ -1,53 +1,16 @@
-<?php 
-$publisherSearchId = filter_input ( INPUT_GET, 'pid' );
-$comic = new comicSearch ();
-
-if ($publisherSearchId !== NULL) {
-  $listAll = 2;
-}
-
-if (isset($userSetID) && $validUser == 1) {
-  $comic->collectionCount ($userSetID);
-  $totalIssues = $comic->total_issue_count;
-  $listAll = 0;
-  $comic->seriesList ($listAll, $publisherSearchId, $userSetID);
-} else {
-  if (isset($userSetID) && $validUser != 1) {
-    $messageNum = 64;
-  }
-  if ($publisherSearchId !== NULL) {
-    $listAll = 2;
-  } else {
-    $listAll = 0;
-  }
-  $comic->collectionCount ($userID);
-  $totalIssues = $comic->total_issue_count;
-  $comic->seriesList ($listAll, $publisherSearchId, $userID);
-} ?>
+<?php
+  $comic->seriesList (0, '', $profileID);
+?>
 <section data-module="series_list">
 <?php if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
   <header class="row headline">
-    <div class="col-xs-12 col-md-5 col-lg-6">
-      <h2>
-        <?php if (isset($userSetName) && $validUser == 1) {
-          echo $userSetName . '&rsquo;s collection';
-        } else if (isset($publisherSearchId)) {
-          echo $publisherName;
-        } else {
-          echo 'Your collection';
-        } ?>
-      </h2>
+    <div class="col-xs-7 col-md-8">
+      <h2><?php if (isset($profile_name) && $profile_name != '') { echo $first_name . '&#8217;s'; } else { echo 'Your'; } ?>  Collection</h2>
     </div>
-    <div class="col-xs-12 col-md-7 col-lg-6 series-meta">
-      <ul class="nolist row">
-        <li class="col-xs-4 col-md-4 col-lg-4"><span class="text-danger"><?php echo $totalIssues; ?></span> Total Issues</li>
-        <li class="col-xs-3 col-md-3 col-lg-4"><span class="text-danger">XXX</span> Total Series</li>
-        <li class="col-xs-5 col-md-5 col-lg-4 sort-control-container">
-          <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
-          <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
-          <button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
-        </li>
-      </ul>
+    <div class="col-xs-5 col-md-4 sort-control-container">
+      <button class="btn-xs btn-default sort-control active" id="sort-thumb-lg"><i class="fa fa-th-large"></i></button>
+      <button class="btn-xs btn-default sort-control" id="sort-thumb-sm"><i class="fa fa-th"></i></button>
+      <button class="btn-xs btn-default sort-control" id="sort-list"><i class="fa fa-list"></i></button>
     </div>
   </header>
   <ul id="inventory-table" class="row layout-thumbLg">
@@ -55,11 +18,9 @@ if (isset($userSetID) && $validUser == 1) {
     $series_id = $row ['series_id'];
     $series_name = $row ['series_name'];
     $series_vol = $row ['series_vol'];
-    if (isset($userSetID) && $validUser == 1) {
-      $comic->seriesInfo($series_id, $userSetID);
-    } else {
-      $comic->seriesInfo($series_id, $userID);
-    }
+    
+    $comic->seriesInfo($series_id, $profileID);
+    
     $series_issue_count = $comic->series_issue_count;
     $latestCoverMed = $comic->latestCoverMed;
     $latestCoverSmall = $comic->latestCoverSmall;
@@ -73,7 +34,7 @@ if (isset($userSetID) && $validUser == 1) {
 
     <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
       <div class="series-list-row">
-        <a href="issues.php?series_id=<?php echo $series_id; ?>" class="series-info">
+        <a href="issues.php?series_id=<?php echo $series_id; if (isset($profile_name) && $profile_name != '') { echo '&user=' . $profile_name; } ?>" class="series-info">
           <div class="series-list-row">
             <div class="comic-image">
               <img src="/<?php echo $latestCoverMed; ?>" alt="<?php echo $series_name; ?>" class="img-responsive" />
@@ -98,6 +59,15 @@ if (isset($userSetID) && $validUser == 1) {
     </li>
   <?php } ?>
   </ul>
+  <?php if ($comic->hasPagination === true) { ?>
+  <nav class="text-center">
+    <ul class="pagination pagination-lg center-block">
+      <?php echo $comic->previousPage; ?>
+      <?php echo $comic->pagination; ?>
+      <?php echo $comic->nextPage; ?>
+    </ul>
+  </nav>
+  <?php } ?>
 <?php } else { ?>
   <p>No Comics in your collection. Perhaps you should <a href="/add.php">Add some!</a></p>
 <?php } ?>

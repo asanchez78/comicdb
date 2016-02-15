@@ -24,6 +24,7 @@
 @import "bootstrap-sass/assets/stylesheets/bootstrap/navbar";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/modals";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/pagination";
 
 // Core
 @import "includes/mixins";
@@ -40,3 +41,7 @@
 @import "../modules/add_comic/add_comic";
 @import "../modules/series_list/series_list";
 @import "../modules/single_comic/single_comic";
+@import "../modules/profiles/profiles";
+@import "../modules/profiles/user_meta/user_meta";
+@import "../modules/profiles/edit_profile/edit_profile_modal";
+@import "../modules/profiles/follow_button/follow_button";

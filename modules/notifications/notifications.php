@@ -49,6 +49,9 @@
       case 9:
         $messageText = 'Your account has been created successfully. You can now <a href="../login.php">log in.</a>';
         break;
+      case 10:
+        $messageText = 'Your profile has been updated.';
+        break;
       // Logout
       case 49:
         $messageText = "You have been successfully logged out.";
@@ -115,6 +118,10 @@
       case 66:
         // SQL Error: Syntax
         $messageText .= 'A problem occurred with the server. Please try again later.';
+        break;
+      case 67:
+        // Update profile error
+        $messageText .= 'Could not update the following fields ' . $errorSet;
         break;
       case 90:
         $messageText .= 'Sorry, no database connection.';

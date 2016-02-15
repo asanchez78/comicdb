@@ -3,15 +3,19 @@
   $issue_list = null;
 
   $series_id = filter_input ( INPUT_GET, 'series_id' );
+  $profile_name = filter_input(INPUT_GET, 'user');
+
   $comic = new comicSearch ();
 
-  if (isset($userSetID) && $validUser == 1) {
-    $comic->seriesInfo ( $series_id, $userSetID );
-    $comic->issuesList ( $series_id, $userSetID );
+  if (isset($profile_name) && $profile_name != '') {
+    $comic->userLookup($profile_name);
+    $profileID = $comic->browse_user_id;
   } else {
-    $comic->seriesInfo( $series_id, $userID );
-    $comic->issuesList ( $series_id, $userID );
+    $profileID = $userID;
   }
+
+  $comic->seriesInfo( $series_id, $profileID );
+  $comic->issuesList ( $series_id, $profileID );
   $publisherID = $comic->publisherID;
   $publisherName = $comic->publisherName;
   $publisherShort = $comic->publisherShort;
@@ -44,7 +48,7 @@
         </ul>
       </div>
     </header>
-    <ul id="inventory-table" class="row layout-thumb-lg">
+    <ul id="inventory-table" class="row layout-thumbLg">
       <?php echo $comic->issue_list; ?>
     </ul>
   </div>

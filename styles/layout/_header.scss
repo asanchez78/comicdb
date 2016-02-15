@@ -145,6 +145,7 @@
   }
 
   .navbar-nav > li > a {
+    cursor: pointer;
     &:hover, &:focus {
       background-color: #e7e7e7;
     }
