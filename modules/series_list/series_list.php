@@ -59,6 +59,15 @@
     </li>
   <?php } ?>
   </ul>
+  <?php if ($comic->hasPagination === true) { ?>
+  <nav class="text-center">
+    <ul class="pagination pagination-lg center-block">
+      <?php echo $comic->previousPage; ?>
+      <?php echo $comic->pagination; ?>
+      <?php echo $comic->nextPage; ?>
+    </ul>
+  </nav>
+  <?php } ?>
 <?php } else { ?>
   <p>No Comics in your collection. Perhaps you should <a href="/add.php">Add some!</a></p>
 <?php } ?>

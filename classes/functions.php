@@ -212,23 +212,68 @@ class comicSearch {
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
     } else {
-    // List all owned books in a series
+      // List all owned books in a series
       $sql = "SELECT DISTINCT comics.series_id
           FROM comics
           JOIN users_comics
           ON comics.comic_id=users_comics.comic_id
           WHERE users_comics.user_id=$ownerID ORDER BY series_id;";
+
       $result = $this->db_connection->query ( $sql );
+      $numResults = $result->num_rows;
       if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
         $list = NULL;
         while ($row = $result->fetch_assoc ()) {
           $list .= "series_id=" . $row ['series_id'] . " or ";
         }
         $idList = preg_replace('/(or(?!.*or))/', '', $list);
+
+        // Start pagination
+        $this->pageNum = filter_input(INPUT_GET, 'page');
+        $profile_name = filter_input(INPUT_GET, 'user');
+        if (!isset($this->pageNum)) {
+          $this->pageNum = 1;
+        }
+        $this->hasPagination = false;
+        $this->pagination = '';
         $sql = "SELECT *, CASE WHEN series_name
           LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
           FROM series WHERE $idList
-          ORDER BY series_name2 ASC, series_vol ASC";
+          ORDER BY series_name2 ASC, series_vol ASC ";
+        if ($numResults > 48) {
+          $this->hasPagination = true;
+          $sql .= 'LIMIT 48 ';
+          $this->numPages = round($numResults / 48);
+          for ($i = 1; $i <= $this->numPages; $i++) {
+            if (isset($profile_name) && $profile_name !== '') { 
+              $userBrowse = 'user=' . $profile_name . '&';
+            } else {
+              $userBrowse = '';
+            }
+            if (isset($this->pageNum) && $i === $this->pageNum) {
+              $this->pagination .= '<li class="active"><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
+            } else {
+              $this->pagination .= '<li><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
+            }
+          }
+          if ($this->pageNum === 1) {
+            $this->previousPage = ' <li class="disabled"><a href="" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+          } else {
+            $previousPageNum = $this->pageNum - 1;
+            $this->previousPage = ' <li><a href="/profile.php?' . $userBrowse . 'page=' . $previousPageNum . '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+          }
+          if ($this->pageNum === $this->numPages) {
+            $this->nextPage = ' <li class="disabled"><a href="" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+          } else {
+            $nextPageNum = $this->pageNum + 1;
+            $this->nextPage = ' <li><a href="/profile.php?' . $userBrowse . 'page=' . $nextPageNum . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+          }
+          if ($this->pageNum > 1) {
+            $offsetNum = $this->pageNum - 1;
+            $sql .= 'OFFSET ' . 48 * $offsetNum;
+          }
+          
+        }
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
     }
