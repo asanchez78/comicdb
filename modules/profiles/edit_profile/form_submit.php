@@ -8,9 +8,9 @@
   $input_instagram = filter_input ( INPUT_POST, 'user_instagram' );
 
   // Initialize our meta arrays
-  $meta_key = array();
-  $meta_value = array();
-  $meta_update = array();
+  $meta_key[] = '';
+  $meta_value[] = '';
+  $meta_update[] = '';
 
   // Look through inputs, push them to the meta arrays
   if (isset($input_first_name)) {

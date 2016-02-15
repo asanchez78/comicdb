@@ -12,7 +12,7 @@
 
   if (isset($comic->user_follows)) {
     $followBlock = '';
-    $followList = explode(',', $comic->user_follows);
+    $followList = preg_split('/\D/', $comic->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
       $user = new comicSearch ();
