@@ -5970,8 +5970,8 @@ ul#inventory-table .series-extra {
   height: 70px;
   content: '';
   display: block;
-  background: -webkit-linear-gradient(black, transparent);
-  background: linear-gradient(black, transparent);
+  background-image: -webkit-linear-gradient(black, transparent);
+  background-image: linear-gradient(black, transparent);
   opacity: 0.9;
 }
 
