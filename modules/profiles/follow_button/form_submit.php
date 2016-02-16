@@ -40,13 +40,13 @@
       }
     }
     if (mysqli_query ( $connection, $sql )) {
-      //$sqlMessage .= '<strong class="text-success">Success</strong>: User ' . $profile_id . ' follow status updated.<br />' . $sql . '<br />';
+      $sqlMessage .= '<strong class="text-success">Success</strong>: User ' . $profile_id . ' follow status updated.<br />' . $sql . '<br />';
     } else {
-      //$sqlMessage .= '<strong class="text-success">Failure</strong>: User ' . $profile_id . ' follow status not updated.<br />' . $sql . '<br />' . $sql . '<code>' . mysqli_error ( $connection ) . '</code><br />';
+      $sqlMessage .= '<strong class="text-success">Failure</strong>: User ' . $profile_id . ' follow status not updated.<br />' . $sql . '<br />' . $sql . '<code>' . mysqli_error ( $connection ) . '</code><br />';
     }
   };
 
-  // Grab the field values
+  // Grab the field input values 
   $follow_profile_id = filter_input ( INPUT_POST, 'profile_id' );
   $follow_user_id = filter_input ( INPUT_POST, 'user_id' );
   

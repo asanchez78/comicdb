@@ -5904,6 +5904,11 @@ ul#inventory-table .series-extra {
 }
 
 /* Single Issue */
+[data-module="single_comic"] .issue-content,
+[data-module="edit_comic"] .issue-content,
+[data-module="add_issue"] .issue-content {
+  padding-top: 15px;
+}
 @media (min-width: 641px) {
   [data-module="single_comic"] .issue-content,
   [data-module="edit_comic"] .issue-content,
