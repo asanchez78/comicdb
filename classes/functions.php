@@ -243,7 +243,7 @@ class comicSearch {
         if ($numResults > 48) {
           $this->hasPagination = true;
           $sql .= 'LIMIT 48 ';
-          $this->numPages = round($numResults / 48);
+          $this->numPages = ceil($numResults / 48);
           for ($i = 1; $i <= $this->numPages; $i++) {
             if (isset($profile_name) && $profile_name !== '') { 
               $userBrowse = 'user=' . $profile_name . '&';
