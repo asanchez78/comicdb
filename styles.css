@@ -6147,6 +6147,11 @@ ul#inventory-table .series-extra {
     font-size: 12px;
   }
 }
+@media (min-width: 900px) {
+  [data-module="user-meta"] {
+    max-height: 138px;
+  }
+}
 [data-module="user-meta"] h2 {
   font-size: 16px;
   margin: 0;
@@ -6167,6 +6172,11 @@ ul#inventory-table .series-extra {
   box-shadow: 0 0 5px #333;
   margin-left: 5px;
   width: 100%;
+}
+@media (min-width: 900px) {
+  [data-module="user-meta"] .user-avatar > img {
+    max-height: 138px;
+  }
 }
 [data-module="user-meta"] .user-name {
   margin-top: 5px;
