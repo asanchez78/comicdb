@@ -82,8 +82,8 @@
       <?php if ($login->isUserLoggedIn () == true) { ?>
       <div class="manage-comic-container">
         <div class="text-center">
-          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-sm btn-warning" title="Edit the details of this issue"><i class="fa fa-fw fa-pencil-square-o"></i> <span class="sr-only">Update Comic</span></a>
-          <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-danger" title="Delete this issue from your collection"><i class="fa fa-fw fa-trash"></i> <span class="sr-only">Delete Comic</span></button>
+          <a href="/comic.php?comic_id=<?php echo $comic->comic_id; ?>&type=edit" class="btn btn-sm btn-warning" title="Edit the details of this issue"><i class="fa fa-fw fa-pencil-square-o"></i> <span class="hidden-xs hidden-sm">Edit</span></a>
+          <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-danger" title="Delete this issue from your collection"><i class="fa fa-fw fa-trash"></i> <span class="hidden-xs hidden-sm">Delete</span></button>
         </div>
       </div>
       <?php } ?>

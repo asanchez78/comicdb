@@ -5926,11 +5926,6 @@ ul#inventory-table .series-extra {
     overflow: hidden;
   }
 }
-[data-module="single_comic"] .issue-story,
-[data-module="edit_comic"] .issue-story,
-[data-module="add_issue"] .issue-story {
-  margin-top: 15px;
-}
 [data-module="single_comic"] .issue-story h4,
 [data-module="edit_comic"] .issue-story h4,
 [data-module="add_issue"] .issue-story h4 {

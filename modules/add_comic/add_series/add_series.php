@@ -1,5 +1,5 @@
 <section data-module="add_series" class="row add-block">
-  <?php if ($addSeriesSearch == 'true') { ?>
+  <?php if (isset($addSeriesSearch) && $addSeriesSearch == 'true') { ?>
   <header class="headline col-xs-12">
     <h2>Your Search Results</h2>
   </header>
@@ -21,7 +21,7 @@
       </div>
     </form>
   </div>
-  <?php } elseif ($addSeriesSubmit == 'true') {
+  <?php } elseif (isset($addSeriesSubmit) && $addSeriesSubmit == 'true') {
     if ($seriesSubmitted == true) { ?>
     <div class="add-success bg-success col-xs-12">
       <div class="success-message text-center">

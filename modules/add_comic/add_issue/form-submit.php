@@ -5,7 +5,6 @@
   $series_vol = filter_input(INPUT_POST, 'series_vol');
   $series_id = filter_input ( INPUT_POST, 'series_id' );
   $issue_number = filter_input ( INPUT_POST, 'issue_number' );
-  $comic_id = filter_input ( INPUT_POST, 'comic_id' );
   $wiki_id = filter_input ( INPUT_POST, 'wiki_id' );
   $released_date = filter_input ( INPUT_POST, 'released_date' );
   $story_name = addslashes ( filter_input ( INPUT_POST, 'story_name' ) );
@@ -67,7 +66,8 @@
 
   if ($comic->issueExists == 1) {
     // Checks if the new issues being added are already in the master database. If so, then just adds to the user table.
-    $sql = "INSERT INTO users_comics (user_id, comic_id, quantity, originalPurchase, custPlot, custStoryName, issueCondition) VALUES ('$ownerID', '$comic->comic_id', '$quantity', '$originalPurchase', '$custPlot', '$custStoryName', '$issueCondition')";
+    $comic_id = $comic->comic_id;
+    $sql = "INSERT INTO users_comics (user_id, comic_id, quantity, originalPurchase, custPlot, custStoryName, issueCondition) VALUES ('$ownerID', '$comic_id', '$quantity', '$originalPurchase', '$custPlot', '$custStoryName', '$issueCondition')";
     if (mysqli_query ( $connection, $sql )) {
       $messageNum = 1;
     } else {
