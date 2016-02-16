@@ -115,10 +115,6 @@
   }
 }
 
-#add-issue button[type="submit"] {
-  margin-top: 42px;
-}
-
 .issue-details {
   margin-bottom: 20px;
 }
@@ -210,6 +206,13 @@
 }
 
 // Module Specific Styles
+[data-module="add_issue"],
+[data-module="add_series"] {
+  button.form-submit {
+    margin-top: 15px;
+    display: block;
+  }
+}
 
 [data-module="add_range"] {
   .success-message h3 {

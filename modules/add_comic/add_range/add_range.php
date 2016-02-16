@@ -1,15 +1,10 @@
-<?php
-  $addRangeSubmit = filter_input ( INPUT_POST, 'addRangeSubmit' );
-  if ($addRangeSubmit) { include(__ROOT__.'/modules/add_comic/add_range/form-submit.php'); }
-?>
-
 <section data-module="add_range" class="row add-block">
   <?php if ($addRangeSubmit != true) { // This shows the form if the user has not submitted yet. ?>
   <header class="headline col-xs-12">
     <h2>Add a range of issues</h2>
   </header>
   <div class="col-xs-12">
-    <form id="input_select" class="add-form" method="post" action="<?php echo $filename; ?>#addRange">
+    <form id="input_select" class="add-form" method="post" action="">
       <p>Use the form below to add several issues of one series in consecutive order. To add details like <strong>quantity</strong>, <strong>custom story name</strong>, <strong>custom plot</strong>, and <strong>variant cover</strong> please edit the individual issues after submitting.</p>
       <div class="row">
         <div class="col-xs-12 col-md-6">
@@ -73,7 +68,7 @@
         </div>
         <div class="text-center center-block">
           <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
-          <a href="/add.php#addRange" class="btn btn-lg btn-info">Add More</a>
+          <a href="/add.php?add=true#addRange" class="btn btn-lg btn-info">Add More</a>
         </div>
       </div>
     </div>

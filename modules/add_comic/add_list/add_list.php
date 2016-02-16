@@ -1,8 +1,3 @@
-<?php
-  $addListSubmit = filter_input ( INPUT_POST, 'addListSubmit' );
-  if ($addListSubmit) { include(__ROOT__.'/modules/add_comic/add_list/form-submit.php'); }
-?>
-
 <section data-module="add_list" class="row add-block">
   <header class="col-xs-12 headline">
     <h2>Add List of Issues</h2>
@@ -54,7 +49,7 @@
           </div>
           <div class="text-center center-block">
             <a href="/issues.php?series_id=<?php echo $series_id; ?>" class="btn btn-lg btn-success">View Series</a>
-            <a href="/add.php#addList" class="btn btn-lg btn-info">Add More</a>
+            <a href="/add.php?add=true#addList" class="btn btn-lg btn-info">Add More</a>
           </div>
         </div>
       </div>

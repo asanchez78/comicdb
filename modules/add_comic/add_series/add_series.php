@@ -1,11 +1,3 @@
-<?php
-  $addSeriesSearch = filter_input ( INPUT_POST, 'addSeriesSearch' );
-  $addSeriesSubmit = filter_input ( INPUT_POST, 'addSeriesSubmit' );
-
-  if ($addSeriesSearch) { include(__ROOT__.'/modules/add_comic/add_series/form-search.php'); }
-  if ($addSeriesSubmit) { include(__ROOT__.'/modules/add_comic/add_series/form-submit.php'); }
-?>
-
 <section data-module="add_series" class="row add-block">
   <?php if ($addSeriesSearch == 'true') { ?>
   <header class="headline col-xs-12">
@@ -25,7 +17,7 @@
       <input type="hidden" name="addSeriesSubmit" value="true" />
       <div class="text-center center-block button-block">
         <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
+        <button type="submit" name="submit" class="btn btn-lg btn-danger form-search"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-plus"></i> Add</span></button>
       </div>
     </form>
   </div>
@@ -44,7 +36,7 @@
         <h3><?php echo $series_name; ?><br /><small>(<?php echo $series_vol; ?>)</small></h3>
         <p>is already in your collection</p>
         <button class="btn btn-lg btn-warning form-back"><i class="fa fa-arrow-left"></i> Back</button>
-        <a class="btn btn-lg btn-success add-another" href="/add.php#addSeries"><i class="fa fa-plus-square"></i> Add another?</a>
+        <a class="btn btn-lg btn-success add-another" href="/add.php?add=true#addSeries"><i class="fa fa-plus-square"></i> Add another?</a>
       </div>
     </div>
     <?php } ?>
@@ -73,9 +65,7 @@
         <input name="series_name" class="form-control" type="text" size="50" value="" required />
       </div>
       <input type="hidden" name="addSeriesSearch" value="true" />
-      <div class="form-group">
-        <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-search"></i> Search</span></button>
-      </div>
+      <button type="submit" name="submit" class="btn btn-lg btn-danger form-submit"><span class="icon-loading"><i class="fa fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-search"></i> Search</span></button>
     </form>
   </div>
   <?php } ?>

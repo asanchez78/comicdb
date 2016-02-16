@@ -1,6 +1,21 @@
 <?php
   require_once('views/head.php');
   $filename = $_SERVER["PHP_SELF"];
+
+  // Form input submits
+  $addIssueSearch = filter_input ( INPUT_POST, 'addIssueSearch' );
+  $addIssueSubmit = filter_input ( INPUT_POST, 'addIssueSubmit' );
+  $addListSubmit = filter_input ( INPUT_POST, 'addListSubmit' );
+  $addRangeSubmit = filter_input ( INPUT_POST, 'addRangeSubmit' );
+  $addSeriesSearch = filter_input ( INPUT_POST, 'addSeriesSearch' );
+  $addSeriesSubmit = filter_input ( INPUT_POST, 'addSeriesSubmit' );
+
+  if ($addIssueSearch) { include(__ROOT__.'/modules/add_comic/add_issue/form-search.php'); }
+  if ($addIssueSubmit) { include(__ROOT__.'/modules/add_comic/add_issue/form-submit.php'); }
+  if ($addListSubmit) { include(__ROOT__.'/modules/add_comic/add_list/form-submit.php'); }
+  if ($addRangeSubmit) { include(__ROOT__.'/modules/add_comic/add_range/form-submit.php'); }
+  if ($addSeriesSearch) { include(__ROOT__.'/modules/add_comic/add_series/form-search.php'); }
+  if ($addSeriesSubmit) { include(__ROOT__.'/modules/add_comic/add_series/form-submit.php'); }
 ?>
   <title>Add :: POW! Comic Book Manager</title>
 </head>
