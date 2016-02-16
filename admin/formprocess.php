@@ -21,10 +21,10 @@
         $series_name = $comic->series_name;
         $originalPurchase = $comic->originalPurchase;
         $quantity = $comic->issue_quantity;
-        $condition = $comic->issue_condition;
+        $issue_condition = $comic->issueCondition;
         
         // Wiki updates automatically if field is blank
-        $wiki->issueSearch($cvVolumeID, $issue_number);
+        $wiki->issueSearch($cvVolumeID, $issue_number, $series_vol);
         $creatorsList = $wiki->creatorsList;
         
         // Release Date
