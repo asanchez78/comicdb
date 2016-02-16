@@ -4,6 +4,7 @@
   $comic->userFollowedBy ($profileID);
   $totalIssues = $comic->total_issue_count;
 
+  // If the user has uploaded an avatar display it, otherwise show either Gravatar or default avatar.
   if (isset($comic->user_avatar)) {
     $avatar = $comic->user_avatar;
   } else {

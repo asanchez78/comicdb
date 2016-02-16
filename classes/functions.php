@@ -235,27 +235,37 @@ class comicSearch {
           $this->pageNum = 1;
         }
         $this->hasPagination = false;
+        // Prepare our string array
         $this->pagination = '';
         $sql = "SELECT *, CASE WHEN series_name
           LIKE 'The %' THEN trim(substr(series_name from 4)) else series_name end as series_name2
           FROM series WHERE $idList
           ORDER BY series_name2 ASC, series_vol ASC ";
+        // Lock our results at 48 per page (to make even rows)
         if ($numResults > 48) {
           $this->hasPagination = true;
           $sql .= 'LIMIT 48 ';
+
+          // Divides total number of results by our result limit to figure out number of pages
           $this->numPages = ceil($numResults / 48);
+
+          // Loop to generate page number links
           for ($i = 1; $i <= $this->numPages; $i++) {
             if (isset($profile_name) && $profile_name !== '') { 
               $userBrowse = 'user=' . $profile_name . '&';
             } else {
               $userBrowse = '';
             }
+
+            // Set class of page number as active if it matches the current page number
             if (isset($this->pageNum) && $i == $this->pageNum) {
               $this->pagination .= '<li class="active"><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
             } else {
               $this->pagination .= '<li><a href="/profile.php?' . $userBrowse . 'page=' . $i . '">' . $i . '</a></li>';
             }
           }
+
+          // Removes "previous" and "next" functionality if at beginning/end of pagination.
           if ($this->pageNum == 1) {
             $this->previousPage = '';
           } else {
@@ -268,6 +278,8 @@ class comicSearch {
             $nextPageNum = $this->pageNum + 1;
             $this->nextPage = ' <li><a href="/profile.php?' . $userBrowse . 'page=' . $nextPageNum . '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
           }
+
+          // Offset the results if on pages after 1
           if ($this->pageNum > 1) {
             $offsetNum = $this->pageNum - 1;
             $sql .= 'OFFSET ' . 48 * $offsetNum;
@@ -451,6 +463,7 @@ class comicSearch {
     }
   }
 
+  // Counts total number of books for the user in users_comics
   public function collectionCount($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -463,6 +476,7 @@ class comicSearch {
     $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
 
+  // Counts the number of series owned by the user
   public function seriesCount($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -478,6 +492,7 @@ class comicSearch {
     $this->total_series_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
 
+  // Grabs user meta information for user on profile pages.
   public function userMeta($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -487,8 +502,10 @@ class comicSearch {
     $sql = "SELECT *
         FROM users_meta
         WHERE user_id = $user_id";
+
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
+      // Meta Key and Meta Value can be set as anything. We need to set an array to store all the values for the user.
       $this->meta_key = array();
       $this->meta_val = array();
       while ( $row = $result->fetch_assoc () ) {
@@ -527,6 +544,7 @@ class comicSearch {
     }
   }
 
+  // Looks up User information by profile name.
   public function userLookup($profile_name) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -538,6 +556,7 @@ class comicSearch {
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
+        // Grab userID and userEmail from database, convert user_email to hash string for security and to pass to Gravatar.
         $this->browse_user_id = $row ['user_id'];
         $this->browse_user_email_hash = md5(strtolower(trim( $row ['user_email'] )));
         $validUser=1;
@@ -547,6 +566,7 @@ class comicSearch {
     }
   }
 
+  // Grab the followers the user follows
   public function userFollows($profile_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -558,12 +578,14 @@ class comicSearch {
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
+        // Grab userID and userEmail from database, convert user_email to hash string for security and to pass to Gravatar.
         $this->follow_username = $row ['user_name'];
         $this->follow_email_hash = md5( strtolower( trim( $row ['user_email'] ) ) );
       }
     }
   }
 
+  // Builds the 'Comic Wall' on the users profile page header.
   public function userCovers($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -587,6 +609,7 @@ class comicSearch {
     }
   }
 
+  // Counts the number of users that follow a user
   public function userFollowedBy($user_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
