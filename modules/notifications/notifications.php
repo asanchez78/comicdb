@@ -49,6 +49,7 @@
       case 9:
         $messageText = 'Your account has been created successfully. You can now <a href="../login.php">log in.</a>';
         break;
+      // User Profiles
       case 10:
         $messageText = 'Your profile has been updated.';
         break;

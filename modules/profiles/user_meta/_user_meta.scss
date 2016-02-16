@@ -14,6 +14,10 @@
   @media (min-width: $screen-md) {
     font-size: 12px;
   }
+  
+  @media (min-width: $screen-lg) {
+    max-height: 138px;
+  }
 
   h2 {
     font-size: 16px;
@@ -35,6 +39,9 @@
       box-shadow: 0 0 5px #333;
       margin-left: 5px;
       width: 100%;
+      @media (min-width: $screen-lg) {
+        max-height: 138px;
+      }
     }
   }
 

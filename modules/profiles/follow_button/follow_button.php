@@ -2,6 +2,7 @@
   $followers = new comicSearch ();
   $followers->userMeta($userID);
 
+  // Checks to see if the user is already following the profile
   if (isset($followers->user_follows)) {
     $followList = preg_split('/\D/', $followers->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     foreach ($followList as $followUser) {

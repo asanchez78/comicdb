@@ -7,7 +7,7 @@
       <div class="manage-comic-container">
         <div class="text-center">
           <button class="btn btn-sm btn-warning form-back"><i class="fa fa-fw fa-arrow-left"></i> <span class="sr-only">Back</span></button>
-          <button type="submit" name="submit" class="btn btn-sm btn-success form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-fw fa-save"></i> <span class="sr-only">Save</span></span></button>
+          <button type="submit" name="submit" class="btn btn-sm btn-success form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-fw fa-save"></i> <span class="hidden-sm hidden-xs">Save</span></span></button>
         </div>
       </div>
       <div class="form-group">

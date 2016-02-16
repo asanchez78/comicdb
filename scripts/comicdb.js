@@ -107,6 +107,10 @@ jQuery(document).ready(function($) {
     $(this).addClass('loading');
   });
 
+  $('.form-save').click(function() {
+    $(this).addClass('loading');
+  });
+
   // Hides the notification bar after 6 seconds (6000ms)
   var $notifications = $('.notifications');
   if($notifications) {

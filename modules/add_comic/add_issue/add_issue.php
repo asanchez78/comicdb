@@ -1,11 +1,3 @@
-<?php
-  $addIssueSearch = filter_input ( INPUT_POST, 'addIssueSearch' );
-  $addIssueSubmit = filter_input ( INPUT_POST, 'addIssueSubmit' );
-
-  if ($addIssueSearch) { include(__ROOT__.'/modules/add_comic/add_issue/form-search.php'); }
-  if ($addIssueSubmit) { include(__ROOT__.'/modules/add_comic/add_issue/form-submit.php'); }
-?>
-
 <section data-module="add_issue" class="row add-block">
   <?php // ADD SINGLE ISSUE: Part 2/3: Displays final fields and allows user to change details before adding to collection.
     if ($addIssueSearch == 'true' && $searchResults == 'true') { ?>
@@ -17,7 +9,7 @@
         <div class="manage-comic-container">
           <div class="text-center">
             <button class="btn btn-sm btn-warning form-back"><i class="fa fa-fw fa-arrow-left"></i> <span class="sr-only">Back</span></button>
-            <button type="submit" name="submit" class="btn btn-sm btn-success form-submit"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-fw fa-save"></i> <span class="sr-only">Save</span></span></button>
+            <button type="submit" name="submit" class="btn btn-sm btn-success form-search"><span class="icon-loading"><i class="fa fa-fw fa-spinner fa-spin"></i></span><span class="text-submit"><i class="fa fa-fw fa-save"></i> <span class="hidden-xs hidden-sm">Save</span></span></button>
           </div>
         </div>
         <div class="form-group">
@@ -162,7 +154,7 @@
         </div>
         <div class="text-center center-block">
           <a href="/comic.php?comic_id=<?php echo $comic_id; ?>" class="btn btn-lg btn-success">View Issue</a>
-          <a href="/add.php#addSingle" class="btn btn-lg btn-info">Add another?</a>
+          <a href="/add.php?add=true#addSingle" class="btn btn-lg btn-info add-another">Add another?</a>
         </div>
       </div>
     </div>
