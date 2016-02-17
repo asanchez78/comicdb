@@ -114,8 +114,10 @@ class Login {
 		$_SESSION = array ();
 		session_destroy ();
 		setcookie("user_name", "", time() -60, "/","", 0);
+		setcookie("user_email", "", time() -60, "/","", 0);
 		setcookie("user_id", "", time() -60, "/","", 0);
 		setcookie("apiKey", "", time() -60, "/","", 0);
+		setcookie("DisplayStyle", "", time() -60, "/","", 0);
 		setcookie("user_login_status", "0", time() -60, "/","", 0);
 	}
 	
