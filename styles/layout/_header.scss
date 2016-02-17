@@ -113,8 +113,12 @@
   .navbar-default {
     border-radius: 0;
     border: none;
-    border-right: 1px solid $border-color;
-    border-bottom: 1px solid $border-color;
+    margin-bottom: 0;
+
+    @media (min-width: $screen-md) {
+      border-right: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+    }
 
     .navbar-toggle {
       background-color: transparent;

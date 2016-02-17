@@ -47,8 +47,9 @@ class wikiQuery {
 	 * @return string             list of results
 	 */
 	public function seriesSearch ($seriesName) {
-		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
-		$jsondata = file_get_contents($apiURL);
+		$apiURL = "http://comicvine.gamespot.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
+		// @file_get_contents prevents the site from spitting out 403 errors. We'll hand errors in the null check. This prevents our site from spitting out nasty errors when ComicVine is down.
+		$jsondata = @file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->resultNum = 1;
 
@@ -102,11 +103,12 @@ class wikiQuery {
 	 * @return string               issue's story name, plot, etc.
 	 */
 	public function issueSearch ($cvVolumeID, $issue_number, $series_vol) {
-		$apiURL = "http://www.comicvine.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
-		$jsondata = file_get_contents($apiURL);
+		$apiURL = "http://comicvine.gamespot.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
+		$jsondata = @file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
+
 		// Checks if the results returned anything
-		if ($results['number_of_page_results'] > 0) {
+		if ($results['number_of_page_results'] > 0 && $results !== FALSE) {
 			$this->searchResults = true;
 			$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=" . __apiKey__;
 			$jsondata = file_get_contents($apiDetailURL);
