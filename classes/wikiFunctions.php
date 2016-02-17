@@ -47,7 +47,7 @@ class wikiQuery {
 	 * @return string             list of results
 	 */
 	public function seriesSearch ($seriesName) {
-		$apiURL = "http://www.comicvine.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
+		$apiURL = "http://comicvine.gamespot.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		$this->resultNum = 1;
@@ -102,7 +102,7 @@ class wikiQuery {
 	 * @return string               issue's story name, plot, etc.
 	 */
 	public function issueSearch ($cvVolumeID, $issue_number, $series_vol) {
-		$apiURL = "http://www.comicvine.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
+		$apiURL = "http://comicvine.gamespot.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
 		$jsondata = file_get_contents($apiURL);
 		$results = json_decode($jsondata, true);
 		// Checks if the results returned anything
