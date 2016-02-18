@@ -48,9 +48,13 @@ class wikiQuery {
 	 */
 	public function seriesSearch ($seriesName) {
 		$apiURL = "http://comicvine.gamespot.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
-		// @file_get_contents prevents the site from spitting out 403 errors. We'll hand errors in the null check. This prevents our site from spitting out nasty errors when ComicVine is down.
-		$jsondata = @file_get_contents($apiURL);
+		$ch = curl_init($apiURL);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt( $ch, CURLOPT_USERAGENT, "WadeWilson" );
+		$jsondata = curl_exec($ch);
 		$results = json_decode($jsondata, true);
+		curl_close($ch);
 		$this->resultNum = 1;
 
 		if ($results['number_of_page_results'] < 5) {
@@ -87,8 +91,13 @@ class wikiQuery {
 	 */
 	public function seriesLookup ($apiDetailURL) {
 		$apiURL = $apiDetailURL . "?format=json&api_key=" . __apiKey__;
-		$jsondata = file_get_contents($apiURL);
+		$ch = curl_init($apiURL);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt( $ch, CURLOPT_USERAGENT, "WadeWilson" );
+		$jsondata = curl_exec($ch);
 		$results = json_decode($jsondata, true);
+		curl_close($ch);
 		$this->seriesName = $results['results']['name'];
 		$this->cvVolumeID = $results['results']['id'];
 		$this->seriesStartYear = $results['results']['start_year'];
@@ -104,15 +113,25 @@ class wikiQuery {
 	 */
 	public function issueSearch ($cvVolumeID, $issue_number, $series_vol) {
 		$apiURL = "http://comicvine.gamespot.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
-		$jsondata = @file_get_contents($apiURL);
+		$ch = curl_init($apiURL);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt( $ch, CURLOPT_USERAGENT, "WadeWilson" );
+		$jsondata = curl_exec($ch);
 		$results = json_decode($jsondata, true);
+		curl_close($ch);
 
 		// Checks if the results returned anything
 		if ($results['number_of_page_results'] > 0 && $results !== FALSE) {
 			$this->searchResults = true;
 			$apiDetailURL = $results['results']['0']['api_detail_url'] . "?format=json&api_key=" . __apiKey__;
-			$jsondata = file_get_contents($apiDetailURL);
+			$ch = curl_init($apiDetailURL);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt( $ch, CURLOPT_USERAGENT, "WadeWilson" );
+			$jsondata = curl_exec($ch);
 			$detailResults = json_decode($jsondata, true);
+			curl_close($ch);
 			$this->storyName = $detailResults['results']['name'];
 			$this->releaseDate = $detailResults['results']['cover_date'];
 			$this->synopsis = $detailResults['results']['description'];
