@@ -7142,4 +7142,25 @@ ul#inventory-table .series-extra {
   color: #363636;
 }
 
+[data-module="quick_add"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+@media (min-width: 641px) {
+  [data-module="quick_add"] {
+    border: 1px solid #e7e7e7;
+    margin-left: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+[data-module="quick_add"] h3 {
+  font-size: 18px;
+  margin-top: 0;
+  color: #ff0300;
+}
+[data-module="quick_add"] .form-control {
+  font-size: 16px;
+}
+
 /*# sourceMappingURL=styles.css.map */
