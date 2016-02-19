@@ -11,8 +11,10 @@
 
   h4 {
     margin-top: 15px;
+    
     @media (min-width: $screen-md) {
       margin-top: 0;
+      font-size: 22px;
     }
 
     a {
@@ -20,8 +22,23 @@
     }
   }
   
+  h5 {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
   > .row {
     background-color: #363636;
+    padding-bottom: 25px;
+    min-height: 685px;
+    
+    @media (min-width: $screen-md) {
+      min-height: 295px;
+    }
+
+    @media (min-width: $screen-lg) {
+      min-height: 390px;
+    }
   }
 
   .item.active {
@@ -63,12 +80,30 @@
       }
     }
   }
+  
+  .story-block {
+    line-height: 1.2;
+
+    > p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  
+  .story-block + .button-block {
+    margin-top: 35px;
+  }
 
   .button-block {
-    margin-bottom: 25px;
+    margin-top: 10px;
+    margin-bottom: 0;
 
     > .btn:first-of-type {
       margin-right: 15px;
     }
+  }
+
+  .read-more {
+    display: block;
+    margin-top: 10px;
   }
 }
