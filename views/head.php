@@ -31,4 +31,3 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" href="/assets/pow.png">
   <script src="/scripts/jquery-2.2.0.min.js"></script>
-  <script src="/scripts/comicdb.js"></script>

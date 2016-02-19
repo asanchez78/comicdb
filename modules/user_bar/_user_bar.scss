@@ -1,0 +1,74 @@
+[data-module="user_bar"] {
+  color: white;
+
+  > .row {
+    background-color: #363636;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 36px;
+    color: white;
+
+    @media (min-width: $screen-md) {
+      font-size: 32px;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 36px;
+      line-height: 1;
+    }
+  }
+  
+  .dropdown {
+    button {
+      outline: none;
+      border: none;
+      padding: 0 15px;
+      height: 36px;
+      background-color: $brand-red;
+
+      @media (min-width: $screen-md) {
+        margin-top: -10px;
+        margin-bottom: -10px;
+        height: 60px;
+      }
+    }
+  }
+
+  .user-profile-button {
+    a {
+      color: white;
+      display: block;
+      
+
+      @media (min-width: $screen-md) {
+        margin-top: -10px;
+        margin-bottom: -10px;
+        height: 60px;
+        line-height: 60px;
+      }
+
+      > * {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .profile-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+
+  .profile-name {
+    margin-right: 10px;
+  }
+
+  .profile-avatar {
+    width: 40px;
+  }
+}

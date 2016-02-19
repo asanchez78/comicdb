@@ -1,0 +1,12 @@
+[data-module="carousel_bar"] {
+  position: relative;
+
+  .item {
+    height: 600px;
+  }
+
+  .carousel-caption {
+    left: 10%;
+    right: 10%;
+  }
+}

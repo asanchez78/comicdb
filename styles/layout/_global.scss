@@ -148,8 +148,6 @@ main {
 }
 
 .sidebar {
-  background-color: $brand-orange;
-  background-image: linear-gradient($brand-orange, white);
   margin-right: 0;
   padding-bottom: 55px;
   padding-top: 15px;
@@ -161,28 +159,17 @@ main {
   h3 {
     font-size: 14px;
   }
-  
-  .issue-image {
-    margin-bottom: 15px;
-  }
+}
 
-  *[class*="credit-"] {
-    span {
-      display: inline;
-      margin-bottom: 3px;
+.big-red {
+  margin: 0 0 -3px 0;
+  font-size: 20px;
+  color: $brand-red;
+  font-family: $headings-font-family;
+  letter-spacing: 1px;
 
-      &:after {
-        content: ", ";
-        display: inline;
-      }
-
-      &:last-of-type {
-        &:after {
-          content: "";
-          display: inline;
-        }
-      }
-    }
+  @media (min-width: $screen-md) {
+    font-size: 30px;
   }
 }
 

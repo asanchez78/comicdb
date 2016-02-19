@@ -43,4 +43,4 @@
 					</ul>
 			</nav>
 		</aside>
-		<main class="col-md-10">
+		<main class="col-md-10" role="main">

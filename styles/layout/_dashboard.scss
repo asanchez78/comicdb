@@ -1,0 +1,36 @@
+.dashboard-index {
+  display: block;
+  margin-left: -15px;
+  margin-right: -15px;
+  
+  @media (min-width: $screen-md) {
+    display: table;
+
+    .dashboard-content,
+    .sidebar {
+      display: table-cell;
+      vertical-align: top;
+    }
+  }
+
+  .sidebar {
+    background-color: #555555;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    @media (min-width: $screen-md) {
+      width: 30%;
+    }
+  }
+}
+
+.dashboard-content {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @media (min-width: $screen-md) {
+      width: 60%;
+    }
+}
