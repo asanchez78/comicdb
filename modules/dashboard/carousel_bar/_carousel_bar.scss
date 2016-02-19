@@ -35,6 +35,9 @@
 
     @media (min-width: $screen-md) {
       text-align: left;
+    }
+
+    @media (min-width: $screen-lg) {
       font-size: 15px;
     }
   }
@@ -62,7 +65,7 @@
   }
 
   .button-block {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 
     > .btn:first-of-type {
       margin-right: 15px;

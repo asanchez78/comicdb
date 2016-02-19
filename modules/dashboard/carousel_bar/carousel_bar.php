@@ -8,10 +8,10 @@
           <div class="carousel-caption">
             <div class="row">
               <div class="col-md-5">
-                <a href="#"><img class="img-responsive" src="/images/A_Force-v2016/A_Force-v2016_1-small.jpg" alt=""></a>
+                <a href="#"><img class="img-responsive center-block" src="/images/A_Force-v2016/A_Force-v2016_1-small.jpg" alt=""></a>
               </div>
               <div class="col-md-7">
-                <div class="logo-marvel pull-right hidden-xs hidden-sm"></div>
+                <div class="logo-marvel pull-right hidden-xs hidden-sm hidden-md"></div>
                 <h4><a href="#">A-Force #1</a></h4>
                 <div class="story-block hidden-xs hidden-sm">
                   <h5>"Part One"</h5>
@@ -33,7 +33,7 @@
                 <a href="#"><img class="img-responsive" src="/images/A_Force-v2016/A_Force-v2016_2-small.jpg" alt=""></a>
               </div>
               <div class="col-md-7">
-                <div class="logo-dc pull-right hidden-xs hidden-sm"></div>
+                <div class="logo-dc pull-right hidden-xs hidden-sm hidden-md"></div>
                 <h4><a href="#">A-Force #2</a></h4>
                 <div class="story-block hidden-xs hidden-sm">
                   <h5>"Part Two"</h5>

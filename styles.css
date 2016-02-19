@@ -7046,6 +7046,10 @@ ul#inventory-table .series-extra {
 @media (min-width: 641px) {
   [data-module="carousel_bar"] .carousel-caption {
     text-align: left;
+  }
+}
+@media (min-width: 900px) {
+  [data-module="carousel_bar"] .carousel-caption {
     font-size: 15px;
   }
 }
@@ -7066,12 +7070,15 @@ ul#inventory-table .series-extra {
   right: 5px;
 }
 [data-module="carousel_bar"] .button-block {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 [data-module="carousel_bar"] .button-block > .btn:first-of-type {
   margin-right: 15px;
 }
 
+[data-module="count_bar"] {
+  font-size: 13px;
+}
 [data-module="count_bar"] > .row, [data-module="count_bar"] > ul#inventory-table {
   background-color: #e7e7e7;
   padding-top: 15px;
