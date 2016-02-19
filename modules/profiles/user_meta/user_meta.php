@@ -1,23 +1,23 @@
 <?php
-  $comic->collectionCount ($profileID);
-  $comic->seriesCount ($profileID);
-  $comic->userFollowedBy ($profileID);
-  $totalIssues = $comic->total_issue_count;
+  $user->collectionCount ($profileID);
+  $user->seriesCount ($profileID);
+  $user->userFollowedBy ($profileID);
+  $totalIssues = $user->total_issue_count;
 
   // If the user has uploaded an avatar display it, otherwise show either Gravatar or default avatar.
-  if (isset($comic->user_avatar)) {
-    $avatar = $comic->user_avatar;
+  if (isset($user->user_avatar)) {
+    $avatar = $user->user_avatar;
   } else {
     $gravatar_hash = $profileEmail;
     $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
   }
 
-  if (isset($comic->user_follows)) {
+  if (isset($user->user_follows)) {
     $followBlock = '';
-    $followList = preg_split('/\D/', $comic->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
+    $followList = preg_split('/\D/', $user->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
-      $user = new comicSearch ();
+      $user = new userInfo ();
       $user->userFollows($followUser);
       $user->userMeta($followUser);
 
@@ -48,24 +48,24 @@
     $follows = '';
   }
 
-  if (isset($comic->followerCount)) {
-    $followerCount = $comic->followerCount;
+  if (isset($user->followerCount)) {
+    $followerCount = $user->followerCount;
   }
 
-  if (isset($comic->facebook_url)) {
-    $facebook_url = $comic->facebook_url;
+  if (isset($user->facebook_url)) {
+    $facebook_url = $user->facebook_url;
   } else {
     $facebook_url = '';
   }
 
-  if (isset($comic->twitter_url)) {
-    $twitter_url = $comic->twitter_url;
+  if (isset($user->twitter_url)) {
+    $twitter_url = $user->twitter_url;
   } else {
     $twitter_url = '';
   }
 
-  if (isset($comic->instagram_url)) {
-    $instagram_url = $comic->instagram_url;
+  if (isset($user->instagram_url)) {
+    $instagram_url = $user->instagram_url;
   } else {
     $instagram_url = '';
   }
@@ -106,11 +106,11 @@
               comics
             </div>
             <div class="hidden-xs hidden-sm col-md-2 text-center meta-total-series">
-              <h3 class="big-red"><?php echo $comic->total_series_count; ?></h3>
+              <h3 class="big-red"><?php echo $user->total_series_count; ?></h3>
               series
             </div>
             <div class="col-xs-6 col-md-4 text-center meta-following">
-              <?php if (isset($comic->user_follows) && $comic->user_follows != '') { ?>
+              <?php if (isset($user->user_follows) && $user->user_follows != '') { ?>
               <h3 class="big-red hidden-md hidden-lg"><?php echo $followCount; ?></h3>
               following
               <div class="hidden-xs hidden-sm">
@@ -121,7 +121,7 @@
               <?php } ?>
             </div>
             <div class="hidden-xs hidden-sm col-md-4 text-center meta-followers">
-              <?php if (isset($comic->followerList) && $comic->followerList != '') { ?>
+              <?php if (isset($user->followerList) && $user->followerList != '') { ?>
               <h3 class="big-red"><?php echo $followerCount; ?></h3>
               followers
               <div class="hidden-xs hidden-sm">
