@@ -7014,12 +7014,62 @@ ul#inventory-table .series-extra {
 [data-module="carousel_bar"] {
   position: relative;
 }
-[data-module="carousel_bar"] .item {
-  height: 600px;
+[data-module="carousel_bar"] h3 {
+  color: white;
+  font-size: 32px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+  margin: 15px;
+}
+[data-module="carousel_bar"] h4 {
+  margin-top: 15px;
+}
+@media (min-width: 641px) {
+  [data-module="carousel_bar"] h4 {
+    margin-top: 0;
+  }
+}
+[data-module="carousel_bar"] h4 a {
+  color: #ffff00;
+}
+[data-module="carousel_bar"] > .row, [data-module="carousel_bar"] > ul#inventory-table {
+  background-color: #363636;
+}
+[data-module="carousel_bar"] .item.active {
+  display: block;
 }
 [data-module="carousel_bar"] .carousel-caption {
-  left: 10%;
-  right: 10%;
+  position: static;
+  padding: 0 40px;
+  font-size: 12px;
+}
+@media (min-width: 641px) {
+  [data-module="carousel_bar"] .carousel-caption {
+    text-align: left;
+    font-size: 15px;
+  }
+}
+[data-module="carousel_bar"] .carousel-control {
+  background-image: none;
+  width: 6%;
+}
+[data-module="carousel_bar"] .carousel-control > span {
+  position: absolute;
+  top: 40%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+[data-module="carousel_bar"] .carousel-control.left > span {
+  left: 5px;
+}
+[data-module="carousel_bar"] .carousel-control.right > span {
+  right: 5px;
+}
+[data-module="carousel_bar"] .button-block {
+  margin-bottom: 15px;
+}
+[data-module="carousel_bar"] .button-block > .btn:first-of-type {
+  margin-right: 15px;
 }
 
 [data-module="count_bar"] > .row, [data-module="count_bar"] > ul#inventory-table {

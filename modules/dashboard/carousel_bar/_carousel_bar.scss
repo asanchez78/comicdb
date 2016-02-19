@@ -1,12 +1,71 @@
 [data-module="carousel_bar"] {
   position: relative;
 
-  .item {
-    height: 600px;
+  h3 {
+    color: white;
+    font-size: 32px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+    margin: 15px;
+  }
+
+  h4 {
+    margin-top: 15px;
+    @media (min-width: $screen-md) {
+      margin-top: 0;
+    }
+
+    a {
+      color: $brand-yellow;
+    }
+  }
+  
+  > .row {
+    background-color: #363636;
+  }
+
+  .item.active {
+    display: block;
   }
 
   .carousel-caption {
-    left: 10%;
-    right: 10%;
+    position: static;
+    padding: 0 40px;
+    font-size: 12px;
+
+    @media (min-width: $screen-md) {
+      text-align: left;
+      font-size: 15px;
+    }
+  }
+
+  .carousel-control {
+    background-image: none;
+    width: 6%;
+
+    > span {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+
+    &.left {
+      > span {
+        left: 5px;
+      }
+    }
+    &.right {
+      > span {
+        right: 5px;
+      }
+    }
+  }
+
+  .button-block {
+    margin-bottom: 15px;
+
+    > .btn:first-of-type {
+      margin-right: 15px;
+    }
   }
 }
