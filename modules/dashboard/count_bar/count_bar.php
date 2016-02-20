@@ -1,4 +1,5 @@
 <?php
+  // User meta is set in header. Grab collection and counts already set by userMeta query.
   $userInfo->collectionCount ($userID);
   $userInfo->seriesCount ($userID);
   $userInfo->userFollowedBy ($userID);
@@ -8,10 +9,15 @@
   if (isset($userInfo->user_follows)) {
     $followList = preg_split('/\D/', $userInfo->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
+  } else {
+    $followList = '';
+    $followCount = 0;
   }
 
   if (isset($userInfo->followerCount)) {
     $followerCount = $userInfo->followerCount;
+  } else {
+    $followerCount = 0;
   }
 ?>
 <div data-module="count_bar">

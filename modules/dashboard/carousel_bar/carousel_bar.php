@@ -1,6 +1,7 @@
 <?php
   $carouselIssues = new comicSearch ();
-  $carouselIssues->carouselComics($userID, 5);
+  $carouselSlides = 5;
+  $carouselIssues->carouselComics($userID, $carouselSlides);
 ?>
 
 <div data-module="carousel_bar">
