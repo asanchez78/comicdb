@@ -1,8 +1,8 @@
 <?php
-  $user->seriesList (0, '', $profileID);
+  $comic->seriesList (0, '', $profileID);
 ?>
 <section data-module="series_list">
-<?php if (isset($user->series_list_result->num_rows) && $user->series_list_result->num_rows > 0) { ?>
+<?php if (isset($comic->series_list_result->num_rows) && $comic->series_list_result->num_rows > 0) { ?>
   <header class="row headline">
     <div class="col-xs-7 col-md-8">
       <h2><?php if (isset($profile_name) && $profile_name != '') { echo $first_name . '&#8217;s'; } else { echo 'Your'; } ?>  Collection</h2>
@@ -14,7 +14,7 @@
     </div>
   </header>
   <ul id="inventory-table" class="row layout-thumbLg">
-  <?php while ( $row = $user->series_list_result->fetch_assoc () ) {
+  <?php while ( $row = $comic->series_list_result->fetch_assoc () ) {
     $series_id = $row ['series_id'];
     $series_name = $row ['series_name'];
     $series_vol = $row ['series_vol'];
@@ -59,12 +59,12 @@
     </li>
   <?php } ?>
   </ul>
-  <?php if ($user->hasPagination === true) { ?>
+  <?php if ($comic->hasPagination === true) { ?>
   <nav class="text-center">
     <ul class="pagination pagination-lg center-block">
-      <?php echo $user->previousPage; ?>
-      <?php echo $user->pagination; ?>
-      <?php echo $user->nextPage; ?>
+      <?php echo $comic->previousPage; ?>
+      <?php echo $comic->pagination; ?>
+      <?php echo $comic->nextPage; ?>
     </ul>
   </nav>
   <?php } ?>
