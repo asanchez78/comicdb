@@ -61,7 +61,7 @@
   </ul>
   <?php if ($comic->hasPagination === true) { ?>
   <nav class="text-center">
-    <ul class="pagination pagination-lg center-block">
+    <ul class="pagination pagination-lg">
       <?php echo $comic->previousPage; ?>
       <?php echo $comic->pagination; ?>
       <?php echo $comic->nextPage; ?>
