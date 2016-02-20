@@ -17,7 +17,6 @@
     $followList = preg_split('/\D/', $user->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
-      $user = new userInfo ();
       $user->userFollows($followUser);
       $user->userMeta($followUser);
 
