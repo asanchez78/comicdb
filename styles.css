@@ -5814,7 +5814,7 @@ label {
     margin-top: 0;
     margin-bottom: 0;
   }
-  .dash-half:nth-child(2) {
+  .dash-half:nth-child(even) {
     border-left: 1px solid #e7e7e7;
   }
 }

@@ -246,7 +246,7 @@ class userInfo {
           } elseif (isset($this->story_name) && $this->story_name != '') {
             $storyName = $this->story_name;
           }
-          if ($storyName != '') {
+          if (isset($storyName) && $storyName != '') {
             $this->carousel_list .= '<h5>"' . $storyName . '"</h5>';
           }
         }

@@ -69,7 +69,7 @@
   @media (min-width: $screen-lg) {
     margin-top: 0;
     margin-bottom: 0;
-    &:nth-child(2) {
+    &:nth-child(even) {
       border-left: 1px solid $border-color;
     }
   }
