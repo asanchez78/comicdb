@@ -6,10 +6,11 @@
   $profile_name = filter_input(INPUT_GET, 'user');
 
   $comic = new comicSearch ();
+  $user = new userInfo ();
 
   if (isset($profile_name) && $profile_name != '') {
-    $comic->userLookup($profile_name);
-    $profileID = $comic->browse_user_id;
+    $user->userLookup($profile_name);
+    $profileID = $user->browse_user_id;
   } else {
     $profileID = $userID;
   }
