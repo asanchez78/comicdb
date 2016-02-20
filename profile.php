@@ -3,26 +3,27 @@
 
   $profile_name = filter_input(INPUT_GET, 'user');
   $comic = new comicSearch ();
+  $user = new userInfo ();
 
   if (isset($profile_name) && $profile_name != '') {
-    $comic->userLookup($profile_name);
-    $profileID = $comic->browse_user_id;
-    $profileEmail = $comic->browse_user_email_hash;
+    $user->userLookup($profile_name);
+    $profileID = $user->browse_user_id;
+    $profileEmail = $user->browse_user_email_hash;
   } else {
     $profileID = $userID;
     $profileEmail = $userEmail;
   }
   // Grab all fields from users_meta for the user ID
-  $comic->userMeta($profileID);
+  $user->userMeta($profileID);
 
-  if (isset($comic->user_first_name)) {
-    $first_name = $comic->user_first_name;  
+  if (isset($user->user_first_name)) {
+    $first_name = $user->user_first_name;  
   } else {
     $first_name = '';
   }
   
-  if (isset($comic->user_last_name)) {
-    $last_name = $comic->user_last_name;
+  if (isset($user->user_last_name)) {
+    $last_name = $user->user_last_name;
   } else {
     $last_name = '';
   }
@@ -35,8 +36,8 @@
     }
   }
 
-  if (isset($comic->user_location)) {
-    $user_location = $comic->user_location;
+  if (isset($user->user_location)) {
+    $user_location = $user->user_location;
   } else {
     $user_location = '';
   }
@@ -66,8 +67,8 @@
         <div class="row">
           <?php 
             // Grabs 36 random covers for the profile page header
-            $comic->userCovers($profileID);
-            echo $comic->cover_list; 
+            $user->userCovers($profileID);
+            echo $user->cover_list; 
           ?>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <?php
-  $followers = new comicSearch ();
+  $followers = new userInfo ();
   $followers->userMeta($userID);
 
   // Checks to see if the user is already following the profile
