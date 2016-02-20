@@ -1,11 +1,6 @@
 .profile-header {
-  margin-top: -23px;
   position: relative;
   margin-bottom: 15px;
-
-  @media (min-width: $screen-md) {
-    margin-top: 0;
-  }
 }
 
 .profile-background-container {

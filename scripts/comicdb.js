@@ -133,7 +133,10 @@ jQuery(document).ready(function($) {
       if (currentPage == '/index.php' && $(this).attr('href') == '/') { 
         $(this).parent().addClass('active'); 
       }
-      if (currentPage == '/issues.php' || currentPage == '/comic.php' && $(this).attr('href') == '/profile.php') { 
+      if (currentPage == '/issues.php' && $(this).attr('href') == '/profile.php') { 
+        $(this).parent().addClass('active'); 
+      }
+      if (currentPage == '/comic.php' && $(this).attr('href') == '/profile.php') { 
         $(this).parent().addClass('active'); 
       }
     }

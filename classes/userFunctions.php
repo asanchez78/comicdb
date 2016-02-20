@@ -196,6 +196,7 @@ class userInfo {
     $this->total_series_count = mysqli_num_rows($this->db_connection->query ( $sql ));
   }
 
+  // Grabs X number of random comics from the user's collection and displays them in a carousel.
   public function carouselComics($user_id, $count) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
@@ -265,9 +266,9 @@ class userInfo {
         }
         $this->carousel_list .= '<a href="/comic.php?comic_id=' . $this->comic_id . '" class="read-more">[Read More]</a>';
         $this->carousel_list .= '</div>';
-        $this->carousel_list .= '<div class="button-block hidden-xs hidden-sm hidden-md"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-danger">View Issue</a> <a href="/comic.php?series_id=' . $this->series_id . '" class="btn btn-danger">View Series</a></div>';
+        $this->carousel_list .= '<div class="button-block hidden-xs hidden-sm hidden-md"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-danger">View Issue</a> <a href="/issues.php?series_id=' . $this->series_id . '" class="btn btn-danger">View Series</a></div>';
         $this->carousel_list .= '</div>';
-        $this->carousel_list .= '<div class="button-block hidden-lg center-block text-center col-xs-12"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-sm btn-danger">View Issue</a> <a href="/comic.php?series_id=' . $this->series_id . '" class="btn btn-sm btn-danger">View Series</a></div>';
+        $this->carousel_list .= '<div class="button-block hidden-lg center-block text-center col-xs-12"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-sm btn-danger">View Issue</a> <a href="/issues.php?series_id=' . $this->series_id . '" class="btn btn-sm btn-danger">View Series</a></div>';
         $this->carousel_list .= '</div></div></div>';
       }
     }

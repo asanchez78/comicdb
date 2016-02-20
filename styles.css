@@ -6759,14 +6759,8 @@ ul#inventory-table .series-extra {
 }
 
 .profile-header {
-  margin-top: -23px;
   position: relative;
   margin-bottom: 15px;
-}
-@media (min-width: 641px) {
-  .profile-header {
-    margin-top: 0;
-  }
 }
 
 .profile-background-container {
