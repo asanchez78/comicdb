@@ -174,13 +174,20 @@ class comicSearch {
     }
   }
 
-  public function publisherList() {
+  public function publisherList($publisher_id) {
     $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
     if ($this->db_connection->connect_errno) {
       die ( "Connection failed:" );
     }
-    $sql = "SELECT * FROM publishers ORDER BY publisherName ASC";
+    $sql = "SELECT * FROM publishers WHERE publisherID LIKE '$publisher_id' ORDER BY publisherName ASC";
     $this->publisher_list_result = $this->db_connection->query ( $sql );
+    $this->result = $this->db_connection->query ( $sql );
+    if ($this->result->num_rows > 0) {
+      while ( $row = $this->result->fetch_assoc () ) {
+        $this->publisherName = $row ['publisherName'];
+        $this->publisherShort = $row ['publisherShort'];
+      }
+    }
   }
 
   public function seriesFind($series_name) {
@@ -247,24 +254,6 @@ class comicSearch {
         $this->latestCoverThumb = str_replace('-medium.', '-thumb.', $this->latestCoverMed);
       } else {
         $this->latestCoverSmall = "assets/nocover.jpg";
-      }
-    }
-  }
-
-  public function publisherInfo($publisher_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT *
-          FROM publishers
-          WHERE publisherID=$publisher_id";
-
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        $this->publisherName = $row ['publisherName'];
-        $this->publisherShort = $row ['publisherShort'];
       }
     }
   }
