@@ -5795,6 +5795,8 @@ label {
 .dash-half {
   border-bottom: 1px solid #e7e7e7;
   padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 .dash-half h3 {
   margin-top: 0;
@@ -5807,8 +5809,14 @@ label {
   padding: 5px 15px;
   color: white;
 }
-.dash-half:nth-child(2) {
-  border-left: 1px solid #e7e7e7;
+@media (min-width: 900px) {
+  .dash-half {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .dash-half:nth-child(2) {
+    border-left: 1px solid #e7e7e7;
+  }
 }
 
 [data-module="login_modal"] .modal-header,
