@@ -9,9 +9,15 @@
 	if ($publisherSearchId !== NULL) {
 		$listAll = 2;
 	}
+	if (isset($profile_name) && $profile_name != '') {
+   		$user->userLookup($profile_name);
+   		$profileID = $user->browse_user_id;
+   	} else {
+   		$profileID = $userID;
+   	}
 
 	$comic = new comicSearch ();
-  $comic->publisherInfo ( $publisherSearchId );
+  $comic->publisherList ( $publisherSearchId );
   $publisherName = $comic->publisherName;
 ?>
   <title><?php echo $publisherName; ?> :: POW! Comic Book Manager</title>
@@ -21,7 +27,7 @@
 	<div class="container content">
 		<?php if ($login->isUserLoggedIn () == true) {
 			if ($publisherSearchId !== NULL) {
-				include ('views/series_list.php');
+				include ('modules/series_list/series_list.php');
 			} else { ?>
 				<p><span class="text-danger">ERROR:</span> No publisher was chosen. Please go back and try again.</p>
 			<?php }
