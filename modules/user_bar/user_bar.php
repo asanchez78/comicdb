@@ -1,5 +1,5 @@
 <?php
-  $userInfo = new comicSearch ();
+  $userInfo = new userInfo ();
   $userInfo->userMeta($userID);
 
   if (isset($userInfo->user_first_name)) {

@@ -4,7 +4,7 @@
     $followList = preg_split('/\D/', $userInfo->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
-      $followSearch = new comicSearch ();
+      $followSearch = new userInfo ();
       $followSearch->userFollows($followUser);
       $followSearch->userMeta($followUser);
 

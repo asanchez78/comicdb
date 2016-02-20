@@ -1,5 +1,5 @@
 <?php
-  $carouselIssues = new comicSearch ();
+  $carouselIssues = new userInfo ();
   $carouselSlides = 5;
   $carouselIssues->carouselComics($userID, $carouselSlides);
 ?>
