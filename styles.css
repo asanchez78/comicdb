@@ -5744,7 +5744,7 @@ label {
 .dashboard-index {
   display: block;
   margin-left: -15px;
-  margin-right: -15px;
+  margin-right: -16px;
 }
 @media (min-width: 641px) {
   .dashboard-index {
@@ -5784,11 +5784,31 @@ label {
 @media (min-width: 641px) {
   .dashboard-content {
     width: 60%;
+    border-left: 1px solid #e7e7e7;
   }
 }
 
 .follow-module {
   margin-bottom: 15px;
+}
+
+.dash-half {
+  border-bottom: 1px solid #e7e7e7;
+  padding-bottom: 15px;
+}
+.dash-half h3 {
+  margin-top: 0;
+  font-size: 24px;
+  padding-bottom: 2px;
+  display: block;
+  background-color: #ff0300;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 5px 15px;
+  color: white;
+}
+.dash-half:nth-child(2) {
+  border-left: 1px solid #e7e7e7;
 }
 
 [data-module="login_modal"] .modal-header,
@@ -7185,23 +7205,27 @@ ul#inventory-table .series-extra {
   color: #363636;
 }
 
-[data-module="quick_add"] {
-  padding-top: 15px;
-  padding-bottom: 15px;
+[data-module="pull_list"] {
+  font-size: 14px;
+  line-height: 1.4;
 }
-@media (min-width: 641px) {
-  [data-module="quick_add"] {
-    border: 1px solid #e7e7e7;
-    margin-left: -15px;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+[data-module="pull_list"] .rssincl-entry {
+  margin-bottom: 15px;
 }
-[data-module="quick_add"] h3 {
-  font-size: 18px;
-  margin-top: 0;
-  color: #ff0300;
+[data-module="pull_list"] .rssincl-itemtitle {
+  margin: 0;
 }
+[data-module="pull_list"] .rssincl-itemdate {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+[data-module="pull_list"] small {
+  display: block;
+  border-top: 1px solid #e7e7e7;
+  padding-top: 5px;
+}
+
 [data-module="quick_add"] .form-control {
   font-size: 16px;
 }

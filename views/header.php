@@ -22,6 +22,7 @@
     		<div class="collapse navbar-collapse" id="main-nav-collapse">
 					<ul class="nav navbar-nav nolist">
 					<?php if ($login->isUserLoggedIn () == true) { ?>
+						<li><a href="/"><i class="fa fa-fw fa-tachometer"></i> Dashboard</a></li>
 						<li><a href="/profile.php"><i class="fa fa-fw fa-archive"></i> Collection</a></li>
 						<li><a href="/add.php"><i class="fa fa-fw fa-plus-circle text-center"></i> Add Items</a></li>
 						

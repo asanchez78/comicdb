@@ -40,8 +40,9 @@
   padding-right: 15px;
 
   @media (min-width: $screen-md) {
-      width: 60%;
-    }
+    width: 60%;
+    border-left: 1px solid $border-color;
+  }
 }
 
 .follow-module {
@@ -50,7 +51,6 @@
 
 .dash-half {
   border-bottom: 1px solid $border-color;
-  border-left: 1px solid $border-color;
   padding-bottom: 15px;
 
   h3 {
@@ -63,5 +63,9 @@
     margin-right: -15px;
     padding: 5px 15px;
     color: white;
+  }
+
+  &:nth-child(2) {
+    border-left: 1px solid $border-color;
   }
 }
