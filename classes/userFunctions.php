@@ -10,6 +10,7 @@
  * userFollowedBy
  * collectionCount
  * seriesCount
+ * carouselComics
  * </pre>
  * @author asanchez
  * @author sloyless
@@ -190,5 +191,82 @@ class userInfo {
       WHERE users_comics.user_id=$user_id
       GROUP BY series_id";
     $this->total_series_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+  }
+
+  public function carouselComics($user_id, $count) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connect failed:" );
+    }
+    $sql = "SELECT *
+        FROM comics
+        LEFT JOIN users_comics
+        ON comics.comic_id=users_comics.comic_id
+        LEFT JOIN series
+        ON comics.series_id=series.series_id
+        LEFT join publishers
+        on series.publisherID=publishers.publisherID
+        WHERE users_comics.user_id=$user_id 
+        ORDER BY RAND()
+        LIMIT 5";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      $this->carousel_list = '';
+      while ( $row = $result->fetch_assoc () ) {
+        $this->series_name = $row ['series_name'];
+        $this->series_id = $row ['series_id'];
+        $this->series_vol = $row ['series_vol'];
+        $this->comic_id = $row ['comic_id'];
+        $this->issue_number = $row ['issue_number'];
+        $this->plot = $row ['plot'];
+        $this->story_name = $row ['story_name'];
+        $this->custPlot = $row ['custPlot'];
+        $this->var_cover_image = $row ['variantCover'];
+        $this->custStoryName = $row ['custStoryName'];
+        $this->publisherShort = $row ['publisherShort'];
+        $this->publisherName = $row ['publisherName'];
+        if ($row['release_date']) {
+          $this->release_date = DateTime::createFromFormat('Y-m-d', $row ['release_date'])->format('M Y');
+        } else {
+          $this->release_date = "";
+        }
+        $this->coverMed = $row ['cover_image'];
+
+        $this->carousel_list .= '<div class="item"><div class="carousel-caption"><div class="row">';
+        $this->carousel_list .= '<div class="col-md-4"><a href="/comic.php?comic_id=' . $this->comic_id . '"><img src="' . $this->coverMed . '" alt="" class="img-responsive center-block" /></a></div>';
+        $this->carousel_list .= '<div class="col-md-8"><div class="logo-' . $this->publisherShort . ' pull-right hidden-xs hidden-sm hidden-md"></div><h4><a href="/comic.php?comic_id=' . $this->comic_id . '">' . $this->series_name . ' #' . $this->issue_number . '</a></h4>';
+        $this->carousel_list .= '<div class="story-block hidden-xs hidden-sm">';
+        if (isset($this->story_name) || isset($this->custStoryName)) {
+          if (isset($this->custStoryName) && $this->custStoryName != '') {
+            $storyName = $this->custStoryName;
+          } elseif (isset($this->story_name) && $this->story_name != '') {
+            $storyName = $this->story_name;
+          }
+          if ($storyName != '') {
+            $this->carousel_list .= '<h5>"' . $storyName . '"</h5>';
+          }
+        }
+        if (isset($this->plot) || isset($this->custPlot)) {
+          if (isset($this->custPlot) && $this->custPlot != '' ) {
+            $plot = $this->custPlot;
+          } else {
+            $plot = $this->plot;
+          }
+          // Let's make an "excerpt"!
+          $wrapped = wordwrap(strip_tags($plot), 115);
+          $lines = explode("\n", $wrapped);
+          // if our $plot is shorter than 120 characters, there will be no $lines[1]
+          (array_key_exists('1', $lines)) ? $suffix = '...' : $suffix = '';
+          $short_plot = $lines[0] . $suffix;
+          $this->carousel_list .= $short_plot;
+        }
+        $this->carousel_list .= '<a href="/comic.php?comic_id=' . $this->comic_id . '" class="read-more">[Read More]</a>';
+        $this->carousel_list .= '</div>';
+        $this->carousel_list .= '<div class="button-block hidden-xs hidden-sm hidden-md"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-danger">View Issue</a> <a href="/comic.php?series_id=' . $this->series_id . '" class="btn btn-danger">View Series</a></div>';
+        $this->carousel_list .= '</div>';
+        $this->carousel_list .= '<div class="button-block hidden-lg center-block text-center col-xs-12"><a href="/comic.php?comic_id=' . $this->comic_id . '" class="btn btn-sm btn-danger">View Issue</a> <a href="/comic.php?series_id=' . $this->series_id . '" class="btn btn-sm btn-danger">View Series</a></div>';
+        $this->carousel_list .= '</div></div></div>';
+      }
+    }
   }
 }
