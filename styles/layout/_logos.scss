@@ -160,3 +160,28 @@
     height: 18px;
   }
 }
+
+.logo-maximumpress {
+  &:before {
+    content: "";
+    background-image: url('../assets/logos/maximum_press_comics.png');
+    background-size: 102px 53px;
+    width: 102px;
+    height: 53px;
+
+    @media(min-width: $screen-md) {
+      width: 60px;
+      height: 31px;
+    }
+
+    @media(min-width: $screen-lg) {
+      width: 102px;
+      height: 53px;
+    }
+  }
+  &.sm-logo:before {
+    background-size: 18px 9px;
+    width: 18px;
+    height: 9px;
+  }
+}
