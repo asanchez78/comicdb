@@ -5239,6 +5239,19 @@ footer.main-footer {
   margin-bottom: 25px;
 }
 
+.follow-list li {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 3px;
+}
+.follow-list li:first-of-type {
+  margin-left: 0;
+}
+.follow-list li:last-of-type {
+  margin-right: 0;
+}
+
 /* Header */
 .main-sidebar .menu-break {
   border-top: 1px solid #e7e7e7;
@@ -5754,6 +5767,14 @@ label {
     width: 30%;
   }
 }
+.dashboard-index .sidebar h3 {
+  color: white;
+  font-size: 14px;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  line-height: 1.2;
+  letter-spacing: 0;
+  margin-top: 0;
+}
 
 .dashboard-content {
   width: 100%;
@@ -5764,6 +5785,10 @@ label {
   .dashboard-content {
     width: 60%;
   }
+}
+
+.follow-module {
+  margin-bottom: 15px;
 }
 
 [data-module="login_modal"] .modal-header,
@@ -6897,18 +6922,6 @@ ul#inventory-table .series-extra {
   [data-module="user-meta"] .meta-total-series, [data-module="user-meta"] .meta-following, [data-module="user-meta"] .meta-followers {
     min-height: 53px;
   }
-}
-[data-module="user-meta"] .follow-list li {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin: 0 3px;
-}
-[data-module="user-meta"] .follow-list li:first-of-type {
-  margin-left: 0;
-}
-[data-module="user-meta"] .follow-list li:last-of-type {
-  margin-right: 0;
 }
 [data-module="user-meta"] .social-icons {
   display: inline-block;

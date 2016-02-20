@@ -270,3 +270,18 @@ footer.main-footer {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
+.follow-list li {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0 3px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
