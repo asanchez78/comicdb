@@ -51,7 +51,7 @@
           <option value="">Choose a Publisher</option>
           <?php
             $comic = new comicSearch ();
-            $comic->publisherList ();
+            $comic->publisherList ('%');
             while ( $row = $comic->publisher_list_result->fetch_assoc () ) {
               $list_publisher_name = $row ['publisherName'];
               $list_publisherID = $row ['publisherID'];

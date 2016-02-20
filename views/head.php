@@ -7,6 +7,7 @@
     define('__userEmail__', $_COOKIE['user_email']);
   }
   require_once(__ROOT__.'/classes/functions.php');
+  require_once(__ROOT__.'/classes/userFunctions.php');
   require_once(__ROOT__.'/config/db.php');
   require_once(__ROOT__.'/classes/Login.php');
   

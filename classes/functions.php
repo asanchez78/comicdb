@@ -145,8 +145,7 @@ class comicSearch {
         ON comics.series_id=series.series_id
         LEFT join publishers
         on series.publisherID=publishers.publisherID
-        WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID ORDER BY comics.issue_number
-";
+        WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID ORDER BY comics.issue_number";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       while ( $row = $result->fetch_assoc () ) {
@@ -174,6 +173,168 @@ class comicSearch {
       }
     }
   }
+
+  public function publisherList($publisher_id) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT * FROM publishers WHERE publisherID LIKE '$publisher_id' ORDER BY publisherName ASC";
+    $this->publisher_list_result = $this->db_connection->query ( $sql );
+    $this->result = $this->db_connection->query ( $sql );
+    if ($this->result->num_rows > 0) {
+      while ( $row = $this->result->fetch_assoc () ) {
+        $this->publisherName = $row ['publisherName'];
+        $this->publisherShort = $row ['publisherShort'];
+      }
+    }
+  }
+
+  public function seriesFind($series_name) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+
+    $sql = "SELECT * FROM series where series_name = '$series_name'";
+    $this->series = $this->db_connection->query ( $sql );
+  }
+
+  public function seriesInfo($series_id, $ownerID) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+
+    $sql = "SELECT *
+        FROM series
+        LEFT JOIN publishers
+        ON publishers.publisherID=series.publisherID
+        WHERE series_id = $series_id";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      while ( $row = $result->fetch_assoc () ) {
+        $this->series_name = $row ['series_name'];
+        $this->series_vol = $row ['series_vol'];
+        $this->publisherID = $row ['publisherID'];
+        $this->publisherName = $row ['publisherName'];
+        $this->publisherShort = $row ['publisherShort'];
+        $this->cvVolumeID = $row ['cvVolumeID'];
+      }
+    }
+
+    // Gets custom information from the user table
+    if (isset($ownerID)) {
+      $sql = "SELECT *
+        FROM comics
+        LEFT JOIN users_comics
+        ON comics.comic_id=users_comics.comic_id
+        WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID";
+      
+      // Issue count
+      $this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+      if ($this->series_issue_count == 1) {
+        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issue';
+      } else {
+        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issues';
+      }
+    }
+
+    // Gets the latest comic book cover image for the series
+    if (isset($ownerID)) {
+      $sql = "SELECT cover_image
+          FROM comics
+          JOIN users_comics
+          ON comics.comic_id=users_comics.comic_id
+          WHERE users_comics.user_id=$ownerID AND series_id=$series_id
+          ORDER BY issue_number DESC LIMIT 1";
+      if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
+        $this->latestCoverMed = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
+        $this->latestCoverSmall = str_replace('-medium.', '-small.', $this->latestCoverMed);
+        $this->latestCoverThumb = str_replace('-medium.', '-thumb.', $this->latestCoverMed);
+      } else {
+        $this->latestCoverSmall = "assets/nocover.jpg";
+      }
+    }
+  }
+
+  public function issueCheck($series_id, $issue_number) {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connection failed:" );
+    }
+    $sql = "SELECT comic_id, series_id, issue_number
+        FROM comics
+        WHERE series_id=$series_id AND issue_number=$issue_number";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      $this->issueExists = 1;
+      while ($row  = $result->fetch_assoc () ) {
+        $this->comic_id = $row['comic_id'];
+      }
+    } else {
+      $this->issueExists = 0;
+    }
+  }
+
+  // Add creators to creators table
+  public function insertCreators($comic_id, $creatorsList) {
+    $connection = mysqli_connect ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if (! $connection) {
+      die ( "Connection failed: " . mysqli_connect_error () );
+    }
+    $creatorsList = explode(";", $creatorsList);
+    foreach ($creatorsList as $creator) {
+      $creatorsArray  = explode("_", $creator);
+      $person = $creatorsArray[0];
+      $job = $creatorsArray[1];
+      $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+      if ($this->db_connection->connect_errno) {
+        die ( "Connection failed:" );
+      }
+      $sql = "SELECT *
+        FROM creators
+        WHERE name='$person' AND job='$job'";
+      $result = $this->db_connection->query ( $sql );
+      if ($result->num_rows > 0) {
+        $this->creatorExists = 1;
+        while ($row  = $result->fetch_assoc () ) {
+          $this->creator_id = $row['creator_id'];
+        }
+      } else {
+        $this->creatorExists = 0;
+      }
+      if ($this->creatorExists == 1) {
+        // Checks if the creators are already in the database. If so, just create the link to the new comic.
+        $creator_id = $this->creator_id;
+        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
+        if (mysqli_query ( $connection, $sql )) {
+          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
+          $success = true;
+        } else {
+          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
+          $messageNum = 51;
+        }
+      } else {
+        // Creator is not in the database. Add them and associate them with their issue.
+        $sql_creator = "INSERT INTO creators (name, job) VALUES ('$person', '$job')";
+        if (mysqli_query($connection, $sql_creator)) {
+          $creator_id = mysqli_insert_id($connection);
+          } else {
+          $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_creator . '<br>' . mysqli_error ( $connection );
+        }
+        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
+        if (mysqli_query ( $connection, $sql )) {
+          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
+          $success = true;
+        } else {
+          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
+          $messageNum = 51;
+        }
+      }
+    }
+  }
+
   /**
    * Returns a list of comic series
    */
@@ -288,355 +449,6 @@ class comicSearch {
         }
         $this->series_list_result = $this->db_connection->query ( $sql ); 
       }
-    }
-  }
-
-  public function publisherList() {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT * FROM publishers ORDER BY publisherName ASC";
-    $this->publisher_list_result = $this->db_connection->query ( $sql );
-  }
-
-  public function seriesFind($series_name) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-
-    $sql = "SELECT * FROM series where series_name = '$series_name'";
-    $this->series = $this->db_connection->query ( $sql );
-  }
-
-  public function seriesInfo($series_id, $ownerID) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-
-    $sql = "SELECT *
-        FROM series
-        LEFT JOIN publishers
-        ON publishers.publisherID=series.publisherID
-        WHERE series_id = $series_id";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        $this->series_name = $row ['series_name'];
-        $this->series_vol = $row ['series_vol'];
-        $this->publisherID = $row ['publisherID'];
-        $this->publisherName = $row ['publisherName'];
-        $this->publisherShort = $row ['publisherShort'];
-        $this->cvVolumeID = $row ['cvVolumeID'];
-      }
-    }
-
-    // Gets custom information from the user table
-    if (isset($ownerID)) {
-      $sql = "SELECT *
-        FROM comics
-        LEFT JOIN users_comics
-        ON comics.comic_id=users_comics.comic_id
-        WHERE comics.series_id=$series_id AND users_comics.user_id=$ownerID";
-      
-      // Issue count
-      $this->series_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
-      if ($this->series_issue_count == 1) {
-        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issue';
-      } else {
-        $this->series_issue_count = '<span class="text-danger">' . $this->series_issue_count . '</span> Issues';
-      }
-    }
-
-    // Gets the latest comic book cover image for the series
-    if (isset($ownerID)) {
-      $sql = "SELECT cover_image
-          FROM comics
-          JOIN users_comics
-          ON comics.comic_id=users_comics.comic_id
-          WHERE users_comics.user_id=$ownerID AND series_id=$series_id
-          ORDER BY issue_number DESC LIMIT 1";
-      if (mysqli_fetch_row($this->db_connection->query ( $sql )) > 0) {
-        $this->latestCoverMed = implode(mysqli_fetch_row($this->db_connection->query ( $sql )));
-        $this->latestCoverSmall = str_replace('-medium.', '-small.', $this->latestCoverMed);
-        $this->latestCoverThumb = str_replace('-medium.', '-thumb.', $this->latestCoverMed);
-      } else {
-        $this->latestCoverSmall = "assets/nocover.jpg";
-      }
-    }
-  }
-
-  public function publisherInfo($publisher_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT *
-          FROM publishers
-          WHERE publisherID=$publisher_id";
-
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        $this->publisherName = $row ['publisherName'];
-        $this->publisherShort = $row ['publisherShort'];
-      }
-    }
-  }
-
-  public function issueCheck($series_id, $issue_number) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT comic_id, series_id, issue_number
-        FROM comics
-        WHERE series_id=$series_id AND issue_number=$issue_number";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      $this->issueExists = 1;
-      while ($row  = $result->fetch_assoc () ) {
-        $this->comic_id = $row['comic_id'];
-      }
-    } else {
-      $this->issueExists = 0;
-    }
-  }
-
-  // Add creators to creators table
-  public function insertCreators($comic_id, $creatorsList) {
-    $connection = mysqli_connect ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if (! $connection) {
-      die ( "Connection failed: " . mysqli_connect_error () );
-    }
-    $creatorsList = explode(";", $creatorsList);
-    foreach ($creatorsList as $creator) {
-      $creatorsArray  = explode("_", $creator);
-      $person = $creatorsArray[0];
-      $job = $creatorsArray[1];
-      $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-      if ($this->db_connection->connect_errno) {
-        die ( "Connection failed:" );
-      }
-      $sql = "SELECT *
-        FROM creators
-        WHERE name='$person' AND job='$job'";
-      $result = $this->db_connection->query ( $sql );
-      if ($result->num_rows > 0) {
-        $this->creatorExists = 1;
-        while ($row  = $result->fetch_assoc () ) {
-          $this->creator_id = $row['creator_id'];
-        }
-      } else {
-        $this->creatorExists = 0;
-      }
-      if ($this->creatorExists == 1) {
-        // Checks if the creators are already in the database. If so, just create the link to the new comic.
-        $creator_id = $this->creator_id;
-        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
-        if (mysqli_query ( $connection, $sql )) {
-          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
-          $success = true;
-        } else {
-          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
-          $messageNum = 51;
-        }
-      } else {
-        // Creator is not in the database. Add them and associate them with their issue.
-        $sql_creator = "INSERT INTO creators (name, job) VALUES ('$person', '$job')";
-        if (mysqli_query($connection, $sql_creator)) {
-          $creator_id = mysqli_insert_id($connection);
-          } else {
-          $sqlMessage = '<strong class="text-warning">Error</strong>: ' . $sql_creator . '<br>' . mysqli_error ( $connection );
-        }
-        $sql = "INSERT INTO creators_link (comic_id, creator_id) VALUES ('$comic_id', '$creator_id')";
-        if (mysqli_query ( $connection, $sql )) {
-          $sqlMessage = '<strong class="text-success">Add Creator Link Success. :</strong><br /><code>' . $sql . '</code><br /><br />';
-          $success = true;
-        } else {
-          $sqlMessage = '<strong class="text-warning">Error:</strong> ' . $sql . '<br>' . mysqli_error ( $connection );
-          $messageNum = 51;
-        }
-      }
-    }
-  }
-
-  // Counts total number of books for the user in users_comics
-  public function collectionCount($user_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-
-    $sql = "SELECT user_id, comic_id, quantity
-        FROM users_comics
-        WHERE user_id = $user_id";
-    $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
-  }
-
-  // Counts the number of series owned by the user
-  public function seriesCount($user_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-
-    $sql = "SELECT user_id, comics.comic_id, users_comics.comic_id, series_id
-      FROM comics
-      JOIN users_comics
-      ON comics.comic_id=users_comics.comic_id
-      WHERE users_comics.user_id=$user_id
-      GROUP BY series_id";
-    $this->total_series_count = mysqli_num_rows($this->db_connection->query ( $sql ));
-  }
-
-  // Grabs user meta information for user on profile pages.
-  public function userMeta($user_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-
-    $sql = "SELECT *
-        FROM users_meta
-        WHERE user_id = $user_id";
-
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      // Meta Key and Meta Value can be set as anything. We need to set an array to store all the values for the user.
-      $this->meta_key = array();
-      $this->meta_val = array();
-      while ( $row = $result->fetch_assoc () ) {
-        array_push($this->meta_key, $row ['meta_key']);
-        array_push($this->meta_val, $row ['meta_value']);
-      }
-      // offset 1 for 0 array position
-      $array_size = sizeof($this->meta_key) -1;
-      // Loops through the meta_key array for values, then gets their associated key and assigns it to a global var.
-      for ($i = 0; $i <= $array_size; $i++) {
-        if ($this->meta_key[$i] === 'first_name') {
-           $this->user_first_name = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'last_name') {
-           $this->user_last_name = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'location') {
-           $this->user_location = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'avatar') {
-           $this->user_avatar = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'user_follows') {
-           $this->user_follows = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'facebook_url') {
-           $this->facebook_url = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'twitter_url') {
-           $this->twitter_url = $this->meta_val[$i];
-        }
-        if ($this->meta_key[$i] === 'instagram_url') {
-           $this->instagram_url = $this->meta_val[$i];
-        }
-      }
-    }
-  }
-
-  // Looks up User information by profile name.
-  public function userLookup($profile_name) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT user_id, user_email
-        FROM users
-        WHERE user_name = '$profile_name'";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        // Grab userID and userEmail from database, convert user_email to hash string for security and to pass to Gravatar.
-        $this->browse_user_id = $row ['user_id'];
-        $this->browse_user_email_hash = md5(strtolower(trim( $row ['user_email'] )));
-        $validUser=1;
-      }
-    } else {
-      $validUser=0;
-    }
-  }
-
-  // Grab the followers the user follows
-  public function userFollows($profile_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT user_name, user_email
-        FROM users
-        WHERE user_id = '$profile_id'";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      while ( $row = $result->fetch_assoc () ) {
-        // Grab userID and userEmail from database, convert user_email to hash string for security and to pass to Gravatar.
-        $this->follow_username = $row ['user_name'];
-        $this->follow_email_hash = md5( strtolower( trim( $row ['user_email'] ) ) );
-      }
-    }
-  }
-
-  // Builds the 'Comic Wall' on the users profile page header.
-  public function userCovers($user_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connect failed:" );
-    }
-    $sql = "SELECT cover_image
-        FROM comics
-        LEFT JOIN users_comics
-        ON comics.comic_id=users_comics.comic_id
-        WHERE users_comics.user_id=$user_id 
-        ORDER BY RAND()
-        LIMIT 36";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      $this->cover_list = '';
-      while ( $row = $result->fetch_assoc () ) {
-        $this->coverMed = $row ['cover_image'];
-        $this->coverThumb = str_replace('-medium.', '-thumb.', $this->coverMed);
-        $this->cover_list .= '<div class="col-xs-2 col-md-1 profile-bg-image"><img src="' . $this->coverThumb . '" alt="" class="img-responsive" /></div>';
-      }
-    }
-  }
-
-  // Counts the number of users that follow a user
-  public function userFollowedBy($user_id) {
-    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    if ($this->db_connection->connect_errno) {
-      die ( "Connection failed:" );
-    }
-    $sql = "SELECT user_id, meta_key, meta_value
-        FROM users_meta
-        WHERE meta_key = 'user_follows' AND user_id != '$user_id'";
-    $result = $this->db_connection->query ( $sql );
-    if ($result->num_rows > 0) {
-      // Initialize our final array
-      $this->followerList = array();
-
-      while ( $row = $result->fetch_assoc () ) {
-        // Grab the user_follows value from all users except logged in user
-        $followerField = $row ['meta_value'];
-        // Split string into array
-        $followSplitList = preg_split('/\D/', $followerField, NULL, PREG_SPLIT_NO_EMPTY);
-        // Count the # ids
-        $preCount = count($followSplitList);
-        for ($i = 0; $i <= $preCount; $i++) {
-          if(isset($followSplitList[$i]) && $followSplitList[$i] == $user_id) {
-            array_push($this->followerList, $followSplitList[$i]);
-          }
-        }
-      }
-      $this->followerCount = count($this->followerList);
     }
   }
 
