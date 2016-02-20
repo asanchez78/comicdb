@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 /**
  * functions relating to user information
