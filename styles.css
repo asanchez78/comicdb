@@ -7070,6 +7070,11 @@ ul#inventory-table .series-extra {
   font-size: 14px;
   letter-spacing: 1px;
 }
+@media (min-width: 900px) {
+  [data-module="carousel_bar"] h5 {
+    font-size: 16px;
+  }
+}
 [data-module="carousel_bar"] > .row, [data-module="carousel_bar"] > ul#inventory-table {
   background-color: #363636;
   padding-bottom: 25px;

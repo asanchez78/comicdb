@@ -64,6 +64,9 @@ class userInfo {
         if ($this->meta_key[$i] === 'instagram_url') {
            $this->instagram_url = $this->meta_val[$i];
         }
+        if ($this->meta_key[$i] === 'admin') {
+           $this->is_admin = $this->meta_val[$i];
+        }
       }
     }
   }
