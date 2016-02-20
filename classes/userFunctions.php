@@ -8,6 +8,8 @@
  * userFollows
  * userCovers
  * userFollowedBy
+ * collectionCount
+ * seriesCount
  * </pre>
  * @author asanchez
  * @author sloyless

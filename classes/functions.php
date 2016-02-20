@@ -4,14 +4,13 @@
  * functions relating to searching comic information
  * <pre>
  * issueLookup
- * artistLookup
- * writerLookup
  * issuesList
- * seriesList
+ * publisherList
  * seriesFind
  * seriesInfo
- * userMeta
- * userLookup
+ * issueCheck
+ * insertCreators
+ * seriesList
  * 
  * </pre>
  * @author asanchez
