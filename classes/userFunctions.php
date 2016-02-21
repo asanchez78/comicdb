@@ -174,10 +174,10 @@ class userInfo {
       die ( "Connection failed:" );
     }
 
-    $sql = "SELECT user_id, comic_id, quantity
-        FROM users_comics
-        WHERE user_id = $user_id";
-    $this->total_issue_count = mysqli_num_rows($this->db_connection->query ( $sql ));
+    $sql = "SELECT SUM(quantity) AS totalComics from users_comics where users_comics.user_id = $user_id";
+    $this->result = $this->db_connection->query ( $sql );
+    $row = $this->result->fetch_row ();
+    $this->total_issue_count = $row [0];
   }
 
   // Counts the number of series owned by the user
