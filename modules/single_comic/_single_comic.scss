@@ -63,6 +63,45 @@
   }
 }
 
+[data-module="single_comic"] {
+  .sidebar {
+    background-color: $brand-orange;
+    background-image: linear-gradient($brand-orange, white);
+    margin-right: 0;
+
+    h2 {
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 14px;
+    }
+    
+    .issue-image {
+      margin-bottom: 15px;
+    }
+
+    *[class*="credit-"] {
+      span {
+        display: inline;
+        margin-bottom: 3px;
+
+        &:after {
+          content: ", ";
+          display: inline;
+        }
+
+        &:last-of-type {
+          &:after {
+            content: "";
+            display: inline;
+          }
+        }
+      }
+    }
+  }
+}
+
 .manage-comic-container {
   position: absolute;
   top: 0;

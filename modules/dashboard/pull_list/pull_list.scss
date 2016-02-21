@@ -1,0 +1,24 @@
+[data-module="pull_list"] {
+  font-size: 14px;
+  line-height: 1.4;
+  
+  .rssincl-entry {
+    margin-bottom: 15px;
+  }
+
+  .rssincl-itemtitle {
+    margin: 0;
+  }
+
+  .rssincl-itemdate {
+    margin: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  small {
+    display: block;
+    border-top: 1px solid $border-color;
+    padding-top: 5px;
+  }
+}

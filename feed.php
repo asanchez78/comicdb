@@ -1,6 +1,5 @@
 <?php
   require_once('views/head.php');
-  require_once('config/db.php');
 ?>
   <title>User Feed :: POW! Comic Book Manager</title>
 </head>

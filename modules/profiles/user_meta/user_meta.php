@@ -17,27 +17,28 @@
     $followList = preg_split('/\D/', $user->user_follows, NULL, PREG_SPLIT_NO_EMPTY);
     $followCount = count($followList);
     foreach ($followList as $followUser) {
-      $user->userFollows($followUser);
-      $user->userMeta($followUser);
+      $followSearch = new userInfo ();
+      $followSearch->userFollows($followUser);
+      $followSearch->userMeta($followUser);
 
-      if (isset($user->user_first_name)) {
-        $follow_first_name = $user->user_first_name;  
+      if (isset($followSearch->user_first_name)) {
+        $follow_first_name = $followSearch->user_first_name;  
       } else {
         $follow_first_name = '';
       }
 
-      if (isset($user->user_last_name)) {
-        $follow_last_name = $user->user_last_name;
+      if (isset($followSearch->user_last_name)) {
+        $follow_last_name = $followSearch->user_last_name;
       } else {
         $follow_last_name = '';
       }
 
-      $followBlock .= '<li><a href="/profile.php?user='. $user->follow_username . '">';
-      if (isset($user->user_avatar)) {
-        $followAvatar = $user->user_avatar;
-        $followBlock .= '<img src="' . $user->user_avatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" />';
+      $followBlock .= '<li><a href="/profile.php?user='. $followSearch->follow_username . '">';
+      if (isset($followSearch->user_avatar)) {
+        $followAvatar = $followSearch->user_avatar;
+        $followBlock .= '<img src="' . $followSearch->user_avatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" />';
       } else {
-        $gravatar_hash = $user->follow_email_hash;
+        $gravatar_hash = $followSearch->follow_email_hash;
         $followAvatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=60&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
         $followBlock .= '<img src="' . $followAvatar . '" alt="' . $follow_first_name . ' ' . $follow_last_name . '" class="img-circle img-responsive" />';
       }
@@ -50,7 +51,7 @@
   if (isset($user->followerCount)) {
     $followerCount = $user->followerCount;
   }
-
+  
   if (isset($user->facebook_url)) {
     $facebook_url = $user->facebook_url;
   } else {

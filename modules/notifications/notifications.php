@@ -17,10 +17,10 @@
     switch ($messageNum) {
     // SUCCESS MESSAGES
       case 1:
-        $messageText = "Issue added successfully.";
+        $messageText = 'Issue added successfully. <a href="/comic.php?comic_id="' . $comic_id . '">View issue.</a>';
         break;
       case 2:
-        $messageText = "Issues added successfully.";
+        $messageText = 'Issues added successfully.';
         break;
       case 3:
         $messageText = '<em>' . $series_name . ' (' . $series_vol . ')</em> added to your collection successfully.';

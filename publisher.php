@@ -1,6 +1,5 @@
 <?php
 	require_once('views/head.php');
-	require_once('config/db.php');
 	if (isset($_COOKIE ['user_name'])) {
 		$userName = $_COOKIE ['user_name'];
 		$validUser=1;

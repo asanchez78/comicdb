@@ -1,0 +1,40 @@
+[data-module="count_bar"] {
+  font-size: 13px;
+  > .row {
+    background-color: #e7e7e7;
+    padding-top: 15px;
+    
+    @media (min-width: $screen-lg) {
+      padding-bottom: 15px;
+    }
+  }
+
+  .big-red {
+    display: block;
+    line-height: 1;
+    margin-bottom: 15px;
+    font-size: 36px;
+  }
+
+  a {
+    display: block;
+    margin-left: -15px;
+    margin-right: -15px;
+    background-color: $brand-red;
+    color: white;
+    line-height: 36px;
+    padding: 0 15px;
+
+    @media (min-width: $screen-lg) {
+      background-color: transparent;
+      color: $link-color;
+      line-height: 1;
+      padding: 0;
+      margin: 0;
+    }
+
+    i.fa {
+      color: $text-color;
+    }
+  }
+}

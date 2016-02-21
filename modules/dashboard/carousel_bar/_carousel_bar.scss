@@ -1,0 +1,113 @@
+[data-module="carousel_bar"] {
+  position: relative;
+
+  h3 {
+    color: white;
+    font-size: 32px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+    margin: 15px;
+  }
+
+  h4 {
+    margin-top: 15px;
+    
+    @media (min-width: $screen-md) {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    a {
+      color: $brand-yellow;
+    }
+  }
+  
+  h5 {
+    font-size: 14px;
+    letter-spacing: 1px;
+
+    @media (min-width: $screen-lg) {
+      font-size: 16px;
+    }
+  }
+
+  > .row {
+    background-color: #363636;
+    padding-bottom: 25px;
+    min-height: 685px;
+    
+    @media (min-width: $screen-md) {
+      min-height: 295px;
+    }
+
+    @media (min-width: $screen-lg) {
+      min-height: 390px;
+    }
+  }
+
+  .item.active {
+    display: block;
+  }
+
+  .carousel-caption {
+    position: static;
+    padding: 0 40px;
+    font-size: 12px;
+
+    @media (min-width: $screen-md) {
+      text-align: left;
+    }
+
+    @media (min-width: $screen-lg) {
+      font-size: 15px;
+    }
+  }
+
+  .carousel-control {
+    background-image: none;
+    width: 6%;
+
+    > span {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+
+    &.left {
+      > span {
+        left: 5px;
+      }
+    }
+    &.right {
+      > span {
+        right: 5px;
+      }
+    }
+  }
+  
+  .story-block {
+    line-height: 1.2;
+
+    > p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  
+  .story-block + .button-block {
+    margin-top: 35px;
+  }
+
+  .button-block {
+    margin-top: 10px;
+    margin-bottom: 0;
+
+    > .btn:first-of-type {
+      margin-right: 15px;
+    }
+  }
+
+  .read-more {
+    display: block;
+    margin-top: 10px;
+  }
+}

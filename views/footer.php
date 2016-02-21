@@ -1,7 +1,7 @@
       <?php include(__ROOT__.'/modules/notifications/notifications.php'); ?>
     </main>
     <footer class="main-footer col-xs-12 text-center center-block">
-      <p>&copy;<?php echo date("Y"); ?> Anthony Sanchez and Sean Loyless. All content from ComicVine</p>
+      <p>&copy;<?php echo date("Y"); ?> Anthony Sanchez and Sean Loyless.</p>
     </footer>
   </div>
   <!-- Site content ends -->
@@ -14,10 +14,13 @@
 <!-- Site wrapper ends -->
 
 <!-- Scripts at the bottom to improve load time -->
-<script src="/scripts/bootstrap/alert.js"></script>
+<script src="/scripts/bootstrap/tab.js"></script>
 <script src="/scripts/bootstrap/transition.js"></script>
+<script src="/scripts/bootstrap/alert.js"></script>
 <script src="/scripts/bootstrap/collapse.js"></script>
 <script src="/scripts/bootstrap/modal.js"></script>
+<script src="/scripts/bootstrap/dropdown.js"></script>
+<script src="/scripts/comicdb.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

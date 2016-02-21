@@ -42,12 +42,14 @@
     $user_location = '';
   }
 
+  // Calls the edit form submit if the edit modal form has been submitted
   $editMode = filter_input ( INPUT_POST, 'edit_submit' );
 
   if (isset($editMode) && $editMode === 'true') {
     include ('modules/profiles/edit_profile/form_submit.php');
   }
 
+  // Calls the edit follow form submit if the follow button is pressed
   $followToggle = filter_input ( INPUT_POST, 'followed' );
   if (isset($followToggle)) {
     include(__ROOT__.'/modules/profiles/follow_button/form_submit.php');
@@ -66,7 +68,7 @@
       <div class="profile-background">
         <div class="row">
           <?php 
-            // Grabs 36 random covers for the profile page header
+            // Grabs 48 random covers for the profile page header
             $user->userCovers($profileID);
             echo $user->cover_list; 
           ?>

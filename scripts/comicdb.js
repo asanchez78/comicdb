@@ -118,4 +118,27 @@ jQuery(document).ready(function($) {
       $($notifications).addClass('notify-hide');
     }, 6000);
   }
+
+  // Sets the menu item active if you are on the page
+  var currentPage, $menuItem;
+
+  currentPage = window.location.pathname;
+  $menuItem = $('#main-nav-collapse li').find('a');
+
+  $.each($menuItem, function() {
+    if (currentPage == $(this).attr('href')) {
+      $(this).parent().addClass('active');
+    } else {
+      // Exceptions to the rule, like Dashboard, or Issues/Comic pages
+      if (currentPage == '/index.php' && $(this).attr('href') == '/') { 
+        $(this).parent().addClass('active'); 
+      }
+      if (currentPage == '/issues.php' && $(this).attr('href') == '/profile.php') { 
+        $(this).parent().addClass('active'); 
+      }
+      if (currentPage == '/comic.php' && $(this).attr('href') == '/profile.php') { 
+        $(this).parent().addClass('active'); 
+      }
+    }
+  });
 });

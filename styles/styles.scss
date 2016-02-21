@@ -16,15 +16,22 @@
 @import "bootstrap-sass/assets/stylesheets/bootstrap/forms";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/buttons";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/component-animations";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/utilities";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/close";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/dropdowns";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/button-groups";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/navs";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/navbar";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/modals";
-@import "bootstrap-sass/assets/stylesheets/bootstrap/input-groups";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/pagination";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/alerts";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/close";
+
+// Bootstrap Components w/ JavaScript
+@import "bootstrap-sass/assets/stylesheets/bootstrap/modals";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/carousel";
+
+// Bootstrap Utilities
+@import "bootstrap-sass/assets/stylesheets/bootstrap/utilities";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
 // Core
 @import "includes/mixins";
@@ -35,6 +42,7 @@
 @import "layout/forms";
 @import "layout/logos";
 @import "layout/about";
+@import "layout/dashboard";
 
 // Modules
 @import "../modules/login/login";
@@ -45,3 +53,10 @@
 @import "../modules/profiles/user_meta/user_meta";
 @import "../modules/profiles/edit_profile/edit_profile_modal";
 @import "../modules/profiles/follow_button/follow_button";
+@import "../modules/user_bar/user_bar";
+@import "../modules/dashboard/carousel_bar/carousel_bar";
+@import "../modules/dashboard/count_bar/count_bar";
+@import "../modules/dashboard/followers/followers";
+@import "../modules/dashboard/pull_list/pull_list";
+@import "../modules/dashboard/quick_add/quick_add";
+@import "../modules/dashboard/user_feed/user_feed";

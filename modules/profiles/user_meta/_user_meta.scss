@@ -92,21 +92,6 @@
     }
   }
 
-  .follow-list li {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin: 0 3px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-
   .social-icons {
     display: inline-block;
 
@@ -140,16 +125,6 @@
       &:focus {
         opacity: 1;
       }
-    }
-  }
-
-  .big-red {
-    margin: 0 0 -3px 0;
-    font-size: 20px;
-    color: $brand-red;
-
-    @media (min-width: $screen-md) {
-      font-size: 30px;
     }
   }
 }

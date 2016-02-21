@@ -25,7 +25,6 @@
     include (__ROOT__."/views/not_logged_in.php");
     die ();
   } ?>
-  <script src="/scripts/bootstrap/tab.js"></script>
   <div class="row">
     <ul class="add-menu nav nav-tabs" id="addTabs">
       <li role="presentation" class="active col-xs-3">
