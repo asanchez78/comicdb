@@ -285,3 +285,38 @@ footer.main-footer {
     margin-right: 0;
   }
 }
+
+.splash-page {
+  background-color: $brand-red;
+  color: white;
+  height: 100vh;
+  margin: 0;
+}
+
+.splash-content {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  > img {
+    width: 50%;
+  }
+
+  h1 {
+    font-size: 24px;
+    width: 40%;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid white;
+
+    @media (min-width: $screen-md) {
+      font-size: 48px;
+    }
+  }
+
+  button.login {
+    margin-top: 25px;
+    background-color: black;
+    color: white;
+  }
+}

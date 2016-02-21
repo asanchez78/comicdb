@@ -11,7 +11,7 @@
     include 'modules/user_bar/user_bar.php';
     include 'views/dashboard.php';
   } else {
-    include 'views/home.php';
+    include 'views/splash.php';
   }
   ?>
 <?php include 'views/footer.php';?>

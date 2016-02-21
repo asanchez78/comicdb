@@ -1,7 +1,7 @@
       <?php include(__ROOT__.'/modules/notifications/notifications.php'); ?>
     </main>
     <footer class="main-footer col-xs-12 text-center center-block">
-      <p>&copy;<?php echo date("Y"); ?> Anthony Sanchez and Sean Loyless. All content from ComicVine</p>
+      <p>&copy;<?php echo date("Y"); ?> Anthony Sanchez and Sean Loyless.</p>
     </footer>
   </div>
   <!-- Site content ends -->

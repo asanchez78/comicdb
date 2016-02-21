@@ -5252,6 +5252,40 @@ footer.main-footer {
   margin-right: 0;
 }
 
+.splash-page {
+  background-color: #ff0300;
+  color: white;
+  height: 100vh;
+  margin: 0;
+}
+
+.splash-content {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+.splash-content > img {
+  width: 50%;
+}
+.splash-content h1 {
+  font-size: 24px;
+  width: 40%;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid white;
+}
+@media (min-width: 641px) {
+  .splash-content h1 {
+    font-size: 48px;
+  }
+}
+.splash-content button.login {
+  margin-top: 25px;
+  background-color: black;
+  color: white;
+}
+
 /* Header */
 .main-sidebar .menu-break {
   border-top: 1px solid #e7e7e7;
