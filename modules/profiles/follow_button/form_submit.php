@@ -2,7 +2,7 @@
   // This local function will do the brunt of the work for us, so all we have to do is pass in a few variables to it.
   $followUser = function ($profile_id, $user_id, $toggle) {
     $connection = mysqli_connect ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
-    $fieldCheck = new comicSearch ();
+    $fieldCheck = new userInfo ();
     
     // Let's grab the users's current follow list to compare.
     $fieldCheck->userMeta($user_id);
