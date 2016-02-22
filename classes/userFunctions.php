@@ -301,7 +301,6 @@ class userInfo {
         array(60 , 'minute'),
       );
       $timeAdded = DateTime::createFromFormat('Y-m-d H:i:s', $row['date_added'])->format('U');
-      $timeAdded = $timeAdded + 25200; //adjusting for local time
       $timeNow = time(); // Current unix time
       $since = $timeNow - $timeAdded;
       if($since > 604800) {
