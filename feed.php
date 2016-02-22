@@ -8,7 +8,10 @@
   <div class="row">
     <div class="col-xs-12">
       <header class="headline"><h2>Updates</h2></header>
-      <p>Coming soon</p>
+      <?php
+      $feedLength = 30;
+      include 'modules/feed/feed.php';
+      ?>
     </div>
   </div>
   <?php include 'views/footer.php';?>
