@@ -281,14 +281,12 @@ class userInfo {
       die ( "Connect failed:" );
     }
 
-    $sql = "SELECT users.user_name, publishers.publisherName, series.series_name, comics.issue_number, comics.cover_image, users_comics.date_added, comics.comic_id
+    $sql = "SELECT users.user_name, series.series_name, comics.issue_number, comics.cover_image, users_comics.date_added, comics.comic_id
       FROM comics
       LEFT JOIN users_comics
       ON comics.comic_id=users_comics.comic_id
       LEFT JOIN series
       ON comics.series_id=series.series_id
-      LEFT join publishers
-      on series.publisherID=publishers.publisherID
       LEFT JOIN users
       on users.user_id=users_comics.user_id
       WHERE users_comics.user_id IN ($followList) ORDER BY users_comics.id DESC LIMIT $feedLength";
