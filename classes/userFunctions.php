@@ -345,12 +345,8 @@ class userInfo {
              $this->user_avatar = $this->meta_val[$i];
           }
         }
-        if (isset($this->user_avatar)) {
-          $avatar = $this->user_avatar;
-        } else {
-          $gravatar_hash = $userEmailHash = md5( strtolower( trim( $row['user_email'] )));
-          $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
-        }
+        $gravatar_hash = $userEmailHash = md5( strtolower( trim( $row['user_email'] )));
+        $avatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=200&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
 
         $feed .= '<li><span class="profile-avatar pull-left"><img src="' . $avatar . '" alt="" class="img-responsive img-circle" /></span>' . $this->user_first_name . ' added <a href="comic.php?comic_id=' . $row['comic_id'] . '">' . $row['series_name'] . ' (' . $row['series_vol'] . ') #' . $row['issue_number'] . '</a> - <em>' . $added . '</em></li>';
       }
