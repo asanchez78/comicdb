@@ -1,0 +1,20 @@
+ul.user-feed-container {
+  margin-top: 15px;
+
+  li {
+    display: block;
+    clear: both;
+    margin-bottom: 10px;
+  }
+
+  .profile-avatar {
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+  }
+}
+
+[data-module="feed"] {
+  
+}
