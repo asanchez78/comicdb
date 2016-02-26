@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Bangers|Roboto:300,400,500,700);
-
 // Global
 @import "includes/variables";
 
@@ -33,8 +31,12 @@
 @import "bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
+// Font Awesome
+@import "font-awesome/font-awesome";
+
 // Core
 @import "includes/mixins";
+@import "includes/fonts";
 
 // Theme
 @import "layout/global";
@@ -60,3 +62,4 @@
 @import "../modules/dashboard/pull_list/pull_list";
 @import "../modules/dashboard/quick_add/quick_add";
 @import "../modules/dashboard/user_feed/user_feed";
+@import "../modules/feed/feed";

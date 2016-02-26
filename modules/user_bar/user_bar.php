@@ -34,7 +34,7 @@
     </div>
     <div class="col-xs-6 col-md-3 col-lg-3 user-profile-button text-right">
       <a href="/profile.php">
-        <span class="profile-avatar"><img src="<?php echo $avatar;?>" alt="Sean" class="img-responsive img-circle" /></span>
+        <span class="profile-avatar"><img src="<?php echo $avatar;?>" alt="<?php echo $first_name; ?>" class="img-responsive img-circle" /></span>
         <span class="profile-name"><?php echo $first_name; ?></span>
       </a>
     </div>
