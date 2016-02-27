@@ -358,4 +358,34 @@ class userInfo {
       $this->feed = $feed;
     }
   }
+
+  public function mostOwnedComics() {
+    $this->db_connection = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_NAME );
+    if ($this->db_connection->connect_errno) {
+      die ( "Connect failed:" );
+    }
+    $sql = "SELECT comics.comic_id, users_comics.comic_id, count(users_comics.comic_id) c, issue_number, series_vol, series_name, cover_image
+    FROM users_comics
+    LEFT JOIN comics
+    ON users_comics.comic_id=comics.comic_id
+    LEFT JOIN series
+    ON comics.series_id=series.series_id
+    GROUP BY users_comics.comic_id
+    ORDER BY c DESC
+    LIMIT 8";
+    $result = $this->db_connection->query ( $sql );
+    if ($result->num_rows > 0) {
+      $this->mostOwnedList = '';
+      while ( $row = $result->fetch_assoc () ) {
+        $this->series_name = $row ['series_name'];
+        $this->series_vol = $row ['series_vol'];
+        $this->comic_id = $row ['comic_id'];
+        $this->issue_number = $row ['issue_number'];
+        $this->coverMed = $row ['cover_image'];
+        $this->coverSmall = str_replace('-medium.', '-small.', $this->coverMed);
+
+        $this->mostOwnedList .= '<a href="/comic.php?comic_id=' . $this->comic_id . '" class="most-owned-cover img-thumbnail" title="' . $this->series_name . ' #' . $this->issue_number . '"><img src="' . $this->coverSmall . '" alt="" class="img-responsive" /></a>';
+      }
+    }
+  }
 }

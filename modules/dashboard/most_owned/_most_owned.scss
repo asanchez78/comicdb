@@ -1,0 +1,19 @@
+[data-module="most_owned"] {
+  .most-owned-cover {
+    width: 23.5%;
+    overflow: hidden;
+    margin: 0 1%;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:nth-child(4n+4) {
+      margin-right: 0;
+    }
+
+    &:nth-child(5n+5) {
+      margin-left: 0;
+    }
+  }
+}
