@@ -49,11 +49,8 @@
   margin-bottom: 15px;
 }
 
-.dashboard-content {
-  .dashContentLeft {
-    border-right: 1px solid $border-color;
-  }
-
+.dashContentLeft,
+.dashContentRight {
   [data-module] {
     margin-bottom: 15px;
     
@@ -85,4 +82,8 @@
     padding: 5px 15px;
     color: white;
   }
+}
+
+.dashContentLeft {
+  border-right: 1px solid $border-color;
 }

@@ -8606,13 +8606,12 @@ label {
   margin-bottom: 15px;
 }
 
-.dashboard-content .dashContentLeft {
-  border-right: 1px solid #e7e7e7;
-}
-.dashboard-content [data-module] {
+.dashContentLeft [data-module],
+.dashContentRight [data-module] {
   margin-bottom: 15px;
 }
-.dashboard-content [data-module]:after {
+.dashContentLeft [data-module]:after,
+.dashContentRight [data-module]:after {
   content: '';
   display: block;
   border-bottom: 1px solid #e7e7e7;
@@ -8621,12 +8620,14 @@ label {
   margin-right: -15px;
   padding-bottom: 15px;
 }
-.dashboard-content [data-module]:last-of-type:after {
+.dashContentLeft [data-module]:last-of-type:after,
+.dashContentRight [data-module]:last-of-type:after {
   border-bottom: none;
   margin-bottom: 0;
   padding-bottom: 0;
 }
-.dashboard-content h3 {
+.dashContentLeft h3,
+.dashContentRight h3 {
   margin-top: 0;
   font-size: 24px;
   padding-bottom: 2px;
@@ -8636,6 +8637,10 @@ label {
   margin-right: -15px;
   padding: 5px 15px;
   color: white;
+}
+
+.dashContentLeft {
+  border-right: 1px solid #e7e7e7;
 }
 
 [data-module="login_modal"] .modal-header,
