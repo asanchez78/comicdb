@@ -1,7 +1,7 @@
 <section data-module="logout_modal" class="modal fade" id="logoutFormModal" tabindex="-1" role="dialog" aria-labelledby="logoutFormModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <form method="post" action="/index.php" name="logoutform" class="form-horizontal">
+      <form method="post" action="/" name="logoutform" class="form-horizontal">
         <header class="modal-header text-center">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="logoutFormModalLabel">Are you sure you want to sign out?</h4>

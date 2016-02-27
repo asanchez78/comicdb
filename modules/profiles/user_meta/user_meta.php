@@ -48,8 +48,41 @@
     $follows = '';
   }
 
-  if (isset($user->followerCount)) {
-    $followerCount = $user->followerCount;
+  $followerList = $user->followerList;
+  $followerCount = count($followerList);
+
+  if ($followerCount > 0) {
+    $followerBlock = '';
+    
+    foreach ($followerList as $followerUser) {
+      $followerSearch = new userInfo ();
+      $followerSearch->userMeta($followerUser);
+
+      if (isset($followerSearch->user_first_name)) {
+        $follower_first_name = $followerSearch->user_first_name;
+      } else {
+        $follower_first_name = '';
+      }
+
+      if (isset($followerSearch->user_last_name)) {
+        $follower_last_name = $followerSearch->user_last_name;
+      } else {
+        $follower_last_name = '';
+      }
+
+      $followerBlock .= '<li><a href="/profile.php?user='. $followerSearch->user_account_name . '">';
+      if (isset($followerSearch->user_avatar)) {
+        $followerAvatar = $followerSearch->user_avatar;
+        $followerBlock .= '<img src="' . $followerSearch->user_avatar . '" alt="' . $follower_first_name . ' ' . $follower_last_name . '" class="img-circle img-responsive" />';
+      } else {
+        $gravatar_hash = $followerSearch->follow_email_hash;
+        $followerAvatar = '//www.gravatar.com/avatar/' . $gravatar_hash . '?s=60&d=' . urlencode('http://comicmanager.com/assets/avatar-deadpool.png');
+        $followerBlock .= '<img src="' . $followerAvatar . '" alt="' . $follower_first_name . ' ' . $follower_last_name . '" class="img-circle img-responsive" />';
+      }
+      $followerBlock .= '</a></li>';
+    }
+  } else {
+    $follows = '';
   }
   
   if (isset($user->facebook_url)) {
@@ -112,7 +145,7 @@
             <div class="col-xs-6 col-md-4 text-center meta-following">
               <?php if (isset($user->user_follows) && $user->user_follows != '') { ?>
               <h3 class="big-red hidden-md hidden-lg"><?php echo $followCount; ?></h3>
-              following
+                <span class="hidden-xs hidden-sm text-danger"><?php echo $followCount; ?></span> following
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">
                   <?php echo $followBlock; ?>
@@ -122,8 +155,12 @@
             </div>
             <div class="hidden-xs hidden-sm col-md-4 text-center meta-followers">
               <?php if (isset($user->followerList) && $user->followerList != '') { ?>
-              <h3 class="big-red"><?php echo $followerCount; ?></h3>
-              followers
+              <span class="text-danger"><?php echo $followerCount; ?></span> followers
+              <div class="hidden-xs hidden-sm">
+                <ul class="nolist follow-list">
+                  <?php echo $followerBlock; ?>
+                </ul>
+              </div>
               <div class="hidden-xs hidden-sm">
                 <ul class="nolist follow-list">
                   

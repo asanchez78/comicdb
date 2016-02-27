@@ -25,7 +25,9 @@ class userInfo {
 
     $sql = "SELECT *
         FROM users_meta
-        WHERE user_id = $user_id";
+        LEFT JOIN users
+        ON users.user_id=users_meta.user_id
+        WHERE users_meta.user_id = $user_id";
 
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
@@ -35,6 +37,8 @@ class userInfo {
       while ( $row = $result->fetch_assoc () ) {
         array_push($this->meta_key, $row ['meta_key']);
         array_push($this->meta_val, $row ['meta_value']);
+        $this->user_account_name = $row ['user_name'];
+        $this->follow_email_hash = md5( strtolower( trim( $row ['user_email'] ) ) );
       }
       // offset 1 for 0 array position
       $array_size = sizeof($this->meta_key) -1;
@@ -144,7 +148,8 @@ class userInfo {
     }
     $sql = "SELECT user_id, meta_key, meta_value
         FROM users_meta
-        WHERE meta_key = 'user_follows' AND user_id != '$user_id'";
+        WHERE meta_key = 'user_follows' AND user_id != '$user_id'
+        ORDER BY user_id DESC";
     $result = $this->db_connection->query ( $sql );
     if ($result->num_rows > 0) {
       // Initialize our final array
@@ -158,7 +163,7 @@ class userInfo {
         // Count the # ids
         $preCount = count($followSplitList);
         for ($i = 0; $i <= $preCount; $i++) {
-          if(isset($followSplitList[$i]) && $followSplitList[$i] == $user_id) {
+          if(isset($followSplitList[$i]) && $followSplitList[$i] != $user_id) {
             array_push($this->followerList, $followSplitList[$i]);
           }
         }
