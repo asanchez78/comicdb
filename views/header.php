@@ -13,7 +13,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand logo" href="/index.php">
+		      <a class="navbar-brand logo" href="/">
 						<img src="../assets/logo.svg" alt="POW! Comic Book Manager" />
 		      	<h1>Comic Book Manager</h1>
 		      </a>
