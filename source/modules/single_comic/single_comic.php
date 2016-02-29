@@ -14,6 +14,7 @@
   if (isset($comic->series_name) && isset($comic->series_vol) && isset($comic->issue_number) && isset($comic->publisherName)) {
     $series_name = $comic->series_name;
     $series_vol = $comic->series_vol;
+    $series_id = $comic->series_id;
     $issue_num = $comic->issue_number;
     $publisherID = $comic->publisherID;
     $publisherName = $comic->publisherName;
@@ -61,7 +62,7 @@
 <section data-module="single_comic" data-series-id="<?php echo $series_id; ?>" data-comic-id="<?php echo $comic_id; ?>">
   <header class="row headline">
     <div class="col-xs-12 col-md-7 col-lg-8">
-      <h2><?php echo $series_name . " #" . $issue_num; ?></h2>
+      <h2><a href="/issues.php?series_id=<?php echo $series_id; ?>"><?php echo $series_name . "</a> #" . $issue_num; ?></h2>
     </div>
     <div class="col-xs-12 col-md-5 col-lg-4 series-meta">
       <ul class="nolist row">
