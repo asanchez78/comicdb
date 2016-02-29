@@ -13,7 +13,11 @@
     margin-right: 5px;
     width: 13px;
     height: 18px;
-   }
+  }
+  &.pull-right {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 .logo-marvel {

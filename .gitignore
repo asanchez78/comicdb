@@ -69,3 +69,4 @@ node_modules/
 
 sftp-config.json
 dirCheck.php
+build/

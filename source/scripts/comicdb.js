@@ -26,11 +26,11 @@ jQuery(document).ready(function($) {
       typeClass = layoutThumbSm;
     } else {
       typeClass = layoutList;
-    };
+    }
     $.each($comics, function() {
       $(this).attr('class', typeClass);
     });
-  }
+  };
 
   var $sortControls, displayCookie;
   $sortControls = $('.sort-control');
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
   // Back button. Triggers native browser back state
   var $backButton = $('.form-back');
   $($backButton).click(function(e) {
-    e.preventDefault;
+    e.preventDefault();
     window.history.back();
   });
 
@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
 
   // Triggers the Edit Plot function
   $('#editPlot').click(function(e) {
-    e.preventDefault;
+    e.preventDefault();
     $(this).text('');
     // Shows the textarea container 
     $('#plotInput').addClass('active');

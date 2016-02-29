@@ -25,5 +25,3 @@
     </div>
   </div>
 </div>
-<script src="/scripts/bootstrap/carousel.js"></script>
-<script src="/modules/dashboard/carousel_bar/carousel_bar.js"></script>
