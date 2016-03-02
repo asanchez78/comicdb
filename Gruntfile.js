@@ -130,7 +130,7 @@ module.exports = function(grunt) {
       main: {
         expand: true,
         cwd: '<%= project.app %>/',
-        src: ['**/*.php', 'scripts/jquery-2.2.0.min.js', 'assets/**/*', 'images/**/*', , 'favicon.ico'],
+        src: ['**/*.php', 'scripts/jquery-2.2.0.min.js', 'assets/**/*', 'images/**/*', 'favicon.ico'],
         dest: '<%= project.build %>/',
       }
     },
