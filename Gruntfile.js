@@ -130,7 +130,7 @@ module.exports = function(grunt) {
       main: {
         expand: true,
         cwd: '<%= project.app %>/',
-        src: ['**/*.php', 'scripts/jquery-2.2.0.min.js', 'assets/**/*', 'images/**/*'],
+        src: ['**/*.php', 'scripts/jquery-2.2.0.min.js', 'assets/**/*', 'images/**/*', 'favicon.ico'],
         dest: '<%= project.build %>/',
       }
     },
@@ -174,7 +174,7 @@ module.exports = function(grunt) {
         files: ['<%= project.build %>/styles.css'],
         tasks: ['autoprefixer', 'notify:autoprefixer']
       },
-      // Sync tasks for PHP, Plugins, and Images
+      // Sync tasks for PHP and Images
       php: {
         files: ['<%= project.app %>/**/*.php'],
         tasks: ['sync:php', 'notify:php']
