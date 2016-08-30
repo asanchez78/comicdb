@@ -235,26 +235,23 @@ class wikiQuery {
 	}
 
 	public function downloadFile($url, $path) {
-		$newfname = $path;
-		$file = fopen ( $url, "rb" );
-		if ($file) {
-			$newf = fopen ( $newfname, "wb" );
+		$fp = fopen($path, 'w+');
 
-			if ($newf) {
-				while ( ! feof ( $file ) ) {
-					fwrite ( $newf, fread ( $file, 1024 * 8 ), 1024 * 8 );
-				}
-			} else {
-				die ( 'Could not write cover image file.' );
-			}
-		}
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_FILE, $fp); // output to file
+    	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    	curl_setopt($ch, CURLOPT_TIMEOUT, 1000);
+    	curl_setopt($ch, CURLOPT_USERAGENT, 'WadeWilson');
+    	// curl_setopt($ch, CURLOPT_VERBOSE, true);   // Enable this line to see debug prints
+    	curl_exec($ch);
 
-		if ($file) {
-			fclose ( $file );
-		}
-
-		if ($newf) {
-			fclose ( $newf );
-		}
+    	curl_close($ch);
+    	fclose($fp);
+    	
+    	if (file_exists($path)) {
+    		$this->imageDownloaded = true;
+    	} else {
+    		$this->imageDownloaded = false;
+    	}
 	}
 }
