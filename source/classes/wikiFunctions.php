@@ -47,7 +47,7 @@ class wikiQuery {
 	 * @return string             list of results
 	 */
 	public function seriesSearch ($seriesName) {
-		$apiURL = "http://comicvine.gamespot.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
+		$apiURL = "https://comicvine.gamespot.com/api/volumes/?format=json&filter=name:$seriesName&api_key=" . __apiKey__;
 		$ch = curl_init($apiURL);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -112,7 +112,7 @@ class wikiQuery {
 	 * @return string               issue's story name, plot, etc.
 	 */
 	public function issueSearch ($cvVolumeID, $issue_number, $series_vol) {
-		$apiURL = "http://comicvine.gamespot.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
+		$apiURL = "https://comicvine.gamespot.com/api/issues/?filter=volume:$cvVolumeID,issue_number:$issue_number&format=json&api_key=" . $_COOKIE["apiKey"];
 		$ch = curl_init($apiURL);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -138,7 +138,7 @@ class wikiQuery {
 			$this->seriesName = $detailResults['results']['volume']['name'];
 			$issueCreditsArray = $detailResults['results']['person_credits'];
 			$this->issueCreditsArray = $issueCreditsArray;
-			
+
 			// Initializing the credit strings
 			$this->pencils = '';
 			$this->script = '';
@@ -247,7 +247,7 @@ class wikiQuery {
 
     	curl_close($ch);
     	fclose($fp);
-    	
+
     	if (file_exists($path)) {
     		$this->imageDownloaded = true;
     	} else {
