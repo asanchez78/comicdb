@@ -15,6 +15,7 @@
       die ( "Connection failed: " );
     }
     $month = filter_input ( INPUT_GET, 'month' );
+    $year = filter_input ( INPUT_GET, 'year' );
     $sort = filter_input ( INPUT_GET, 'sort' );
     $sql = "SELECT series.series_name, comics.issue_number, comics.release_date, comics.comic_id, comics.cover_image
     		FROM comics
@@ -24,8 +25,8 @@
 			on users_comics.comic_id=comics.comic_id
 			left join users
 			on users.user_id=users_comics.user_id
-			where (YEAR(release_date) LIKE '19%7' and MONTH(release_date) = '$month' or YEAR(release_date) = '1993' and MONTH(release_date) = '$month') and users.user_name='$userName'
-			order by $sort";
+			where (YEAR(release_date) = '$year' and MONTH(release_date) = '$month') and users.user_name='$userName'
+			order by comics.issue_number";
     $result = $db_connection->query ( $sql );
     $myArray = array();
     $issue_list = "";
