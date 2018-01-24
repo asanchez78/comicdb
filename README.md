@@ -2,6 +2,8 @@
 
 A Bootstrap PHP/MySQL web application for maintaining a comic book collection database.
 
+![Alt text](/screenshots/main_page.png?raw=true "Optional Title")
+
 ## Requirements
 * PHP Web Server
 * mySQL
