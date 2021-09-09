@@ -11,7 +11,7 @@ A Bootstrap PHP/MySQL web application for maintaining a comic book collection da
 ## Installation
 * Clone repository to web directory
 * Import .sql file to comicdb database
-* Change $allowRegistration to "yes" in admin/register.php in order to create the initial user
+* Change $allowRegistration to "true" in admin/register.php in order to create the initial user
 * edit database connection info in config/db.php
 
 ## Development
